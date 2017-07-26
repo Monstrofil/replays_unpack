@@ -1,0 +1,278 @@
+{
+      "10_NE_big_race": {
+        "spaceSizeY": 1400.0,
+        "spaceSizeX": 1400.0,
+        "mapSizeY": 1000.0,
+        "mapSizeX": 1000.0
+      },
+      "15_NE_north": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "i01_tutorial": {
+        "spaceSizeY": 1200.0,
+        "spaceSizeX": 1200.0,
+        "mapSizeY": 800.0,
+        "mapSizeX": 800.0
+      },
+      "50_Gold_harbor": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "25_sea_hope": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "05_Ring": {
+        "spaceSizeY": 1600.0,
+        "spaceSizeX": 1600.0,
+        "mapSizeY": 1200.0,
+        "mapSizeX": 1200.0
+      },
+      "dock_prem": {
+        "spaceSizeY": 400.0,
+        "spaceSizeX": 400.0,
+        "mapSizeY": 0.0,
+        "mapSizeX": 0.0
+      },
+      "08_NE_passage": {
+        "spaceSizeY": 1600.0,
+        "spaceSizeX": 1600.0,
+        "mapSizeY": 1200.0,
+        "mapSizeX": 1200.0
+      },
+      "23_Shards": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "19_OC_prey": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "Dock_ChinaArpeggio": {
+        "spaceSizeY": 400.0,
+        "spaceSizeX": 400.0,
+        "mapSizeY": 0.0,
+        "mapSizeX": 0.0
+      },
+      "40_Okinawa": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "28_naval_mission": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "dock_London": {
+        "spaceSizeY": 400.0,
+        "spaceSizeX": 400.0,
+        "mapSizeY": 0.0,
+        "mapSizeX": 0.0
+      },
+      "00_CO_ocean": {
+        "spaceSizeY": 1600.0,
+        "spaceSizeX": 1600.0,
+        "mapSizeY": 1200.0,
+        "mapSizeX": 1200.0
+      },
+      "33_new_tierra": {
+        "spaceSizeY": 1200.0,
+        "spaceSizeX": 1200.0,
+        "mapSizeY": 800.0,
+        "mapSizeX": 800.0
+      },
+      "dock_nagasaki": {
+        "spaceSizeY": 400.0,
+        "spaceSizeX": 400.0,
+        "mapSizeY": 0.0,
+        "mapSizeX": 0.0
+      },
+      "45_Zigzag": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "Dock": {
+        "spaceSizeY": 200.0,
+        "spaceSizeX": 200.0,
+        "mapSizeY": -200.0,
+        "mapSizeX": -200.0
+      },
+      "s01_NavalBase": {
+        "spaceSizeY": 1600.0,
+        "spaceSizeX": 1600.0,
+        "mapSizeY": 1200.0,
+        "mapSizeX": 1200.0
+      },
+      "37_Ridge": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "20_NE_two_brothers": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "Dock_HSF": {
+        "spaceSizeY": 600.0,
+        "spaceSizeX": 600.0,
+        "mapSizeY": 200.0,
+        "mapSizeX": 200.0
+      },
+      "46_Estuary": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "41_Conquest": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "38_Canada": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "42_Neighbors": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "16_OC_bees_to_honey": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "44_Path_warrior": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "dock_dry": {
+        "spaceSizeY": 400.0,
+        "spaceSizeX": 400.0,
+        "mapSizeY": 0.0,
+        "mapSizeX": 0.0
+      },
+      "Dock_SPB": {
+        "spaceSizeY": 400.0,
+        "spaceSizeX": 400.0,
+        "mapSizeY": 0.0,
+        "mapSizeX": 0.0
+      },
+      "s03_Labyrinth": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "r01_military_navigation": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "04_Archipelago": {
+        "spaceSizeY": 1400.0,
+        "spaceSizeX": 1400.0,
+        "mapSizeY": 1000.0,
+        "mapSizeX": 1000.0
+      },
+      "s02_Naval_Defense": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "18_NE_ice_islands": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "Dock_ocean": {
+        "spaceSizeY": 200.0,
+        "spaceSizeX": 200.0,
+        "mapSizeY": -200.0,
+        "mapSizeX": -200.0
+      },
+      "22_tierra_del_fuego": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "35_NE_north_winter": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "01_solomon_islands": {
+        "spaceSizeY": 1400.0,
+        "spaceSizeX": 1400.0,
+        "mapSizeY": 1000.0,
+        "mapSizeX": 1000.0
+      },
+      "13_OC_new_dawn": {
+        "spaceSizeY": 1600.0,
+        "spaceSizeX": 1600.0,
+        "mapSizeY": 1200.0,
+        "mapSizeX": 1200.0
+      },
+      "14_Atlantic": {
+        "spaceSizeY": 2000.0,
+        "spaceSizeX": 2000.0,
+        "mapSizeY": 1600.0,
+        "mapSizeX": 1600.0
+      },
+      "34_OC_islands": {
+        "spaceSizeY": 1200.0,
+        "spaceSizeX": 1200.0,
+        "mapSizeY": 800.0,
+        "mapSizeX": 800.0
+      },
+      "dock_NY": {
+        "spaceSizeY": 400.0,
+        "spaceSizeX": 400.0,
+        "mapSizeY": 0.0,
+        "mapSizeX": 0.0
+      },
+      "17_NA_fault_line": {
+        "spaceSizeY": 1800.0,
+        "spaceSizeX": 1800.0,
+        "mapSizeY": 1400.0,
+        "mapSizeX": 1400.0
+      },
+      "Dock_23_February": {
+        "spaceSizeY": 400.0,
+        "spaceSizeX": 400.0,
+        "mapSizeY": 0.0,
+        "mapSizeX": 0.0
+      }
+}
