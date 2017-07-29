@@ -14,5 +14,10 @@ class Entity(PacketDataBase):
     def __init__(self, stream):
         self.entityID, = struct.unpack('i', stream.read(4))
         self.type, = struct.unpack('h', stream.read(2))
+        self.spaceId, = struct.unpack('i', stream.read(4))
+        self.vehicleId, = struct.unpack('i', stream.read(4))
+        self.position = Vector3(stream)
+        self.direction = Vector3(stream)
+        self._sizeState, = struct.unpack('i', stream.read(4))
 
-        self.value = ':'.join(x.encode('hex') for x in stream.read())
+        self.state = ':'.join(x.encode('hex') for x in stream.read(self._sizeState))
