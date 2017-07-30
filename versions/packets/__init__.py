@@ -6,5 +6,6 @@ from MemoryData import MemoryData
 from Position import Position
 from Camera import Camera
 from Entity import Entity
+from EntityEnter import EntityEnter
 
 __author__ = "Aleksandr Shyshatsky"
