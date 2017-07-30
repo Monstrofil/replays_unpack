@@ -7,5 +7,6 @@ from Position import Position
 from Camera import Camera
 from Entity import Entity
 from EntityEnter import EntityEnter
+from EntityLeave import EntityLeave
 
 __author__ = "Aleksandr Shyshatsky"
