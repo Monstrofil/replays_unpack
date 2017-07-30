@@ -9,5 +9,6 @@ from Entity import Entity
 from EntityEnter import EntityEnter
 from EntityLeave import EntityLeave
 from EntityControl import EntityControl
+from BasePlayerCreate import BasePlayerCreate
 
 __author__ = "Aleksandr Shyshatsky"
