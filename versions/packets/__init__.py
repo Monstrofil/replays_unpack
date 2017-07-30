@@ -8,5 +8,6 @@ from Camera import Camera
 from Entity import Entity
 from EntityEnter import EntityEnter
 from EntityLeave import EntityLeave
+from EntityControl import EntityControl
 
 __author__ = "Aleksandr Shyshatsky"

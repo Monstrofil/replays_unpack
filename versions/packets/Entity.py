@@ -9,7 +9,7 @@ from base.packets.PacketData import PacketDataBase
 __author__ = "Aleksandr Shyshatsky"
 
 
-@bigworld_packet(type_=5)
+@bigworld_packet(type_=0x5)
 class Entity(PacketDataBase):
     def __init__(self, stream):
         self.entityID, = struct.unpack('i', stream.read(4))
