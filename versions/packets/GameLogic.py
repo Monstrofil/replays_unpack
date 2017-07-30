@@ -16,5 +16,5 @@ class GameLogic(PacketDataBase):
         self.subtype, = struct.unpack('I', stream.read(4))
         self.size, = struct.unpack('I', stream.read(4))
 
-        class_ = g_SubPackets.get(self.subtype) or g_Packets[0]
+        class_ = g_SubPackets.get(self.subtype) or g_Packets[-1]
         self.data = class_(StringIO(stream.read(self.size)))

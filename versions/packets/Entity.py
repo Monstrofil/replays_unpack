@@ -2,6 +2,7 @@
 # coding=utf-8
 import struct
 
+from base.packets.types.BinaryIStream import BinaryIStream
 from base.packets.types.Vector3 import Vector3
 from base.decorators import bigworld_packet
 from base.packets.PacketData import PacketDataBase
@@ -18,6 +19,5 @@ class Entity(PacketDataBase):
         self.vehicleId, = struct.unpack('i', stream.read(4))
         self.position = Vector3(stream)
         self.direction = Vector3(stream)
-        self._sizeState, = struct.unpack('i', stream.read(4))
 
-        self.state = ':'.join(x.encode('hex') for x in stream.read(self._sizeState))
+        self.state = BinaryIStream(stream)

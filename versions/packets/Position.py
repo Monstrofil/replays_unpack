@@ -16,6 +16,6 @@ class Position(PacketDataBase):
         self.spaceID, = struct.unpack('i', stream.read(4))
         self.vehicleId, = struct.unpack('i', stream.read(4))
         self.position = Vector3(stream)
-        self.position_error = Vector3(stream)
+        self.positionError = Vector3(stream)
         self.rotation = Vector3(stream)
         self.is_error, = struct.unpack('b', stream.read(1))
