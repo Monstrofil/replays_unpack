@@ -9,6 +9,6 @@ __author__ = "Aleksandr Shyshatsky"
 
 
 @bigworld_packet(type_=-1)
-class MemoryData(PacketDataBase):
+class Unknown(PacketDataBase):
     def __init__(self, stream):
         self.value = ':'.join(x.encode('hex') for x in stream.read())

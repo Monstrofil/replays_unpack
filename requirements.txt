@@ -2,5 +2,3 @@ pycrypto
 tqdm
 mock
 ddt
-pillow
-colour

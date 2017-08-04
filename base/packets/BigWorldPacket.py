@@ -21,7 +21,7 @@ class BigWorldPacket(object):
         try:
             self.data = class_(StringIO(stream.read(self.size)))
         except Exception, e:
-            self.data = None
+            raise
 
     def __repr__(self):
         return "TIME: {} TYPE: {} SIZE: {} DATA: {}".format(self.time, hex(self.type), self.size, self.data)

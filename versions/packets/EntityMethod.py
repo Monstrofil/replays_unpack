@@ -12,7 +12,7 @@ __author__ = "Aleksandr Shyshatsky"
 @bigworld_packet(type_=0x8)
 class EntityMethod(PacketDataBase):
     def __init__(self, stream):
-        self.vehicleId, = struct.unpack('I', stream.read(4))
-        self.subtype, = struct.unpack('I', stream.read(4))
+        self.entityId, = struct.unpack('I', stream.read(4))
+        self.messageId, = struct.unpack('I', stream.read(4))
 
         self.data = BinaryIStream(stream)

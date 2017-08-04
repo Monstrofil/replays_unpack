@@ -9,6 +9,6 @@ __author__ = "Aleksandr Shyshatsky"
 
 class BinaryIStream(PacketDataBase):
     def __init__(self, stream):
-        self._length, = struct.unpack('i', stream.read(4))
+        self._length, = struct.unpack('I', stream.read(4))
         self.value = stream.read(self._length).encode('hex')
 
