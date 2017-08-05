@@ -11,5 +11,6 @@ from .EntityLeave import EntityLeave
 from .EntityControl import EntityControl
 from .BasePlayerCreate import BasePlayerCreate
 from .EntityProperty import EntityProperty
+from .CellPlayerCreate import CellPlayerCreate
 
 __author__ = "Aleksandr Shyshatsky"

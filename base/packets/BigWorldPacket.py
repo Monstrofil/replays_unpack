@@ -8,7 +8,6 @@ from base.decorators import bigworld_packet, g_Packets
 __author__ = "Aleksandr Shyshatsky"
 
 
-@bigworld_packet(type_=1)
 class BigWorldPacket(object):
     __slots__ = ['size', 'type', 'time', 'data']
 
