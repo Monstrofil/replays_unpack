@@ -2,3 +2,4 @@ pycrypto
 tqdm
 mock
 ddt
+raven
