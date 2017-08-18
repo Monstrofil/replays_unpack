@@ -5,9 +5,9 @@ import os
 import sys
 from StringIO import StringIO
 
-from base.packets.BigWorldPacket import BigWorldPacket
-from replay_decrypt import WoWSReplayDecrypt
-from sentry import client
+from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
+from replay_unpack.replay_decrypt import WoWSReplayDecrypt
+from replay_unpack.sentry import client
 
 __author__ = "Aleksandr Shyshatsky"
 
@@ -23,11 +23,12 @@ class ReplayParser(object):
         json_data, replay_data = self._decrypter.get_replay_data()
 
         client_version = '.'.join(json_data['clientVersionFromXml'].split(', ')[:3])
-        sys.path.append(os.path.join(self.BASE_PATH, 'versions', client_version))
+        sys.path.append(os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version))
 
         try:
             hidden_data = self._get_hidden_data(replay_data)
         except Exception as e:
+            raise
             client.captureException()
             hidden_data = None
 
@@ -37,7 +38,7 @@ class ReplayParser(object):
         )
 
     def _get_hidden_data(self, replay_data):
-        from replay_player import ReplayPlayer
+        from replay_unpack.replay_player import ReplayPlayer
         player = ReplayPlayer()
         io = StringIO(replay_data)
         while io.pos != io.len:
