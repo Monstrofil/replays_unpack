@@ -28,7 +28,6 @@ class ReplayParser(object):
         try:
             hidden_data = self._get_hidden_data(replay_data)
         except Exception as e:
-            raise
             client.captureException()
             hidden_data = None
 
@@ -49,7 +48,7 @@ class ReplayParser(object):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--replay', type=str)
+    parser.add_argument('--replay', type=str, required=True)
 
     namespace = parser.parse_args()
     print json.dumps(ReplayParser(namespace.replay).get_info(), indent=1)
