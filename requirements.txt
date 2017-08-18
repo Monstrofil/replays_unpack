@@ -3,4 +3,4 @@ tqdm
 mock
 ddt
 raven
--e git://github.com/Monstrofil/wows_convert_def_to_py
+-e git://github.com/Monstrofil/wows_convert_def_to_py#egg=def_generator
