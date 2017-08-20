@@ -7,9 +7,14 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class SmokeScreen(Entity):
+
+
+class SmokeScreen(object):
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
 
         self._bcRadius = None
 
@@ -20,6 +25,9 @@ class SmokeScreen(Entity):
         self._height = None
 
         self._activePointIndex = None
+
+
+        # MRO fix
 
         return
 
@@ -73,3 +81,7 @@ class SmokeScreen(Entity):
     @activePointIndex.setter
     def activePointIndex(self, value):
         self._activePointIndex, = unpack_variables(value, ['INT8'])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

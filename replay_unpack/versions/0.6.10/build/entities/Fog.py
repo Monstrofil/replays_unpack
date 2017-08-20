@@ -7,15 +7,23 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class Fog(Entity):
+
+
+class Fog(object):
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
 
         self._radius = None
 
         self._force = None
 
         self._height = None
+
+
+        # MRO fix
 
         return
 
@@ -53,3 +61,7 @@ class Fog(Entity):
     @height.setter
     def height(self, value):
         self._height, = unpack_variables(value, ['FLOAT32'])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

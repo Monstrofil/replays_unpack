@@ -12,12 +12,3 @@ def bigworld_packet(type_):
 
 g_Packets = {}
 
-
-def bigworld_subpacket(type_):
-    def real_wrapper(cls):
-        g_SubPackets[type_] = cls
-        return cls
-    return real_wrapper
-
-
-g_SubPackets = {}

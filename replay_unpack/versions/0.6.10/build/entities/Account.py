@@ -7,7 +7,44 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class Account(Entity):
+try:
+    from interfaces.AccountEditor import AccountEditor
+except:
+    from AccountEditor import AccountEditor
+
+try:
+    from interfaces.BattleStarter import BattleStarter
+except:
+    from BattleStarter import BattleStarter
+
+try:
+    from interfaces.WalletOwner import WalletOwner
+except:
+    from WalletOwner import WalletOwner
+
+try:
+    from interfaces.AccountPData import AccountPData
+except:
+    from AccountPData import AccountPData
+
+try:
+    from interfaces.EntityLookuper import EntityLookuper
+except:
+    from EntityLookuper import EntityLookuper
+
+try:
+    from interfaces.VoteBase import VoteBase
+except:
+    from VoteBase import VoteBase
+
+try:
+    from interfaces.VoiceChatClient import VoiceChatClient
+except:
+    from VoiceChatClient import VoiceChatClient
+
+
+
+class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLookuper, VoteBase, VoiceChatClient):
     
     g_onAccountReallyCreated = EventHook()
     
@@ -288,8 +325,28 @@ class Account(Entity):
     g_testInvoice = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
 
         self._surveyUrl = None
+
+
+        # MRO fix
+
+        AccountEditor.__init__(self)
+
+        BattleStarter.__init__(self)
+
+        WalletOwner.__init__(self)
+
+        AccountPData.__init__(self)
+
+        EntityLookuper.__init__(self)
+
+        VoteBase.__init__(self)
+
+        VoiceChatClient.__init__(self)
 
         return
 
@@ -867,3 +924,7 @@ class Account(Entity):
     @surveyUrl.setter
     def surveyUrl(self, value):
         self._surveyUrl, = unpack_variables(value, ['STRING'])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

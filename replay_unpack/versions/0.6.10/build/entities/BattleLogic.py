@@ -7,9 +7,14 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class BattleLogic(Entity):
+
+
+class BattleLogic(object):
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
 
         self._battleType = None
 
@@ -22,6 +27,9 @@ class BattleLogic(Entity):
         self._state = None
 
         self._debugText = None
+
+
+        # MRO fix
 
         return
 
@@ -83,3 +91,7 @@ class BattleLogic(Entity):
     @debugText.setter
     def debugText(self, value):
         self._debugText, = unpack_variables(value, [['ARRAY', 'BATTLE_LOGIC_DEBUG_TEXT']])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

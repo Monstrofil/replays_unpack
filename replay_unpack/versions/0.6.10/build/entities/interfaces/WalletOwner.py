@@ -9,7 +9,7 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 
-class OfflineEntity(object):
+class WalletOwner(object):
     
     def __init__(self):
         self.id = None

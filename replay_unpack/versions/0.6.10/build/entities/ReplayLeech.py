@@ -7,7 +7,14 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class ReplayLeech(Entity):
+try:
+    from interfaces.AccountReady import AccountReady
+except:
+    from AccountReady import AccountReady
+
+
+
+class ReplayLeech(AccountReady):
     
     g_onCheckGamePing = EventHook()
     
@@ -20,6 +27,14 @@ class ReplayLeech(Entity):
     g_onBecomePlayer = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
+
+
+        # MRO fix
+
+        AccountReady.__init__(self)
 
         return
 
@@ -53,3 +68,7 @@ class ReplayLeech(Entity):
     #       PROPERTIES
     ####################################
 
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

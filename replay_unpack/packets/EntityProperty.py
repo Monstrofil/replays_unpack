@@ -3,7 +3,7 @@
 import struct
 from StringIO import StringIO
 
-from replay_unpack.base.decorators import bigworld_packet, g_Packets, g_SubPackets
+from replay_unpack.base.decorators import bigworld_packet, g_Packets
 from replay_unpack.base.packets.PacketData import PacketDataBase
 from replay_unpack.base.packets.types.BinaryIStream import BinaryIStream
 

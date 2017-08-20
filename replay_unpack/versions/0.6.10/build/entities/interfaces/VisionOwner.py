@@ -9,7 +9,13 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 
-class OfflineEntity(object):
+class VisionOwner(object):
+    
+    g_isInvisible = EventHook()
+    
+    g_onVisibilityChanged = EventHook()
+    
+    g_removeFromVision = EventHook()
     
     def __init__(self):
         self.id = None
@@ -25,6 +31,18 @@ class OfflineEntity(object):
     #      METHODS
     ####################################
 
+
+    @unpack_func_args([])
+    def isInvisible(self):
+        self.g_isInvisible.fire(self)
+
+    @unpack_func_args(['ENTITY_ID', 'UINT8'])
+    def onVisibilityChanged(self, arg1, arg2):
+        self.g_onVisibilityChanged.fire(self, arg1, arg2)
+
+    @unpack_func_args(['ENTITY_ID'])
+    def removeFromVision(self, arg1):
+        self.g_removeFromVision.fire(self, arg1)
 
 
     ####################################

@@ -7,7 +7,14 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class MasterChanger(Entity):
+try:
+    from interfaces.AccountReady import AccountReady
+except:
+    from AccountReady import AccountReady
+
+
+
+class MasterChanger(AccountReady):
     
     g_onKickedFromServer = EventHook()
     
@@ -18,10 +25,18 @@ class MasterChanger(Entity):
     g_checkGamePing = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
 
         self._countBattles = None
 
         self._lastBattleFinish = None
+
+
+        # MRO fix
+
+        AccountReady.__init__(self)
 
         return
 
@@ -67,3 +82,7 @@ class MasterChanger(Entity):
     @lastBattleFinish.setter
     def lastBattleFinish(self, value):
         self._lastBattleFinish, = unpack_variables(value, ['UINT32'])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

@@ -104,6 +104,19 @@ class Avatar(Avatar):
             39: 'ownSmokeTimeLifeChanges'
         }
 
-        super(Avatar, self).__init__()
+        self.attributesMap = {
+            6: 'ownShipId',
+            0: 'useATBAandAirDefense',
+            9: 'vehiclePosition',
+            1: 'teamId',
+            2: 'isBattleStopped',
+            7: 'selectedWeapon',
+            3: 'isFlyMode',
+            4: 'intuitionActive',
+            8: 'attrs',
+            5: 'isInOfflineMode',
+            10: 'minefields'
+        }
 
+        super(Avatar, self).__init__()
 

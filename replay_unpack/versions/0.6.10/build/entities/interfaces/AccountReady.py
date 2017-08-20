@@ -9,7 +9,9 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 
-class OfflineEntity(object):
+class AccountReady(object):
+    
+    g_onAccountReady = EventHook()
     
     def __init__(self):
         self.id = None
@@ -25,6 +27,10 @@ class OfflineEntity(object):
     #      METHODS
     ####################################
 
+
+    @unpack_func_args(['MAILBOX', 'DB_ID', 'MAILBOX', 'MASTER_ID', 'UINT8', 'UINT64'])
+    def onAccountReady(self, arg1, arg2, arg3, arg4, arg5, arg6):
+        self.g_onAccountReady.fire(self, arg1, arg2, arg3, arg4, arg5, arg6)
 
 
     ####################################

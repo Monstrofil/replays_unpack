@@ -7,7 +7,14 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class Login(Entity):
+try:
+    from interfaces.EntityLookuper import EntityLookuper
+except:
+    from EntityLookuper import EntityLookuper
+
+
+
+class Login(EntityLookuper):
     
     g_onKickedFromServer = EventHook()
     
@@ -16,8 +23,16 @@ class Login(Entity):
     g_checkGamePing = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
 
         self._accountDBID_s = None
+
+
+        # MRO fix
+
+        EntityLookuper.__init__(self)
 
         return
 
@@ -51,3 +66,7 @@ class Login(Entity):
     @accountDBID_s.setter
     def accountDBID_s(self, value):
         self._accountDBID_s, = unpack_variables(value, ['STRING'])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

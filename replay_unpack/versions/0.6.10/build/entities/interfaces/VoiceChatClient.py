@@ -9,7 +9,15 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 
-class OfflineEntity(object):
+class VoiceChatClient(object):
+    
+    g_loginVoiceChat = EventHook()
+    
+    g_joinVoiceChat = EventHook()
+    
+    g_signedCommandToClient = EventHook()
+    
+    g_receiveSignedCommand = EventHook()
     
     def __init__(self):
         self.id = None
@@ -25,6 +33,22 @@ class OfflineEntity(object):
     #      METHODS
     ####################################
 
+
+    @unpack_func_args([])
+    def loginVoiceChat(self):
+        self.g_loginVoiceChat.fire(self)
+
+    @unpack_func_args([])
+    def joinVoiceChat(self):
+        self.g_joinVoiceChat.fire(self)
+
+    @unpack_func_args(['BLOB'])
+    def signedCommandToClient(self, arg1):
+        self.g_signedCommandToClient.fire(self, arg1)
+
+    @unpack_func_args(['BLOB'])
+    def receiveSignedCommand(self, arg1):
+        self.g_receiveSignedCommand.fire(self, arg1)
 
 
     ####################################

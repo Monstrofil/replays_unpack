@@ -7,7 +7,9 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class Weather(Entity):
+
+
+class Weather(object):
     
     g_startTransition = EventHook()
     
@@ -22,6 +24,9 @@ class Weather(Entity):
     g_onClientEnterWorld = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
 
         self._configPath = None
 
@@ -48,6 +53,9 @@ class Weather(Entity):
         self._maxPlaneVisionDistance = None
 
         self._isBad = None
+
+
+        # MRO fix
 
         return
 
@@ -189,3 +197,7 @@ class Weather(Entity):
     @isBad.setter
     def isBad(self, value):
         self._isBad, = unpack_variables(value, ['FLOAT'])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

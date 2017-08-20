@@ -7,7 +7,34 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class Building(Entity):
+try:
+    from interfaces.VisionOwner import VisionOwner
+except:
+    from VisionOwner import VisionOwner
+
+try:
+    from interfaces.AtbaOwner import AtbaOwner
+except:
+    from AtbaOwner import AtbaOwner
+
+try:
+    from interfaces.AirDefenceOwner import AirDefenceOwner
+except:
+    from AirDefenceOwner import AirDefenceOwner
+
+try:
+    from interfaces.DebugDrawEntity import DebugDrawEntity
+except:
+    from DebugDrawEntity import DebugDrawEntity
+
+try:
+    from interfaces.HitLocationManagerOwner import HitLocationManagerOwner
+except:
+    from HitLocationManagerOwner import HitLocationManagerOwner
+
+
+
+class Building(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocationManagerOwner):
     
     g_startOfflineBattle = EventHook()
     
@@ -26,6 +53,9 @@ class Building(Entity):
     g_offlineOnHit = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
 
         self._paramsId = None
 
@@ -40,6 +70,19 @@ class Building(Entity):
         self._isInOfflineMode = None
 
         self._debugText = None
+
+
+        # MRO fix
+
+        VisionOwner.__init__(self)
+
+        AtbaOwner.__init__(self)
+
+        AirDefenceOwner.__init__(self)
+
+        DebugDrawEntity.__init__(self)
+
+        HitLocationManagerOwner.__init__(self)
 
         return
 
@@ -141,3 +184,7 @@ class Building(Entity):
     @debugText.setter
     def debugText(self, value):
         self._debugText, = unpack_variables(value, [['ARRAY', 'ENTITY_DEBUG_TEXT']])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

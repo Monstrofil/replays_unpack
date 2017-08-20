@@ -5,7 +5,7 @@ import struct
 from replay_unpack.base.BigWorld import BigWorld
 from build import entities as entities
 from build._entities_list import g_entitiesList
-from packets import Map, BasePlayerCreate, CellPlayerCreate, Entity, Position, EntityMethod
+from packets import Map, BasePlayerCreate, CellPlayerCreate, Entity, Position, EntityMethod, EntityProperty
 from sentry import client
 
 __author__ = "Aleksandr Shyshatsky"
@@ -47,6 +47,16 @@ class ReplayPlayer(object):
                 if method_name:
                     try:
                         getattr(entity, method_name)(packet.data.data.value.decode('hex'))
+                    except struct.error:
+                        client.captureException()
+
+        if isinstance(packet.data, EntityProperty):
+            entity = self._bigworld.entities[packet.data.objectID]
+            if hasattr(entity, 'attributesMap'):
+                attribute_name = entity.attributesMap.get(packet.data.messageId, None)
+                if attribute_name:
+                    try:
+                        setattr(entity, attribute_name, packet.data.data.value.decode('hex'))
                     except struct.error:
                         client.captureException()
 

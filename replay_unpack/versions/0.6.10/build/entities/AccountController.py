@@ -7,7 +7,24 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class AccountController(Entity):
+try:
+    from interfaces.WalletProperties import WalletProperties
+except:
+    from WalletProperties import WalletProperties
+
+try:
+    from interfaces.AccountPData import AccountPData
+except:
+    from AccountPData import AccountPData
+
+try:
+    from interfaces.EntityLookuper import EntityLookuper
+except:
+    from EntityLookuper import EntityLookuper
+
+
+
+class AccountController(WalletProperties, AccountPData, EntityLookuper):
     
     g_onKickedFromServer = EventHook()
     
@@ -16,6 +33,18 @@ class AccountController(Entity):
     g_checkGamePing = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
+
+
+
+        # MRO fix
+
+        WalletProperties.__init__(self)
+
+        AccountPData.__init__(self)
+
+        EntityLookuper.__init__(self)
 
         return
 
@@ -41,3 +70,7 @@ class AccountController(Entity):
     #       PROPERTIES
     ####################################
 
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

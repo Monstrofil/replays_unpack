@@ -7,7 +7,14 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class Avatar(Entity):
+try:
+    from interfaces.VoiceChatClient import VoiceChatClient
+except:
+    from VoiceChatClient import VoiceChatClient
+
+
+
+class Avatar(VoiceChatClient):
     
     g_onVisibilityChanged = EventHook()
     
@@ -320,28 +327,36 @@ class Avatar(Entity):
     g_setInvitationsEnabled = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
 
-        self._ownShipId = 0
 
-        self._useATBAandAirDefense = 0
+        self._ownShipId = 0.0
+
+        self._useATBAandAirDefense = 0.0
 
         self._vehiclePosition = None
 
         self._teamId = None
 
-        self._isBattleStopped = 1
+        self._isBattleStopped = 1.0
 
-        self._selectedWeapon = 0
+        self._selectedWeapon = 0.0
 
         self._isFlyMode = None
 
         self._intuitionActive = None
 
-        self._attrs = 0
+        self._attrs = 0.0
 
         self._isInOfflineMode = None
 
         self._minefields = None
+
+
+        # MRO fix
+
+        VoiceChatClient.__init__(self)
 
         return
 
@@ -1063,3 +1078,7 @@ class Avatar(Entity):
     @minefields.setter
     def minefields(self, value):
         self._minefields, = unpack_variables(value, [['ARRAY', 'MINEFIELD_STATE']])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)

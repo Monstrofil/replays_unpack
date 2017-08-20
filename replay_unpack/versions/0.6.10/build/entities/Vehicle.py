@@ -7,7 +7,34 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-class Vehicle(Entity):
+try:
+    from interfaces.VisionOwner import VisionOwner
+except:
+    from VisionOwner import VisionOwner
+
+try:
+    from interfaces.AtbaOwner import AtbaOwner
+except:
+    from AtbaOwner import AtbaOwner
+
+try:
+    from interfaces.AirDefenceOwner import AirDefenceOwner
+except:
+    from AirDefenceOwner import AirDefenceOwner
+
+try:
+    from interfaces.DebugDrawEntity import DebugDrawEntity
+except:
+    from DebugDrawEntity import DebugDrawEntity
+
+try:
+    from interfaces.HitLocationManagerOwner import HitLocationManagerOwner
+except:
+    from HitLocationManagerOwner import HitLocationManagerOwner
+
+
+
+class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocationManagerOwner):
     
     g_startOfflineBattle = EventHook()
     
@@ -90,10 +117,13 @@ class Vehicle(Entity):
     g_offlineOnHit = EventHook()
     
     def __init__(self):
+        self.id = None
+        self.position = None
 
-        self._isOnForsage = 0
 
-        self._regenCrewHpLimit = 0.0
+        self._isOnForsage = 0.0
+
+        self._regenCrewHpLimit = '0.0'
 
         self._buoyancy = None
 
@@ -101,7 +131,7 @@ class Vehicle(Entity):
 
         self._torpedoLocalPos = None
 
-        self._weaponLockFlags = 0
+        self._weaponLockFlags = 0.0
 
         self._owner = None
 
@@ -113,7 +143,7 @@ class Vehicle(Entity):
 
         self._isAlive = None
 
-        self._selectedWeapon = 0
+        self._selectedWeapon = 0.0
 
         self._serverSpeedRaw = None
 
@@ -127,9 +157,22 @@ class Vehicle(Entity):
 
         self._debugText = None
 
-        self._isBot = False
+        self._isBot = 'False'
 
         self._miscsPresetsStatus = None
+
+
+        # MRO fix
+
+        VisionOwner.__init__(self)
+
+        AtbaOwner.__init__(self)
+
+        AirDefenceOwner.__init__(self)
+
+        DebugDrawEntity.__init__(self)
+
+        HitLocationManagerOwner.__init__(self)
 
         return
 
@@ -463,3 +506,7 @@ class Vehicle(Entity):
     @miscsPresetsStatus.setter
     def miscsPresetsStatus(self, value):
         self._miscsPresetsStatus, = unpack_variables(value, [['ARRAY', 'STRING']])
+
+
+    def __repr__(self):
+        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
