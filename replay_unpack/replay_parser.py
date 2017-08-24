@@ -4,7 +4,9 @@ import os
 import sys
 from StringIO import StringIO
 
-from replay_unpack import WoWSReplayDecrypt, client, BigWorldPacket
+from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
+from replay_unpack.replay_decrypt import WoWSReplayDecrypt
+from replay_unpack.sentry import client
 
 __author__ = "Aleksandr Shyshatsky"
 
