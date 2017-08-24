@@ -12,6 +12,23 @@ from replay_unpack.sentry import client
 __author__ = "Aleksandr Shyshatsky"
 
 
+def silence_stdout_until_process_exit():
+    """
+    Upon process exit, Sentry sometimes prints:
+
+        Sentry is attempting to send 1 pending error messages
+        Waiting up to 10 seconds
+        Press Ctrl-C to quit
+
+    This causes us to get emails from cron which are useless noise, since the
+    exceptions end up in sentry anyway. "Real" exceptions print to stderr, not
+    stdout, so this shouldn't silence anything important.
+
+    See also this issue: https://github.com/getsentry/raven-python/issues/904
+    """
+    sys.stdout = StringIO()
+
+
 class ReplayParser(object):
     BASE_PATH = os.path.dirname(__file__)
 
@@ -52,3 +69,4 @@ if __name__ == '__main__':
 
     namespace = parser.parse_args()
     print json.dumps(ReplayParser(namespace.replay).get_info(), indent=1)
+    silence_stdout_until_process_exit()
