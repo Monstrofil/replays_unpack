@@ -5,7 +5,7 @@ import struct
 from replay_unpack.base.BigWorld import BigWorld
 from build import entities as entities
 from build._entities_list import g_entitiesList
-from packets import Map, BasePlayerCreate, CellPlayerCreate, Entity, Position, EntityMethod, EntityProperty
+from replay_unpack.packets import *
 from sentry import client
 
 __author__ = "Aleksandr Shyshatsky"
