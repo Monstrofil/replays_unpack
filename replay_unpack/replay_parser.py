@@ -4,6 +4,10 @@ import os
 import sys
 from StringIO import StringIO
 
+from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
+from replay_unpack.replay_decrypt import WoWSReplayDecrypt
+from replay_unpack.sentry import client
+
 __author__ = "Aleksandr Shyshatsky"
 
 
@@ -12,11 +16,9 @@ class ReplayParser(object):
 
     def __init__(self, replay_path):
         self._replay_path = replay_path
-        from replay_unpack.replay_decrypt import WoWSReplayDecrypt
         self._decrypter = WoWSReplayDecrypt(replay_path)
 
     def get_info(self):
-        from replay_unpack.sentry import client
         json_data, replay_data = self._decrypter.get_replay_data()
 
         client_version = '.'.join(json_data['clientVersionFromXml'].split(', ')[:3])
@@ -35,7 +37,6 @@ class ReplayParser(object):
 
     def _get_hidden_data(self, replay_data):
         from replay_unpack.replay_player import ReplayPlayer
-        from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
         player = ReplayPlayer()
         io = StringIO(replay_data)
         while io.pos != io.len:
