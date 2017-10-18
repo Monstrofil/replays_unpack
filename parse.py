@@ -14,7 +14,7 @@ from replay_parser import ReplayParser
 
 from os import listdir, path
 
-BASE_DIR = r"C:\Users\shish\Desktop\replays_for_artpechka"
+BASE_DIR = r"C:\Users\shish\Desktop\replays"
 
 Player = namedtuple('Player', [
     'DATABASE_ID',
@@ -33,6 +33,10 @@ for i, file in enumerate(listdir(BASE_DIR)):
     players = {}
 
     replayInfo = ReplayParser(path.join(BASE_DIR, file)).get_info()['hidden']
+
+    if replayInfo is None:
+        print 'UNKNOWN result'
+        continue
     winnerTeamId = replayInfo['battle_result']['winner_team_id']
 
     for player in replayInfo['players'].itervalues():
