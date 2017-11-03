@@ -404,8 +404,8 @@ class Avatar(VoiceChatClient, StatsPublisher):
         self.g_onBattleInterrupted.fire(self)
 
     @unpack_func_args([['ARRAY', 'SHOT'], ['ARRAY', 'TORPEDOSHOT'], ['ARRAY', 'SHOTKILL'], ['ARRAY', 'EXPLOSION']])
-    def receiveShotPack(self, arg1, arg2, arg3, arg4):
-        self.g_receiveShotPack.fire(self, arg1, arg2, arg3, arg4)
+    def receiveShotPack(self, arg1, arg2, arg3, arg4=None):
+        self.g_receiveShotPack.fire(self, arg1, arg2, arg3, arg4=None)
 
     @unpack_func_args(['INT32', 'BLOB', 'ENTITY_ID', 'BOOL'])
     def receiveProjectileTrace(self, arg1, arg2, arg3, arg4):

@@ -23,7 +23,7 @@ Player = namedtuple('Player', [
     'REPLAY'
 ])
 
-f = open('Teinor.csv', 'wb')
+f = open('corsairs.csv', 'wb')
 print Player._fields
 w = csv.DictWriter(f, Player._fields, delimiter=';')
 w.writeheader()
