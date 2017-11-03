@@ -47,7 +47,7 @@ class ReplayPlayer(object):
                 if method_name:
                     try:
                         getattr(entity, method_name)(packet.data.data.value.decode('hex'))
-                    except struct.error:
+                    except Exception:
                         client.captureException()
 
         if isinstance(packet.data, EntityProperty):
@@ -57,7 +57,7 @@ class ReplayPlayer(object):
                 if attribute_name:
                     try:
                         setattr(entity, attribute_name, packet.data.data.value.decode('hex'))
-                    except struct.error:
+                    except Exception:
                         client.captureException()
 
     def get_info(self):
