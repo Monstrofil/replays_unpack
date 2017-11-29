@@ -9,7 +9,10 @@ from replay_unpack.base.packets.PacketData import PacketDataBase
 __author__ = "Aleksandr Shyshatsky"
 
 
-@bigworld_packet(type_=10)
+# TODO: 6.14 broke this packet
+# YC     �hC    ���}      �  E�g�    �ɻ
+# xC yC                                     
+# @bigworld_packet(type_=10)
 class Position(PacketDataBase):
     def __init__(self, stream):
         self.entityId, = struct.unpack('i', stream.read(4))
