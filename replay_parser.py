@@ -3,6 +3,7 @@
 import json
 import os
 import sys
+import logging
 from StringIO import StringIO
 
 from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
@@ -32,9 +33,12 @@ def silence_stdout_until_process_exit():
 class ReplayParser(object):
     BASE_PATH = os.path.dirname(__file__)
 
-    def __init__(self, replay_path):
+    def __init__(self, replay_path, debug):
+        self._debug = debug
         self._replay_path = replay_path
         self._decrypter = WoWSReplayDecrypt(replay_path)
+
+        logging.basicConfig(level=logging.DEBUG if debug else logging.CRITICAL)
 
     def get_info(self):
         json_data, replay_data = self._decrypter.get_replay_data()
@@ -45,7 +49,7 @@ class ReplayParser(object):
         try:
             hidden_data = self._get_hidden_data(replay_data)
         except Exception as e:
-            client.captureException()
+            logging.exception(e)
             hidden_data = None
 
         return dict(
@@ -62,11 +66,14 @@ class ReplayParser(object):
             player.on_packet(packet)
         return player.get_info()
 
+
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--replay', type=str, required=True)
+    parser.add_argument('--debug', action='store_true', required=False)
 
     namespace = parser.parse_args()
-    print json.dumps(ReplayParser(namespace.replay).get_info(), indent=1)
+    print json.dumps(
+        ReplayParser(namespace.replay, namespace.debug).get_info(), indent=1)
     silence_stdout_until_process_exit()
