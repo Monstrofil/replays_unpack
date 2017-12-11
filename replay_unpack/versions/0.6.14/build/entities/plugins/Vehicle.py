@@ -43,4 +43,36 @@ class Vehicle(Vehicle):
             5: 'uniqueSkillActivated',
         }
 
+        self.attributesMap = {
+            24: 'atbaTargets',
+            25: 'airDefenseTargetId',
+            14: 'airDefenseDispRadius',
+            0: 'isAntiAirMode',
+            15: 'health',
+            16: 'regenerationHealth',
+            17: 'regeneratedHealth',
+            1: 'burningFlags',
+            2: 'isOnForsage',
+            18: 'regenCrewHpLimit',
+            19: 'buoyancy',
+            11: 'targetLocalPos',
+            12: 'torpedoLocalPos',
+            13: 'weaponLockFlags',
+            20: 'owner',
+            26: 'shipConfig',
+            23: 'crewModifiersCompactParams',
+            3: 'teamId',
+            4: 'isAlive',
+            21: 'selectedWeapon',
+            5: 'serverSpeedRaw',
+            6: 'speedSignDir',
+            7: 'enginePower',
+            8: 'isInOfflineMode',
+            9: 'ignoreMapBorders',
+            27: 'debugText',
+            10: 'isBot',
+            28: 'miscsPresetsStatus',
+            22: 'draught',
+        }
+
         super(Vehicle, self).__init__()

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # coding=utf-8
 import struct
+import logging
 
 from replay_unpack.base.BigWorld import BigWorld
 from build import entities as entities
@@ -34,6 +35,15 @@ class ReplayPlayer(object):
             class_ = getattr(entities, g_entitiesList[packet.data.type])
             entity = class_()
             entity.id = packet.data.entityID
+
+            if hasattr(entity, 'attributesMap'):
+                values = packet.data.state.io()
+                values_count, = struct.unpack('B', values.read(1))
+                for i in xrange(values_count):
+                    k = values.read(1)
+                    idx, = struct.unpack('B', k)
+                    setattr(entity, entity.attributesMap[idx], values)
+
             self._bigworld.entities[packet.data.entityID] = entity
 
         if isinstance(packet.data, Position):
@@ -47,8 +57,8 @@ class ReplayPlayer(object):
                 if method_name:
                     try:
                         getattr(entity, method_name)(packet.data.data.value.decode('hex'))
-                    except Exception:
-                        client.captureException()
+                    except Exception as e:
+                        logging.error(e.message)
 
         if isinstance(packet.data, EntityProperty):
             entity = self._bigworld.entities[packet.data.objectID]
@@ -57,8 +67,8 @@ class ReplayPlayer(object):
                 if attribute_name:
                     try:
                         setattr(entity, attribute_name, packet.data.data.value.decode('hex'))
-                    except Exception:
-                        client.captureException()
+                    except Exception as e:
+                        logging.error(e.message)
 
     def get_info(self):
         return self._bigworld.battle_controller.get_info()
