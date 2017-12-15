@@ -10,7 +10,8 @@ __author__ = "Aleksandr Shyshatsky"
 
 
 class BattleController(object):
-    def __init__(self):
+    def __init__(self, bigworld):
+        self._bigworld = bigworld
         self._achievements = {}
         self._ribbons = {}
         self._players = PlayersInfo()
@@ -31,8 +32,6 @@ class BattleController(object):
         Avatar.g_onAchievementEarned += self.onAchievementEarned
         Avatar.g_receiveDamageStat += self.receiveDamageStat
         Avatar.g_receive_planeDeath += self.receive_planeDeath
-
-        Avatar.g_onBattleAchievementsRestored += self.receiveShotPack
 
         Vehicle.g_receiveDamagesOnShip += self.g_receiveDamagesOnShip
 
@@ -88,9 +87,6 @@ class BattleController(object):
 
     def receive_planeDeath(self, avatar, planeID, reason, attackerId):
         self._dead_planes.append((planeID, reason, attackerId))
-
-    def receiveShotPack(self, avatar, *args):
-        print args
 
     @property
     def map(self):

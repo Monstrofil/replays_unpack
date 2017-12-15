@@ -6,16 +6,12 @@ from def_generator.events import EventHook
 from def_generator.decorators import unpack_func_args, unpack_variables
 
 
-
-
 class BattleLogic(object):
-    
     g_playEffectOnce = EventHook()
-    
+
     def __init__(self):
         self.id = None
         self.position = None
-
 
         self._battleType = None
 
@@ -29,7 +25,6 @@ class BattleLogic(object):
 
         self._debugText = None
 
-
         # MRO fix
 
         return
@@ -42,7 +37,6 @@ class BattleLogic(object):
     @unpack_func_args(['STRING', 'VECTOR3', 'FLOAT'])
     def playEffectOnce(self, arg1, arg2, arg3):
         self.g_playEffectOnce.fire(self, arg1, arg2, arg3)
-
 
     ####################################
     #       PROPERTIES
@@ -96,7 +90,6 @@ class BattleLogic(object):
     @debugText.setter
     def debugText(self, value):
         self._debugText, = unpack_variables(value, [['ARRAY', 'BATTLE_LOGIC_DEBUG_TEXT']])
-
 
     def __repr__(self):
         return "<{}> {}".format(self.__class__.__name__, self.__dict__)

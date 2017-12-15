@@ -135,7 +135,7 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
     
     g_setTrace = EventHook()
     
-    g_curVersion_Release_0_6_14_0_302523 = EventHook()
+    g_curVersion_Release_0_6_14_2_305789 = EventHook()
     
     g_initActions = EventHook()
     
@@ -531,8 +531,8 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
         self.g_setTrace.fire(self, arg1)
 
     @unpack_func_args([])
-    def curVersion_Release_0_6_14_0_302523(self):
-        self.g_curVersion_Release_0_6_14_0_302523.fire(self)
+    def curVersion_Release_0_6_14_2_305789(self):
+        self.g_curVersion_Release_0_6_14_2_305789.fire(self)
 
     @unpack_func_args(['STRING', 'STRING'])
     def initActions(self, arg1, arg2):

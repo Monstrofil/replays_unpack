@@ -10,7 +10,7 @@ __author__ = "Aleksandr Shyshatsky"
 
 
 class BattleController(object):
-    def __init__(self):
+    def __init__(self, bigworld):
         self._achievements = {}
         self._ribbons = {}
         self._players = PlayersInfo()
