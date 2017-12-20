@@ -32,7 +32,7 @@ for i, file in enumerate(listdir(BASE_DIR)):
     print file
     players = {}
 
-    replayInfo = ReplayParser(path.join(BASE_DIR, file)).get_info()['hidden']
+    replayInfo = ReplayParser(path.join(BASE_DIR, file), False).get_info()['hidden']
 
     if replayInfo is None:
         print 'UNKNOWN result'
