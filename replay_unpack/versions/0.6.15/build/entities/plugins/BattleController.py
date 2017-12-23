@@ -32,6 +32,7 @@ class BattleController(object):
         Avatar.g_onAchievementEarned += self.onAchievementEarned
         Avatar.g_receiveDamageStat += self.receiveDamageStat
         Avatar.g_receive_planeDeath += self.receive_planeDeath
+        Avatar.g_onNewPlayerSpawnedInBattle += self.onNewPlayerSpawnedInBattle
 
         Vehicle.g_receiveDamagesOnShip += self.g_receiveDamagesOnShip
 
@@ -53,6 +54,10 @@ class BattleController(object):
             winner_team_id=teamId,
             victory_type=state
         )
+
+    def onNewPlayerSpawnedInBattle(self, avatar, pickle_data):
+        self._players.create_or_update_players(
+            pickle.loads(pickle_data))
 
     def onArenaStateReceived(self, avatar, arena_info):
         self._players.create_or_update_players(

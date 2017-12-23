@@ -57,7 +57,7 @@ class ReplayPlayer(object):
                     try:
                         getattr(entity, method_name)(packet.data.data.value.decode('hex'))
                     except Exception as e:
-                        logging.error(e.message)
+                        logging.exception(e.message)
 
         if isinstance(packet.data, EntityProperty):
             entity = self._bigworld.entities[packet.data.objectID]
@@ -67,7 +67,7 @@ class ReplayPlayer(object):
                     try:
                         setattr(entity, attribute_name, packet.data.data.value.decode('hex'))
                     except Exception as e:
-                        logging.error(e.message)
+                        logging.exception(e.message)
 
     def get_info(self):
         return self._bigworld.battle_controller.get_info()
