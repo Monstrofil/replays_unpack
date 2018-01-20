@@ -62,3 +62,4 @@ for i, file in enumerate(listdir(BASE_DIR)):
     w.writerows(dict(zip(Player._fields, p)) for p in players.values())
 
 f.close()
+
