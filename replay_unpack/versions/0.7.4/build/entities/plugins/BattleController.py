@@ -70,6 +70,12 @@ class BattleController(object):
     def receiveDamageStat(self, avatar, blob):
         normalized = {}
         for (type_, bool_), value in pickle.loads(blob).iteritems():
+            # TODO: fix on frontend side
+            # bool_ == 3 => potential damage
+            # bool_ == 0 => damage
+            # bool_ == 1 => unknown
+            if bool_ == 3:
+                continue
             normalized.setdefault(type_, {}).setdefault(bool_, 0)
             normalized[type_][bool_] = value
         self._damage_map.update(normalized)

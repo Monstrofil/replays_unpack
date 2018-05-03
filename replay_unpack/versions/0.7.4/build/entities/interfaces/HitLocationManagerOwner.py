@@ -22,6 +22,8 @@ class HitLocationManagerOwner(object):
     
     g_setBurnFlood = EventHook()
     
+    g_dev_detonate = EventHook()
+    
     g_drawSplash = EventHook()
     
     g_receiveSomeSplashInfo = EventHook()
@@ -86,6 +88,10 @@ class HitLocationManagerOwner(object):
     @unpack_func_args(['UINT8', 'BOOL'])
     def setBurnFlood(self, arg1, arg2):
         self.g_setBurnFlood.fire(self, arg1, arg2)
+
+    @unpack_func_args(['STRING', 'INT32', 'STRING'])
+    def dev_detonate(self, arg1, arg2, arg3):
+        self.g_dev_detonate.fire(self, arg1, arg2, arg3)
 
     @unpack_func_args(['VECTOR3', 'FLOAT32', 'UINT32', 'BOOL'])
     def drawSplash(self, arg1, arg2, arg3, arg4):

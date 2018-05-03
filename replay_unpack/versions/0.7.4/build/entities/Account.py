@@ -129,15 +129,13 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
     
     g_receiveToken = EventHook()
     
-    g_setNewSurveyUrl = EventHook()
-    
     g_dev_logConsole = EventHook()
     
     g_onCheckGamePing = EventHook()
     
     g_setTrace = EventHook()
     
-    g_curVersion_Release_0_7_3_0_329111 = EventHook()
+    g_curVersion_Release_0_7_4_0_336247 = EventHook()
     
     g_initActions = EventHook()
     
@@ -309,21 +307,21 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
     
     g_dev_bot_setTestBattleParams = EventHook()
     
-    g_onSurveyCompleted = EventHook()
-    
     g_dev_onSurveyClear = EventHook()
     
     g_checkGamePing = EventHook()
     
     g_sendStatData = EventHook()
     
-    g_sendBattleSurvey = EventHook()
+    g_sendSurveyResults = EventHook()
     
     g_newTraces = EventHook()
     
     g_dev_resetDailyLimits = EventHook()
     
-    g_dev_resetTeamKillRating = EventHook()
+    g_dev_resetAbuseRating = EventHook()
+    
+    g_dev_resetRecidivism = EventHook()
     
     g_executeTransactionCl = EventHook()
     
@@ -333,7 +331,11 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
     
     g_dev_receiveExternalNotification = EventHook()
     
-    g_dev_setTKillRating = EventHook()
+    g_dev_setAbuseStatus = EventHook()
+    
+    g_dev_setAbuseRecidivism = EventHook()
+    
+    g_dev_setAbuseRating = EventHook()
     
     g_testInvoice = EventHook()
     
@@ -341,8 +343,6 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
         self.id = None
         self.position = None
 
-
-        self._surveyUrl = None
 
 
         # MRO fix
@@ -536,10 +536,6 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
     def receiveToken(self, arg1, arg2, arg3):
         self.g_receiveToken.fire(self, arg1, arg2, arg3)
 
-    @unpack_func_args(['UNICODE_STRING'])
-    def setNewSurveyUrl(self, arg1):
-        self.g_setNewSurveyUrl.fire(self, arg1)
-
     @unpack_func_args(['STRING'])
     def dev_logConsole(self, arg1):
         self.g_dev_logConsole.fire(self, arg1)
@@ -553,8 +549,8 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
         self.g_setTrace.fire(self, arg1)
 
     @unpack_func_args([])
-    def curVersion_Release_0_7_3_0_329111(self):
-        self.g_curVersion_Release_0_7_3_0_329111.fire(self)
+    def curVersion_Release_0_7_4_0_336247(self):
+        self.g_curVersion_Release_0_7_4_0_336247.fire(self)
 
     @unpack_func_args(['STRING', 'STRING'])
     def initActions(self, arg1, arg2):
@@ -897,10 +893,6 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
         self.g_dev_bot_setTestBattleParams.fire(self, arg1)
 
     @unpack_func_args([])
-    def onSurveyCompleted(self):
-        self.g_onSurveyCompleted.fire(self)
-
-    @unpack_func_args([])
     def dev_onSurveyClear(self):
         self.g_dev_onSurveyClear.fire(self)
 
@@ -912,9 +904,9 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
     def sendStatData(self, arg1):
         self.g_sendStatData.fire(self, arg1)
 
-    @unpack_func_args([['ARRAY', 'UINT8']])
-    def sendBattleSurvey(self, arg1):
-        self.g_sendBattleSurvey.fire(self, arg1)
+    @unpack_func_args([['ARRAY', 'UINT8'], 'INT64', 'INT64'])
+    def sendSurveyResults(self, arg1, arg2, arg3):
+        self.g_sendSurveyResults.fire(self, arg1, arg2, arg3)
 
     @unpack_func_args(['STRING'])
     def newTraces(self, arg1):
@@ -925,8 +917,12 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
         self.g_dev_resetDailyLimits.fire(self)
 
     @unpack_func_args([])
-    def dev_resetTeamKillRating(self):
-        self.g_dev_resetTeamKillRating.fire(self)
+    def dev_resetAbuseRating(self):
+        self.g_dev_resetAbuseRating.fire(self)
+
+    @unpack_func_args([])
+    def dev_resetRecidivism(self):
+        self.g_dev_resetRecidivism.fire(self)
 
     @unpack_func_args(['UINT32', 'BLOB', 'INT32'])
     def executeTransactionCl(self, arg1, arg2, arg3):
@@ -944,9 +940,17 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
     def dev_receiveExternalNotification(self, arg1):
         self.g_dev_receiveExternalNotification.fire(self, arg1)
 
-    @unpack_func_args([['ARRAY', 'FLOAT']])
-    def dev_setTKillRating(self, arg1):
-        self.g_dev_setTKillRating.fire(self, arg1)
+    @unpack_func_args(['UINT8'])
+    def dev_setAbuseStatus(self, arg1):
+        self.g_dev_setAbuseStatus.fire(self, arg1)
+
+    @unpack_func_args(['STRING', 'FLOAT'])
+    def dev_setAbuseRecidivism(self, arg1, arg2):
+        self.g_dev_setAbuseRecidivism.fire(self, arg1, arg2)
+
+    @unpack_func_args(['FLOAT'])
+    def dev_setAbuseRating(self, arg1):
+        self.g_dev_setAbuseRating.fire(self, arg1)
 
     @unpack_func_args(['BLOB'])
     def testInvoice(self, arg1):
@@ -957,14 +961,6 @@ class Account(AccountEditor, BattleStarter, WalletOwner, AccountPData, EntityLoo
     #       PROPERTIES
     ####################################
 
-
-    @property
-    def surveyUrl(self):
-        return self._surveyUrl
-
-    @surveyUrl.setter
-    def surveyUrl(self, value):
-        self._surveyUrl, = unpack_variables(value, ['STRING'])
 
 
     def __repr__(self):
