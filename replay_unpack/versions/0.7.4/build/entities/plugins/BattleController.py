@@ -46,8 +46,14 @@ class BattleController(object):
             shots_damage_map=self._shots_damage_map,
             death_map=self._death_map,
             map=self._map,
-            player_id=self._player_id
+            player_id=self._player_id,
+            skills=dict(self._getCrewSkillsInfo())
         )
+
+    def _getCrewSkillsInfo(self):
+        for e in self._bigworld.entities.values():
+            if isinstance(e, Vehicle):
+                yield e.id, list(e.getLearnedSkills())
 
     def onBattleEnd(self, avatar, teamId, state):
         self._battle_result = dict(

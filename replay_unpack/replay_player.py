@@ -35,13 +35,16 @@ class ReplayPlayer(object):
             entity = class_()
             entity.id = packet.data.entityID
 
-            # if hasattr(entity, 'attributesMap'):
-            #     values = packet.data.state.io()
-            #     values_count, = struct.unpack('B', values.read(1))
-            #     for i in xrange(values_count):
-            #         k = values.read(1)
-            #         idx, = struct.unpack('B', k)
-            #         setattr(entity, entity.attributesMap[idx], values)
+            if hasattr(entity, 'attributesMap'):
+                try:
+                    values = packet.data.state.io()
+                    values_count, = struct.unpack('B', values.read(1))
+                    for i in xrange(values_count):
+                        k = values.read(1)
+                        idx, = struct.unpack('B', k)
+                        setattr(entity, entity.attributesMap[idx], values)
+                except Exception as e:
+                    logging.exception(e.message)
 
             self._bigworld.entities[packet.data.entityID] = entity
 
