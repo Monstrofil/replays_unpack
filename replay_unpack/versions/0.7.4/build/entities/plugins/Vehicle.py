@@ -86,7 +86,7 @@ class Vehicle(Vehicle):
         So to turn it back, we must divide number by two;
         """
         learned_skills = self.crewModifiersCompactParams['learnedSkills']
-        skill_id = 0
+        skill_id = 1
         while learned_skills != 0:
             if learned_skills % 2 == 1:
                 yield skill_id
