@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # coding=utf-8
-from replay_unpack.base.PlayersInfo import PlayersInfo
 from build.entities.plugins.BattleController import BattleController
 
 __author__ = "Aleksandr Shyshatsky"

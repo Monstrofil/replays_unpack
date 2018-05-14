@@ -12,8 +12,10 @@ from Crypto.Cipher import Blowfish
 from tqdm import tqdm
 
 BASE_DIR = os.path.dirname(__file__)
-BLOWFISH_KEY = ''.join(['\x29', '\xB7', '\xC9', '\x09', '\x38', '\x3F', '\x84', '\x88',
-                        '\xFA', '\x98', '\xEC', '\x4E', '\x13', '\x19', '\x79', '\xFB'])
+BLOWFISH_KEY = ''.join(['\xDE', '\x72', '\xBE', '\xA0', '\xDE', '\x04', '\xBE', '\xB1',
+                        '\xDE', '\xFE', '\xBE', '\xEF', '\xDE', '\xAD', '\xBE', '\xEF'])
+
+
 
 
 class WoWSReplayDecrypt(object):
@@ -57,20 +59,21 @@ class WoWSReplayDecrypt(object):
             f.seek(4)  # skip signature
             blocks_count = struct.unpack("i", f.read(4))[0]
 
-            # TODO: replay can contain up to 3 blocks
-            if blocks_count != 1:
-                raise Exception("Not implemented replay data structure. "
-                                "Expected blocks == 1, blocks == {0}".format(blocks_count))
+            # # TODO: replay can contain up to 3 blocks
+            # if blocks_count != 1:
+            #     raise Exception("Not implemented replay data structure. "
+            #                     "Expected blocks == 1, blocks == {0}".format(blocks_count))
 
-            block_size = struct.unpack("i", f.read(4))[0]
-            arena_info = json.loads(f.read(block_size))
+            for _ in range(blocks_count):
+                block_size = struct.unpack("i", f.read(4))[0]
+                arena_info = json.loads(f.read(block_size))
 
             decrypted_data = zlib.decompress(self.__decrypt_data(f.read()))
 
             if self.__dump_binary_data:
                 self.__save_decrypted_data(decrypted_data)
 
-            return arena_info, decrypted_data
+            return [], decrypted_data
 
     def __save_decrypted_data(self, decrypted_data):
         """
