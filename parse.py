@@ -49,15 +49,15 @@ for i, file in enumerate(listdir(BASE_DIR)):
         )
 
     vehicleId = next(player['shipId'] for player in replayInfo['players'].itervalues() if player['avatarId'] == replayInfo['player_id'])
-    killerVehicleId = next((killer for victim, killer, _ in replayInfo['death_map'] if victim == vehicleId), -1)
+    # killerVehicleId = next((killer for victim, killer, _ in replayInfo['death_map'] if victim == vehicleId), -1)
 
-    if killerVehicleId != -1:
-        players[killerVehicleId] = Player(
-                DATABASE_ID=players[killerVehicleId].DATABASE_ID,
-                NAME=players[killerVehicleId].NAME,
-                GOLD=players[killerVehicleId].GOLD + 500,
-                REPLAY=players[killerVehicleId].REPLAY
-        )
+    # if killerVehicleId != -1:
+    #     players[killerVehicleId] = Player(
+    #             DATABASE_ID=players[killerVehicleId].DATABASE_ID,
+    #             NAME=players[killerVehicleId].NAME,
+    #             GOLD=players[killerVehicleId].GOLD + 500,
+    #             REPLAY=players[killerVehicleId].REPLAY
+    #     )
 
     w.writerows(dict(zip(Player._fields, p)) for p in players.values())
 

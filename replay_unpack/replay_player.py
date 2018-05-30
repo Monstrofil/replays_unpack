@@ -61,6 +61,8 @@ class ReplayPlayer(object):
                         getattr(entity, method_name)(packet.data.data.value.decode('hex'))
                     except Exception as e:
                         logging.exception(e.message)
+                else:
+                    logging.debug('Unable to detect method name %s:%s', packet.data.messageId, entity.__class__)
 
         if isinstance(packet.data, EntityProperty):
             entity = self._bigworld.entities[packet.data.objectID]
@@ -71,6 +73,8 @@ class ReplayPlayer(object):
                         setattr(entity, attribute_name, packet.data.data.value.decode('hex'))
                     except Exception as e:
                         logging.exception(e.message)
+                else:
+                    logging.debug('Unable to detect property name %s:%s', packet.data.messageId, entity.__class__)
 
     def get_info(self):
         return self._bigworld.battle_controller.get_info()
