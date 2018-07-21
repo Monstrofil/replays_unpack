@@ -48,8 +48,12 @@ class BattleController(object):
             death_map=self._death_map,
             map=self._map,
             player_id=self._player_id,
+            control_points=self._getCapturePointsInfo(),
             skills=dict(self._getCrewSkillsInfo())
         )
+
+    def _getCapturePointsInfo(self):
+        return self._bigworld.battleLogic.state['controlPoints']
 
     def _getCrewSkillsInfo(self):
         for e in self._bigworld.entities.values():
