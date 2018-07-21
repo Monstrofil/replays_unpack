@@ -2,14 +2,11 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
-
-try:
-    from interfaces.WeatherOwner import WeatherOwner
-except:
-    from WeatherOwner import WeatherOwner
+from interfaces.WeatherOwner import WeatherOwner
 
 
 
@@ -39,7 +36,41 @@ class SmokeScreen(WeatherOwner):
 
         WeatherOwner.__init__(self)
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (32, 'bcRadius'),
+            (10000000000, 'points'),
+            (32, 'radius'),
+            (32, 'height'),
+            (8, 'activePointIndex'),
+            (10000000000, 'spawnPointEffect'),
+            (10000000000, 'livePointEffect'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
@@ -51,7 +82,7 @@ class SmokeScreen(WeatherOwner):
     #       PROPERTIES
     ####################################
 
-
+# property size: 32
     @property
     def bcRadius(self):
         return self._bcRadius
@@ -59,7 +90,7 @@ class SmokeScreen(WeatherOwner):
     @bcRadius.setter
     def bcRadius(self, value):
         self._bcRadius, = unpack_variables(value, ['FLOAT32'])
-
+# property size: 10000000000
     @property
     def points(self):
         return self._points
@@ -67,7 +98,7 @@ class SmokeScreen(WeatherOwner):
     @points.setter
     def points(self, value):
         self._points, = unpack_variables(value, [['ARRAY', 'VECTOR2']])
-
+# property size: 32
     @property
     def radius(self):
         return self._radius
@@ -75,7 +106,7 @@ class SmokeScreen(WeatherOwner):
     @radius.setter
     def radius(self, value):
         self._radius, = unpack_variables(value, ['FLOAT32'])
-
+# property size: 32
     @property
     def height(self):
         return self._height
@@ -83,7 +114,7 @@ class SmokeScreen(WeatherOwner):
     @height.setter
     def height(self, value):
         self._height, = unpack_variables(value, ['FLOAT32'])
-
+# property size: 8
     @property
     def activePointIndex(self):
         return self._activePointIndex
@@ -91,7 +122,7 @@ class SmokeScreen(WeatherOwner):
     @activePointIndex.setter
     def activePointIndex(self, value):
         self._activePointIndex, = unpack_variables(value, ['INT8'])
-
+# property size: 10000000000
     @property
     def spawnPointEffect(self):
         return self._spawnPointEffect
@@ -99,7 +130,7 @@ class SmokeScreen(WeatherOwner):
     @spawnPointEffect.setter
     def spawnPointEffect(self, value):
         self._spawnPointEffect, = unpack_variables(value, ['STRING'])
-
+# property size: 10000000000
     @property
     def livePointEffect(self):
         return self._livePointEffect
@@ -109,5 +140,30 @@ class SmokeScreen(WeatherOwner):
         self._livePointEffect, = unpack_variables(value, ['STRING'])
 
 
+    def get_summary(self):
+        print '~' * 60
+        print 'Entity name: ', self.__class__.__name__
+        print 'Total entity client properties: {:>5}'.format(len(self._properties))
+        print 'Total entity client methods: {:>5}'.format(len(self._methods))
+
+        print
+        print 'Listing entity properties:'
+        print '{:>4} {:>40}'.format('idx', 'property name')
+        for i, p in self.attributesMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+
+        print
+        print 'Listing entity methods:'
+        print '{:>4} {:>40}'.format('idx', 'method name')
+        for i, p in self.methodsMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+        print '~' * 60
+        print
+        print
+
+
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,10 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class AccountEditor(object):
-    
-    g_onAccountPropertiesChanged = EventHook()
-    
-    g_receiveProperties = EventHook()
     
     def __init__(self):
         self.id = None
@@ -22,20 +19,39 @@ class AccountEditor(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['INT32', 'INT32'])
-    def onAccountPropertiesChanged(self, arg1, arg2):
-        self.g_onAccountPropertiesChanged.fire(self, arg1, arg2)
-
-    @unpack_func_args(['OBJECT_ID', 'DB_ID', 'INT32', 'PYTHON'])
-    def receiveProperties(self, arg1, arg2, arg3, arg4):
-        self.g_receiveProperties.fire(self, arg1, arg2, arg3, arg4)
 
 
     ####################################
@@ -44,5 +60,30 @@ class AccountEditor(object):
 
 
 
+    def get_summary(self):
+        print '~' * 60
+        print 'Entity name: ', self.__class__.__name__
+        print 'Total entity client properties: {:>5}'.format(len(self._properties))
+        print 'Total entity client methods: {:>5}'.format(len(self._methods))
+
+        print
+        print 'Listing entity properties:'
+        print '{:>4} {:>40}'.format('idx', 'property name')
+        for i, p in self.attributesMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+
+        print
+        print 'Listing entity methods:'
+        print '{:>4} {:>40}'.format('idx', 'method name')
+        for i, p in self.methodsMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+        print '~' * 60
+        print
+        print
+
+
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

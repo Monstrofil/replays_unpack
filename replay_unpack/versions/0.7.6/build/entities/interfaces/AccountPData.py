@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -17,44 +18,44 @@ class AccountPData(object):
 
         self._name = ''
 
-        self._normalizedName = None
-
         self._spaID = None
 
-        self._externalID = 0.0
-
-        self._version = None
-
-        self._accountType = None
-
         self._attrs = 0.0
-
-        self._level = 0.0
-
-        self._isTeamkiller = 0.0
-
-        self._rank = 0.0
-
-        self._lastGameTime = 0.0
-
-        self._dogTag = None
-
-        self._persistentData = None
-
-        self._vhID = None
-
-        self._dataRevision = 1.0
-
-        self._ttkStatus = 0.0
-
-        self.__destroyReason = None
-
-        self._suspended = 0.0
 
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (10000000000, 'name'),
+            (64, 'spaID'),
+            (64, 'attrs'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
@@ -66,7 +67,7 @@ class AccountPData(object):
     #       PROPERTIES
     ####################################
 
-
+# property size: 10000000000
     @property
     def name(self):
         return self._name
@@ -74,15 +75,7 @@ class AccountPData(object):
     @name.setter
     def name(self, value):
         self._name, = unpack_variables(value, ['STRING'])
-
-    @property
-    def normalizedName(self):
-        return self._normalizedName
-
-    @normalizedName.setter
-    def normalizedName(self, value):
-        self._normalizedName, = unpack_variables(value, ['STRING'])
-
+# property size: 64
     @property
     def spaID(self):
         return self._spaID
@@ -90,31 +83,7 @@ class AccountPData(object):
     @spaID.setter
     def spaID(self, value):
         self._spaID, = unpack_variables(value, ['DB_ID'])
-
-    @property
-    def externalID(self):
-        return self._externalID
-
-    @externalID.setter
-    def externalID(self, value):
-        self._externalID, = unpack_variables(value, ['DB_ID'])
-
-    @property
-    def version(self):
-        return self._version
-
-    @version.setter
-    def version(self, value):
-        self._version, = unpack_variables(value, ['INT16'])
-
-    @property
-    def accountType(self):
-        return self._accountType
-
-    @accountType.setter
-    def accountType(self, value):
-        self._accountType, = unpack_variables(value, ['UINT32'])
-
+# property size: 64
     @property
     def attrs(self):
         return self._attrs
@@ -123,94 +92,31 @@ class AccountPData(object):
     def attrs(self, value):
         self._attrs, = unpack_variables(value, ['UINT64'])
 
-    @property
-    def level(self):
-        return self._level
 
-    @level.setter
-    def level(self, value):
-        self._level, = unpack_variables(value, ['UINT32'])
+    def get_summary(self):
+        print '~' * 60
+        print 'Entity name: ', self.__class__.__name__
+        print 'Total entity client properties: {:>5}'.format(len(self._properties))
+        print 'Total entity client methods: {:>5}'.format(len(self._methods))
 
-    @property
-    def isTeamkiller(self):
-        return self._isTeamkiller
+        print
+        print 'Listing entity properties:'
+        print '{:>4} {:>40}'.format('idx', 'property name')
+        for i, p in self.attributesMap.items():
+            print '{:>4} {:>40}'.format(i, p)
 
-    @isTeamkiller.setter
-    def isTeamkiller(self, value):
-        self._isTeamkiller, = unpack_variables(value, ['UINT8'])
-
-    @property
-    def rank(self):
-        return self._rank
-
-    @rank.setter
-    def rank(self, value):
-        self._rank, = unpack_variables(value, ['UINT32'])
-
-    @property
-    def lastGameTime(self):
-        return self._lastGameTime
-
-    @lastGameTime.setter
-    def lastGameTime(self, value):
-        self._lastGameTime, = unpack_variables(value, ['UINT32'])
-
-    @property
-    def dogTag(self):
-        return self._dogTag
-
-    @dogTag.setter
-    def dogTag(self, value):
-        self._dogTag, = unpack_variables(value, ['STRING'])
-
-    @property
-    def persistentData(self):
-        return self._persistentData
-
-    @persistentData.setter
-    def persistentData(self, value):
-        self._persistentData, = unpack_variables(value, ['STRING'])
-
-    @property
-    def vhID(self):
-        return self._vhID
-
-    @vhID.setter
-    def vhID(self, value):
-        self._vhID, = unpack_variables(value, ['UINT64'])
-
-    @property
-    def dataRevision(self):
-        return self._dataRevision
-
-    @dataRevision.setter
-    def dataRevision(self, value):
-        self._dataRevision, = unpack_variables(value, ['UINT64'])
-
-    @property
-    def ttkStatus(self):
-        return self._ttkStatus
-
-    @ttkStatus.setter
-    def ttkStatus(self, value):
-        self._ttkStatus, = unpack_variables(value, ['UINT64'])
-
-    @property
-    def _destroyReason(self):
-        return self.__destroyReason
-
-    @_destroyReason.setter
-    def _destroyReason(self, value):
-        self.__destroyReason, = unpack_variables(value, ['UINT8'])
-
-    @property
-    def suspended(self):
-        return self._suspended
-
-    @suspended.setter
-    def suspended(self, value):
-        self._suspended, = unpack_variables(value, ['UINT8'])
+        print
+        print 'Listing entity methods:'
+        print '{:>4} {:>40}'.format('idx', 'method name')
+        for i, p in self.methodsMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+        print '~' * 60
+        print
+        print
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

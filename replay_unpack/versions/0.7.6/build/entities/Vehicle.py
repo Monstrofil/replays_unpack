@@ -2,44 +2,17 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
-
-try:
-    from interfaces.VisionOwner import VisionOwner
-except:
-    from VisionOwner import VisionOwner
-
-try:
-    from interfaces.AtbaOwner import AtbaOwner
-except:
-    from AtbaOwner import AtbaOwner
-
-try:
-    from interfaces.AirDefenceOwner import AirDefenceOwner
-except:
-    from AirDefenceOwner import AirDefenceOwner
-
-try:
-    from interfaces.DebugDrawEntity import DebugDrawEntity
-except:
-    from DebugDrawEntity import DebugDrawEntity
-
-try:
-    from interfaces.HitLocationManagerOwner import HitLocationManagerOwner
-except:
-    from HitLocationManagerOwner import HitLocationManagerOwner
-
-try:
-    from interfaces.AviationOwner import AviationOwner
-except:
-    from AviationOwner import AviationOwner
-
-try:
-    from interfaces.WeatherOwner import WeatherOwner
-except:
-    from WeatherOwner import WeatherOwner
+from interfaces.VisionOwner import VisionOwner
+from interfaces.AtbaOwner import AtbaOwner
+from interfaces.AirDefenceOwner import AirDefenceOwner
+from interfaces.DebugDrawEntity import DebugDrawEntity
+from interfaces.HitLocationManagerOwner import HitLocationManagerOwner
+from interfaces.AviationOwner import AviationOwner
+from interfaces.WeatherOwner import WeatherOwner
 
 
 
@@ -113,18 +86,6 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     
     g_onConsumableEnabled = EventHook()
     
-    g_onClientEnterWorld = EventHook()
-    
-    g_onClientLeaveWorld = EventHook()
-    
-    g_suicide = EventHook()
-    
-    g_dev_teleportShip = EventHook()
-    
-    g_dev_flight = EventHook()
-    
-    g_offlineOnHit = EventHook()
-    
     def __init__(self):
         self.id = None
         self.position = None
@@ -191,179 +152,238 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
 
         WeatherOwner.__init__(self)
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (8, 'isOnForsage'),
+            (32, 'regenCrewHpLimit'),
+            (32, 'buoyancy'),
+            (16, 'targetLocalPos'),
+            (16, 'torpedoLocalPos'),
+            (16, 'weaponLockFlags'),
+            (32, 'owner'),
+            (10000000000, 'shipConfig'),
+            (128, 'crewModifiersCompactParams'),
+            (8, 'teamId'),
+            (8, 'isAlive'),
+            (32, 'selectedWeapon'),
+            (8, 'serverSpeedRaw'),
+            (8, 'speedSignDir'),
+            (8, 'enginePower'),
+            (8, 'isInOfflineMode'),
+            (8, 'ignoreMapBorders'),
+            (10000000000, 'debugText'),
+            (8, 'isBot'),
+            (10000000000, 'miscsPresetsStatus'),
+            (32, 'draught'),
+            (8, 'isFogHornOn'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (1, 'startOfflineBattle'),
+            (9, 'onConsumableInterrupted'),
+            (9, 'setAmmoArtilleryGun'),
+            (10000000001, 'setShotDecals'),
+            (10000000002, 'receiveDamagesOnShip'),
+            (41, 'consumableUsed'),
+            (9, 'setArtilleryGunsDefaultYawsPitchsTo'),
+            (169, 'syncMyTorpedoTube'),
+            (10000000001, 'syncMyArtilleryGun'),
+            (105, 'syncArtilleryGun'),
+            (137, 'syncTorpedoTube'),
+            (65, 'syncTorpedoState'),
+            (393, 'kill'),
+            (33, 'forceSink'),
+            (33, 'bodySinkPartLurched'),
+            (201, 'shootTorpedo'),
+            (17, 'shootGuns'),
+            (10000000001, 'syncShipCracks'),
+            (1, 'makeShipCracksActive'),
+            (10000000002, 'makeShipCracks'),
+            (10000000002, 'setReloadingStateTorpedoes'),
+            (10000000002, 'setReloadingStateArtillery'),
+            (10000000001, 'setConsumables'),
+            (1, 'stopVarys'),
+            (1, 'reflood'),
+            (65, 'onShotDecal'),
+            (33, 'receiveMirrorDamage'),
+            (33, 'offlineSetAI'),
+            (10000000001, 'offlineRecieveMovementRoute'),
+            (97, 'receiveVisibilityFactors'),
+            (1, 'forceReloadTorpedoes'),
+            (33, 'onSkillActivated'),
+            (1, 'uniqueSkillActivated'),
+            (17, 'onConsumableEnabled'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
+# method size: 1
     @unpack_func_args([])
     def startOfflineBattle(self):
         self.g_startOfflineBattle.fire(self)
-
+# method size: 9
     @unpack_func_args(['UINT8'])
     def onConsumableInterrupted(self, arg1):
         self.g_onConsumableInterrupted.fire(self, arg1)
-
+# method size: 9
     @unpack_func_args(['UINT8'])
     def setAmmoArtilleryGun(self, arg1):
         self.g_setAmmoArtilleryGun.fire(self, arg1)
-
+# method size: 10000000001
     @unpack_func_args([['ARRAY', 'UINT64']])
     def setShotDecals(self, arg1):
         self.g_setShotDecals.fire(self, arg1)
-
+# method size: 10000000002
     @unpack_func_args([['ARRAY', 'DAMAGES']])
     def receiveDamagesOnShip(self, arg1):
         self.g_receiveDamagesOnShip.fire(self, arg1)
-
+# method size: 41
     @unpack_func_args(['INT8', 'FLOAT32'])
     def consumableUsed(self, arg1, arg2):
         self.g_consumableUsed.fire(self, arg1, arg2)
-
+# method size: 9
     @unpack_func_args(['BOOL'])
     def setArtilleryGunsDefaultYawsPitchsTo(self, arg1):
         self.g_setArtilleryGunsDefaultYawsPitchsTo.fire(self, arg1)
-
+# method size: 169
     @unpack_func_args(['INT32', 'FLOAT32', 'FLOAT32', 'BOOL', 'FLOAT32', 'INT32'])
     def syncMyTorpedoTube(self, arg1, arg2, arg3, arg4, arg5, arg6):
         self.g_syncMyTorpedoTube.fire(self, arg1, arg2, arg3, arg4, arg5, arg6)
-
+# method size: 10000000001
     @unpack_func_args(['INT32', 'FLOAT32', 'FLOAT32', 'BOOL', 'FLOAT32', ['ARRAY', 'STRING']])
     def syncMyArtilleryGun(self, arg1, arg2, arg3, arg4, arg5, arg6):
         self.g_syncMyArtilleryGun.fire(self, arg1, arg2, arg3, arg4, arg5, arg6)
-
+# method size: 105
     @unpack_func_args(['INT32', 'FLOAT32', 'FLOAT32', 'BOOL'])
     def syncArtilleryGun(self, arg1, arg2, arg3, arg4):
         self.g_syncArtilleryGun.fire(self, arg1, arg2, arg3, arg4)
-
+# method size: 137
     @unpack_func_args(['INT32', 'FLOAT32', 'FLOAT32', 'BOOL', 'INT32'])
     def syncTorpedoTube(self, arg1, arg2, arg3, arg4, arg5):
         self.g_syncTorpedoTube.fire(self, arg1, arg2, arg3, arg4, arg5)
-
+# method size: 65
     @unpack_func_args(['UINT32', 'UINT32'])
     def syncTorpedoState(self, arg1, arg2):
         self.g_syncTorpedoState.fire(self, arg1, arg2)
-
+# method size: 393
     @unpack_func_args(['UINT32', 'UINT32', 'UINT32', 'FLOAT', 'UINT8', 'VECTOR2', 'VECTOR3', 'VECTOR3'])
     def kill(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8):
         self.g_kill.fire(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)
-
+# method size: 33
     @unpack_func_args(['FLOAT'])
     def forceSink(self, arg1):
         self.g_forceSink.fire(self, arg1)
-
+# method size: 33
     @unpack_func_args(['FLOAT'])
     def bodySinkPartLurched(self, arg1):
         self.g_bodySinkPartLurched.fire(self, arg1)
-
+# method size: 201
     @unpack_func_args(['INT32', 'VECTOR3', 'INT32', 'INT32', 'BOOL'])
     def shootTorpedo(self, arg1, arg2, arg3, arg4, arg5):
         self.g_shootTorpedo.fire(self, arg1, arg2, arg3, arg4, arg5)
-
+# method size: 17
     @unpack_func_args(['UINT16'])
     def shootGuns(self, arg1):
         self.g_shootGuns.fire(self, arg1)
-
+# method size: 10000000001
     @unpack_func_args(['BLOB', 'BLOB'])
     def syncShipCracks(self, arg1, arg2):
         self.g_syncShipCracks.fire(self, arg1, arg2)
-
+# method size: 1
     @unpack_func_args([])
     def makeShipCracksActive(self):
         self.g_makeShipCracksActive.fire(self)
-
+# method size: 10000000002
     @unpack_func_args(['INT8', 'BLOB'])
     def makeShipCracks(self, arg1, arg2):
         self.g_makeShipCracks.fire(self, arg1, arg2)
-
+# method size: 10000000002
     @unpack_func_args(['BLOB'])
     def setReloadingStateTorpedoes(self, arg1):
         self.g_setReloadingStateTorpedoes.fire(self, arg1)
-
+# method size: 10000000002
     @unpack_func_args(['BLOB'])
     def setReloadingStateArtillery(self, arg1):
         self.g_setReloadingStateArtillery.fire(self, arg1)
-
+# method size: 10000000001
     @unpack_func_args(['BLOB'])
     def setConsumables(self, arg1):
         self.g_setConsumables.fire(self, arg1)
-
+# method size: 1
     @unpack_func_args([])
     def stopVarys(self):
         self.g_stopVarys.fire(self)
-
+# method size: 1
     @unpack_func_args([])
     def reflood(self):
         self.g_reflood.fire(self)
-
+# method size: 65
     @unpack_func_args(['UINT64'])
     def onShotDecal(self, arg1):
         self.g_onShotDecal.fire(self, arg1)
-
+# method size: 33
     @unpack_func_args(['FLOAT'])
     def receiveMirrorDamage(self, arg1):
         self.g_receiveMirrorDamage.fire(self, arg1)
-
+# method size: 33
     @unpack_func_args(['UINT32'])
     def offlineSetAI(self, arg1):
         self.g_offlineSetAI.fire(self, arg1)
-
+# method size: 10000000001
     @unpack_func_args([['ARRAY', 'VECTOR3']])
     def offlineRecieveMovementRoute(self, arg1):
         self.g_offlineRecieveMovementRoute.fire(self, arg1)
-
+# method size: 97
     @unpack_func_args(['FLOAT', 'FLOAT', 'FLOAT'])
     def receiveVisibilityFactors(self, arg1, arg2, arg3):
         self.g_receiveVisibilityFactors.fire(self, arg1, arg2, arg3)
-
+# method size: 1
     @unpack_func_args([])
     def forceReloadTorpedoes(self):
         self.g_forceReloadTorpedoes.fire(self)
-
+# method size: 33
     @unpack_func_args(['UINT32'])
     def onSkillActivated(self, arg1):
         self.g_onSkillActivated.fire(self, arg1)
-
+# method size: 1
     @unpack_func_args([])
     def uniqueSkillActivated(self):
         self.g_uniqueSkillActivated.fire(self)
-
+# method size: 17
     @unpack_func_args(['UINT8', 'BOOL'])
     def onConsumableEnabled(self, arg1, arg2):
         self.g_onConsumableEnabled.fire(self, arg1, arg2)
-
-    @unpack_func_args([])
-    def onClientEnterWorld(self):
-        self.g_onClientEnterWorld.fire(self)
-
-    @unpack_func_args([])
-    def onClientLeaveWorld(self):
-        self.g_onClientLeaveWorld.fire(self)
-
-    @unpack_func_args([])
-    def suicide(self):
-        self.g_suicide.fire(self)
-
-    @unpack_func_args(['VECTOR3'])
-    def dev_teleportShip(self, arg1):
-        self.g_dev_teleportShip.fire(self, arg1)
-
-    @unpack_func_args([])
-    def dev_flight(self):
-        self.g_dev_flight.fire(self)
-
-    @unpack_func_args(['ON_HIT_INFO'])
-    def offlineOnHit(self, arg1):
-        self.g_offlineOnHit.fire(self, arg1)
 
 
     ####################################
     #       PROPERTIES
     ####################################
 
-
+# property size: 8
     @property
     def isOnForsage(self):
         return self._isOnForsage
@@ -371,7 +391,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @isOnForsage.setter
     def isOnForsage(self, value):
         self._isOnForsage, = unpack_variables(value, ['BOOL'])
-
+# property size: 32
     @property
     def regenCrewHpLimit(self):
         return self._regenCrewHpLimit
@@ -379,7 +399,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @regenCrewHpLimit.setter
     def regenCrewHpLimit(self, value):
         self._regenCrewHpLimit, = unpack_variables(value, ['FLOAT32'])
-
+# property size: 32
     @property
     def buoyancy(self):
         return self._buoyancy
@@ -387,7 +407,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @buoyancy.setter
     def buoyancy(self, value):
         self._buoyancy, = unpack_variables(value, ['FLOAT32'])
-
+# property size: 16
     @property
     def targetLocalPos(self):
         return self._targetLocalPos
@@ -395,7 +415,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @targetLocalPos.setter
     def targetLocalPos(self, value):
         self._targetLocalPos, = unpack_variables(value, ['UINT16'])
-
+# property size: 16
     @property
     def torpedoLocalPos(self):
         return self._torpedoLocalPos
@@ -403,7 +423,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @torpedoLocalPos.setter
     def torpedoLocalPos(self, value):
         self._torpedoLocalPos, = unpack_variables(value, ['UINT16'])
-
+# property size: 16
     @property
     def weaponLockFlags(self):
         return self._weaponLockFlags
@@ -411,7 +431,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @weaponLockFlags.setter
     def weaponLockFlags(self, value):
         self._weaponLockFlags, = unpack_variables(value, ['UINT16'])
-
+# property size: 32
     @property
     def owner(self):
         return self._owner
@@ -419,7 +439,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @owner.setter
     def owner(self, value):
         self._owner, = unpack_variables(value, ['ENTITY_ID'])
-
+# property size: 10000000000
     @property
     def shipConfig(self):
         return self._shipConfig
@@ -427,7 +447,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @shipConfig.setter
     def shipConfig(self, value):
         self._shipConfig, = unpack_variables(value, ['SHIP_CONFIG'])
-
+# property size: 128
     @property
     def crewModifiersCompactParams(self):
         return self._crewModifiersCompactParams
@@ -435,7 +455,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @crewModifiersCompactParams.setter
     def crewModifiersCompactParams(self, value):
         self._crewModifiersCompactParams, = unpack_variables(value, ['CREW_MODIFIERS_COMPACT_PARAMS'])
-
+# property size: 8
     @property
     def teamId(self):
         return self._teamId
@@ -443,7 +463,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @teamId.setter
     def teamId(self, value):
         self._teamId, = unpack_variables(value, ['TEAM_ID'])
-
+# property size: 8
     @property
     def isAlive(self):
         return self._isAlive
@@ -451,7 +471,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @isAlive.setter
     def isAlive(self, value):
         self._isAlive, = unpack_variables(value, ['BOOL'])
-
+# property size: 32
     @property
     def selectedWeapon(self):
         return self._selectedWeapon
@@ -459,7 +479,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @selectedWeapon.setter
     def selectedWeapon(self, value):
         self._selectedWeapon, = unpack_variables(value, ['UINT32'])
-
+# property size: 8
     @property
     def serverSpeedRaw(self):
         return self._serverSpeedRaw
@@ -467,7 +487,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @serverSpeedRaw.setter
     def serverSpeedRaw(self, value):
         self._serverSpeedRaw, = unpack_variables(value, ['UINT8'])
-
+# property size: 8
     @property
     def speedSignDir(self):
         return self._speedSignDir
@@ -475,7 +495,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @speedSignDir.setter
     def speedSignDir(self, value):
         self._speedSignDir, = unpack_variables(value, ['INT8'])
-
+# property size: 8
     @property
     def enginePower(self):
         return self._enginePower
@@ -483,7 +503,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @enginePower.setter
     def enginePower(self, value):
         self._enginePower, = unpack_variables(value, ['UINT8'])
-
+# property size: 8
     @property
     def isInOfflineMode(self):
         return self._isInOfflineMode
@@ -491,7 +511,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @isInOfflineMode.setter
     def isInOfflineMode(self, value):
         self._isInOfflineMode, = unpack_variables(value, ['BOOL'])
-
+# property size: 8
     @property
     def ignoreMapBorders(self):
         return self._ignoreMapBorders
@@ -499,7 +519,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @ignoreMapBorders.setter
     def ignoreMapBorders(self, value):
         self._ignoreMapBorders, = unpack_variables(value, ['BOOL'])
-
+# property size: 10000000000
     @property
     def debugText(self):
         return self._debugText
@@ -507,7 +527,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @debugText.setter
     def debugText(self, value):
         self._debugText, = unpack_variables(value, [['ARRAY', 'ENTITY_DEBUG_TEXT']])
-
+# property size: 8
     @property
     def isBot(self):
         return self._isBot
@@ -515,7 +535,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @isBot.setter
     def isBot(self, value):
         self._isBot, = unpack_variables(value, ['BOOL'])
-
+# property size: 10000000000
     @property
     def miscsPresetsStatus(self):
         return self._miscsPresetsStatus
@@ -523,7 +543,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @miscsPresetsStatus.setter
     def miscsPresetsStatus(self, value):
         self._miscsPresetsStatus, = unpack_variables(value, [['ARRAY', 'STRING']])
-
+# property size: 32
     @property
     def draught(self):
         return self._draught
@@ -531,7 +551,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @draught.setter
     def draught(self, value):
         self._draught, = unpack_variables(value, ['FLOAT32'])
-
+# property size: 8
     @property
     def isFogHornOn(self):
         return self._isFogHornOn
@@ -541,5 +561,30 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
         self._isFogHornOn, = unpack_variables(value, ['BOOL'])
 
 
+    def get_summary(self):
+        print '~' * 60
+        print 'Entity name: ', self.__class__.__name__
+        print 'Total entity client properties: {:>5}'.format(len(self._properties))
+        print 'Total entity client methods: {:>5}'.format(len(self._methods))
+
+        print
+        print 'Listing entity properties:'
+        print '{:>4} {:>40}'.format('idx', 'property name')
+        for i, p in self.attributesMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+
+        print
+        print 'Listing entity methods:'
+        print '{:>4} {:>40}'.format('idx', 'method name')
+        for i, p in self.methodsMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+        print '~' * 60
+        print
+        print
+
+
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

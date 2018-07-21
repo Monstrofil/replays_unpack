@@ -2,38 +2,15 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
-
-try:
-    from interfaces.AccountReady import AccountReady
-except:
-    from AccountReady import AccountReady
+from AccountReady import AccountReady
 
 
 
 class EntityLookuper(AccountReady):
-    
-    g_getSuperMBox = EventHook()
-    
-    g_putSuperMBox = EventHook()
-    
-    g_lookUpEntityByDBID = EventHook()
-    
-    g_createEntityByDBID = EventHook()
-    
-    g_createEntityAnywhere = EventHook()
-    
-    g_getNicknameByIDReq = EventHook()
-    
-    g_getUserlistByDBIDReq = EventHook()
-    
-    g_getUserlistByNameReq = EventHook()
-    
-    g_putSQLResult = EventHook()
-    
-    g_onCreateEntityAnywhere = EventHook()
     
     def __init__(self):
         self.id = None
@@ -45,52 +22,39 @@ class EntityLookuper(AccountReady):
 
         AccountReady.__init__(self)
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['MAILBOX', 'UINT64'])
-    def getSuperMBox(self, arg1, arg2):
-        self.g_getSuperMBox.fire(self, arg1, arg2)
-
-    @unpack_func_args(['MAILBOX', 'MAILBOX', 'UINT8', 'UINT64'])
-    def putSuperMBox(self, arg1, arg2, arg3, arg4):
-        self.g_putSuperMBox.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['MAILBOX', 'STRING', 'DB_ID', 'UINT8', 'UINT64'])
-    def lookUpEntityByDBID(self, arg1, arg2, arg3, arg4, arg5):
-        self.g_lookUpEntityByDBID.fire(self, arg1, arg2, arg3, arg4, arg5)
-
-    @unpack_func_args(['MAILBOX', 'STRING', 'DB_ID', 'UINT64'])
-    def createEntityByDBID(self, arg1, arg2, arg3, arg4):
-        self.g_createEntityByDBID.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['MAILBOX', 'STRING', 'PYTHON', 'UINT64'])
-    def createEntityAnywhere(self, arg1, arg2, arg3, arg4):
-        self.g_createEntityAnywhere.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['DB_ID', 'UINT64'])
-    def getNicknameByIDReq(self, arg1, arg2):
-        self.g_getNicknameByIDReq.fire(self, arg1, arg2)
-
-    @unpack_func_args(['DB_ID_LIST', 'UINT64'])
-    def getUserlistByDBIDReq(self, arg1, arg2):
-        self.g_getUserlistByDBIDReq.fire(self, arg1, arg2)
-
-    @unpack_func_args(['STRING', 'UINT32', 'UINT64'])
-    def getUserlistByNameReq(self, arg1, arg2, arg3):
-        self.g_getUserlistByNameReq.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['BLOB', 'UINT64'])
-    def putSQLResult(self, arg1, arg2):
-        self.g_putSQLResult.fire(self, arg1, arg2)
-
-    @unpack_func_args(['MAILBOX', 'UINT64'])
-    def onCreateEntityAnywhere(self, arg1, arg2):
-        self.g_onCreateEntityAnywhere.fire(self, arg1, arg2)
 
 
     ####################################
@@ -99,5 +63,30 @@ class EntityLookuper(AccountReady):
 
 
 
+    def get_summary(self):
+        print '~' * 60
+        print 'Entity name: ', self.__class__.__name__
+        print 'Total entity client properties: {:>5}'.format(len(self._properties))
+        print 'Total entity client methods: {:>5}'.format(len(self._methods))
+
+        print
+        print 'Listing entity properties:'
+        print '{:>4} {:>40}'.format('idx', 'property name')
+        for i, p in self.attributesMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+
+        print
+        print 'Listing entity methods:'
+        print '{:>4} {:>40}'.format('idx', 'method name')
+        for i, p in self.methodsMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+        print '~' * 60
+        print
+        print
+
+
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

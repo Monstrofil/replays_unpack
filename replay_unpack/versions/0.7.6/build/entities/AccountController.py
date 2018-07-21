@@ -2,24 +2,13 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
-
-try:
-    from interfaces.WalletProperties import WalletProperties
-except:
-    from WalletProperties import WalletProperties
-
-try:
-    from interfaces.AccountPData import AccountPData
-except:
-    from AccountPData import AccountPData
-
-try:
-    from interfaces.EntityLookuper import EntityLookuper
-except:
-    from EntityLookuper import EntityLookuper
+from interfaces.WalletProperties import WalletProperties
+from interfaces.AccountPData import AccountPData
+from interfaces.EntityLookuper import EntityLookuper
 
 
 
@@ -28,8 +17,6 @@ class AccountController(WalletProperties, AccountPData, EntityLookuper):
     g_onKickedFromServer = EventHook()
     
     g_onCheckGamePing = EventHook()
-    
-    g_checkGamePing = EventHook()
     
     def __init__(self):
         self.id = None
@@ -45,24 +32,49 @@ class AccountController(WalletProperties, AccountPData, EntityLookuper):
 
         EntityLookuper.__init__(self)
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (41, 'onKickedFromServer'),
+            (65, 'onCheckGamePing'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args([])
-    def onKickedFromServer(self):
-        self.g_onKickedFromServer.fire(self)
-
+# method size: 41
+    @unpack_func_args(['UINT32', 'UINT8'])
+    def onKickedFromServer(self, arg1, arg2):
+        self.g_onKickedFromServer.fire(self, arg1, arg2)
+# method size: 65
     @unpack_func_args(['UINT64'])
     def onCheckGamePing(self, arg1):
         self.g_onCheckGamePing.fire(self, arg1)
-
-    @unpack_func_args([])
-    def checkGamePing(self):
-        self.g_checkGamePing.fire(self)
 
 
     ####################################
@@ -71,5 +83,30 @@ class AccountController(WalletProperties, AccountPData, EntityLookuper):
 
 
 
+    def get_summary(self):
+        print '~' * 60
+        print 'Entity name: ', self.__class__.__name__
+        print 'Total entity client properties: {:>5}'.format(len(self._properties))
+        print 'Total entity client methods: {:>5}'.format(len(self._methods))
+
+        print
+        print 'Listing entity properties:'
+        print '{:>4} {:>40}'.format('idx', 'property name')
+        for i, p in self.attributesMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+
+        print
+        print 'Listing entity methods:'
+        print '{:>4} {:>40}'.format('idx', 'method name')
+        for i, p in self.methodsMap.items():
+            print '{:>4} {:>40}'.format(i, p)
+        print '~' * 60
+        print
+        print
+
+
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

@@ -2,6 +2,7 @@
 # coding=utf-8
 import pickle
 
+from build._consts import DamageStatsType
 from replay_unpack.base.PlayersInfo import PlayersInfo
 from Avatar import Avatar
 from Vehicle import Vehicle
@@ -76,11 +77,8 @@ class BattleController(object):
     def receiveDamageStat(self, avatar, blob):
         normalized = {}
         for (type_, bool_), value in pickle.loads(blob).iteritems():
-            # TODO: fix on frontend side
-            # bool_ == 3 => potential damage
-            # bool_ == 0 => damage
-            # bool_ == 1 => unknown
-            if bool_ == 3:
+            # TODO: improve damage_map and list other damage types too
+            if bool_ != DamageStatsType.DAMAGE_STATS_ENEMY:
                 continue
             normalized.setdefault(type_, {}).setdefault(bool_, 0)
             normalized[type_][bool_] = value
