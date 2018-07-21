@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,28 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class RespawnController_Avatar(object):
-    
-    g_respawnController_requestRespawnGroupChange = EventHook()
-    
-    g_respawnController_chooseVehicleForRespawn = EventHook()
-    
-    g_respawnController_performRespawn = EventHook()
-    
-    g_respawnController_redrawVehicleOnRespawn = EventHook()
-    
-    g_respawnController_explodeVehicleBeforeRespawn = EventHook()
-    
-    g_respawnController_updateRespawnVehicles = EventHook()
-    
-    g_respawnController_updateRespawnCooldowns = EventHook()
-    
-    g_respawnController_updateRespawnInfo = EventHook()
-    
-    g_respawnController_updateVehicleLimits = EventHook()
-    
-    g_respawnController_onTeamLivesRestored = EventHook()
-    
-    g_respawnController_updatePlayerLives = EventHook()
     
     g_redrawVehicleOnRespawn = EventHook()
     
@@ -56,85 +35,84 @@ class RespawnController_Avatar(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (10000000000, 'redrawVehicleOnRespawn'),
+            (32, 'explodeVehicleBeforeRespawn'),
+            (10000000000, 'updateRespawnVehicles'),
+            (10000000000, 'updateRespawnCooldowns'),
+            (10000000000, 'updateRespawnInfo'),
+            (10000000000, 'updateVehicleLimits'),
+            (8, 'updatePlayerLives'),
+            (10000000000, 'onTeamLivesRestored'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
 
-    @unpack_func_args(['UINT8'])
-    def respawnController_requestRespawnGroupChange(self, arg1):
-        self.g_respawnController_requestRespawnGroupChange.fire(self, arg1)
-
-    @unpack_func_args(['UINT16'])
-    def respawnController_chooseVehicleForRespawn(self, arg1):
-        self.g_respawnController_chooseVehicleForRespawn.fire(self, arg1)
-
-    @unpack_func_args([])
-    def respawnController_performRespawn(self):
-        self.g_respawnController_performRespawn.fire(self)
-
-    @unpack_func_args(['OBJECT_ID', 'STRING', 'STRING'])
-    def respawnController_redrawVehicleOnRespawn(self, arg1, arg2, arg3):
-        self.g_respawnController_redrawVehicleOnRespawn.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['OBJECT_ID'])
-    def respawnController_explodeVehicleBeforeRespawn(self, arg1):
-        self.g_respawnController_explodeVehicleBeforeRespawn.fire(self, arg1)
-
-    @unpack_func_args([['ARRAY', 'RESPAWN_AVAILABLE_VEHICLE']])
-    def respawnController_updateRespawnVehicles(self, arg1):
-        self.g_respawnController_updateRespawnVehicles.fire(self, arg1)
-
-    @unpack_func_args([['ARRAY', 'RESPAWN_COOLDOWN_ITEM']])
-    def respawnController_updateRespawnCooldowns(self, arg1):
-        self.g_respawnController_updateRespawnCooldowns.fire(self, arg1)
-
-    @unpack_func_args(['RESPAWN_INFO'])
-    def respawnController_updateRespawnInfo(self, arg1):
-        self.g_respawnController_updateRespawnInfo.fire(self, arg1)
-
-    @unpack_func_args([['ARRAY', 'RESPAWN_LIMITED_VEHICLES']])
-    def respawnController_updateVehicleLimits(self, arg1):
-        self.g_respawnController_updateVehicleLimits.fire(self, arg1)
-
-    @unpack_func_args([['ARRAY', 'UINT8']])
-    def respawnController_onTeamLivesRestored(self, arg1):
-        self.g_respawnController_onTeamLivesRestored.fire(self, arg1)
-
-    @unpack_func_args(['UINT8'])
-    def respawnController_updatePlayerLives(self, arg1):
-        self.g_respawnController_updatePlayerLives.fire(self, arg1)
-
+    # method size: 10000000000
     @unpack_func_args(['OBJECT_ID', 'STRING', 'STRING'])
     def redrawVehicleOnRespawn(self, arg1, arg2, arg3):
         self.g_redrawVehicleOnRespawn.fire(self, arg1, arg2, arg3)
 
+    # method size: 32
     @unpack_func_args(['OBJECT_ID'])
     def explodeVehicleBeforeRespawn(self, arg1):
         self.g_explodeVehicleBeforeRespawn.fire(self, arg1)
 
+    # method size: 10000000000
     @unpack_func_args([['ARRAY', 'RESPAWN_AVAILABLE_VEHICLE']])
     def updateRespawnVehicles(self, arg1):
         self.g_updateRespawnVehicles.fire(self, arg1)
 
+    # method size: 10000000000
     @unpack_func_args([['ARRAY', 'RESPAWN_COOLDOWN_ITEM']])
     def updateRespawnCooldowns(self, arg1):
         self.g_updateRespawnCooldowns.fire(self, arg1)
 
+    # method size: 10000000000
     @unpack_func_args(['RESPAWN_INFO'])
     def updateRespawnInfo(self, arg1):
         self.g_updateRespawnInfo.fire(self, arg1)
 
+    # method size: 10000000000
     @unpack_func_args([['ARRAY', 'RESPAWN_LIMITED_VEHICLES']])
     def updateVehicleLimits(self, arg1):
         self.g_updateVehicleLimits.fire(self, arg1)
 
+    # method size: 8
     @unpack_func_args(['UINT8'])
     def updatePlayerLives(self, arg1):
         self.g_updatePlayerLives.fire(self, arg1)
 
+    # method size: 10000000000
     @unpack_func_args([['ARRAY', 'UINT8']])
     def onTeamLivesRestored(self, arg1):
         self.g_onTeamLivesRestored.fire(self, arg1)
@@ -147,4 +125,7 @@ class RespawnController_Avatar(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

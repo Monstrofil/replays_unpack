@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -14,28 +15,10 @@ class DetachedTurret(object):
     
     g_showDamageFromShot = EventHook()
     
-    g_receiveShot = EventHook()
-    
-    g_receiveExplosion = EventHook()
-    
-    g_applyForceToCOM = EventHook()
-    
-    g_onDamageVehicle = EventHook()
-    
-    g_smartDestroy = EventHook()
-    
     def __init__(self):
         self.id = None
         self.position = None
 
-
-        self._cp = None
-
-        self._arenaTypeID = None
-
-        self._velocity = None
-
-        self._angularVelocity = None
 
         self._vehicleCompDescr = None
 
@@ -45,51 +28,58 @@ class DetachedTurret(object):
 
         self._vehicleID = None
 
-        self._attackerInfo = None
-
-        self._vehicleInfo = None
-
-        self._isAtackerProxy = None
-
-        self._arena = None
-
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (10000000000, 'vehicleCompDescr'),
+            (8, 'isUnderWater'),
+            (8, 'isCollidingWithWorld'),
+            (32, 'vehicleID'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (224, 'onStaticCollision'),
+            (10000000000, 'showDamageFromShot'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
 
+    # method size: 224
     @unpack_func_args(['FLOAT32', 'VECTOR3', 'VECTOR3'])
     def onStaticCollision(self, arg1, arg2, arg3):
         self.g_onStaticCollision.fire(self, arg1, arg2, arg3)
 
+    # method size: 10000000000
     @unpack_func_args([['ARRAY', 'UINT64'], 'UINT8'])
     def showDamageFromShot(self, arg1, arg2):
         self.g_showDamageFromShot.fire(self, arg1, arg2)
-
-    @unpack_func_args(['ATTACKER_INFO', 'SHOT_ID', 'INT32', 'VECTOR3', 'VECTOR3', 'VECTOR3'])
-    def receiveShot(self, arg1, arg2, arg3, arg4, arg5, arg6):
-        self.g_receiveShot.fire(self, arg1, arg2, arg3, arg4, arg5, arg6)
-
-    @unpack_func_args(['VECTOR3', 'FLOAT32', 'FLOAT32', 'UINT8'])
-    def receiveExplosion(self, arg1, arg2, arg3, arg4):
-        self.g_receiveExplosion.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['VECTOR3'])
-    def applyForceToCOM(self, arg1):
-        self.g_applyForceToCOM.fire(self, arg1)
-
-    @unpack_func_args([])
-    def onDamageVehicle(self):
-        self.g_onDamageVehicle.fire(self)
-
-    @unpack_func_args([])
-    def smartDestroy(self):
-        self.g_smartDestroy.fire(self)
 
 
     ####################################
@@ -97,38 +87,7 @@ class DetachedTurret(object):
     ####################################
 
 
-    @property
-    def cp(self):
-        return self._cp
-
-    @cp.setter
-    def cp(self, value):
-        self._cp, = unpack_variables(value, ['PYTHON'])
-
-    @property
-    def arenaTypeID(self):
-        return self._arenaTypeID
-
-    @arenaTypeID.setter
-    def arenaTypeID(self, value):
-        self._arenaTypeID, = unpack_variables(value, ['INT32'])
-
-    @property
-    def velocity(self):
-        return self._velocity
-
-    @velocity.setter
-    def velocity(self, value):
-        self._velocity, = unpack_variables(value, ['VECTOR3'])
-
-    @property
-    def angularVelocity(self):
-        return self._angularVelocity
-
-    @angularVelocity.setter
-    def angularVelocity(self, value):
-        self._angularVelocity, = unpack_variables(value, ['VECTOR3'])
-
+    # property size: 10000000000
     @property
     def vehicleCompDescr(self):
         return self._vehicleCompDescr
@@ -137,6 +96,7 @@ class DetachedTurret(object):
     def vehicleCompDescr(self, value):
         self._vehicleCompDescr, = unpack_variables(value, ['STRING'])
 
+    # property size: 8
     @property
     def isUnderWater(self):
         return self._isUnderWater
@@ -145,6 +105,7 @@ class DetachedTurret(object):
     def isUnderWater(self, value):
         self._isUnderWater, = unpack_variables(value, ['BOOL'])
 
+    # property size: 8
     @property
     def isCollidingWithWorld(self):
         return self._isCollidingWithWorld
@@ -153,6 +114,7 @@ class DetachedTurret(object):
     def isCollidingWithWorld(self, value):
         self._isCollidingWithWorld, = unpack_variables(value, ['BOOL'])
 
+    # property size: 32
     @property
     def vehicleID(self):
         return self._vehicleID
@@ -161,38 +123,9 @@ class DetachedTurret(object):
     def vehicleID(self, value):
         self._vehicleID, = unpack_variables(value, ['INT32'])
 
-    @property
-    def attackerInfo(self):
-        return self._attackerInfo
-
-    @attackerInfo.setter
-    def attackerInfo(self, value):
-        self._attackerInfo, = unpack_variables(value, ['ATTACKER_INFO'])
-
-    @property
-    def vehicleInfo(self):
-        return self._vehicleInfo
-
-    @vehicleInfo.setter
-    def vehicleInfo(self, value):
-        self._vehicleInfo, = unpack_variables(value, ['ATTACKER_INFO'])
-
-    @property
-    def isAtackerProxy(self):
-        return self._isAtackerProxy
-
-    @isAtackerProxy.setter
-    def isAtackerProxy(self, value):
-        self._isAtackerProxy, = unpack_variables(value, ['BOOL'])
-
-    @property
-    def arena(self):
-        return self._arena
-
-    @arena.setter
-    def arena(self, value):
-        self._arena, = unpack_variables(value, ['MAILBOX'])
-
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -10,48 +11,53 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 class StepRepairPoint(object):
     
-    g_changeOwnerTeam = EventHook()
-    
-    g_setCooldownAfterRepair = EventHook()
-    
     def __init__(self):
         self.id = None
         self.position = None
 
 
-        self._initTeam = 0.0
-
         self._team = 0.0
-
-        self._pointsPerStep = 100.0
-
-        self._repairTime = '1.0'
-
-        self._secondsCooldownPerStep = '10.0'
-
-        self._baseSecondsCooldownAfterRepair = '120.0'
-
-        self._percentageShellsPerStep = 10.0
 
         self._radius = '25.0'
 
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (8, 'team'),
+            (32, 'radius'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['UINT8'])
-    def changeOwnerTeam(self, arg1):
-        self.g_changeOwnerTeam.fire(self, arg1)
-
-    @unpack_func_args(['OBJECT_ID', 'FLOAT32', 'BOOL'])
-    def setCooldownAfterRepair(self, arg1, arg2, arg3):
-        self.g_setCooldownAfterRepair.fire(self, arg1, arg2, arg3)
 
 
     ####################################
@@ -59,14 +65,7 @@ class StepRepairPoint(object):
     ####################################
 
 
-    @property
-    def initTeam(self):
-        return self._initTeam
-
-    @initTeam.setter
-    def initTeam(self, value):
-        self._initTeam, = unpack_variables(value, ['UINT8'])
-
+    # property size: 8
     @property
     def team(self):
         return self._team
@@ -75,46 +74,7 @@ class StepRepairPoint(object):
     def team(self, value):
         self._team, = unpack_variables(value, ['UINT8'])
 
-    @property
-    def pointsPerStep(self):
-        return self._pointsPerStep
-
-    @pointsPerStep.setter
-    def pointsPerStep(self, value):
-        self._pointsPerStep, = unpack_variables(value, ['INT16'])
-
-    @property
-    def repairTime(self):
-        return self._repairTime
-
-    @repairTime.setter
-    def repairTime(self, value):
-        self._repairTime, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def secondsCooldownPerStep(self):
-        return self._secondsCooldownPerStep
-
-    @secondsCooldownPerStep.setter
-    def secondsCooldownPerStep(self, value):
-        self._secondsCooldownPerStep, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def baseSecondsCooldownAfterRepair(self):
-        return self._baseSecondsCooldownAfterRepair
-
-    @baseSecondsCooldownAfterRepair.setter
-    def baseSecondsCooldownAfterRepair(self, value):
-        self._baseSecondsCooldownAfterRepair, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def percentageShellsPerStep(self):
-        return self._percentageShellsPerStep
-
-    @percentageShellsPerStep.setter
-    def percentageShellsPerStep(self, value):
-        self._percentageShellsPerStep, = unpack_variables(value, ['UINT8'])
-
+    # property size: 32
     @property
     def radius(self):
         return self._radius
@@ -125,4 +85,7 @@ class StepRepairPoint(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

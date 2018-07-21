@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -21,22 +22,10 @@ class DestructibleEntity(Destructible):
     
     g_showDamageFromExplosion = EventHook()
     
-    g_start = EventHook()
-    
-    g_stop = EventHook()
-    
-    g_reset = EventHook()
-    
-    g_smartDestroy = EventHook()
-    
     def __init__(self):
         self.id = None
         self.position = None
 
-
-        self._arena = None
-
-        self._arenaBase = None
 
         self._isActive = None
 
@@ -50,55 +39,74 @@ class DestructibleEntity(Destructible):
 
         self._typeID = 1.0
 
-        self._initActive = 0.0
-
         self._linkedMapActivities = None
 
         self._damageStickers = None
-
-        self._explosionDamageFactor = '0.5'
-
-        self._cp = None
 
 
         # MRO fix
 
         Destructible.__init__(self)
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (8, 'isActive'),
+            (8, 'team'),
+            (8, 'destructibleEntityID'),
+            (32, 'health'),
+            (8, 'isDestructibleDestroyed'),
+            (8, 'typeID'),
+            (10000000000, 'linkedMapActivities'),
+            (10000000000, 'damageStickers'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (88, 'onHealthChanged'),
+            (10000000000, 'showDamageFromShot'),
+            (144, 'showDamageFromExplosion'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
 
+    # method size: 88
     @unpack_func_args(['INT16', 'OBJECT_ID', 'UINT8', 'INT32'])
     def onHealthChanged(self, arg1, arg2, arg3, arg4):
         self.g_onHealthChanged.fire(self, arg1, arg2, arg3, arg4)
 
+    # method size: 10000000000
     @unpack_func_args([['ARRAY', 'UINT64'], 'UINT8'])
     def showDamageFromShot(self, arg1, arg2):
         self.g_showDamageFromShot.fire(self, arg1, arg2)
 
+    # method size: 144
     @unpack_func_args(['OBJECT_ID', 'VECTOR3', 'UINT8', 'UINT8'])
     def showDamageFromExplosion(self, arg1, arg2, arg3, arg4):
         self.g_showDamageFromExplosion.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args([])
-    def start(self):
-        self.g_start.fire(self)
-
-    @unpack_func_args([])
-    def stop(self):
-        self.g_stop.fire(self)
-
-    @unpack_func_args([])
-    def reset(self):
-        self.g_reset.fire(self)
-
-    @unpack_func_args([])
-    def smartDestroy(self):
-        self.g_smartDestroy.fire(self)
 
 
     ####################################
@@ -106,22 +114,7 @@ class DestructibleEntity(Destructible):
     ####################################
 
 
-    @property
-    def arena(self):
-        return self._arena
-
-    @arena.setter
-    def arena(self, value):
-        self._arena, = unpack_variables(value, ['MAILBOX'])
-
-    @property
-    def arenaBase(self):
-        return self._arenaBase
-
-    @arenaBase.setter
-    def arenaBase(self, value):
-        self._arenaBase, = unpack_variables(value, ['MAILBOX'])
-
+    # property size: 8
     @property
     def isActive(self):
         return self._isActive
@@ -130,6 +123,7 @@ class DestructibleEntity(Destructible):
     def isActive(self, value):
         self._isActive, = unpack_variables(value, ['BOOL'])
 
+    # property size: 8
     @property
     def team(self):
         return self._team
@@ -138,6 +132,7 @@ class DestructibleEntity(Destructible):
     def team(self, value):
         self._team, = unpack_variables(value, ['UINT8'])
 
+    # property size: 8
     @property
     def destructibleEntityID(self):
         return self._destructibleEntityID
@@ -146,6 +141,7 @@ class DestructibleEntity(Destructible):
     def destructibleEntityID(self, value):
         self._destructibleEntityID, = unpack_variables(value, ['UINT8'])
 
+    # property size: 32
     @property
     def health(self):
         return self._health
@@ -154,6 +150,7 @@ class DestructibleEntity(Destructible):
     def health(self, value):
         self._health, = unpack_variables(value, ['FLOAT32'])
 
+    # property size: 8
     @property
     def isDestructibleDestroyed(self):
         return self._isDestructibleDestroyed
@@ -162,6 +159,7 @@ class DestructibleEntity(Destructible):
     def isDestructibleDestroyed(self, value):
         self._isDestructibleDestroyed, = unpack_variables(value, ['BOOL'])
 
+    # property size: 8
     @property
     def typeID(self):
         return self._typeID
@@ -170,14 +168,7 @@ class DestructibleEntity(Destructible):
     def typeID(self, value):
         self._typeID, = unpack_variables(value, ['UINT8'])
 
-    @property
-    def initActive(self):
-        return self._initActive
-
-    @initActive.setter
-    def initActive(self, value):
-        self._initActive, = unpack_variables(value, ['BOOL'])
-
+    # property size: 10000000000
     @property
     def linkedMapActivities(self):
         return self._linkedMapActivities
@@ -186,30 +177,18 @@ class DestructibleEntity(Destructible):
     def linkedMapActivities(self, value):
         self._linkedMapActivities, = unpack_variables(value, ['STRING'])
 
+    # property size: 10000000000
     @property
     def damageStickers(self):
         return self._damageStickers
 
     @damageStickers.setter
     def damageStickers(self, value):
-        self._damageStickers, = unpack_variables(value, ['ARRAY', ['UINT64']])
-
-    @property
-    def explosionDamageFactor(self):
-        return self._explosionDamageFactor
-
-    @explosionDamageFactor.setter
-    def explosionDamageFactor(self, value):
-        self._explosionDamageFactor, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def cp(self):
-        return self._cp
-
-    @cp.setter
-    def cp(self, value):
-        self._cp, = unpack_variables(value, ['PYTHON'])
+        self._damageStickers, = unpack_variables(value, [['ARRAY', 'UINT64']])
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

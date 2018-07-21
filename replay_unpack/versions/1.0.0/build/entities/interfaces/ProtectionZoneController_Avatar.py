@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,12 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class ProtectionZoneController_Avatar(object):
-    
-    g_protectionZone_enteringProtectionZone = EventHook()
-    
-    g_protectionZone_leavingProtectionZone = EventHook()
-    
-    g_protectionZone_protectionZoneShooting = EventHook()
     
     def __init__(self):
         self.id = None
@@ -24,24 +19,39 @@ class ProtectionZoneController_Avatar(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['UINT8'])
-    def protectionZone_enteringProtectionZone(self, arg1):
-        self.g_protectionZone_enteringProtectionZone.fire(self, arg1)
-
-    @unpack_func_args(['UINT8'])
-    def protectionZone_leavingProtectionZone(self, arg1):
-        self.g_protectionZone_leavingProtectionZone.fire(self, arg1)
-
-    @unpack_func_args(['UINT8'])
-    def protectionZone_protectionZoneShooting(self, arg1):
-        self.g_protectionZone_protectionZoneShooting.fire(self, arg1)
 
 
     ####################################
@@ -51,4 +61,7 @@ class ProtectionZoneController_Avatar(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

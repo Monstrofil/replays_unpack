@@ -20,4 +20,7 @@ class Entity(PacketDataBase):
         self.position = Vector3(stream)
         self.direction = Vector3(stream)
 
+        # TODO: what is it?
+        self.unknown1, = struct.unpack('i', stream.read(4))
+
         self.state = BinaryIStream(stream)

@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,22 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class BootcampAccount(object):
-    
-    g_completeBootcampLesson = EventHook()
-    
-    g_saveBootcampCheckpoint = EventHook()
-    
-    g_changeBootcampLessonBonus = EventHook()
-    
-    g_requestBootcampQuit = EventHook()
-    
-    g_onBootcampEnqueued = EventHook()
-    
-    g_setParent = EventHook()
-    
-    g_resetBootcamp = EventHook()
-    
-    g_setToken = EventHook()
     
     g_finishBootcamp = EventHook()
     
@@ -35,54 +20,51 @@ class BootcampAccount(object):
         self.position = None
 
 
-        self._markForDelete = None
-
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (0, 'finishBootcamp'),
+            (128, 'onBootcampEnqueued'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
 
-    @unpack_func_args(['UINT8'])
-    def completeBootcampLesson(self, arg1):
-        self.g_completeBootcampLesson.fire(self, arg1)
-
-    @unpack_func_args(['STRING', 'UINT8'])
-    def saveBootcampCheckpoint(self, arg1, arg2):
-        self.g_saveBootcampCheckpoint.fire(self, arg1, arg2)
-
-    @unpack_func_args(['UINT8'])
-    def changeBootcampLessonBonus(self, arg1):
-        self.g_changeBootcampLessonBonus.fire(self, arg1)
-
-    @unpack_func_args(['UINT32'])
-    def requestBootcampQuit(self, arg1):
-        self.g_requestBootcampQuit.fire(self, arg1)
-
-    @unpack_func_args(['INT32', 'UINT64'])
-    def onBootcampEnqueued(self, arg1, arg2):
-        self.g_onBootcampEnqueued.fire(self, arg1, arg2)
-
-    @unpack_func_args(['MAILBOX'])
-    def setParent(self, arg1):
-        self.g_setParent.fire(self, arg1)
-
-    @unpack_func_args([])
-    def resetBootcamp(self):
-        self.g_resetBootcamp.fire(self)
-
-    @unpack_func_args(['INT64', 'INT32'])
-    def setToken(self, arg1, arg2):
-        self.g_setToken.fire(self, arg1, arg2)
-
+    # method size: 0
     @unpack_func_args([])
     def finishBootcamp(self):
         self.g_finishBootcamp.fire(self)
 
+    # method size: 128
     @unpack_func_args(['UINT64', 'UINT32', 'INT32'])
     def onBootcampEnqueued(self, arg1, arg2, arg3):
         self.g_onBootcampEnqueued.fire(self, arg1, arg2, arg3)
@@ -93,14 +75,9 @@ class BootcampAccount(object):
     ####################################
 
 
-    @property
-    def markForDelete(self):
-        return self._markForDelete
-
-    @markForDelete.setter
-    def markForDelete(self, value):
-        self._markForDelete, = unpack_variables(value, ['BOOL'])
-
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

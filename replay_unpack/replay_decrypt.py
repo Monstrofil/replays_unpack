@@ -16,8 +16,6 @@ BLOWFISH_KEY = ''.join(['\xDE', '\x72', '\xBE', '\xA0', '\xDE', '\x04', '\xBE', 
                         '\xDE', '\xFE', '\xBE', '\xEF', '\xDE', '\xAD', '\xBE', '\xEF'])
 
 
-
-
 class WoWSReplayDecrypt(object):
     """
     # Header

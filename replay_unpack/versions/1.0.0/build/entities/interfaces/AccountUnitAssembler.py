@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,16 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class AccountUnitAssembler(object):
-    
-    g_accountUnitAssembler_acceptAutoSearch = EventHook()
-    
-    g_accountUnitAssembler_createEx = EventHook()
-    
-    g_accountUnitAssembler_joinEx = EventHook()
-    
-    g_accountUnitAssembler_onNeedToJoinToUnitMgr = EventHook()
-    
-    g_accountUnitAssembler_onAddAutoAssembledAccount = EventHook()
     
     def __init__(self):
         self.id = None
@@ -28,32 +19,39 @@ class AccountUnitAssembler(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['INT32', 'INT64'])
-    def accountUnitAssembler_acceptAutoSearch(self, arg1, arg2):
-        self.g_accountUnitAssembler_acceptAutoSearch.fire(self, arg1, arg2)
-
-    @unpack_func_args(['INT32', 'INT32', 'PYTHON'])
-    def accountUnitAssembler_createEx(self, arg1, arg2, arg3):
-        self.g_accountUnitAssembler_createEx.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT32', 'INT32', 'PYTHON'])
-    def accountUnitAssembler_joinEx(self, arg1, arg2, arg3):
-        self.g_accountUnitAssembler_joinEx.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['MAILBOX', 'INT8', 'UINT16', 'INT32'])
-    def accountUnitAssembler_onNeedToJoinToUnitMgr(self, arg1, arg2, arg3, arg4):
-        self.g_accountUnitAssembler_onNeedToJoinToUnitMgr.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['UINT32', 'PYTHON', 'BOOL'])
-    def accountUnitAssembler_onAddAutoAssembledAccount(self, arg1, arg2, arg3):
-        self.g_accountUnitAssembler_onAddAutoAssembledAccount.fire(self, arg1, arg2, arg3)
 
 
     ####################################
@@ -63,4 +61,7 @@ class AccountUnitAssembler(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

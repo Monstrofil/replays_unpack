@@ -38,11 +38,12 @@ class ReplayPlayer(object):
             if hasattr(entity, 'attributesMap'):
                 try:
                     values = packet.data.state.io()
-                    values_count, = struct.unpack('B', values.read(1))
-                    for i in xrange(values_count):
-                        k = values.read(1)
-                        idx, = struct.unpack('B', k)
-                        setattr(entity, entity.attributesMap[idx], values)
+                    if values.len != 0:
+                        values_count, = struct.unpack('B', values.read(1))
+                        for i in xrange(values_count):
+                            k = values.read(1)
+                            idx, = struct.unpack('B', k)
+                            setattr(entity, entity.attributesMap[idx], values)
                 except Exception as e:
                     logging.exception(e.message)
 
@@ -55,22 +56,20 @@ class ReplayPlayer(object):
         if isinstance(packet.data, EntityMethod):
             entity = self._bigworld.entities[packet.data.entityId]
             if hasattr(entity, 'methodsMap'):
-                method_name = entity.methodsMap.get(packet.data.messageId, None)
-                if method_name:
-                    try:
-                        getattr(entity, method_name)(packet.data.data.value.decode('hex'))
-                    except Exception as e:
-                        logging.exception(e.message)
+                method_name = entity.methodsMap[packet.data.messageId]
+                try:
+                    getattr(entity, method_name)(packet.data.data.value.decode('hex'))
+                except Exception:
+                    logging.exception('Failed to run method %s for entity %s', method_name, entity.__class__)
 
         if isinstance(packet.data, EntityProperty):
             entity = self._bigworld.entities[packet.data.objectID]
             if hasattr(entity, 'attributesMap'):
-                attribute_name = entity.attributesMap.get(packet.data.messageId, None)
-                if attribute_name:
-                    try:
-                        setattr(entity, attribute_name, packet.data.data.value.decode('hex'))
-                    except Exception as e:
-                        logging.exception(e.message)
+                attribute_name = entity.attributesMap[packet.data.messageId]
+                try:
+                    setattr(entity, attribute_name, packet.data.data.value.decode('hex'))
+                except Exception:
+                    logging.exception('Failed to set property %s for entity %s', attribute_name, entity.__class__)
 
     def get_info(self):
         return self._bigworld.battle_controller.get_info()

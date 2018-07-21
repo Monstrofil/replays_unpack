@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -48,7 +49,49 @@ class Flock(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (10000000000, 'modelName'),
+            (10000000000, 'modelName2'),
+            (8, 'modelCount'),
+            (32, 'yawSpeed'),
+            (32, 'pitchSpeed'),
+            (32, 'rollSpeed'),
+            (32, 'animSpeedMin'),
+            (32, 'animSpeedMax'),
+            (32, 'height'),
+            (32, 'radius'),
+            (32, 'deadZoneRadius'),
+            (32, 'speedAtBottom'),
+            (32, 'speedAtTop'),
+            (32, 'decisionTime'),
+            (8, 'flyAroundCenter'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
@@ -61,6 +104,7 @@ class Flock(object):
     ####################################
 
 
+    # property size: 10000000000
     @property
     def modelName(self):
         return self._modelName
@@ -69,6 +113,7 @@ class Flock(object):
     def modelName(self, value):
         self._modelName, = unpack_variables(value, ['STRING'])
 
+    # property size: 10000000000
     @property
     def modelName2(self):
         return self._modelName2
@@ -77,6 +122,7 @@ class Flock(object):
     def modelName2(self, value):
         self._modelName2, = unpack_variables(value, ['STRING'])
 
+    # property size: 8
     @property
     def modelCount(self):
         return self._modelCount
@@ -85,6 +131,7 @@ class Flock(object):
     def modelCount(self, value):
         self._modelCount, = unpack_variables(value, ['UINT8'])
 
+    # property size: 32
     @property
     def yawSpeed(self):
         return self._yawSpeed
@@ -93,6 +140,7 @@ class Flock(object):
     def yawSpeed(self, value):
         self._yawSpeed, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def pitchSpeed(self):
         return self._pitchSpeed
@@ -101,6 +149,7 @@ class Flock(object):
     def pitchSpeed(self, value):
         self._pitchSpeed, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def rollSpeed(self):
         return self._rollSpeed
@@ -109,6 +158,7 @@ class Flock(object):
     def rollSpeed(self, value):
         self._rollSpeed, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def animSpeedMin(self):
         return self._animSpeedMin
@@ -117,6 +167,7 @@ class Flock(object):
     def animSpeedMin(self, value):
         self._animSpeedMin, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def animSpeedMax(self):
         return self._animSpeedMax
@@ -125,6 +176,7 @@ class Flock(object):
     def animSpeedMax(self, value):
         self._animSpeedMax, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def height(self):
         return self._height
@@ -133,6 +185,7 @@ class Flock(object):
     def height(self, value):
         self._height, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def radius(self):
         return self._radius
@@ -141,6 +194,7 @@ class Flock(object):
     def radius(self, value):
         self._radius, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def deadZoneRadius(self):
         return self._deadZoneRadius
@@ -149,6 +203,7 @@ class Flock(object):
     def deadZoneRadius(self, value):
         self._deadZoneRadius, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def speedAtBottom(self):
         return self._speedAtBottom
@@ -157,6 +212,7 @@ class Flock(object):
     def speedAtBottom(self, value):
         self._speedAtBottom, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def speedAtTop(self):
         return self._speedAtTop
@@ -165,6 +221,7 @@ class Flock(object):
     def speedAtTop(self, value):
         self._speedAtTop, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def decisionTime(self):
         return self._decisionTime
@@ -173,6 +230,7 @@ class Flock(object):
     def decisionTime(self, value):
         self._decisionTime, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 8
     @property
     def flyAroundCenter(self):
         return self._flyAroundCenter
@@ -183,4 +241,7 @@ class Flock(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

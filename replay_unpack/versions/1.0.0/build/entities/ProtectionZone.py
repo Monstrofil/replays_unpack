@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -10,24 +11,10 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 class ProtectionZone(object):
     
-    g_start = EventHook()
-    
-    g_reset = EventHook()
-    
-    g_stop = EventHook()
-    
-    g_harm_receiveAttackResults = EventHook()
-    
-    g_smartDestroy = EventHook()
-    
     def __init__(self):
         self.id = None
         self.position = None
 
-
-        self._arena = None
-
-        self._arenaBase = None
 
         self._zoneID = 1.0
 
@@ -37,59 +24,49 @@ class ProtectionZone(object):
 
         self._team = 0.0
 
-        self._maxStayTime = '5.0'
-
-        self._numberOfTurrets = 2.0
-
-        self._minTurretShootInterval = '2.0'
-
-        self._minShootingTime = '15.0'
-
-        self._shotDuration = '1.0'
-
-        self._shotRadius = '5.0'
-
-        self._shotShellNation = 'germany'
-
-        self._shotShellName = 'protection_zone_artillery_shell'
-
-        self._shotPiercingPower = '45.'
-
-        self._mainDirection = 0.0
-
         self._isActive = 'False'
-
-        self._cp = None
 
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (8, 'zoneID'),
+            (32, 'lengthX'),
+            (32, 'lengthZ'),
+            (8, 'team'),
+            (8, 'isActive'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args([])
-    def start(self):
-        self.g_start.fire(self)
-
-    @unpack_func_args([])
-    def reset(self):
-        self.g_reset.fire(self)
-
-    @unpack_func_args([])
-    def stop(self):
-        self.g_stop.fire(self)
-
-    @unpack_func_args(['ATTACK_RESULTS'])
-    def harm_receiveAttackResults(self, arg1):
-        self.g_harm_receiveAttackResults.fire(self, arg1)
-
-    @unpack_func_args([])
-    def smartDestroy(self):
-        self.g_smartDestroy.fire(self)
 
 
     ####################################
@@ -97,22 +74,7 @@ class ProtectionZone(object):
     ####################################
 
 
-    @property
-    def arena(self):
-        return self._arena
-
-    @arena.setter
-    def arena(self, value):
-        self._arena, = unpack_variables(value, ['MAILBOX'])
-
-    @property
-    def arenaBase(self):
-        return self._arenaBase
-
-    @arenaBase.setter
-    def arenaBase(self, value):
-        self._arenaBase, = unpack_variables(value, ['MAILBOX'])
-
+    # property size: 8
     @property
     def zoneID(self):
         return self._zoneID
@@ -121,6 +83,7 @@ class ProtectionZone(object):
     def zoneID(self, value):
         self._zoneID, = unpack_variables(value, ['UINT8'])
 
+    # property size: 32
     @property
     def lengthX(self):
         return self._lengthX
@@ -129,6 +92,7 @@ class ProtectionZone(object):
     def lengthX(self, value):
         self._lengthX, = unpack_variables(value, ['FLOAT32'])
 
+    # property size: 32
     @property
     def lengthZ(self):
         return self._lengthZ
@@ -137,6 +101,7 @@ class ProtectionZone(object):
     def lengthZ(self, value):
         self._lengthZ, = unpack_variables(value, ['FLOAT32'])
 
+    # property size: 8
     @property
     def team(self):
         return self._team
@@ -145,86 +110,7 @@ class ProtectionZone(object):
     def team(self, value):
         self._team, = unpack_variables(value, ['UINT8'])
 
-    @property
-    def maxStayTime(self):
-        return self._maxStayTime
-
-    @maxStayTime.setter
-    def maxStayTime(self, value):
-        self._maxStayTime, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def numberOfTurrets(self):
-        return self._numberOfTurrets
-
-    @numberOfTurrets.setter
-    def numberOfTurrets(self, value):
-        self._numberOfTurrets, = unpack_variables(value, ['UINT8'])
-
-    @property
-    def minTurretShootInterval(self):
-        return self._minTurretShootInterval
-
-    @minTurretShootInterval.setter
-    def minTurretShootInterval(self, value):
-        self._minTurretShootInterval, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def minShootingTime(self):
-        return self._minShootingTime
-
-    @minShootingTime.setter
-    def minShootingTime(self, value):
-        self._minShootingTime, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def shotDuration(self):
-        return self._shotDuration
-
-    @shotDuration.setter
-    def shotDuration(self, value):
-        self._shotDuration, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def shotRadius(self):
-        return self._shotRadius
-
-    @shotRadius.setter
-    def shotRadius(self, value):
-        self._shotRadius, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def shotShellNation(self):
-        return self._shotShellNation
-
-    @shotShellNation.setter
-    def shotShellNation(self, value):
-        self._shotShellNation, = unpack_variables(value, ['STRING'])
-
-    @property
-    def shotShellName(self):
-        return self._shotShellName
-
-    @shotShellName.setter
-    def shotShellName(self, value):
-        self._shotShellName, = unpack_variables(value, ['STRING'])
-
-    @property
-    def shotPiercingPower(self):
-        return self._shotPiercingPower
-
-    @shotPiercingPower.setter
-    def shotPiercingPower(self, value):
-        self._shotPiercingPower, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def mainDirection(self):
-        return self._mainDirection
-
-    @mainDirection.setter
-    def mainDirection(self, value):
-        self._mainDirection, = unpack_variables(value, ['UINT8'])
-
+    # property size: 8
     @property
     def isActive(self):
         return self._isActive
@@ -233,14 +119,9 @@ class ProtectionZone(object):
     def isActive(self, value):
         self._isActive, = unpack_variables(value, ['BOOL'])
 
-    @property
-    def cp(self):
-        return self._cp
-
-    @cp.setter
-    def cp(self, value):
-        self._cp, = unpack_variables(value, ['PYTHON'])
-
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

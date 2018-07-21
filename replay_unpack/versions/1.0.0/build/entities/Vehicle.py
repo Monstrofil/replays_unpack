@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -106,114 +107,6 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     
     g_showRammingEffect = EventHook()
     
-    g_updatePrebattleID = EventHook()
-    
-    g_moveWith = EventHook()
-    
-    g_trackWorldPointWithGun = EventHook()
-    
-    g_trackRelativePointWithGun = EventHook()
-    
-    g_stopTrackingWithGun = EventHook()
-    
-    g_trackVehicleWithGun = EventHook()
-    
-    g_changeSetting = EventHook()
-    
-    g_sendVisibilityDevelopmentInfo = EventHook()
-    
-    g_shoot = EventHook()
-    
-    g_teleportTo = EventHook()
-    
-    g_replenishAmmo = EventHook()
-    
-    g_setDevelopmentFeature = EventHook()
-    
-    g_receiveFakeShot = EventHook()
-    
-    g_setAvatar = EventHook()
-    
-    g_registerObserver = EventHook()
-    
-    g_sendFinalStats = EventHook()
-    
-    g_onClientConnected = EventHook()
-    
-    g_onBattleRunning = EventHook()
-    
-    g_sendStateToOwnClient = EventHook()
-    
-    g_receiveHitAssistBonus = EventHook()
-    
-    g_onEnemyVehicleShot = EventHook()
-    
-    g_scheduleExtraCheck = EventHook()
-    
-    g_onObservedByEnemy = EventHook()
-    
-    g_onDetectedByEnemy = EventHook()
-    
-    g_onConcealedFromEnemy = EventHook()
-    
-    g_onStopObservationByEnemy = EventHook()
-    
-    g_updateVehicleAmmo = EventHook()
-    
-    g_onFlagAction = EventHook()
-    
-    g_receiveAssistsFromArena = EventHook()
-    
-    g_receiveFirstDetectionFromArena = EventHook()
-    
-    g_sendPositionsToClient = EventHook()
-    
-    g_requestDamagedDevicesFromFor = EventHook()
-    
-    g_sendDamagedDevicesTo = EventHook()
-    
-    g_setHonorTitle = EventHook()
-    
-    g_receiveTaggedDestructibleKill = EventHook()
-    
-    g_setOnFireByExplosion = EventHook()
-    
-    g_onReceiveSpatialData = EventHook()
-    
-    g_onResourceAbsorbed = EventHook()
-    
-    g_setInsideResourcePoint = EventHook()
-    
-    g_grantWinPoints = EventHook()
-    
-    g_activateGasAttack = EventHook()
-    
-    g_pauseMechanics = EventHook()
-    
-    g_startOrUpdateExtraFromOutside = EventHook()
-    
-    g_damageByEquipment = EventHook()
-    
-    g_updateOwnClientRTT = EventHook()
-    
-    g_receiveVisibilityUpdate = EventHook()
-    
-    g_requestVisibilityLists = EventHook()
-    
-    g_createCellNearHere = EventHook()
-    
-    g_onCreateCellSuccess = EventHook()
-    
-    g_receiveFinalStats = EventHook()
-    
-    g_setAvatar = EventHook()
-    
-    g_sendFinalStats = EventHook()
-    
-    g_smartDestroy = EventHook()
-    
-    g_logAimMetrics = EventHook()
-    
     def __init__(self):
         self.id = None
         self.position = None
@@ -241,55 +134,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
 
         self._publicStateModifiers = None
 
-        self._compDescr = None
-
         self._stunInfo = None
-
-        self._status = None
-
-        self._invisibility = None
-
-        self._radioDistance = None
-
-        self._circularVisionRadius = None
-
-        self._detectedVehicles = None
-
-        self._isObservedByEnemy = None
-
-        self._rammingBonus = None
-
-        self._ammo = None
-
-        self._isClientConnected = None
-
-        self._avatar = None
-
-        self._arenaBase = None
-
-        self._botKind = None
-
-        self._crewCompactDescrs = None
-
-        self._arenaTypeID = None
-
-        self._arenaBonusType = None
-
-        self._tkillRating = None
-
-        self._cp = None
-
-        self._arenaUniqueID = None
-
-        self._accountDBID = None
-
-        self._historyLoggingFlags = None
-
-        self._heatmapLoggingFlags = None
-
-        self._state = None
-
-        self._arena = None
 
         self._inspiringEffect = None
 
@@ -334,260 +179,103 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
 
         InspireController_Vehicle.__init__(self)
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (8, 'isStrafing'),
+            (32, 'steeringAngle'),
+            (8, 'physicsMode'),
+            (8, 'siegeState'),
+            (16, 'gunAnglesPacked'),
+            (10000000000, 'publicInfo'),
+            (16, 'health'),
+            (8, 'isCrewActive'),
+            (16, 'engineMode'),
+            (10000000000, 'damageStickers'),
+            (10000000000, 'publicStateModifiers'),
+            (64, 'stunInfo'),
+            (10000000000, 'inspiringEffect'),
+            (10000000000, 'inspired'),
+            (8, 'isSpeedCapturing'),
+            (8, 'isBlockingCapture'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (56, 'onHealthChanged'),
+            (8, 'showShooting'),
+            (10000000000, 'showDamageFromShot'),
+            (144, 'showDamageFromExplosion'),
+            (72, 'showAmmoBayEffect'),
+            (64, 'onPushed'),
+            (352, 'onStaticCollision'),
+            (128, 'showRammingEffect'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
 
+    # method size: 56
     @unpack_func_args(['INT16', 'OBJECT_ID', 'UINT8'])
     def onHealthChanged(self, arg1, arg2, arg3):
         self.g_onHealthChanged.fire(self, arg1, arg2, arg3)
 
+    # method size: 8
     @unpack_func_args(['UINT8'])
     def showShooting(self, arg1):
         self.g_showShooting.fire(self, arg1)
 
+    # method size: 10000000000
     @unpack_func_args(['OBJECT_ID', ['ARRAY', 'UINT64'], 'UINT8', 'UINT8'])
     def showDamageFromShot(self, arg1, arg2, arg3, arg4):
         self.g_showDamageFromShot.fire(self, arg1, arg2, arg3, arg4)
 
+    # method size: 144
     @unpack_func_args(['OBJECT_ID', 'VECTOR3', 'UINT8', 'UINT8'])
     def showDamageFromExplosion(self, arg1, arg2, arg3, arg4):
         self.g_showDamageFromExplosion.fire(self, arg1, arg2, arg3, arg4)
 
+    # method size: 72
     @unpack_func_args(['UINT8', 'FLOAT32', 'FLOAT32'])
     def showAmmoBayEffect(self, arg1, arg2, arg3):
         self.g_showAmmoBayEffect.fire(self, arg1, arg2, arg3)
 
+    # method size: 64
     @unpack_func_args(['FLOAT32', 'FLOAT32'])
     def onPushed(self, arg1, arg2):
         self.g_onPushed.fire(self, arg1, arg2)
 
+    # method size: 352
     @unpack_func_args(['FLOAT32', 'VECTOR3', 'VECTOR3', 'UINT8', 'FLOAT32', 'FLOAT32', 'FLOAT32', 'INT8', 'UINT16'])
     def onStaticCollision(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9):
         self.g_onStaticCollision.fire(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 
+    # method size: 128
     @unpack_func_args(['FLOAT32', 'VECTOR3'])
     def showRammingEffect(self, arg1, arg2):
         self.g_showRammingEffect.fire(self, arg1, arg2)
-
-    @unpack_func_args(['OBJECT_ID'])
-    def updatePrebattleID(self, arg1):
-        self.g_updatePrebattleID.fire(self, arg1)
-
-    @unpack_func_args(['UINT8'])
-    def moveWith(self, arg1):
-        self.g_moveWith.fire(self, arg1)
-
-    @unpack_func_args(['VECTOR3'])
-    def trackWorldPointWithGun(self, arg1):
-        self.g_trackWorldPointWithGun.fire(self, arg1)
-
-    @unpack_func_args(['VECTOR3'])
-    def trackRelativePointWithGun(self, arg1):
-        self.g_trackRelativePointWithGun.fire(self, arg1)
-
-    @unpack_func_args(['FLOAT32', 'FLOAT32'])
-    def stopTrackingWithGun(self, arg1, arg2):
-        self.g_stopTrackingWithGun.fire(self, arg1, arg2)
-
-    @unpack_func_args(['OBJECT_ID'])
-    def trackVehicleWithGun(self, arg1):
-        self.g_trackVehicleWithGun.fire(self, arg1)
-
-    @unpack_func_args(['UINT8', 'INT32'])
-    def changeSetting(self, arg1, arg2):
-        self.g_changeSetting.fire(self, arg1, arg2)
-
-    @unpack_func_args(['OBJECT_ID', 'VECTOR3'])
-    def sendVisibilityDevelopmentInfo(self, arg1, arg2):
-        self.g_sendVisibilityDevelopmentInfo.fire(self, arg1, arg2)
-
-    @unpack_func_args(['FLOAT32'])
-    def shoot(self, arg1):
-        self.g_shoot.fire(self, arg1)
-
-    @unpack_func_args(['VECTOR3', 'FLOAT32'])
-    def teleportTo(self, arg1, arg2):
-        self.g_teleportTo.fire(self, arg1, arg2)
-
-    @unpack_func_args([])
-    def replenishAmmo(self):
-        self.g_replenishAmmo.fire(self)
-
-    @unpack_func_args(['STRING', 'INT32', 'STRING'])
-    def setDevelopmentFeature(self, arg1, arg2, arg3):
-        self.g_setDevelopmentFeature.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT32', 'FLOAT32', 'VECTOR3', 'VECTOR3', 'UINT8'])
-    def receiveFakeShot(self, arg1, arg2, arg3, arg4, arg5):
-        self.g_receiveFakeShot.fire(self, arg1, arg2, arg3, arg4, arg5)
-
-    @unpack_func_args(['MAILBOX'])
-    def setAvatar(self, arg1):
-        self.g_setAvatar.fire(self, arg1)
-
-    @unpack_func_args(['MAILBOX', 'BOOL'])
-    def registerObserver(self, arg1, arg2):
-        self.g_registerObserver.fire(self, arg1, arg2)
-
-    @unpack_func_args(['PYTHON'])
-    def sendFinalStats(self, arg1):
-        self.g_sendFinalStats.fire(self, arg1)
-
-    @unpack_func_args(['BOOL'])
-    def onClientConnected(self, arg1):
-        self.g_onClientConnected.fire(self, arg1)
-
-    @unpack_func_args(['BOOL', 'BOOL'])
-    def onBattleRunning(self, arg1, arg2):
-        self.g_onBattleRunning.fire(self, arg1, arg2)
-
-    @unpack_func_args([])
-    def sendStateToOwnClient(self):
-        self.g_sendStateToOwnClient.fire(self)
-
-    @unpack_func_args(['OBJECT_ID', 'SHOT_ID', 'UINT16', 'UINT8', 'INT32', 'INT32', 'INT32', 'UINT8', 'UINT8', 'UINT8', 'UINT16', 'BOOL', 'UINT16', 'UINT8'])
-    def receiveHitAssistBonus(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14):
-        self.g_receiveHitAssistBonus.fire(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14)
-
-    @unpack_func_args(['OBJECT_ID', ['ARRAY', 'SHOT_ID'], 'UINT8', 'FLOAT32', 'FLOAT32'])
-    def onEnemyVehicleShot(self, arg1, arg2, arg3, arg4, arg5):
-        self.g_onEnemyVehicleShot.fire(self, arg1, arg2, arg3, arg4, arg5)
-
-    @unpack_func_args(['OBJECT_ID', 'FLOAT32'])
-    def scheduleExtraCheck(self, arg1, arg2):
-        self.g_scheduleExtraCheck.fire(self, arg1, arg2)
-
-    @unpack_func_args([])
-    def onObservedByEnemy(self):
-        self.g_onObservedByEnemy.fire(self)
-
-    @unpack_func_args(['OBJECT_ID', 'BOOL', 'UINT8'])
-    def onDetectedByEnemy(self, arg1, arg2, arg3):
-        self.g_onDetectedByEnemy.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['OBJECT_ID'])
-    def onConcealedFromEnemy(self, arg1):
-        self.g_onConcealedFromEnemy.fire(self, arg1)
-
-    @unpack_func_args([])
-    def onStopObservationByEnemy(self):
-        self.g_onStopObservationByEnemy.fire(self)
-
-    @unpack_func_args(['INT32', 'UINT16', 'UINT8', 'INT16', 'INT16'])
-    def updateVehicleAmmo(self, arg1, arg2, arg3, arg4, arg5):
-        self.g_updateVehicleAmmo.fire(self, arg1, arg2, arg3, arg4, arg5)
-
-    @unpack_func_args(['UINT8', 'PYTHON', 'UINT8'])
-    def onFlagAction(self, arg1, arg2, arg3):
-        self.g_onFlagAction.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args([['ARRAY', 'UINT8'], ['ARRAY', 'OBJECT_ID']])
-    def receiveAssistsFromArena(self, arg1, arg2):
-        self.g_receiveAssistsFromArena.fire(self, arg1, arg2)
-
-    @unpack_func_args(['OBJECT_ID', 'UINT8', 'UINT16'])
-    def receiveFirstDetectionFromArena(self, arg1, arg2, arg3):
-        self.g_receiveFirstDetectionFromArena.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['BOOL'])
-    def sendPositionsToClient(self, arg1):
-        self.g_sendPositionsToClient.fire(self, arg1)
-
-    @unpack_func_args(['OBJECT_ID', 'MAILBOX'])
-    def requestDamagedDevicesFromFor(self, arg1, arg2):
-        self.g_requestDamagedDevicesFromFor.fire(self, arg1, arg2)
-
-    @unpack_func_args(['MAILBOX'])
-    def sendDamagedDevicesTo(self, arg1):
-        self.g_sendDamagedDevicesTo.fire(self, arg1)
-
-    @unpack_func_args(['STRING'])
-    def setHonorTitle(self, arg1):
-        self.g_setHonorTitle.fire(self, arg1)
-
-    @unpack_func_args(['UINT8'])
-    def receiveTaggedDestructibleKill(self, arg1):
-        self.g_receiveTaggedDestructibleKill.fire(self, arg1)
-
-    @unpack_func_args(['ATTACKER_INFO', 'SHOT_ID'])
-    def setOnFireByExplosion(self, arg1, arg2):
-        self.g_setOnFireByExplosion.fire(self, arg1, arg2)
-
-    @unpack_func_args([['ARRAY', 'VEHICLE_SPATIAL_INFO']])
-    def onReceiveSpatialData(self, arg1):
-        self.g_onReceiveSpatialData.fire(self, arg1)
-
-    @unpack_func_args(['UINT16'])
-    def onResourceAbsorbed(self, arg1):
-        self.g_onResourceAbsorbed.fire(self, arg1)
-
-    @unpack_func_args(['BOOL'])
-    def setInsideResourcePoint(self, arg1):
-        self.g_setInsideResourcePoint.fire(self, arg1)
-
-    @unpack_func_args(['UINT16'])
-    def grantWinPoints(self, arg1):
-        self.g_grantWinPoints.fire(self, arg1)
-
-    @unpack_func_args(['FLOAT32'])
-    def activateGasAttack(self, arg1):
-        self.g_activateGasAttack.fire(self, arg1)
-
-    @unpack_func_args(['UINT64'])
-    def pauseMechanics(self, arg1):
-        self.g_pauseMechanics.fire(self, arg1)
-
-    @unpack_func_args(['STRING', 'PYTHON'])
-    def startOrUpdateExtraFromOutside(self, arg1, arg2):
-        self.g_startOrUpdateExtraFromOutside.fire(self, arg1, arg2)
-
-    @unpack_func_args(['INT32', 'BOOL'])
-    def damageByEquipment(self, arg1, arg2):
-        self.g_damageByEquipment.fire(self, arg1, arg2)
-
-    @unpack_func_args(['FLOAT32'])
-    def updateOwnClientRTT(self, arg1):
-        self.g_updateOwnClientRTT.fire(self, arg1)
-
-    @unpack_func_args(['OBJECT_ID', 'BOOL', 'BOOL'])
-    def receiveVisibilityUpdate(self, arg1, arg2, arg3):
-        self.g_receiveVisibilityUpdate.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['MAILBOX'])
-    def requestVisibilityLists(self, arg1):
-        self.g_requestVisibilityLists.fire(self, arg1)
-
-    @unpack_func_args(['MAILBOX'])
-    def createCellNearHere(self, arg1):
-        self.g_createCellNearHere.fire(self, arg1)
-
-    @unpack_func_args([])
-    def onCreateCellSuccess(self):
-        self.g_onCreateCellSuccess.fire(self)
-
-    @unpack_func_args(['STRING'])
-    def receiveFinalStats(self, arg1):
-        self.g_receiveFinalStats.fire(self, arg1)
-
-    @unpack_func_args(['MAILBOX'])
-    def setAvatar(self, arg1):
-        self.g_setAvatar.fire(self, arg1)
-
-    @unpack_func_args(['PYTHON'])
-    def sendFinalStats(self, arg1):
-        self.g_sendFinalStats.fire(self, arg1)
-
-    @unpack_func_args([])
-    def smartDestroy(self):
-        self.g_smartDestroy.fire(self)
-
-    @unpack_func_args(['PYTHON'])
-    def logAimMetrics(self, arg1):
-        self.g_logAimMetrics.fire(self, arg1)
 
 
     ####################################
@@ -595,6 +283,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     ####################################
 
 
+    # property size: 8
     @property
     def isStrafing(self):
         return self._isStrafing
@@ -603,6 +292,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def isStrafing(self, value):
         self._isStrafing, = unpack_variables(value, ['BOOL'])
 
+    # property size: 32
     @property
     def steeringAngle(self):
         return self._steeringAngle
@@ -611,6 +301,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def steeringAngle(self, value):
         self._steeringAngle, = unpack_variables(value, ['FLOAT32'])
 
+    # property size: 8
     @property
     def physicsMode(self):
         return self._physicsMode
@@ -619,6 +310,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def physicsMode(self, value):
         self._physicsMode, = unpack_variables(value, ['UINT8'])
 
+    # property size: 8
     @property
     def siegeState(self):
         return self._siegeState
@@ -627,6 +319,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def siegeState(self, value):
         self._siegeState, = unpack_variables(value, ['UINT8'])
 
+    # property size: 16
     @property
     def gunAnglesPacked(self):
         return self._gunAnglesPacked
@@ -635,6 +328,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def gunAnglesPacked(self, value):
         self._gunAnglesPacked, = unpack_variables(value, ['UINT16'])
 
+    # property size: 10000000000
     @property
     def publicInfo(self):
         return self._publicInfo
@@ -643,6 +337,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def publicInfo(self, value):
         self._publicInfo, = unpack_variables(value, ['PUBLIC_VEHICLE_INFO'])
 
+    # property size: 16
     @property
     def health(self):
         return self._health
@@ -651,6 +346,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def health(self, value):
         self._health, = unpack_variables(value, ['INT16'])
 
+    # property size: 8
     @property
     def isCrewActive(self):
         return self._isCrewActive
@@ -659,38 +355,34 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def isCrewActive(self, value):
         self._isCrewActive, = unpack_variables(value, ['BOOL'])
 
+    # property size: 16
     @property
     def engineMode(self):
         return self._engineMode
 
     @engineMode.setter
     def engineMode(self, value):
-        self._engineMode, = unpack_variables(value, ['ARRAY', ['UINT8'], 2])
+        self._engineMode, = unpack_variables(value, [['ARRAY', 'UINT8', 2]])
 
+    # property size: 10000000000
     @property
     def damageStickers(self):
         return self._damageStickers
 
     @damageStickers.setter
     def damageStickers(self, value):
-        self._damageStickers, = unpack_variables(value, ['ARRAY', ['UINT64']])
+        self._damageStickers, = unpack_variables(value, [['ARRAY', 'UINT64']])
 
+    # property size: 10000000000
     @property
     def publicStateModifiers(self):
         return self._publicStateModifiers
 
     @publicStateModifiers.setter
     def publicStateModifiers(self, value):
-        self._publicStateModifiers, = unpack_variables(value, ['ARRAY', ['EXTRA_ID']])
+        self._publicStateModifiers, = unpack_variables(value, [['ARRAY', 'EXTRA_ID']])
 
-    @property
-    def compDescr(self):
-        return self._compDescr
-
-    @compDescr.setter
-    def compDescr(self, value):
-        self._compDescr, = unpack_variables(value, ['STRING'])
-
+    # property size: 64
     @property
     def stunInfo(self):
         return self._stunInfo
@@ -699,190 +391,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def stunInfo(self, value):
         self._stunInfo, = unpack_variables(value, ['STUN_INFO'])
 
-    @property
-    def status(self):
-        return self._status
-
-    @status.setter
-    def status(self, value):
-        self._status, = unpack_variables(value, ['INT8'])
-
-    @property
-    def invisibility(self):
-        return self._invisibility
-
-    @invisibility.setter
-    def invisibility(self, value):
-        self._invisibility, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def radioDistance(self):
-        return self._radioDistance
-
-    @radioDistance.setter
-    def radioDistance(self, value):
-        self._radioDistance, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def circularVisionRadius(self):
-        return self._circularVisionRadius
-
-    @circularVisionRadius.setter
-    def circularVisionRadius(self, value):
-        self._circularVisionRadius, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def detectedVehicles(self):
-        return self._detectedVehicles
-
-    @detectedVehicles.setter
-    def detectedVehicles(self, value):
-        self._detectedVehicles, = unpack_variables(value, ['ARRAY', ['OBJECT_ID']])
-
-    @property
-    def isObservedByEnemy(self):
-        return self._isObservedByEnemy
-
-    @isObservedByEnemy.setter
-    def isObservedByEnemy(self, value):
-        self._isObservedByEnemy, = unpack_variables(value, ['BOOL'])
-
-    @property
-    def rammingBonus(self):
-        return self._rammingBonus
-
-    @rammingBonus.setter
-    def rammingBonus(self, value):
-        self._rammingBonus, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def ammo(self):
-        return self._ammo
-
-    @ammo.setter
-    def ammo(self, value):
-        self._ammo, = unpack_variables(value, ['ARRAY', ['INT32']])
-
-    @property
-    def isClientConnected(self):
-        return self._isClientConnected
-
-    @isClientConnected.setter
-    def isClientConnected(self, value):
-        self._isClientConnected, = unpack_variables(value, ['INT8'])
-
-    @property
-    def avatar(self):
-        return self._avatar
-
-    @avatar.setter
-    def avatar(self, value):
-        self._avatar, = unpack_variables(value, ['MAILBOX'])
-
-    @property
-    def arenaBase(self):
-        return self._arenaBase
-
-    @arenaBase.setter
-    def arenaBase(self, value):
-        self._arenaBase, = unpack_variables(value, ['MAILBOX'])
-
-    @property
-    def botKind(self):
-        return self._botKind
-
-    @botKind.setter
-    def botKind(self, value):
-        self._botKind, = unpack_variables(value, ['UINT8'])
-
-    @property
-    def crewCompactDescrs(self):
-        return self._crewCompactDescrs
-
-    @crewCompactDescrs.setter
-    def crewCompactDescrs(self, value):
-        self._crewCompactDescrs, = unpack_variables(value, ['ARRAY', ['STRING']])
-
-    @property
-    def arenaTypeID(self):
-        return self._arenaTypeID
-
-    @arenaTypeID.setter
-    def arenaTypeID(self, value):
-        self._arenaTypeID, = unpack_variables(value, ['INT32'])
-
-    @property
-    def arenaBonusType(self):
-        return self._arenaBonusType
-
-    @arenaBonusType.setter
-    def arenaBonusType(self, value):
-        self._arenaBonusType, = unpack_variables(value, ['UINT8'])
-
-    @property
-    def tkillRating(self):
-        return self._tkillRating
-
-    @tkillRating.setter
-    def tkillRating(self, value):
-        self._tkillRating, = unpack_variables(value, ['FLOAT'])
-
-    @property
-    def cp(self):
-        return self._cp
-
-    @cp.setter
-    def cp(self, value):
-        self._cp, = unpack_variables(value, ['PYTHON'])
-
-    @property
-    def arenaUniqueID(self):
-        return self._arenaUniqueID
-
-    @arenaUniqueID.setter
-    def arenaUniqueID(self, value):
-        self._arenaUniqueID, = unpack_variables(value, ['UINT64'])
-
-    @property
-    def accountDBID(self):
-        return self._accountDBID
-
-    @accountDBID.setter
-    def accountDBID(self, value):
-        self._accountDBID, = unpack_variables(value, ['DB_ID'])
-
-    @property
-    def historyLoggingFlags(self):
-        return self._historyLoggingFlags
-
-    @historyLoggingFlags.setter
-    def historyLoggingFlags(self, value):
-        self._historyLoggingFlags, = unpack_variables(value, ['UINT32'])
-
-    @property
-    def heatmapLoggingFlags(self):
-        return self._heatmapLoggingFlags
-
-    @heatmapLoggingFlags.setter
-    def heatmapLoggingFlags(self, value):
-        self._heatmapLoggingFlags, = unpack_variables(value, ['UINT32'])
-
-    @property
-    def state(self):
-        return self._state
-
-    @state.setter
-    def state(self, value):
-        self._state, = unpack_variables(value, ['UINT8'])
-
-    @property
-    def arena(self):
-        return self._arena
-
-    @arena.setter
-    def arena(self, value):
-        self._arena, = unpack_variables(value, ['MAILBOX'])
-
+    # property size: 10000000000
     @property
     def inspiringEffect(self):
         return self._inspiringEffect
@@ -891,6 +400,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def inspiringEffect(self, value):
         self._inspiringEffect, = unpack_variables(value, ['INSPIRING_EFFECT'])
 
+    # property size: 10000000000
     @property
     def inspired(self):
         return self._inspired
@@ -899,6 +409,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def inspired(self, value):
         self._inspired, = unpack_variables(value, ['INSPIRED'])
 
+    # property size: 8
     @property
     def isSpeedCapturing(self):
         return self._isSpeedCapturing
@@ -907,6 +418,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
     def isSpeedCapturing(self, value):
         self._isSpeedCapturing, = unpack_variables(value, ['BOOL'])
 
+    # property size: 8
     @property
     def isBlockingCapture(self):
         return self._isBlockingCapture
@@ -917,4 +429,7 @@ class Vehicle(VehicleAI, TeamBase_Vehicle, SectorBase_Vehicle, RepairBase_Vehicl
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

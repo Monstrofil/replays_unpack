@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,12 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class RecoveryMechanic_Avatar(object):
-    
-    g_recoveryMechanic_notifyCannotStartRecovering = EventHook()
-    
-    g_recoveryMechanic_notifyCancelled = EventHook()
-    
-    g_recoveryMechanic_updateState = EventHook()
     
     g_notifyCannotStartRecovering = EventHook()
     
@@ -30,33 +25,54 @@ class RecoveryMechanic_Avatar(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (0, 'notifyCannotStartRecovering'),
+            (0, 'notifyCancelled'),
+            (104, 'updateState'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
 
-    @unpack_func_args([])
-    def recoveryMechanic_notifyCannotStartRecovering(self):
-        self.g_recoveryMechanic_notifyCannotStartRecovering.fire(self)
-
-    @unpack_func_args([])
-    def recoveryMechanic_notifyCancelled(self):
-        self.g_recoveryMechanic_notifyCancelled.fire(self)
-
-    @unpack_func_args(['BOOL', 'INT32', 'INT32', 'FLOAT32'])
-    def recoveryMechanic_updateState(self, arg1, arg2, arg3, arg4):
-        self.g_recoveryMechanic_updateState.fire(self, arg1, arg2, arg3, arg4)
-
+    # method size: 0
     @unpack_func_args([])
     def notifyCannotStartRecovering(self):
         self.g_notifyCannotStartRecovering.fire(self)
 
+    # method size: 0
     @unpack_func_args([])
     def notifyCancelled(self):
         self.g_notifyCancelled.fire(self)
 
+    # method size: 104
     @unpack_func_args(['BOOL', 'INT32', 'INT32', 'FLOAT32'])
     def updateState(self, arg1, arg2, arg3, arg4):
         self.g_updateState.fire(self, arg1, arg2, arg3, arg4)
@@ -69,4 +85,7 @@ class RecoveryMechanic_Avatar(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

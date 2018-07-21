@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -60,7 +61,55 @@ class FlockExotic(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (32, 'animSpeedMax'),
+            (32, 'animSpeedMin'),
+            (8, 'modelCount'),
+            (10000000000, 'modelName'),
+            (10000000000, 'modelName2'),
+            (32, 'speed'),
+            (64, 'initSpeedRandom'),
+            (64, 'speedRandom'),
+            (32, 'accelerationTime'),
+            (32, 'triggerRadius'),
+            (64, 'explosionRadius'),
+            (32, 'spawnRadius'),
+            (32, 'spawnHeight'),
+            (32, 'flightRadius'),
+            (32, 'flightHeight'),
+            (32, 'flightAngleMin'),
+            (32, 'flightAngleMax'),
+            (32, 'flightOffsetFromOrigin'),
+            (32, 'lifeTime'),
+            (32, 'respawnTime'),
+            (10000000000, 'flightSound'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
@@ -73,6 +122,7 @@ class FlockExotic(object):
     ####################################
 
 
+    # property size: 32
     @property
     def animSpeedMax(self):
         return self._animSpeedMax
@@ -81,6 +131,7 @@ class FlockExotic(object):
     def animSpeedMax(self, value):
         self._animSpeedMax, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def animSpeedMin(self):
         return self._animSpeedMin
@@ -89,6 +140,7 @@ class FlockExotic(object):
     def animSpeedMin(self, value):
         self._animSpeedMin, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 8
     @property
     def modelCount(self):
         return self._modelCount
@@ -97,6 +149,7 @@ class FlockExotic(object):
     def modelCount(self, value):
         self._modelCount, = unpack_variables(value, ['UINT8'])
 
+    # property size: 10000000000
     @property
     def modelName(self):
         return self._modelName
@@ -105,6 +158,7 @@ class FlockExotic(object):
     def modelName(self, value):
         self._modelName, = unpack_variables(value, ['STRING'])
 
+    # property size: 10000000000
     @property
     def modelName2(self):
         return self._modelName2
@@ -113,6 +167,7 @@ class FlockExotic(object):
     def modelName2(self, value):
         self._modelName2, = unpack_variables(value, ['STRING'])
 
+    # property size: 32
     @property
     def speed(self):
         return self._speed
@@ -121,6 +176,7 @@ class FlockExotic(object):
     def speed(self, value):
         self._speed, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 64
     @property
     def initSpeedRandom(self):
         return self._initSpeedRandom
@@ -129,6 +185,7 @@ class FlockExotic(object):
     def initSpeedRandom(self, value):
         self._initSpeedRandom, = unpack_variables(value, ['VECTOR2'])
 
+    # property size: 64
     @property
     def speedRandom(self):
         return self._speedRandom
@@ -137,6 +194,7 @@ class FlockExotic(object):
     def speedRandom(self, value):
         self._speedRandom, = unpack_variables(value, ['VECTOR2'])
 
+    # property size: 32
     @property
     def accelerationTime(self):
         return self._accelerationTime
@@ -145,6 +203,7 @@ class FlockExotic(object):
     def accelerationTime(self, value):
         self._accelerationTime, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def triggerRadius(self):
         return self._triggerRadius
@@ -153,6 +212,7 @@ class FlockExotic(object):
     def triggerRadius(self, value):
         self._triggerRadius, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 64
     @property
     def explosionRadius(self):
         return self._explosionRadius
@@ -161,6 +221,7 @@ class FlockExotic(object):
     def explosionRadius(self, value):
         self._explosionRadius, = unpack_variables(value, ['VECTOR2'])
 
+    # property size: 32
     @property
     def spawnRadius(self):
         return self._spawnRadius
@@ -169,6 +230,7 @@ class FlockExotic(object):
     def spawnRadius(self, value):
         self._spawnRadius, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def spawnHeight(self):
         return self._spawnHeight
@@ -177,6 +239,7 @@ class FlockExotic(object):
     def spawnHeight(self, value):
         self._spawnHeight, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def flightRadius(self):
         return self._flightRadius
@@ -185,6 +248,7 @@ class FlockExotic(object):
     def flightRadius(self, value):
         self._flightRadius, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def flightHeight(self):
         return self._flightHeight
@@ -193,6 +257,7 @@ class FlockExotic(object):
     def flightHeight(self, value):
         self._flightHeight, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def flightAngleMin(self):
         return self._flightAngleMin
@@ -201,6 +266,7 @@ class FlockExotic(object):
     def flightAngleMin(self, value):
         self._flightAngleMin, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def flightAngleMax(self):
         return self._flightAngleMax
@@ -209,6 +275,7 @@ class FlockExotic(object):
     def flightAngleMax(self, value):
         self._flightAngleMax, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def flightOffsetFromOrigin(self):
         return self._flightOffsetFromOrigin
@@ -217,6 +284,7 @@ class FlockExotic(object):
     def flightOffsetFromOrigin(self, value):
         self._flightOffsetFromOrigin, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def lifeTime(self):
         return self._lifeTime
@@ -225,6 +293,7 @@ class FlockExotic(object):
     def lifeTime(self, value):
         self._lifeTime, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 32
     @property
     def respawnTime(self):
         return self._respawnTime
@@ -233,6 +302,7 @@ class FlockExotic(object):
     def respawnTime(self, value):
         self._respawnTime, = unpack_variables(value, ['FLOAT'])
 
+    # property size: 10000000000
     @property
     def flightSound(self):
         return self._flightSound
@@ -243,4 +313,7 @@ class FlockExotic(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

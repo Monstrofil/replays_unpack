@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,22 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class ClientCommandsPort(object):
-    
-    g_doCmdStr = EventHook()
-    
-    g_doCmdInt3 = EventHook()
-    
-    g_doCmdInt4 = EventHook()
-    
-    g_doCmdInt2Str = EventHook()
-    
-    g_doCmdIntArr = EventHook()
-    
-    g_doCmdIntStr = EventHook()
-    
-    g_doCmdIntStrArr = EventHook()
-    
-    g_doCmdIntArrStrArr = EventHook()
     
     g_onCmdResponse = EventHook()
     
@@ -38,49 +23,48 @@ class ClientCommandsPort(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            (10000000000, 'onCmdResponse'),
+            (10000000000, 'onCmdResponseExt'),
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
 
-    @unpack_func_args(['INT16', 'INT16', 'STRING'])
-    def doCmdStr(self, arg1, arg2, arg3):
-        self.g_doCmdStr.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT16', 'INT16', 'INT64', 'INT64', 'INT64'])
-    def doCmdInt3(self, arg1, arg2, arg3, arg4, arg5):
-        self.g_doCmdInt3.fire(self, arg1, arg2, arg3, arg4, arg5)
-
-    @unpack_func_args(['INT16', 'INT16', 'INT64', 'INT64', 'INT32', 'INT32'])
-    def doCmdInt4(self, arg1, arg2, arg3, arg4, arg5, arg6):
-        self.g_doCmdInt4.fire(self, arg1, arg2, arg3, arg4, arg5, arg6)
-
-    @unpack_func_args(['INT16', 'INT16', 'INT64', 'INT64', 'STRING'])
-    def doCmdInt2Str(self, arg1, arg2, arg3, arg4, arg5):
-        self.g_doCmdInt2Str.fire(self, arg1, arg2, arg3, arg4, arg5)
-
-    @unpack_func_args(['INT16', 'INT16', ['ARRAY', 'INT32']])
-    def doCmdIntArr(self, arg1, arg2, arg3):
-        self.g_doCmdIntArr.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT16', 'INT16', 'INT64', 'STRING'])
-    def doCmdIntStr(self, arg1, arg2, arg3, arg4):
-        self.g_doCmdIntStr.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['INT16', 'INT16', 'INT64', ['ARRAY', 'STRING']])
-    def doCmdIntStrArr(self, arg1, arg2, arg3, arg4):
-        self.g_doCmdIntStrArr.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['INT16', 'INT16', ['ARRAY', 'INT64'], ['ARRAY', 'STRING']])
-    def doCmdIntArrStrArr(self, arg1, arg2, arg3, arg4):
-        self.g_doCmdIntArrStrArr.fire(self, arg1, arg2, arg3, arg4)
-
+    # method size: 10000000000
     @unpack_func_args(['INT16', 'INT16', 'STRING'])
     def onCmdResponse(self, arg1, arg2, arg3):
         self.g_onCmdResponse.fire(self, arg1, arg2, arg3)
 
+    # method size: 10000000000
     @unpack_func_args(['INT16', 'INT16', 'STRING', 'STRING'])
     def onCmdResponseExt(self, arg1, arg2, arg3, arg4):
         self.g_onCmdResponseExt.fire(self, arg1, arg2, arg3, arg4)
@@ -93,4 +77,7 @@ class ClientCommandsPort(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

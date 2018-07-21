@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -15,24 +16,10 @@ except:
 
 class SectorBase(EntityTrap):
     
-    g_setMaxPointsFactor = EventHook()
-    
-    g_reset = EventHook()
-    
     def __init__(self):
         self.id = None
         self.position = None
 
-
-        self._pointsPerSecond = '1.0'
-
-        self._maxPointsPerSecond = '3.0'
-
-        self._ownerStopsCapturing = 0.0
-
-        self._defaultPointsPerSecond = '1.0'
-
-        self._defaultMaxPointsPerSecond = '3.0'
 
         self._isActive = None
 
@@ -43,8 +30,6 @@ class SectorBase(EntityTrap):
         self._sectorID = None
 
         self._maxPoints = '200.0'
-
-        self._initMaxPoints = '200.0'
 
         self._pointsPercentage = 0.0
 
@@ -65,20 +50,51 @@ class SectorBase(EntityTrap):
 
         EntityTrap.__init__(self)
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (8, 'isActive'),
+            (8, 'team'),
+            (8, 'baseID'),
+            (8, 'sectorID'),
+            (32, 'maxPoints'),
+            (8, 'pointsPercentage'),
+            (8, 'capturingStopped'),
+            (32, 'onDamageCooldownTime'),
+            (32, 'radius'),
+            (8, 'isCaptured'),
+            (8, 'invadersCount'),
+            (32, 'expectedCaptureTime'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['FLOAT32'])
-    def setMaxPointsFactor(self, arg1):
-        self.g_setMaxPointsFactor.fire(self, arg1)
-
-    @unpack_func_args([])
-    def reset(self):
-        self.g_reset.fire(self)
 
 
     ####################################
@@ -86,46 +102,7 @@ class SectorBase(EntityTrap):
     ####################################
 
 
-    @property
-    def pointsPerSecond(self):
-        return self._pointsPerSecond
-
-    @pointsPerSecond.setter
-    def pointsPerSecond(self, value):
-        self._pointsPerSecond, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def maxPointsPerSecond(self):
-        return self._maxPointsPerSecond
-
-    @maxPointsPerSecond.setter
-    def maxPointsPerSecond(self, value):
-        self._maxPointsPerSecond, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def ownerStopsCapturing(self):
-        return self._ownerStopsCapturing
-
-    @ownerStopsCapturing.setter
-    def ownerStopsCapturing(self, value):
-        self._ownerStopsCapturing, = unpack_variables(value, ['BOOL'])
-
-    @property
-    def defaultPointsPerSecond(self):
-        return self._defaultPointsPerSecond
-
-    @defaultPointsPerSecond.setter
-    def defaultPointsPerSecond(self, value):
-        self._defaultPointsPerSecond, = unpack_variables(value, ['FLOAT32'])
-
-    @property
-    def defaultMaxPointsPerSecond(self):
-        return self._defaultMaxPointsPerSecond
-
-    @defaultMaxPointsPerSecond.setter
-    def defaultMaxPointsPerSecond(self, value):
-        self._defaultMaxPointsPerSecond, = unpack_variables(value, ['FLOAT32'])
-
+    # property size: 8
     @property
     def isActive(self):
         return self._isActive
@@ -134,6 +111,7 @@ class SectorBase(EntityTrap):
     def isActive(self, value):
         self._isActive, = unpack_variables(value, ['BOOL'])
 
+    # property size: 8
     @property
     def team(self):
         return self._team
@@ -142,6 +120,7 @@ class SectorBase(EntityTrap):
     def team(self, value):
         self._team, = unpack_variables(value, ['UINT8'])
 
+    # property size: 8
     @property
     def baseID(self):
         return self._baseID
@@ -150,6 +129,7 @@ class SectorBase(EntityTrap):
     def baseID(self, value):
         self._baseID, = unpack_variables(value, ['UINT8'])
 
+    # property size: 8
     @property
     def sectorID(self):
         return self._sectorID
@@ -158,6 +138,7 @@ class SectorBase(EntityTrap):
     def sectorID(self, value):
         self._sectorID, = unpack_variables(value, ['UINT8'])
 
+    # property size: 32
     @property
     def maxPoints(self):
         return self._maxPoints
@@ -166,14 +147,7 @@ class SectorBase(EntityTrap):
     def maxPoints(self, value):
         self._maxPoints, = unpack_variables(value, ['FLOAT32'])
 
-    @property
-    def initMaxPoints(self):
-        return self._initMaxPoints
-
-    @initMaxPoints.setter
-    def initMaxPoints(self, value):
-        self._initMaxPoints, = unpack_variables(value, ['FLOAT32'])
-
+    # property size: 8
     @property
     def pointsPercentage(self):
         return self._pointsPercentage
@@ -182,6 +156,7 @@ class SectorBase(EntityTrap):
     def pointsPercentage(self, value):
         self._pointsPercentage, = unpack_variables(value, ['UINT8'])
 
+    # property size: 8
     @property
     def capturingStopped(self):
         return self._capturingStopped
@@ -190,6 +165,7 @@ class SectorBase(EntityTrap):
     def capturingStopped(self, value):
         self._capturingStopped, = unpack_variables(value, ['BOOL'])
 
+    # property size: 32
     @property
     def onDamageCooldownTime(self):
         return self._onDamageCooldownTime
@@ -198,6 +174,7 @@ class SectorBase(EntityTrap):
     def onDamageCooldownTime(self, value):
         self._onDamageCooldownTime, = unpack_variables(value, ['FLOAT32'])
 
+    # property size: 32
     @property
     def radius(self):
         return self._radius
@@ -206,6 +183,7 @@ class SectorBase(EntityTrap):
     def radius(self, value):
         self._radius, = unpack_variables(value, ['FLOAT32'])
 
+    # property size: 8
     @property
     def isCaptured(self):
         return self._isCaptured
@@ -214,6 +192,7 @@ class SectorBase(EntityTrap):
     def isCaptured(self, value):
         self._isCaptured, = unpack_variables(value, ['BOOL'])
 
+    # property size: 8
     @property
     def invadersCount(self):
         return self._invadersCount
@@ -222,6 +201,7 @@ class SectorBase(EntityTrap):
     def invadersCount(self, value):
         self._invadersCount, = unpack_variables(value, ['UINT8'])
 
+    # property size: 32
     @property
     def expectedCaptureTime(self):
         return self._expectedCaptureTime
@@ -232,4 +212,7 @@ class SectorBase(EntityTrap):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,22 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class AccountUnitRemote(object):
-    
-    g_accountUnitRemote_create = EventHook()
-    
-    g_accountUnitRemote_createEx = EventHook()
-    
-    g_accountUnitRemote_join = EventHook()
-    
-    g_accountUnitRemote_joinEx = EventHook()
-    
-    g_accountUnitRemote_doCmd = EventHook()
-    
-    g_accountUnitRemote_sendInvites = EventHook()
-    
-    g_accountUnitRemote_setRosterSlots = EventHook()
-    
-    g_accountUnitRemote_validateVehicleList = EventHook()
     
     def __init__(self):
         self.id = None
@@ -34,44 +19,39 @@ class AccountUnitRemote(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['INT32', 'INT32', 'INT32'])
-    def accountUnitRemote_create(self, arg1, arg2, arg3):
-        self.g_accountUnitRemote_create.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT32', 'INT32', 'PYTHON'])
-    def accountUnitRemote_createEx(self, arg1, arg2, arg3):
-        self.g_accountUnitRemote_createEx.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT32', 'UINT64', 'INT32'])
-    def accountUnitRemote_join(self, arg1, arg2, arg3):
-        self.g_accountUnitRemote_join.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT32', 'INT32', 'PYTHON'])
-    def accountUnitRemote_joinEx(self, arg1, arg2, arg3):
-        self.g_accountUnitRemote_joinEx.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT32', 'INT32', 'OBJECT_ID', 'UINT64', 'INT32', 'STRING'])
-    def accountUnitRemote_doCmd(self, arg1, arg2, arg3, arg4, arg5, arg6):
-        self.g_accountUnitRemote_doCmd.fire(self, arg1, arg2, arg3, arg4, arg5, arg6)
-
-    @unpack_func_args(['INT32', 'UINT64', ['ARRAY', 'DB_ID'], 'STRING'])
-    def accountUnitRemote_sendInvites(self, arg1, arg2, arg3, arg4):
-        self.g_accountUnitRemote_sendInvites.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['INT32', 'UINT64', ['ARRAY', 'INT32'], ['ARRAY', 'STRING']])
-    def accountUnitRemote_setRosterSlots(self, arg1, arg2, arg3, arg4):
-        self.g_accountUnitRemote_setRosterSlots.fire(self, arg1, arg2, arg3, arg4)
-
-    @unpack_func_args(['INT32', 'PYTHON'])
-    def accountUnitRemote_validateVehicleList(self, arg1, arg2):
-        self.g_accountUnitRemote_validateVehicleList.fire(self, arg1, arg2)
 
 
     ####################################
@@ -81,4 +61,7 @@ class AccountUnitRemote(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

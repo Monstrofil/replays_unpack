@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,14 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class DestructibleEntity_Vehicle(object):
-    
-    g_destructibleEntity_showShotResults = EventHook()
-    
-    g_destructibleEntity_onDamaged = EventHook()
-    
-    g_destructibleEntity_onDestroyed = EventHook()
-    
-    g_destructibleEntity_onDefended = EventHook()
     
     def __init__(self):
         self.id = None
@@ -26,28 +19,39 @@ class DestructibleEntity_Vehicle(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['UINT8', 'INT32'])
-    def destructibleEntity_showShotResults(self, arg1, arg2):
-        self.g_destructibleEntity_showShotResults.fire(self, arg1, arg2)
-
-    @unpack_func_args(['UINT8', 'INT16'])
-    def destructibleEntity_onDamaged(self, arg1, arg2):
-        self.g_destructibleEntity_onDamaged.fire(self, arg1, arg2)
-
-    @unpack_func_args(['UINT8', 'BOOL'])
-    def destructibleEntity_onDestroyed(self, arg1, arg2):
-        self.g_destructibleEntity_onDestroyed.fire(self, arg1, arg2)
-
-    @unpack_func_args(['UINT8'])
-    def destructibleEntity_onDefended(self, arg1):
-        self.g_destructibleEntity_onDefended.fire(self, arg1)
 
 
     ####################################
@@ -57,4 +61,7 @@ class DestructibleEntity_Vehicle(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

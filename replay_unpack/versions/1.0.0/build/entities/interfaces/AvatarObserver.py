@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,14 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class AvatarObserver(object):
-    
-    g_switchObserverFPV = EventHook()
-    
-    g_switchObserverFPVControlMode = EventHook()
-    
-    g_setRemoteCamera = EventHook()
-    
-    g_setNumOfObservers = EventHook()
     
     def __init__(self):
         self.id = None
@@ -34,28 +27,43 @@ class AvatarObserver(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (168, 'remoteCamera'),
+            (8, 'isObserverFPV'),
+            (8, 'observerFPVControlMode'),
+            (8, 'numOfObservers'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['BOOL'])
-    def switchObserverFPV(self, arg1):
-        self.g_switchObserverFPV.fire(self, arg1)
-
-    @unpack_func_args(['UINT8'])
-    def switchObserverFPVControlMode(self, arg1):
-        self.g_switchObserverFPVControlMode.fire(self, arg1)
-
-    @unpack_func_args(['REMOTE_CAMERA_DATA'])
-    def setRemoteCamera(self, arg1):
-        self.g_setRemoteCamera.fire(self, arg1)
-
-    @unpack_func_args(['UINT8'])
-    def setNumOfObservers(self, arg1):
-        self.g_setNumOfObservers.fire(self, arg1)
 
 
     ####################################
@@ -63,6 +71,7 @@ class AvatarObserver(object):
     ####################################
 
 
+    # property size: 168
     @property
     def remoteCamera(self):
         return self._remoteCamera
@@ -71,6 +80,7 @@ class AvatarObserver(object):
     def remoteCamera(self, value):
         self._remoteCamera, = unpack_variables(value, ['REMOTE_CAMERA_DATA'])
 
+    # property size: 8
     @property
     def isObserverFPV(self):
         return self._isObserverFPV
@@ -79,6 +89,7 @@ class AvatarObserver(object):
     def isObserverFPV(self, value):
         self._isObserverFPV, = unpack_variables(value, ['BOOL'])
 
+    # property size: 8
     @property
     def observerFPVControlMode(self):
         return self._observerFPVControlMode
@@ -87,6 +98,7 @@ class AvatarObserver(object):
     def observerFPVControlMode(self, value):
         self._observerFPVControlMode, = unpack_variables(value, ['UINT8'])
 
+    # property size: 8
     @property
     def numOfObservers(self):
         return self._numOfObservers
@@ -97,4 +109,7 @@ class AvatarObserver(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

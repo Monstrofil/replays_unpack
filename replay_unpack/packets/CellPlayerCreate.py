@@ -14,8 +14,8 @@ class CellPlayerCreate(PacketDataBase):
     def __init__(self, stream):
         self.entityId, = struct.unpack('i', stream.read(4))
         self.spaceId, = struct.unpack('i', stream.read(4))
-        self.vehicleId, = struct.unpack('i', stream.read(4))
-        self.position = Vector3(stream)
-        self.direction = Vector3(stream)
+        # self.vehicleId, = struct.unpack('i', stream.read(4))
+        # self.position = Vector3(stream)
+        # self.direction = Vector3(stream)
 
         self.value = BinaryIStream(stream)

@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,20 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class AccountUnitBrowser(object):
-    
-    g_accountUnitBrowser_subscribe = EventHook()
-    
-    g_accountUnitBrowser_unsubscribe = EventHook()
-    
-    g_accountUnitBrowser_recenter = EventHook()
-    
-    g_accountUnitBrowser_doCmd = EventHook()
-    
-    g_accountUnitBrowser_onError = EventHook()
-    
-    g_accountUnitBrowser_onResultsSet = EventHook()
-    
-    g_accountUnitBrowser_onResultsUpdate = EventHook()
     
     def __init__(self):
         self.id = None
@@ -32,40 +19,39 @@ class AccountUnitBrowser(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['INT16', 'BOOL'])
-    def accountUnitBrowser_subscribe(self, arg1, arg2):
-        self.g_accountUnitBrowser_subscribe.fire(self, arg1, arg2)
-
-    @unpack_func_args([])
-    def accountUnitBrowser_unsubscribe(self):
-        self.g_accountUnitBrowser_unsubscribe.fire(self)
-
-    @unpack_func_args(['INT32', 'INT16', 'BOOL'])
-    def accountUnitBrowser_recenter(self, arg1, arg2, arg3):
-        self.g_accountUnitBrowser_recenter.fire(self, arg1, arg2, arg3)
-
-    @unpack_func_args(['INT32'])
-    def accountUnitBrowser_doCmd(self, arg1):
-        self.g_accountUnitBrowser_doCmd.fire(self, arg1)
-
-    @unpack_func_args(['INT32', 'STRING'])
-    def accountUnitBrowser_onError(self, arg1, arg2):
-        self.g_accountUnitBrowser_onError.fire(self, arg1, arg2)
-
-    @unpack_func_args(['STRING'])
-    def accountUnitBrowser_onResultsSet(self, arg1):
-        self.g_accountUnitBrowser_onResultsSet.fire(self, arg1)
-
-    @unpack_func_args(['STRING'])
-    def accountUnitBrowser_onResultsUpdate(self, arg1):
-        self.g_accountUnitBrowser_onResultsUpdate.fire(self, arg1)
 
 
     ####################################
@@ -75,4 +61,7 @@ class AccountUnitBrowser(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

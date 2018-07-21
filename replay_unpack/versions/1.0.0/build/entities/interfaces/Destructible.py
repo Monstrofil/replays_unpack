@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -9,12 +10,6 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 class Destructible(object):
-    
-    g_receiveAndTakeOverProjectile = EventHook()
-    
-    g_receiveExplosion = EventHook()
-    
-    g_receiveRamming = EventHook()
     
     def __init__(self):
         self.id = None
@@ -24,24 +19,39 @@ class Destructible(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
     ####################################
 
-
-    @unpack_func_args(['UINT8', 'UINT8', 'VECTOR3', 'VECTOR3', 'VECTOR3', 'FLOAT32', 'FLOAT32', 'ATTACKER_INFO', 'SHOT_ID', 'INT32', 'UINT8', 'UINT8', ['ARRAY', 'MAILBOX'], ['ARRAY', 'FLOAT32', 2], 'FLOAT32', 'FLOAT64', 'VECTOR3', 'VECTOR3', 'FLOAT32', 'FLOAT32', 'FLOAT32', 'FLOAT32', 'FLOAT64'])
-    def receiveAndTakeOverProjectile(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23):
-        self.g_receiveAndTakeOverProjectile.fire(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23)
-
-    @unpack_func_args(['VECTOR3', 'FLOAT32', 'FLOAT32', ['ARRAY', ['ARRAY', 'FLOAT32', 3]], 'ATTACKER_INFO', 'SHOT_ID', 'INT32'])
-    def receiveExplosion(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7):
-        self.g_receiveExplosion.fire(self, arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-
-    @unpack_func_args(['UINT16', 'UINT8', 'FLOAT32', 'FLOAT32', 'ATTACKER_INFO'])
-    def receiveRamming(self, arg1, arg2, arg3, arg4, arg5):
-        self.g_receiveRamming.fire(self, arg1, arg2, arg3, arg4, arg5)
 
 
     ####################################
@@ -51,4 +61,7 @@ class Destructible(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

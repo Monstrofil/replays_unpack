@@ -2,6 +2,7 @@
 # FILE WAS GENERATED AUTOMATICALLY #
 
 from def_generator.events import EventHook
+from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
@@ -28,7 +29,39 @@ class ClientSelectableObject(object):
 
         # MRO fix
 
+        self._properties = getattr(self, '_properties', [])
+        self._properties.extend([
+            (10000000000, 'modelName'),
+            (10000000000, 'selectionId'),
+            (10000000000, 'mouseOverSoundName'),
+            (10000000000, 'clickSoundName'),
+            (8, 'edgeMode'),
+            
+        ])
+        # sort properties by size
+        self._properties.sort(key=itemgetter(0))
+
+        self._methods = getattr(self, '_methods', [])
+        self._methods.extend([
+            
+        ])
+        # sort methods by size
+        self._methods.sort(key=itemgetter(0))
         return
+
+    @property
+    def attributesMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._properties):
+            d[i] = name
+        return d
+
+    @property
+    def methodsMap(self):
+        d = {}
+        for i, (_, name) in enumerate(self._methods):
+            d[i] = name
+        return d
 
     ####################################
     #      METHODS
@@ -41,6 +74,7 @@ class ClientSelectableObject(object):
     ####################################
 
 
+    # property size: 10000000000
     @property
     def modelName(self):
         return self._modelName
@@ -49,6 +83,7 @@ class ClientSelectableObject(object):
     def modelName(self, value):
         self._modelName, = unpack_variables(value, ['STRING'])
 
+    # property size: 10000000000
     @property
     def selectionId(self):
         return self._selectionId
@@ -57,6 +92,7 @@ class ClientSelectableObject(object):
     def selectionId(self, value):
         self._selectionId, = unpack_variables(value, ['STRING'])
 
+    # property size: 10000000000
     @property
     def mouseOverSoundName(self):
         return self._mouseOverSoundName
@@ -65,6 +101,7 @@ class ClientSelectableObject(object):
     def mouseOverSoundName(self, value):
         self._mouseOverSoundName, = unpack_variables(value, ['STRING'])
 
+    # property size: 10000000000
     @property
     def clickSoundName(self):
         return self._clickSoundName
@@ -73,6 +110,7 @@ class ClientSelectableObject(object):
     def clickSoundName(self, value):
         self._clickSoundName, = unpack_variables(value, ['STRING'])
 
+    # property size: 8
     @property
     def edgeMode(self):
         return self._edgeMode
@@ -83,4 +121,7 @@ class ClientSelectableObject(object):
 
 
     def __repr__(self):
-        return "<{}> {}".format(self.__class__.__name__, self.__dict__)
+        d = {}
+        for _, p in self._properties:
+            d[p] = getattr(self, p)
+        return "<{}> {}".format(self.__class__.__name__, d)

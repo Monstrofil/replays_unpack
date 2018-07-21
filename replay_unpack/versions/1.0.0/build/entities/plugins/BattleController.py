@@ -8,4 +8,6 @@ class BattleController:
         self._bigworld = bigworld
 
     def get_info(self):
+        for entity in self._bigworld.entities.values():
+            print entity
         return {}
