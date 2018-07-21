@@ -45,6 +45,7 @@ class ReplayParser(object):
 
         client_version = '.'.join(json_data['clientVersionFromXml'].split(', ')[:3])
         sys.path.append(os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version))
+        client.tags["clientVersionFromXml"] = client_version
 
         try:
             hidden_data = self._get_hidden_data(replay_data)
