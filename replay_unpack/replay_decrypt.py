@@ -131,7 +131,10 @@ class WoWSReplayDecrypt(object):
 
                 decrypted_block = blowfish.decrypt(chunk)
                 if previous_block:
-                    decrypted_block = ''.join([chr(ord(x) ^ ord(y)) for x, y in zip(decrypted_block, previous_block)])
+                    # get two blocks, each 8 bytes long and xor them
+                    # then pack them back to string
+                    x, y = struct.unpack('qq', decrypted_block + previous_block)
+                    decrypted_block = struct.pack('q', x ^ y)
                 decrypted_data.write(decrypted_block)
                 previous_block = decrypted_block
 
