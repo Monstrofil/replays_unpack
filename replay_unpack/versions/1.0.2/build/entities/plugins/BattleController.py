@@ -1,0 +1,13 @@
+#!/usr/bin/python
+# coding=utf-8
+__author__ = "Aleksandr Shyshatsky"
+
+
+class BattleController:
+    def __init__(self, bigworld):
+        self._bigworld = bigworld
+
+    def get_info(self):
+        for entity in self._bigworld.entities.values():
+            print entity.id, entity.__class__.__name__
+        return {}

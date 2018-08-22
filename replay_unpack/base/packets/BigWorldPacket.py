@@ -19,7 +19,7 @@ class BigWorldPacket(object):
         class_ = g_Packets.get(self.type) or g_Packets[-1]
         try:
             self.data = class_(StringIO(stream.read(self.size)))
-        except Exception, e:
+        except Exception as e:
             raise
 
     def __repr__(self):
