@@ -17,10 +17,7 @@ class BigWorldPacket(object):
         self.time, = struct.unpack('f', stream.read(4))
 
         class_ = g_Packets.get(self.type) or g_Packets[-1]
-        try:
-            self.data = class_(StringIO(stream.read(self.size)))
-        except Exception, e:
-            raise
+        self.data = class_(StringIO(stream.read(self.size)))
 
     def __repr__(self):
         return "TIME: {} TYPE: {} SIZE: {} DATA: {}".format(self.time, hex(self.type), self.size, self.data)

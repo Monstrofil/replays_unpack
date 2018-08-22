@@ -216,7 +216,6 @@ class BattleLogic(object):
         print
         print
 
-
     def __repr__(self):
         d = {}
         for _, p in self._properties:
