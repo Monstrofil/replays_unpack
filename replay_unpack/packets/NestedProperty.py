@@ -6,7 +6,6 @@ import struct
 from replay_unpack.base.decorators import bigworld_packet
 from replay_unpack.base.packets.PacketData import PacketDataBase
 from def_generator.nested_types import PyFixedDict, PyFixedList
-from def_generator.decorators import unpack_variables
 from def_generator.bit_reader import BitReader
 
 __author__ = "Aleksandr Shyshatsky"
@@ -24,6 +23,7 @@ class NestedProperty(PacketDataBase):
         assert len(self.payload) == self.payload_size
 
     def read_and_apply(self, entity):
+        from def_generator.decorators import unpack_variables
         bit_reader = BitReader(self.payload)
         obj = entity
 
