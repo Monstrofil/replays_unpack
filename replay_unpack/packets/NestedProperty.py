@@ -27,6 +27,10 @@ class NestedProperty(PacketDataBase):
         bit_reader = BitReader(self.payload)
         obj = entity
 
+        # ignore entities without attributesMap (old game versions)
+        if not hasattr(obj, 'attributesMap'):
+            return
+
         while bit_reader.get(1) and obj:
             l = len(obj.attributesMap) if hasattr(obj, 'attributesMap') else len(obj)
             max_bits = BitReader.bits_required(l)
