@@ -11,7 +11,6 @@ from Login import Login
 from Building import Building
 from AccountController import AccountController
 from MasterChanger import MasterChanger
-from Weather import Weather
 from BattleLogic import BattleLogic
 from ReplayLeech import ReplayLeech
 from ReplayConnectionHandler import ReplayConnectionHandler
@@ -23,4 +22,4 @@ try:
 except ImportError:
     pass
 
-ENTITIES = [Avatar, Vehicle, Account, SmokeScreen, Fog, OfflineEntity, Login, Building, AccountController, MasterChanger, Weather, BattleLogic, ReplayLeech, ReplayConnectionHandler, ]
+ENTITIES = [Avatar, Vehicle, Account, SmokeScreen, Fog, OfflineEntity, Login, Building, AccountController, MasterChanger, BattleLogic, ReplayLeech, ReplayConnectionHandler, ]

@@ -75,6 +75,6 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action='store_true', required=False)
 
     namespace = parser.parse_args()
-    print json.dumps(
-        ReplayParser(namespace.replay, namespace.debug).get_info(), indent=1)
+    replay_info = ReplayParser(namespace.replay, namespace.debug).get_info()
+    print json.dumps(replay_info, indent=1)
     silence_stdout_until_process_exit()

@@ -34,8 +34,6 @@ class BattleLogic(object):
 
         self._debugText = None
 
-        self._uiInfo = None
-
         self._prerequisiteShips = None
 
         self._prerequisiteEffects = None
@@ -54,7 +52,6 @@ class BattleLogic(object):
             (8, 'scenarioPhase'),
             (10000000000, 'state'),
             (10000000000, 'debugText'),
-            (10000000000, 'uiInfo'),
             (10000000000, 'prerequisiteShips'),
             (10000000000, 'prerequisiteEffects'),
             (10000000000, 'prerequisiteWeathers'),
@@ -161,14 +158,6 @@ class BattleLogic(object):
     @debugText.setter
     def debugText(self, value):
         self._debugText, = unpack_variables(value, [['ARRAY', 'BATTLE_LOGIC_DEBUG_TEXT']])
-# property size: 10000000000
-    @property
-    def uiInfo(self):
-        return self._uiInfo
-
-    @uiInfo.setter
-    def uiInfo(self, value):
-        self._uiInfo, = unpack_variables(value, ['BATTLE_LOGIC_UI_INFO'])
 # property size: 10000000000
     @property
     def prerequisiteShips(self):

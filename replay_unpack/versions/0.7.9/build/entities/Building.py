@@ -78,7 +78,7 @@ class Building(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLoca
             (96, 'targetPos'),
             (8, 'isInOfflineMode'),
             (10000000000, 'debugText'),
-            (576, 'weatherParams'),
+            (608, 'weatherParams'),
             
         ])
         # sort properties by size
@@ -197,7 +197,7 @@ class Building(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLoca
     @debugText.setter
     def debugText(self, value):
         self._debugText, = unpack_variables(value, [['ARRAY', 'ENTITY_DEBUG_TEXT']])
-# property size: 576
+# property size: 608
     @property
     def weatherParams(self):
         return self._weatherParams

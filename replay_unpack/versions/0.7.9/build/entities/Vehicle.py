@@ -77,8 +77,6 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     
     g_offlineRecieveMovementRoute = EventHook()
     
-    g_receiveVisibilityFactors = EventHook()
-    
     g_forceReloadTorpedoes = EventHook()
     
     g_onSkillActivated = EventHook()
@@ -86,6 +84,14 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     g_uniqueSkillActivated = EventHook()
     
     g_onConsumableEnabled = EventHook()
+    
+    g_setOneTimeArtilleryReload = EventHook()
+    
+    g_setOneTimeTorpedoesReload = EventHook()
+    
+    g_setModifierCoefArtilleryReload = EventHook()
+    
+    g_setModifierCoefTorpedoesReload = EventHook()
     
     def __init__(self):
         self.id = None
@@ -172,7 +178,7 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
             (8, 'uiEnabled'),
             (8, 'isAlive'),
             (32, 'selectedWeapon'),
-            (8, 'serverSpeedRaw'),
+            (16, 'serverSpeedRaw'),
             (8, 'speedSignDir'),
             (8, 'enginePower'),
             (8, 'isInOfflineMode'),
@@ -218,11 +224,14 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
             (33, 'receiveMirrorDamage'),
             (33, 'offlineSetAI'),
             (10000000001, 'offlineRecieveMovementRoute'),
-            (97, 'receiveVisibilityFactors'),
             (1, 'forceReloadTorpedoes'),
             (33, 'onSkillActivated'),
             (1, 'uniqueSkillActivated'),
             (17, 'onConsumableEnabled'),
+            (33, 'setOneTimeArtilleryReload'),
+            (33, 'setOneTimeTorpedoesReload'),
+            (33, 'setModifierCoefArtilleryReload'),
+            (33, 'setModifierCoefTorpedoesReload'),
             
         ])
         # sort methods by size
@@ -363,10 +372,6 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @unpack_func_args([['ARRAY', 'VECTOR3']])
     def offlineRecieveMovementRoute(self, arg1):
         self.g_offlineRecieveMovementRoute.fire(self, arg1)
-# method size: 97
-    @unpack_func_args(['FLOAT', 'FLOAT', 'FLOAT'])
-    def receiveVisibilityFactors(self, arg1, arg2, arg3):
-        self.g_receiveVisibilityFactors.fire(self, arg1, arg2, arg3)
 # method size: 1
     @unpack_func_args([])
     def forceReloadTorpedoes(self):
@@ -383,6 +388,22 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @unpack_func_args(['UINT8', 'BOOL'])
     def onConsumableEnabled(self, arg1, arg2):
         self.g_onConsumableEnabled.fire(self, arg1, arg2)
+# method size: 33
+    @unpack_func_args(['FLOAT'])
+    def setOneTimeArtilleryReload(self, arg1):
+        self.g_setOneTimeArtilleryReload.fire(self, arg1)
+# method size: 33
+    @unpack_func_args(['FLOAT'])
+    def setOneTimeTorpedoesReload(self, arg1):
+        self.g_setOneTimeTorpedoesReload.fire(self, arg1)
+# method size: 33
+    @unpack_func_args(['FLOAT'])
+    def setModifierCoefArtilleryReload(self, arg1):
+        self.g_setModifierCoefArtilleryReload.fire(self, arg1)
+# method size: 33
+    @unpack_func_args(['FLOAT'])
+    def setModifierCoefTorpedoesReload(self, arg1):
+        self.g_setModifierCoefTorpedoesReload.fire(self, arg1)
 
 
     ####################################
@@ -493,14 +514,14 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @selectedWeapon.setter
     def selectedWeapon(self, value):
         self._selectedWeapon, = unpack_variables(value, ['UINT32'])
-# property size: 8
+# property size: 16
     @property
     def serverSpeedRaw(self):
         return self._serverSpeedRaw
 
     @serverSpeedRaw.setter
     def serverSpeedRaw(self, value):
-        self._serverSpeedRaw, = unpack_variables(value, ['UINT8'])
+        self._serverSpeedRaw, = unpack_variables(value, ['UINT16'])
 # property size: 8
     @property
     def speedSignDir(self):

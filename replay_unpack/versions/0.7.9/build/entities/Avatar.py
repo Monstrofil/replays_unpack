@@ -201,6 +201,8 @@ class Avatar(VoiceChatClient, StatsPublisher):
     
     g_ownSmokeTimeLifeChanges = EventHook()
     
+    g_onDisposableModifierApplied = EventHook()
+    
     def __init__(self):
         self.id = None
         self.position = None
@@ -232,6 +234,8 @@ class Avatar(VoiceChatClient, StatsPublisher):
 
         self._privateBattleLogicState = None
 
+        self._visibilityDistances = None
+
 
         # MRO fix
 
@@ -252,8 +256,9 @@ class Avatar(VoiceChatClient, StatsPublisher):
             (64, 'attrs'),
             (8, 'isInOfflineMode'),
             (10000000000, 'minefields'),
-            (576, 'weatherParams'),
+            (608, 'weatherParams'),
             (10000000000, 'privateBattleLogicState'),
+            (96, 'visibilityDistances'),
             
         ])
         # sort properties by size
@@ -269,9 +274,9 @@ class Avatar(VoiceChatClient, StatsPublisher):
             (10000000001, 'onNewPlayerSpawnedInBattle'),
             (17, 'onBattleEnd'),
             (1, 'onBattleInterrupted'),
-            (10000000002, 'receiveShotPack'),
+            (10000000001, 'receiveShotPack'),
             (10000000001, 'receiveProjectileTrace'),
-            (10000000002, 'receiveDamageReport'),
+            (10000000001, 'receiveDamageReport'),
             (25, 'targetLoss'),
             (273, 'receive_addSquadron'),
             (201, 'receive_addMinimapSquadron'),
@@ -303,7 +308,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
             (161, 'receive_startBombing'),
             (10000000001, 'receive_startTorpedo'),
             (41, 'receive_inDefenceChanged'),
-            (10000000002, 'battleLogicAction'),
+            (10000000001, 'battleLogicAction'),
             (145, 'receive_CommonCMD'),
             (10000000001, 'onChatMessage'),
             (81, 'notifyStartAttackPlane'),
@@ -311,7 +316,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
             (161, 'onShipCollision'),
             (33, 'onEndShipCollision'),
             (41, 'onDisconnectedFromServer'),
-            (10000000002, 'onArenaStateReceived'),
+            (10000000001, 'onArenaStateReceived'),
             (10000000001, 'receiveChatHistory'),
             (65, 'onCheckGamePing'),
             (65, 'onCheckCellPing'),
@@ -324,12 +329,12 @@ class Avatar(VoiceChatClient, StatsPublisher):
             (17, 'onEvaluationAccepted'),
             (33, 'artilleryAlert'),
             (9, 'capturedAsAGoal'),
-            (10000000002, 'onEnterPreBattle'),
+            (10000000001, 'onEnterPreBattle'),
             (17, 'onLeavePreBattle'),
             (1, 'createPreBattle'),
             (1, 'leavePreBattle'),
             (41, 'onOwnerChanged'),
-            (10000000002, 'receivePlayerData'),
+            (10000000001, 'receivePlayerData'),
             (10000000001, 'updatePreBattlesInfo'),
             (1, 'preBattleJoined'),
             (33, 'changePreBattleGrants'),
@@ -355,6 +360,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
             (1, 'notifyAboutSmokePenalty'),
             (1, 'ownSmokeStartsFade'),
             (41, 'ownSmokeTimeLifeChanges'),
+            (33, 'onDisposableModifierApplied'),
             
         ])
         # sort methods by size
@@ -411,7 +417,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @unpack_func_args([])
     def onBattleInterrupted(self):
         self.g_onBattleInterrupted.fire(self)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args([['ARRAY', 'SHOT'], ['ARRAY', 'TORPEDOSHOT'], ['ARRAY', 'SHOTKILL'], ['ARRAY', 'EXPLOSION']])
     def receiveShotPack(self, arg1, arg2, arg3, arg4):
         self.g_receiveShotPack.fire(self, arg1, arg2, arg3, arg4)
@@ -419,7 +425,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @unpack_func_args(['INT32', 'BLOB', 'ENTITY_ID', 'BOOL'])
     def receiveProjectileTrace(self, arg1, arg2, arg3, arg4):
         self.g_receiveProjectileTrace.fire(self, arg1, arg2, arg3, arg4)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB', 'INT16', 'BOOL'])
     def receiveDamageReport(self, arg1, arg2, arg3):
         self.g_receiveDamageReport.fire(self, arg1, arg2, arg3)
@@ -547,7 +553,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @unpack_func_args(['INT32', 'UINT8'])
     def receive_inDefenceChanged(self, arg1, arg2):
         self.g_receive_inDefenceChanged.fire(self, arg1, arg2)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB'])
     def battleLogicAction(self, arg1):
         self.g_battleLogicAction.fire(self, arg1)
@@ -579,7 +585,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @unpack_func_args(['UINT32', 'UINT8'])
     def onDisconnectedFromServer(self, arg1, arg2):
         self.g_onDisconnectedFromServer.fire(self, arg1, arg2)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['ARENA_STATE'])
     def onArenaStateReceived(self, arg1):
         self.g_onArenaStateReceived.fire(self, arg1)
@@ -631,7 +637,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @unpack_func_args(['UINT8'])
     def capturedAsAGoal(self, arg1):
         self.g_capturedAsAGoal.fire(self, arg1)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB', 'INT32', 'BOOL'])
     def onEnterPreBattle(self, arg1, arg2, arg3):
         self.g_onEnterPreBattle.fire(self, arg1, arg2, arg3)
@@ -651,7 +657,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @unpack_func_args(['PLAYER_ID', 'BOOL'])
     def onOwnerChanged(self, arg1, arg2):
         self.g_onOwnerChanged.fire(self, arg1, arg2)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB', 'BOOL'])
     def receivePlayerData(self, arg1, arg2):
         self.g_receivePlayerData.fire(self, arg1, arg2)
@@ -755,6 +761,10 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @unpack_func_args(['BOOL', 'FLOAT'])
     def ownSmokeTimeLifeChanges(self, arg1, arg2):
         self.g_ownSmokeTimeLifeChanges.fire(self, arg1, arg2)
+# method size: 33
+    @unpack_func_args(['GAMEPARAMS_ID'])
+    def onDisposableModifierApplied(self, arg1):
+        self.g_onDisposableModifierApplied.fire(self, arg1)
 
 
     ####################################
@@ -849,7 +859,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @minefields.setter
     def minefields(self, value):
         self._minefields, = unpack_variables(value, [['ARRAY', 'MINEFIELD_STATE']])
-# property size: 576
+# property size: 608
     @property
     def weatherParams(self):
         return self._weatherParams
@@ -865,6 +875,14 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @privateBattleLogicState.setter
     def privateBattleLogicState(self, value):
         self._privateBattleLogicState, = unpack_variables(value, ['PRIVATE_BATTLE_LOGIC_STATE'])
+# property size: 96
+    @property
+    def visibilityDistances(self):
+        return self._visibilityDistances
+
+    @visibilityDistances.setter
+    def visibilityDistances(self, value):
+        self._visibilityDistances, = unpack_variables(value, ['VISIBILITY_DISTANCES'])
 
 
     def get_summary(self):

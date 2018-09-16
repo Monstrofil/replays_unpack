@@ -110,11 +110,9 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     
     g_setTrace = EventHook()
     
-    g_curVersion_release_7_8_0_987447 = EventHook()
+    g_curVersion_preprod_Publictest_1019382 = EventHook()
     
-    g_initActions = EventHook()
-    
-    g_updateActionsProgress = EventHook()
+    g_updateSSEProgress = EventHook()
     
     g_onStartSyncSSE = EventHook()
     
@@ -250,7 +248,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
             (1, 'onAccountReallyCreated'),
             (10000000001, 'onGetBuyList'),
             (10000000001, 'receiveUIStatisticsServiceInfo'),
-            (10000000002, 'onGetMapsList'),
+            (10000000001, 'onGetMapsList'),
             (10000000001, 'onUpdatePrice'),
             (10000000001, 'onGetDisabledMapsList'),
             (9, 'getNationForTutorial'),
@@ -269,14 +267,14 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
             (41, 'onInviteRevoked'),
             (41, 'onInviteRejected'),
             (41, 'onInviteAccepted'),
-            (10000000002, 'enterPreBattle'),
+            (10000000001, 'enterPreBattle'),
             (33, 'changePreBattleGrants'),
             (49, 'onPreBattleCountdown'),
             (17, 'leavePreBattle'),
             (10000000001, 'leaveBattleSession'),
-            (10000000002, 'enterTrainingRoom'),
+            (10000000001, 'enterTrainingRoom'),
             (9, 'setTrainingRoomDisabled'),
-            (10000000002, 'receivePreBattlePlayerData'),
+            (10000000001, 'receivePreBattlePlayerData'),
             (33, 'onOwnerChanged'),
             (33, 'receiveSelectedQueueType'),
             (17, 'onGetActiveShipIndex'),
@@ -292,17 +290,16 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
             (10000000001, 'dev_logConsole'),
             (65, 'onCheckGamePing'),
             (9, 'setTrace'),
-            (1, 'curVersion_release_7_8_0_987447'),
-            (10000000001, 'initActions'),
-            (10000000001, 'updateActionsProgress'),
+            (1, 'curVersion_preprod_Publictest_1019382'),
+            (10000000001, 'updateSSEProgress'),
             (1, 'onStartSyncSSE'),
             (33, 'setServerTime'),
             (33, 'setMaskStat'),
-            (10000000002, 'receiveChanges'),
+            (10000000001, 'receiveChanges'),
             (41, 'receiveShipLock'),
             (10000000001, 'receiveShipBattleLock'),
             (33, 'receiveActiveShip'),
-            (10000000002, 'onStreamComplete'),
+            (10000000001, 'onStreamComplete'),
             (10000000001, 'receiveTransactionState'),
             (10000000001, 'onGetRankBattlesPlayerInfo'),
             (41, 'onGetRankBattlesStage'),
@@ -314,7 +311,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
             (1, 'forceReplayRecording'),
             (73, 'onShutdownTime'),
             (10000000001, 'onChangeLootbox'),
-            (10000000002, 'onGetLootboxRewards'),
+            (10000000001, 'onGetLootboxRewards'),
             (33, 'onActivateTask'),
             (41, 'onDeactivateTask'),
             (10000000001, 'onTakeReward'),
@@ -336,7 +333,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
             (10000000001, 'onUpdateAbuseStatus'),
             (9, 'receiveIngameNews'),
             (10000000001, 'receiveWebEvents'),
-            (10000000002, 'receivePromo'),
+            (10000000001, 'receivePromo'),
             (9, 'receiveArcEventOffer'),
             (9, 'onArcEventSideChosen'),
             (17, 'onArcEventOfferApplied'),
@@ -379,7 +376,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     @unpack_func_args(['UNICODE_STRING', 'INT64'])
     def receiveUIStatisticsServiceInfo(self, arg1, arg2):
         self.g_receiveUIStatisticsServiceInfo.fire(self, arg1, arg2)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB', 'BLOB', 'BOOL'])
     def onGetMapsList(self, arg1, arg2, arg3):
         self.g_onGetMapsList.fire(self, arg1, arg2, arg3)
@@ -455,7 +452,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     @unpack_func_args(['INT8', 'OBJECT_ID'])
     def onInviteAccepted(self, arg1, arg2):
         self.g_onInviteAccepted.fire(self, arg1, arg2)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB', 'INT32', 'BOOL'])
     def enterPreBattle(self, arg1, arg2, arg3):
         self.g_enterPreBattle.fire(self, arg1, arg2, arg3)
@@ -475,7 +472,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     @unpack_func_args(['UINT8', 'BLOB'])
     def leaveBattleSession(self, arg1, arg2):
         self.g_leaveBattleSession.fire(self, arg1, arg2)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB', 'COUNTDOWN_INFO', 'INT32', 'BOOL'])
     def enterTrainingRoom(self, arg1, arg2, arg3, arg4):
         self.g_enterTrainingRoom.fire(self, arg1, arg2, arg3, arg4)
@@ -483,7 +480,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     @unpack_func_args(['INT8'])
     def setTrainingRoomDisabled(self, arg1):
         self.g_setTrainingRoomDisabled.fire(self, arg1)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['PRE_BATTLE_ID', 'BLOB', 'BOOL', 'INT32'])
     def receivePreBattlePlayerData(self, arg1, arg2, arg3, arg4):
         self.g_receivePreBattlePlayerData.fire(self, arg1, arg2, arg3, arg4)
@@ -549,16 +546,12 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
         self.g_setTrace.fire(self, arg1)
 # method size: 1
     @unpack_func_args([])
-    def curVersion_release_7_8_0_987447(self):
-        self.g_curVersion_release_7_8_0_987447.fire(self)
-# method size: 10000000001
-    @unpack_func_args(['STRING', 'STRING'])
-    def initActions(self, arg1, arg2):
-        self.g_initActions.fire(self, arg1, arg2)
+    def curVersion_preprod_Publictest_1019382(self):
+        self.g_curVersion_preprod_Publictest_1019382.fire(self)
 # method size: 10000000001
     @unpack_func_args(['STRING'])
-    def updateActionsProgress(self, arg1):
-        self.g_updateActionsProgress.fire(self, arg1)
+    def updateSSEProgress(self, arg1):
+        self.g_updateSSEProgress.fire(self, arg1)
 # method size: 1
     @unpack_func_args([])
     def onStartSyncSSE(self):
@@ -571,7 +564,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     @unpack_func_args(['INT32'])
     def setMaskStat(self, arg1):
         self.g_setMaskStat.fire(self, arg1)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB'])
     def receiveChanges(self, arg1):
         self.g_receiveChanges.fire(self, arg1)
@@ -587,7 +580,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     @unpack_func_args(['SHIP_ID'])
     def receiveActiveShip(self, arg1):
         self.g_receiveActiveShip.fire(self, arg1)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['UINT32', 'STRING', 'BLOB'])
     def onStreamComplete(self, arg1, arg2, arg3):
         self.g_onStreamComplete.fire(self, arg1, arg2, arg3)
@@ -635,7 +628,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     @unpack_func_args(['STRING', 'UINT8', 'BOOL'])
     def onChangeLootbox(self, arg1, arg2, arg3):
         self.g_onChangeLootbox.fire(self, arg1, arg2, arg3)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB'])
     def onGetLootboxRewards(self, arg1):
         self.g_onGetLootboxRewards.fire(self, arg1)
@@ -723,7 +716,7 @@ class Account(AccountCMDs, AccountEditor, BattleStarter, WalletOwner, AccountPDa
     @unpack_func_args(['BLOB'])
     def receiveWebEvents(self, arg1):
         self.g_receiveWebEvents.fire(self, arg1)
-# method size: 10000000002
+# method size: 10000000001
     @unpack_func_args(['BLOB'])
     def receivePromo(self, arg1):
         self.g_receivePromo.fire(self, arg1)
