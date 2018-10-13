@@ -2,6 +2,7 @@
 # coding=utf-8
 import struct
 import logging
+from StringIO import StringIO
 
 from replay_unpack.base.BigWorld import BigWorld
 from build import entities as entities
@@ -32,12 +33,22 @@ class ReplayPlayer(object):
             avatar = entities.Avatar()
             avatar.id = packet.data.entityId
             self._bigworld.entities[packet.data.entityId] = avatar
-
             self._bigworld.battle_controller.player_id = packet.data.entityId
 
+            # TODO: see comments in CellPlayerCreate section
+
         elif isinstance(packet.data, CellPlayerCreate):
-            # TODO: what to do with this?
-            pass
+            # TODO: rework this part
+            e = self._bigworld.entities.setdefault(
+                packet.data.entityId, entities.Avatar())
+            e.id = packet.data.entityId
+            io = StringIO(packet.data.value.value.decode('hex'))
+            for _, name in e._properties:
+                # TODO: stupid hack, need to rework properties system
+                # we should be able to separate CELL and BASE properties
+                if name == 'attrs':
+                    continue
+                setattr(e, name, io)
 
         elif isinstance(packet.data, Entity):
             class_ = getattr(entities, g_entitiesList[packet.data.type])
@@ -93,7 +104,10 @@ class ReplayPlayer(object):
             logging.debug('')
             logging.debug('nested property request for id=%s isSlice=%s data=%s',
                           e.id, packet.data.is_slice, packet.data.payload.encode('hex'))
-            packet.data.read_and_apply(e)
+            try:
+                packet.data.read_and_apply(e)
+            except NotImplementedError:
+                logging.error("Something really bad happened", exc_info=True)
 
     def get_info(self):
         return self._bigworld.battle_controller.get_info()

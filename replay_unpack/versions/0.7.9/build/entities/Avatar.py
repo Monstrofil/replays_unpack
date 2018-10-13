@@ -261,8 +261,6 @@ class Avatar(VoiceChatClient, StatsPublisher):
             (96, 'visibilityDistances'),
             
         ])
-        # sort properties by size
-        self._properties.sort(key=itemgetter(0))
 
         self._methods = getattr(self, '_methods', [])
         self._methods.extend([
@@ -370,7 +368,7 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @property
     def attributesMap(self):
         d = {}
-        for i, (_, name) in enumerate(self._properties):
+        for i, (_, name) in enumerate(sorted(self._properties, key=itemgetter(0))):
             d[i] = name
         return d
 
