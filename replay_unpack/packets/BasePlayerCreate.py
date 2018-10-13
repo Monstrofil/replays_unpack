@@ -12,9 +12,9 @@ __author__ = "Aleksandr Shyshatsky"
 class BasePlayerCreate(PacketDataBase):
     """
     This method is called to create a new player as far as required to
-	talk to the base entity. Only data shared between the base and the
-	client is provided in this method - the cell data will be provided by
-	onCellPlayerCreate later if the player is put on the cell also.
+    talk to the base entity. Only data shared between the base and the
+    client is provided in this method - the cell data will be provided by
+    onCellPlayerCreate later if the player is put on the cell also.
     """
     def __init__(self, stream):
         self.entityId, = struct.unpack('i', stream.read(4))
