@@ -2,7 +2,7 @@
 # coding=utf-8
 import pickle
 
-from build._consts import DamageStatsType
+from build._consts import DamageStatsType, Category, TaskType, Status
 from replay_unpack.base.PlayersInfo import PlayersInfo
 from Avatar import Avatar
 from Vehicle import Vehicle
@@ -49,11 +49,22 @@ class BattleController(object):
             map=self._map,
             player_id=self._player_id,
             control_points=self._getCapturePointsInfo(),
+            tasks=list(self._getTasksInfo()),
             skills=dict(self._getCrewSkillsInfo())
         )
 
     def _getCapturePointsInfo(self):
-        return self._bigworld.battleLogic.state['controlPoints']
+        return self._bigworld.battleLogic.state.get('controlPoints', [])
+
+    def _getTasksInfo(self):
+        tasks = self._bigworld.battleLogic.state.get('tasks', [])
+        for task in tasks:
+            yield {
+                "category": Category.names[task['category']],
+                "status": Status.names[task['status']],
+                "name": task['name'],
+                "type": TaskType.names[task['type']]
+           }
 
     def _getCrewSkillsInfo(self):
         for e in self._bigworld.entities.values():
