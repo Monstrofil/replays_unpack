@@ -33,12 +33,9 @@ def silence_stdout_until_process_exit():
 class ReplayParser(object):
     BASE_PATH = os.path.dirname(__file__)
 
-    def __init__(self, replay_path, debug):
-        self._debug = debug
+    def __init__(self, replay_path):
         self._replay_path = replay_path
         self._decrypter = WoWSReplayDecrypt(replay_path)
-
-        logging.basicConfig(level=logging.DEBUG if debug else logging.CRITICAL)
 
     def get_info(self):
         json_data, replay_data = self._decrypter.get_replay_data()
@@ -50,6 +47,7 @@ class ReplayParser(object):
         try:
             hidden_data = self._get_hidden_data(replay_data)
         except Exception as e:
+            raise
             logging.exception(e)
             hidden_data = None
 
@@ -75,6 +73,8 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action='store_true', required=False)
 
     namespace = parser.parse_args()
-    replay_info = ReplayParser(namespace.replay, namespace.debug).get_info()
+    logging.basicConfig(
+        level=logging.DEBUG if namespace.debug else logging.CRITICAL)
+    replay_info = ReplayParser(namespace.replay).get_info()
     print json.dumps(replay_info, indent=1)
     silence_stdout_until_process_exit()
