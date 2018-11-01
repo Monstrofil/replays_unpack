@@ -106,7 +106,7 @@ class ReplayPlayer(object):
                           e.id, packet.data.is_slice, packet.data.payload.encode('hex'))
             try:
                 packet.data.read_and_apply(e)
-            except NotImplementedError:
+            except Exception:
                 logging.error("Something really bad happened", exc_info=True)
 
     def get_info(self):
