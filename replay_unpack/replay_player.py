@@ -4,6 +4,7 @@ import struct
 import logging
 from StringIO import StringIO
 
+from replay_unpack import PlayerPosition
 from replay_unpack.base.BigWorld import BigWorld
 from build import entities as entities
 from build._entities_list import g_entitiesList
@@ -71,6 +72,14 @@ class ReplayPlayer(object):
         elif isinstance(packet.data, Position):
             self._bigworld.entities[packet.data.entityId].position = packet.data.position
             self._bigworld.entities[packet.data.entityId].rotation = packet.data.rotation
+
+        elif isinstance(packet.data, PlayerPosition):
+            if packet.data.entityId2 != (0,):
+                # This is a link packet
+                self._bigworld.entities[packet.data.entityId1].position = self._bigworld.entities[packet.data.entityId2].position
+            elif packet.data.entityId1 != (0,) and packet.data.entityId2 == (0,):
+                self._bigworld.entities[packet.data.entityId1].position = packet.data.position
+                self._bigworld.entities[packet.data.entityId1].rotation = packet.data.rotation
 
         elif isinstance(packet.data, EntityMethod):
             entity = self._bigworld.entities[packet.data.entityId]

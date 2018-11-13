@@ -13,5 +13,6 @@ from BasePlayerCreate import BasePlayerCreate
 from EntityProperty import EntityProperty
 from CellPlayerCreate import CellPlayerCreate
 from NestedProperty import NestedProperty
+from PlayerPosition import PlayerPosition
 
 __author__ = "Aleksandr Shyshatsky"
