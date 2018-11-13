@@ -74,12 +74,16 @@ class ReplayPlayer(object):
             self._bigworld.entities[packet.data.entityId].rotation = packet.data.rotation
 
         elif isinstance(packet.data, PlayerPosition):
-            if packet.data.entityId2 != (0,):
-                # This is a link packet
-                self._bigworld.entities[packet.data.entityId1].position = self._bigworld.entities[packet.data.entityId2].position
-            elif packet.data.entityId1 != (0,) and packet.data.entityId2 == (0,):
-                self._bigworld.entities[packet.data.entityId1].position = packet.data.position
-                self._bigworld.entities[packet.data.entityId1].rotation = packet.data.rotation
+            try:
+                if packet.data.entityId2 != (0,):
+                    # This is a link packet
+                    self._bigworld.entities[packet.data.entityId1[0]].position = self._bigworld.entities[packet.data.entityId2[0]].position
+                elif packet.data.entityId1 != (0,) and packet.data.entityId2 == (0,):
+                    self._bigworld.entities[packet.data.entityId1[0]].position = packet.data.position
+                    self._bigworld.entities[packet.data.entityId1[0]].rotation = packet.data.rotation
+            except KeyError as e:
+                # entity not yet created
+                pass
 
         elif isinstance(packet.data, EntityMethod):
             entity = self._bigworld.entities[packet.data.entityId]
