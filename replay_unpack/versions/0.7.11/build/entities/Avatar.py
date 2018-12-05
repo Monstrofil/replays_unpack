@@ -205,8 +205,6 @@ class Avatar(VoiceChatClient, StatsPublisher):
     
     g_increaseConsumableCount = EventHook()
     
-    g_increaseConsumableCount = EventHook()
-    
     g_onSoundMessagePlay = EventHook()
     
     def __init__(self):
@@ -373,7 +371,6 @@ class Avatar(VoiceChatClient, StatsPublisher):
             (1, 'ownSmokeStartsFade'),
             (41, 'ownSmokeTimeLifeChanges'),
             (33, 'onDisposableModifierApplied'),
-            (17, 'increaseConsumableCount'),
             (17, 'increaseConsumableCount'),
             (10000000001, 'onSoundMessagePlay'),
             
@@ -780,10 +777,6 @@ class Avatar(VoiceChatClient, StatsPublisher):
     @unpack_func_args(['GAMEPARAMS_ID'])
     def onDisposableModifierApplied(self, arg1):
         self.g_onDisposableModifierApplied.fire(self, arg1)
-# method size: 17
-    @unpack_func_args(['UINT8', 'UINT8'])
-    def increaseConsumableCount(self, arg1, arg2):
-        self.g_increaseConsumableCount.fire(self, arg1, arg2)
 # method size: 17
     @unpack_func_args(['UINT8', 'UINT8'])
     def increaseConsumableCount(self, arg1, arg2):
