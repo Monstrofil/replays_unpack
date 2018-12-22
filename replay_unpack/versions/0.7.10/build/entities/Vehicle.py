@@ -309,6 +309,8 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
     @unpack_func_args([['ARRAY', 'DAMAGES']])
     def receiveDamagesOnShip(self, arg1):
         self.g_receiveDamagesOnShip.fire(self, arg1)
+        with open('record.rec', 'a+') as f:
+            f.write('DMG '+str(self.id)+' '+str((arg1))+'\r')
 # method size: 41
     @unpack_func_args(['INT8', 'FLOAT32'])
     def consumableUsed(self, arg1, arg2):

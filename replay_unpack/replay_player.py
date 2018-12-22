@@ -92,6 +92,8 @@ class ReplayPlayer(object):
             if hasattr(entity, 'methodsMap'):
                 try:
                     method_name = entity.methodsMap[packet.data.messageId]
+                    with open('record.rec', 'a+') as f:
+                        f.write('\r'+' ' + str(int(packet.time*100)) +' '+method_name+' ')
                 except KeyError:
                     logging.exception('Unable to detect method name %s:%s', packet.data.messageId, entity.__class__)
                 else:
@@ -127,11 +129,7 @@ class ReplayPlayer(object):
         elif isinstance(packet.data, Unknown):
             return
 
-        elif isinstance(packet.data, PlayerPositon):
-            return
-
         else:
-            print 'a'
             pass
 
         pass
