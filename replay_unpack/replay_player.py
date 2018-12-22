@@ -41,16 +41,17 @@ class ReplayPlayer(object):
 
         elif isinstance(packet.data, CellPlayerCreate):
             # TODO: rework this part
-            e = self._bigworld.entities.setdefault(
-                packet.data.entityId, entities.Avatar())
-            e.id = packet.data.entityId
-            io = StringIO(packet.data.value.value.decode('hex'))
-            for _, name in e._properties:
-                # TODO: stupid hack, need to rework properties system
-                # we should be able to separate CELL and BASE properties
-                if name == 'attrs':
-                    continue
-                setattr(e, name, io)
+            # e = self._bigworld.entities.setdefault(
+            #     packet.data.entityId, entities.Avatar())
+            # e.id = packet.data.entityId
+            # io = StringIO(packet.data.value.value.decode('hex'))
+            # for _, name in e._properties:
+            #     # TODO: stupid hack, need to rework properties system
+            #     # we should be able to separate CELL and BASE properties
+            #     if name == 'attrs':
+            #         continue
+            #     setattr(e, name, io)
+            pass
 
         elif isinstance(packet.data, Entity):
             class_ = getattr(entities, g_entitiesList[packet.data.type])
