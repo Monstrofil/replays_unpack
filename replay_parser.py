@@ -36,6 +36,7 @@ class ReplayParser(object):
     def __init__(self, replay_path):
         self._replay_path = replay_path
         self._decrypter = WoWSReplayDecrypt(replay_path)
+        self.packets = []
 
     def get_info(self):
         json_data, replay_data = self._decrypter.get_replay_data()
@@ -63,6 +64,7 @@ class ReplayParser(object):
         while io.pos != io.len:
             packet = BigWorldPacket(io)
             player.on_packet(packet)
+            self.packets.append(packet)
         return player.get_info()
 
 

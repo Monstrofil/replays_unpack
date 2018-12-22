@@ -5,6 +5,7 @@ import logging
 from StringIO import StringIO
 
 from replay_unpack import PlayerPosition
+from replay_unpack import Unknown
 from replay_unpack.base.BigWorld import BigWorld
 from build import entities as entities
 from build._entities_list import g_entitiesList
@@ -121,6 +122,18 @@ class ReplayPlayer(object):
                 packet.data.read_and_apply(e)
             except Exception:
                 logging.error("Something really bad happened", exc_info=True)
+
+        elif isinstance(packet.data, Unknown):
+            return
+
+        elif isinstance(packet.data, PlayerPositon):
+            return
+
+        else:
+            print 'a'
+            pass
+
+        pass
 
     def get_info(self):
         return self._bigworld.battle_controller.get_info()
