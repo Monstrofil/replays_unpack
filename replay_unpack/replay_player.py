@@ -83,8 +83,8 @@ class ReplayPlayer(object):
                 else:
                     try:
                         getattr(entity, method_name)(packet.data.data.value.decode('hex'))
-                    except Exception as e:
-                        logging.exception(e.message)
+                    except Exception:
+                        logging.exception(method_name)
 
         elif isinstance(packet.data, EntityProperty):
             entity = self._bigworld.entities[packet.data.objectID]
