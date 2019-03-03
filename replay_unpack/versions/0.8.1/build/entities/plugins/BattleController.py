@@ -81,9 +81,9 @@ class BattleController(object):
         self._players.create_or_update_players(
             pickle.loads(pickle_data))
 
-    def onArenaStateReceived(self, avatar, arena_info):
+    def onArenaStateReceived(self, avatar, arenaUniqueId, teamBuildTypeId, preBattlesInfo, playersStates, buildingsInfo):
         self._players.create_or_update_players(
-            pickle.loads(arena_info['playersStates']))
+            pickle.loads(playersStates))
 
     def onPlayerInfoUpdate(self, avatar, blob):
         self._players.create_or_update_players(
