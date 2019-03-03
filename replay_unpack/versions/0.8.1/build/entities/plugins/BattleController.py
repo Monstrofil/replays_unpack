@@ -115,8 +115,8 @@ class BattleController(object):
             self._shots_damage_map.setdefault(vehicle.id, {}).setdefault(damage_info['vehicleID'], 0)
             self._shots_damage_map[vehicle.id][damage_info['vehicleID']] += damage_info['damage']
 
-    def receive_planeDeath(self, avatar, planeID, reason, attackerId):
-        self._dead_planes.append((planeID, reason, attackerId))
+    def receive_planeDeath(self, avatar, squadronID, planeIDs, reason, attackerId):
+        self._dead_planes.append((squadronID, reason, attackerId))
 
     @property
     def map(self):
