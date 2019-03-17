@@ -69,7 +69,7 @@ class BattleController(object):
 
     def receiveDamageStat(self, avatar, blob):
         normalized = {}
-        for (type_, bool_), value in pickle.loads(blob).iteritems():
+        for (type_, bool_), value in pickle.loads(blob).items():
             normalized.setdefault(type_, {}).setdefault(bool_, 0)
             normalized[type_][bool_] = value
         self._damage_map.update(normalized)

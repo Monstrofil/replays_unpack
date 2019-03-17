@@ -13,4 +13,4 @@ class BigWorld(object):
 
     @property
     def battleLogic(self):
-        return next(e for e in self.entities.itervalues() if e.__class__.__name__ == 'BattleLogic')
+        return next(e for e in self.entities.values() if e.__class__.__name__ == 'BattleLogic')

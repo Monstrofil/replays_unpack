@@ -8,7 +8,7 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 try:
-    from interfaces.EntityLookuper import EntityLookuper
+    from .interfaces.EntityLookuper import EntityLookuper
 except:
     from EntityLookuper import EntityLookuper
 

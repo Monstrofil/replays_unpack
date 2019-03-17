@@ -4,8 +4,8 @@ import pickle
 
 from build._consts import DamageStatsType, Category, TaskType, Status
 from replay_unpack.base.PlayersInfo import PlayersInfo
-from Avatar import Avatar
-from Vehicle import Vehicle
+from .Avatar import Avatar
+from .Vehicle import Vehicle
 
 __author__ = "Aleksandr Shyshatsky"
 
@@ -91,7 +91,7 @@ class BattleController(object):
 
     def receiveDamageStat(self, avatar, blob):
         normalized = {}
-        for (type_, bool_), value in pickle.loads(blob).iteritems():
+        for (type_, bool_), value in pickle.loads(blob).items():
             # TODO: improve damage_map and list other damage types too
             if bool_ != DamageStatsType.DAMAGE_STATS_ENEMY:
                 continue
@@ -124,7 +124,7 @@ class BattleController(object):
 
     @map.setter
     def map(self, value):
-        self._map = value.lstrip('spaces/')
+        self._map = value.lstrip(b'spaces/')
 
     @property
     def player_id(self):

@@ -4,7 +4,7 @@ import json
 import os
 import sys
 import logging
-from StringIO import StringIO
+from io import BytesIO as StringIO
 
 from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
 from replay_unpack.replay_decrypt import WoWSReplayDecrypt
@@ -60,7 +60,7 @@ class ReplayParser(object):
         from replay_unpack.replay_player import ReplayPlayer
         player = ReplayPlayer()
         io = StringIO(replay_data)
-        while io.pos != io.len:
+        while io.tell() != len(replay_data):
             packet = BigWorldPacket(io)
             player.on_packet(packet)
         return player.get_info()
@@ -76,5 +76,5 @@ if __name__ == '__main__':
     logging.basicConfig(
         level=logging.DEBUG if namespace.debug else logging.CRITICAL)
     replay_info = ReplayParser(namespace.replay).get_info()
-    print json.dumps(replay_info, indent=1)
+    print(json.dumps(replay_info, indent=1))
     silence_stdout_until_process_exit()

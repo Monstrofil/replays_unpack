@@ -7,7 +7,7 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 try:
-    from interfaces.WeatherOwner import WeatherOwner
+    from .interfaces.WeatherOwner import WeatherOwner
 except:
     from WeatherOwner import WeatherOwner
 

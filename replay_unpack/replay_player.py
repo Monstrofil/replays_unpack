@@ -2,12 +2,12 @@
 # coding=utf-8
 import struct
 import logging
-from StringIO import StringIO
+from io import BytesIO as StringIO
 
 from replay_unpack.base.BigWorld import BigWorld
 from build import entities as entities
 from build._entities_list import g_entitiesList
-from packets import (
+from .packets import (
     Map,
     BasePlayerCreate,
     CellPlayerCreate,
@@ -60,12 +60,12 @@ class ReplayPlayer(object):
                 try:
                     values = packet.data.state.io()
                     values_count, = struct.unpack('B', values.read(1))
-                    for i in xrange(values_count):
+                    for i in range(values_count):
                         k = values.read(1)
                         idx, = struct.unpack('B', k)
                         setattr(entity, entity.attributesMap[idx], values)
                 except Exception as e:
-                    logging.exception(e.message)
+                    logging.exception(e)
 
             self._bigworld.entities[packet.data.entityID] = entity
 
@@ -82,7 +82,7 @@ class ReplayPlayer(object):
                     logging.exception('Unable to detect method name %s:%s', packet.data.messageId, entity.__class__)
                 else:
                     try:
-                        getattr(entity, method_name)(packet.data.data.value.decode('hex'))
+                        getattr(entity, method_name)(packet.data.data.value)
                     except Exception:
                         logging.exception(method_name)
 
@@ -95,16 +95,16 @@ class ReplayPlayer(object):
                     logging.exception('Unable to detect property name %s:%s', packet.data.messageId, entity.__class__)
                 else:
                     try:
-                        setattr(entity, attribute_name, packet.data.data.value.decode('hex'))
+                        setattr(entity, attribute_name, packet.data.data.value)
                     except Exception as e:
-                        logging.exception(e.message)
+                        logging.exception(str(e))
 
         elif isinstance(packet.data, NestedProperty):
             e = self._bigworld.entities[packet.data.entity_id]
 
             logging.debug('')
             logging.debug('nested property request for id=%s isSlice=%s data=%s',
-                          e.id, packet.data.is_slice, packet.data.payload.encode('hex'))
+                          e.id, packet.data.is_slice, packet.data.payload.hex())
             try:
                 packet.data.read_and_apply(e)
             except Exception:

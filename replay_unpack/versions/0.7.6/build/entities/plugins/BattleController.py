@@ -80,7 +80,7 @@ class BattleController(object):
 
     def receiveDamageStat(self, avatar, blob):
         normalized = {}
-        for (type_, bool_), value in pickle.loads(blob).iteritems():
+        for (type_, bool_), value in pickle.loads(blob).items():
             # TODO: improve damage_map and list other damage types too
             if bool_ != DamageStatsType.DAMAGE_STATS_ENEMY:
                 continue

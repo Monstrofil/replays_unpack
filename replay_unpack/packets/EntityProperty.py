@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding=utf-8
 import struct
-from StringIO import StringIO
+from io import BytesIO as StringIO
 
 from replay_unpack.base.decorators import bigworld_packet, g_Packets
 from replay_unpack.base.packets.PacketData import PacketDataBase

@@ -87,4 +87,4 @@ class NestedProperty(PacketDataBase):
                 obj[index1] = t[0]
 
         else:
-            raise NotImplementedError
+            raise NotImplementedError(type(obj))

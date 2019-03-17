@@ -6,14 +6,14 @@ from operator import itemgetter
 
 from def_generator.decorators import unpack_func_args, unpack_variables
 
-from interfaces.VisionOwner import VisionOwner
-from interfaces.AtbaOwner import AtbaOwner
-from interfaces.AirDefenceOwner import AirDefenceOwner
-from interfaces.DebugDrawEntity import DebugDrawEntity
-from interfaces.HitLocationManagerOwner import HitLocationManagerOwner
-from interfaces.AviationOwner import AviationOwner
-from interfaces.WeatherOwner import WeatherOwner
-from interfaces.ModelOwner import ModelOwner
+from .interfaces.VisionOwner import VisionOwner
+from .interfaces.AtbaOwner import AtbaOwner
+from .interfaces.AirDefenceOwner import AirDefenceOwner
+from .interfaces.DebugDrawEntity import DebugDrawEntity
+from .interfaces.HitLocationManagerOwner import HitLocationManagerOwner
+from .interfaces.AviationOwner import AviationOwner
+from .interfaces.WeatherOwner import WeatherOwner
+from .interfaces.ModelOwner import ModelOwner
 
 
 
@@ -597,25 +597,25 @@ class Vehicle(VisionOwner, AtbaOwner, AirDefenceOwner, DebugDrawEntity, HitLocat
 
 
     def get_summary(self):
-        print '~' * 60
-        print 'Entity name: ', self.__class__.__name__
-        print 'Total entity client properties: {:>5}'.format(len(self._properties))
-        print 'Total entity client methods: {:>5}'.format(len(self._methods))
+        print('~' * 60)
+        print('Entity name: ', self.__class__.__name__)
+        print('Total entity client properties: {:>5}'.format(len(self._properties)))
+        print('Total entity client methods: {:>5}'.format(len(self._methods)))
 
-        print
-        print 'Listing entity properties:'
-        print '{:>4} {:>40}'.format('idx', 'property name')
+        print()
+        print('Listing entity properties:')
+        print('{:>4} {:>40}'.format('idx', 'property name'))
         for i, p in self.attributesMap.items():
-            print '{:>4} {:>40}'.format(i, p)
+            print('{:>4} {:>40}'.format(i, p))
 
-        print
-        print 'Listing entity methods:'
-        print '{:>4} {:>40}'.format('idx', 'method name')
+        print()
+        print('Listing entity methods:')
+        print('{:>4} {:>40}'.format('idx', 'method name'))
         for i, p in self.methodsMap.items():
-            print '{:>4} {:>40}'.format(i, p)
-        print '~' * 60
-        print
-        print
+            print('{:>4} {:>40}'.format(i, p))
+        print('~' * 60)
+        print()
+        print()
 
 
     def __repr__(self):

@@ -8,7 +8,7 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 try:
-    from interfaces.AccountReady import AccountReady
+    from .interfaces.AccountReady import AccountReady
 except:
     from AccountReady import AccountReady
 

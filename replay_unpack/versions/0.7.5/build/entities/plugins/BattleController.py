@@ -75,7 +75,7 @@ class BattleController(object):
 
     def receiveDamageStat(self, avatar, blob):
         normalized = {}
-        for (type_, bool_), value in pickle.loads(blob).iteritems():
+        for (type_, bool_), value in pickle.loads(blob).items():
             # TODO: fix on frontend side
             # bool_ == 3 => potential damage
             # bool_ == 0 => damage

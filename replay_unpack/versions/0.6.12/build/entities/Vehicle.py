@@ -7,27 +7,27 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 try:
-    from interfaces.VisionOwner import VisionOwner
+    from .interfaces.VisionOwner import VisionOwner
 except:
     from VisionOwner import VisionOwner
 
 try:
-    from interfaces.AtbaOwner import AtbaOwner
+    from .interfaces.AtbaOwner import AtbaOwner
 except:
     from AtbaOwner import AtbaOwner
 
 try:
-    from interfaces.AirDefenceOwner import AirDefenceOwner
+    from .interfaces.AirDefenceOwner import AirDefenceOwner
 except:
     from AirDefenceOwner import AirDefenceOwner
 
 try:
-    from interfaces.DebugDrawEntity import DebugDrawEntity
+    from .interfaces.DebugDrawEntity import DebugDrawEntity
 except:
     from DebugDrawEntity import DebugDrawEntity
 
 try:
-    from interfaces.HitLocationManagerOwner import HitLocationManagerOwner
+    from .interfaces.HitLocationManagerOwner import HitLocationManagerOwner
 except:
     from HitLocationManagerOwner import HitLocationManagerOwner
 

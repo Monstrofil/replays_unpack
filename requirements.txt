@@ -1,4 +1,4 @@
-pycrypto
+pycryptodomex
 tqdm
 mock
 ddt

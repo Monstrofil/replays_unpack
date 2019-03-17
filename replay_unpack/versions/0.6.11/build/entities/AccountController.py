@@ -8,17 +8,17 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 try:
-    from interfaces.WalletProperties import WalletProperties
+    from .interfaces.WalletProperties import WalletProperties
 except:
     from WalletProperties import WalletProperties
 
 try:
-    from interfaces.AccountPData import AccountPData
+    from .interfaces.AccountPData import AccountPData
 except:
     from AccountPData import AccountPData
 
 try:
-    from interfaces.EntityLookuper import EntityLookuper
+    from .interfaces.EntityLookuper import EntityLookuper
 except:
     from EntityLookuper import EntityLookuper
 

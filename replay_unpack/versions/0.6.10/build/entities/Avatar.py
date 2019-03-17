@@ -8,7 +8,7 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 try:
-    from interfaces.VoiceChatClient import VoiceChatClient
+    from .interfaces.VoiceChatClient import VoiceChatClient
 except:
     from VoiceChatClient import VoiceChatClient
 

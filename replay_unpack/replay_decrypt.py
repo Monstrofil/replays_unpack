@@ -3,17 +3,17 @@
 import json
 import os
 import struct
-from cStringIO import StringIO
+from io import BytesIO as StringIO
 
 import zlib
 from contextlib import contextmanager
 
-from Crypto.Cipher import Blowfish
+from Cryptodome.Cipher import Blowfish
 from tqdm import tqdm
 
 BASE_DIR = os.path.dirname(__file__)
-BLOWFISH_KEY = ''.join(['\x29', '\xB7', '\xC9', '\x09', '\x38', '\x3F', '\x84', '\x88',
-                        '\xFA', '\x98', '\xEC', '\x4E', '\x13', '\x19', '\x79', '\xFB'])
+BLOWFISH_KEY = b''.join([b'\x29', b'\xB7', b'\xC9', b'\x09', b'\x38', b'\x3F', b'\x84', b'\x88',
+                         b'\xFA', b'\x98', b'\xEC', b'\x4E', b'\x13', b'\x19', b'\x79', b'\xFB'])
 
 
 class WoWSReplayDecrypt(object):
@@ -83,8 +83,8 @@ class WoWSReplayDecrypt(object):
             replay_name = os.path.basename(self.__replay_path)
             with open('{}.hex'.format(replay_name), 'wb') as df:
                 df.write(decrypted_data)
-        except IOError, e:
-            print 'Cannot dump replay: {}'.format(e)
+        except IOError as e:
+            print('Cannot dump replay: {}'.format(e))
 
     def __check_replay_exists(self):
         """
@@ -102,7 +102,7 @@ class WoWSReplayDecrypt(object):
         :type length: int|long
         :rtype: tuple[int, str]
         """
-        for i in xrange(0, len(string), length):
+        for i in range(0, len(string), length):
             yield i, string[0 + i:length + i]
 
     @contextmanager
@@ -120,7 +120,8 @@ class WoWSReplayDecrypt(object):
 
     def __decrypt_data(self, dirty_data):
         previous_block = None  # type: str
-        blowfish = Blowfish.new(BLOWFISH_KEY)
+        from Cryptodome.Cipher.Blowfish import MODE_ECB
+        blowfish = Blowfish.new(BLOWFISH_KEY, MODE_ECB)
         decrypted_data = StringIO()
 
         with self.__progressbar(len(dirty_data)) as pb:

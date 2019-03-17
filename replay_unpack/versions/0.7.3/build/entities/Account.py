@@ -7,37 +7,37 @@ from def_generator.decorators import unpack_func_args, unpack_variables
 
 
 try:
-    from interfaces.AccountEditor import AccountEditor
+    from .interfaces.AccountEditor import AccountEditor
 except:
     from AccountEditor import AccountEditor
 
 try:
-    from interfaces.BattleStarter import BattleStarter
+    from .interfaces.BattleStarter import BattleStarter
 except:
     from BattleStarter import BattleStarter
 
 try:
-    from interfaces.WalletOwner import WalletOwner
+    from .interfaces.WalletOwner import WalletOwner
 except:
     from WalletOwner import WalletOwner
 
 try:
-    from interfaces.AccountPData import AccountPData
+    from .interfaces.AccountPData import AccountPData
 except:
     from AccountPData import AccountPData
 
 try:
-    from interfaces.EntityLookuper import EntityLookuper
+    from .interfaces.EntityLookuper import EntityLookuper
 except:
     from EntityLookuper import EntityLookuper
 
 try:
-    from interfaces.VoiceChatClient import VoiceChatClient
+    from .interfaces.VoiceChatClient import VoiceChatClient
 except:
     from VoiceChatClient import VoiceChatClient
 
 try:
-    from interfaces.StatsPublisher import StatsPublisher
+    from .interfaces.StatsPublisher import StatsPublisher
 except:
     from StatsPublisher import StatsPublisher
 
