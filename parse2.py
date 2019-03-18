@@ -37,7 +37,7 @@ for i, file in enumerate(listdir(BASE_DIR)):
     if replayInfo is None:
         print 'OOOPS', info
         continue
-    player_id = replayInfo['player_id']
+    player_id = replayInfo['_player_id']
 
     for player in replayInfo['players'].itervalues():
         if player['avatarId'] == player_id:

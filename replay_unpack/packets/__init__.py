@@ -5,7 +5,7 @@ from .Map import Map
 from .Unknown import Unknown
 from .Position import Position
 from .Camera import Camera
-from .Entity import Entity
+from .EntityCreate import EntityCreate
 from .EntityEnter import EntityEnter
 from .EntityLeave import EntityLeave
 from .EntityControl import EntityControl

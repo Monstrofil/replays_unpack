@@ -44,25 +44,34 @@ class ReplayParser(object):
         sys.path.append(os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version))
         client.tags["clientVersionFromXml"] = client_version
 
+        error = None
         try:
-            hidden_data = self._get_hidden_data(replay_data)
+            hidden_data = self._get_hidden_data(replay_data, client_version)
+        except RuntimeError as e:
+            error = str(e)
+            hidden_data = None
         except Exception as e:
-            raise
             logging.exception(e)
             hidden_data = None
 
         return dict(
             open=json_data,
-            hidden=hidden_data
+            hidden=hidden_data,
+            error=error
         )
 
-    def _get_hidden_data(self, replay_data):
+    def _get_hidden_data(self, replay_data: bytes, client_version: str):
         from replay_unpack.replay_player import ReplayPlayer
-        player = ReplayPlayer()
+        player = ReplayPlayer(client_version)
         io = StringIO(replay_data)
         while io.tell() != len(replay_data):
             packet = BigWorldPacket(io)
-            player.on_packet(packet)
+            # noinspection PyBroadException
+            try:
+                player.on_packet(packet)
+            except Exception:
+                logging.error("Problem with packet %s:%s", packet.time, packet.type)
+                raise
         return player.get_info()
 
 

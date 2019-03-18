@@ -1,0 +1,58 @@
+<root>
+	<BaseMethods>
+	</BaseMethods>
+
+	<ClientMethods>
+	</ClientMethods>
+
+	<Properties>
+		<oxygen>
+			<Type> FLOAT </Type>
+			<Flags> ALL_CLIENTS  </Flags>
+		</oxygen>
+		<buoyancyCurrentState>
+            <Type> UINT8 </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyCurrentState>
+        <buoyancyCurrentWaterline>
+            <Type> FLOAT </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyCurrentWaterline>
+	</Properties>
+
+	<TempProperties>
+	    <canChangeBuoyancy/>
+		<_BuoyancyOwner__oldBuoyancyState/>
+		<_BuoyancyOwner__onAutopilot/>
+		<buoyancyAutoStateSpeed/>
+		<buoyancyStates/>
+
+		<buoyancyStateMin/>
+		<buoyancyStateMax/>
+		<buoyancyDesiredState/>
+		<buoyancyMin/>
+		<buoyancyMax/>
+		<buoyancyMinStopLine/>
+		<buoyancyMaxStopLine/>
+		<bCurrentStateMinStopLine/>
+		<bCurrentStateMaxStopLine/>
+		<buoyancyTargetWaterline/>
+		<buoyancyManualDesiredAnglePart/>
+		<buoyancyDesiredAnglePart/>
+		<buoyancySpeedReducer/>
+		<buoyancyReducerBorder/>
+		<buoyancyAngleLimit/>
+		<cppShipPhysics/>
+		<oxygenSpentOnSpeed/>
+		<minOxygen/>
+		<maxOxygen/>
+		<oxygenRates/>
+		<buoyancyIsBlocked/>
+		<canShootArtillery/>
+		<canShootTorps/>
+	</TempProperties>
+
+	<CellMethods>
+
+	</CellMethods>
+</root>

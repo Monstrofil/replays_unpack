@@ -48,7 +48,7 @@ for i, file in enumerate(listdir(BASE_DIR)):
             REPLAY=file
         )
 
-    vehicleId = next(player['shipId'] for player in replayInfo['players'].itervalues() if player['avatarId'] == replayInfo['player_id'])
+    vehicleId = next(player['shipId'] for player in replayInfo['players'].itervalues() if player['avatarId'] == replayInfo['_player_id'])
     # killerVehicleId = next((killer for victim, killer, _ in replayInfo['death_map'] if victim == vehicleId), -1)
 
     # if killerVehicleId != -1:

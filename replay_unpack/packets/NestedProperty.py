@@ -2,11 +2,13 @@
 # coding=utf-8
 import logging
 import struct
+from io import BytesIO
 
 from replay_unpack.base.decorators import bigworld_packet
 from replay_unpack.base.packets.PacketData import PacketDataBase
 from def_generator.nested_types import PyFixedDict, PyFixedList
 from def_generator.bit_reader import BitReader
+
 
 __author__ = "Aleksandr Shyshatsky"
 
@@ -23,24 +25,21 @@ class NestedProperty(PacketDataBase):
         assert len(self.payload) == self.payload_size
 
     def read_and_apply(self, entity):
-        from def_generator.decorators import unpack_variables
+        from replay_unpack.entity import Entity
         bit_reader = BitReader(self.payload)
         obj = entity
 
-        # ignore entities without attributesMap (old game versions)
-        if not hasattr(obj, 'attributesMap'):
-            return
-
         while bit_reader.get(1) and obj:
-            l = len(obj.attributesMap) if hasattr(obj, 'attributesMap') else len(obj)
+            l = len(obj.client_properties) if isinstance(obj, Entity) else len(obj)
             max_bits = BitReader.bits_required(l)
             property_id = bit_reader.get(max_bits)
             if hasattr(obj, 'get_field_name_for_index'):
                 field = obj.get_field_name_for_index(property_id)
                 obj = obj[field]
-            elif hasattr(obj, 'attributesMap'):
-                field = obj.attributesMap[property_id]
-                obj = getattr(obj, field)
+            elif isinstance(obj, Entity):
+                field = obj.client_properties[property_id].get_name()
+                # FIXME: what about cell and base properties?
+                obj = obj.properties['client'][field]
             else:
                 raise NotImplementedError
             logging.debug('next path item: %s(%s)', field, property_id)
@@ -54,7 +53,8 @@ class NestedProperty(PacketDataBase):
 
             field = obj.get_field_name_for_index(index1)
             logging.debug('old obj[%s] = %s', field, obj[field])
-            obj[field] = unpack_variables(bit_reader.get_rest(), [obj.get_field_type_for_index(index1)])[0]
+            obj[field] = obj.get_field_type_for_index(index1).\
+                create_from_stream(BytesIO(bit_reader.get_rest()))
             logging.debug('new obj[%s] = %s', field, obj[field])
 
         elif isinstance(obj, PyFixedList):
@@ -78,13 +78,13 @@ class NestedProperty(PacketDataBase):
                 else:
                     obj[index1] = None
                 return
-            t = unpack_variables(rest, [obj.get_element_type()])
+            t = obj.get_element_type().create_from_stream(BytesIO(rest))
             logging.debug('new list object: %s', t)
 
             if self.is_slice:
-                obj[index1:index1] = t
+                obj[index1:index1] = [t]
             else:
-                obj[index1] = t[0]
+                obj[index1] = t
 
         else:
             raise NotImplementedError(type(obj))

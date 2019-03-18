@@ -28,5 +28,7 @@ class Position(PacketDataBase):
         self.vehicleId, = struct.unpack('i', stream.read(4))
         self.position = Vector3(stream)
         self.positionError = Vector3(stream)
-        self.rotation = Vector3(stream)
+        self.yaw, = struct.unpack('f', stream.read(4))
+        self.pitch, = struct.unpack('f', stream.read(4))
+        self.roll, = struct.unpack('f', stream.read(4))
         self.is_error, = struct.unpack('b', stream.read(1))
