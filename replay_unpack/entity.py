@@ -97,6 +97,7 @@ class Entity:
             except TypeError as e:
                 logging.error("Failed to call %s with args %s "
                               "and kwargs %s, problem: '%s'", func, args, kwargs, e)
+                raise
 
     def set_client_property(self, exposed_index, payload: BytesIO):
         logging.debug('requested property %s of entity %s', exposed_index, self._spec.get_name())

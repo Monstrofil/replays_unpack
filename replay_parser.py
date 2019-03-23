@@ -2,12 +2,15 @@
 # coding=utf-8
 import json
 import os
-import sys
 import logging
 from io import BytesIO as StringIO
 
 from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
 from replay_unpack.replay_decrypt import WoWSReplayDecrypt
+
+logging.basicConfig(
+    level=logging.ERROR
+)
 
 __author__ = "Aleksandr Shyshatsky"
 
@@ -15,8 +18,9 @@ __author__ = "Aleksandr Shyshatsky"
 class ReplayParser(object):
     BASE_PATH = os.path.dirname(__file__)
 
-    def __init__(self, replay_path):
+    def __init__(self, replay_path, strict: bool = False):
         self._replay_path = replay_path
+        self._is_strict_mode = strict
         self._decrypter = WoWSReplayDecrypt(replay_path)
 
     def get_info(self):
@@ -26,12 +30,15 @@ class ReplayParser(object):
         error = None
         try:
             hidden_data = self._get_hidden_data(replay_data, client_version)
-        except RuntimeError as e:
-            error = str(e)
-            hidden_data = None
         except Exception as e:
+            if isinstance(e, RuntimeError):
+                error = str(e)
             logging.exception(e)
             hidden_data = None
+
+            # raise error in strict mode
+            if self._is_strict_mode:
+                raise
 
         return dict(
             open=json_data,
@@ -50,7 +57,8 @@ class ReplayParser(object):
                 player.on_packet(packet)
             except Exception:
                 logging.error("Problem with packet %s:%s:%s", packet.time, packet.type, type(packet.data))
-                raise
+                if self._is_strict_mode:
+                    raise
         return player.get_info()
 
 
@@ -64,9 +72,15 @@ if __name__ == '__main__':
         required=False,
         default='ERROR'
     )
+    parser.add_argument(
+        '--strict_mode',
+        action='store_true',
+        required=False
+    )
 
     namespace = parser.parse_args()
     logging.basicConfig(
         level=getattr(logging, namespace.log_level))
-    replay_info = ReplayParser(namespace.replay).get_info()
+    replay_info = ReplayParser(
+        namespace.replay, strict=namespace.strict_mode).get_info()
     print(json.dumps(replay_info, indent=1))
