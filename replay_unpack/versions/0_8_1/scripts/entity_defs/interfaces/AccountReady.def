@@ -1,0 +1,17 @@
+<root>
+
+	<BaseMethods>
+
+		<!-- Method is called when requested changes in the account properties has been made. -->
+		<onAccountReady>
+			<Arg> MAILBOX </Arg>
+			<Arg> DB_ID </Arg>
+			<Arg> MAILBOX </Arg>
+			<Arg> MASTER_ID </Arg>
+			<Arg> UINT8 </Arg>
+			<Arg> UINT64 </Arg>
+		</onAccountReady>
+
+	</BaseMethods>
+	
+</root>

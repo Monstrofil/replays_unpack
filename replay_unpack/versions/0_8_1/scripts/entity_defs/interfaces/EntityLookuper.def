@@ -1,0 +1,73 @@
+<root>
+	<Implements>
+		<Interface> AccountReady </Interface>
+	</Implements>
+
+	<TempProperties>
+		<_reqCounter/>
+		<_reqList/>
+		<delegate/>
+	</TempProperties>
+	<BaseMethods>
+		<getSuperMBox>
+			<Arg>MAILBOX</Arg>
+			<Arg>UINT64</Arg>
+		</getSuperMBox>
+
+		<putSuperMBox>
+			<Arg>MAILBOX</Arg>
+			<Arg>MAILBOX</Arg>
+			<Arg>UINT8</Arg>
+			<Arg>UINT64</Arg>
+		</putSuperMBox>
+
+		<lookUpEntityByDBID>
+			<Arg>MAILBOX</Arg>
+			<Arg>STRING</Arg>
+			<Arg>DB_ID</Arg>
+			<Arg> UINT8 </Arg>
+			<Arg>UINT64</Arg>
+		</lookUpEntityByDBID>
+
+		<createEntityByDBID>
+			<Arg>MAILBOX</Arg>
+			<Arg>STRING</Arg>
+			<Arg>DB_ID</Arg>
+			<Arg>UINT64</Arg>
+		</createEntityByDBID>
+		
+		<createEntityAnywhere>
+			<Arg>MAILBOX</Arg>
+			<Arg>STRING</Arg>
+			<Arg>PYTHON</Arg>
+			<Arg>UINT64</Arg>
+		</createEntityAnywhere>
+		
+		<getNicknameByIDReq>
+			<Arg> DB_ID </Arg>
+			<Arg> UINT64 </Arg>
+		</getNicknameByIDReq>
+		
+		<getUserlistByDBIDReq>
+			<Arg> DB_ID_LIST </Arg>
+			<Arg> UINT64 </Arg>
+		</getUserlistByDBIDReq>
+		
+		<getUserlistByNameReq>
+			<Arg>STRING</Arg>
+			<Arg>UINT32</Arg>
+			<Arg>UINT64</Arg>
+		</getUserlistByNameReq>
+		
+		<putSQLResult>
+			<Arg>BLOB</Arg>
+			<Arg>UINT64</Arg>
+		</putSQLResult>
+		
+		<onCreateEntityAnywhere>
+			<Arg> MAILBOX </Arg>
+			<Arg> UINT64 </Arg>
+		</onCreateEntityAnywhere>
+		
+	</BaseMethods>
+</root>
