@@ -78,13 +78,22 @@ class NestedProperty(PacketDataBase):
                 else:
                     obj[index1] = None
                 return
-            t = obj.get_element_type().create_from_stream(BytesIO(rest))
-            logging.debug('new list object: %s', t)
+            io = BytesIO(rest)
+            new_elements = []
+            # read elements unless io is empty, sizes should match
+            while io.tell() != len(rest):
+                t = obj.get_element_type().create_from_stream(io)
+                logging.debug('Bytes left in io: %s of %s', io.tell(), len(rest))
+                new_elements.append(t)
+            assert io.tell() == len(rest)
+            logging.debug('old list object: %s', obj)
 
             if self.is_slice:
-                obj[index1:index1] = [t]
+                logging.debug("replacing %s:%s with %s", index1, index2, new_elements)
+                obj[index1:index2] = new_elements
             else:
-                obj[index1] = t
+                obj[index1] = new_elements[0]
+            logging.debug('new list object: %s', obj)
 
         else:
             raise NotImplementedError(type(obj))
