@@ -63,7 +63,7 @@ class WoWSReplayDecrypt(object):
                                 "Expected blocks == 1, blocks == {0}".format(blocks_count))
 
             block_size = struct.unpack("i", f.read(4))[0]
-            arena_info = json.loads(f.read(block_size))
+            arena_info = json.loads(f.read(block_size).decode('utf-8'))
 
             decrypted_data = zlib.decompress(self.__decrypt_data(f.read()))
 
