@@ -6,7 +6,7 @@ import struct
 import logging
 from io import BytesIO
 
-from def_generator.definitions import Definitions
+from replay_unpack.entity_def.definitions import Definitions
 
 from replay_unpack.battle_controller import IBattleController
 from replay_unpack.entity import Entity

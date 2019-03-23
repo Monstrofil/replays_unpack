@@ -6,8 +6,8 @@ from io import BytesIO
 
 from replay_unpack.base.decorators import bigworld_packet
 from replay_unpack.base.packets.PacketData import PacketDataBase
-from def_generator.nested_types import PyFixedDict, PyFixedList
-from def_generator.bit_reader import BitReader
+from replay_unpack.entity_def.nested_types import PyFixedDict, PyFixedList
+from replay_unpack.entity_def.bit_reader import BitReader
 
 
 __author__ = "Aleksandr Shyshatsky"

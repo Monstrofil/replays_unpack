@@ -5,8 +5,8 @@ from enum import Enum
 from io import BytesIO
 from typing import Callable, Dict, List, Tuple
 
-from def_generator.constants import EntityFlags
-from def_generator.data_description.entity_description import EntityDef
+from replay_unpack.entity_def.constants import EntityFlags
+from replay_unpack.entity_def.data_description.entity_description import EntityDef
 
 __author__ = "Aleksandr Shyshatsky"
 
