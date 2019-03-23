@@ -8,26 +8,8 @@ from io import BytesIO as StringIO
 
 from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
 from replay_unpack.replay_decrypt import WoWSReplayDecrypt
-from replay_unpack.sentry import client
 
 __author__ = "Aleksandr Shyshatsky"
-
-
-def silence_stdout_until_process_exit():
-    """
-    Upon process exit, Sentry sometimes prints:
-
-        Sentry is attempting to send 1 pending error messages
-        Waiting up to 10 seconds
-        Press Ctrl-C to quit
-
-    This causes us to get emails from cron which are useless noise, since the
-    exceptions end up in sentry anyway. "Real" exceptions print to stderr, not
-    stdout, so this shouldn't silence anything important.
-
-    See also this issue: https://github.com/getsentry/raven-python/issues/904
-    """
-    sys.stdout = StringIO()
 
 
 class ReplayParser(object):
@@ -41,9 +23,6 @@ class ReplayParser(object):
         json_data, replay_data = self._decrypter.get_replay_data()
 
         client_version = '.'.join(json_data['clientVersionFromXml'].split(', ')[:3])
-        sys.path.append(os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version))
-        client.tags["clientVersionFromXml"] = client_version
-
         error = None
         try:
             hidden_data = self._get_hidden_data(replay_data, client_version)
@@ -70,7 +49,7 @@ class ReplayParser(object):
             try:
                 player.on_packet(packet)
             except Exception:
-                logging.error("Problem with packet %s:%s", packet.time, packet.type)
+                logging.error("Problem with packet %s:%s:%s", packet.time, packet.type, type(packet.data))
                 raise
         return player.get_info()
 
@@ -79,11 +58,15 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--replay', type=str, required=True)
-    parser.add_argument('--debug', action='store_true', required=False)
+    parser.add_argument(
+        '--log_level',
+        choices=['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
+        required=False,
+        default='ERROR'
+    )
 
     namespace = parser.parse_args()
     logging.basicConfig(
-        level=logging.DEBUG if namespace.debug else logging.CRITICAL)
+        level=getattr(logging, namespace.log_level))
     replay_info = ReplayParser(namespace.replay).get_info()
     print(json.dumps(replay_info, indent=1))
-    silence_stdout_until_process_exit()

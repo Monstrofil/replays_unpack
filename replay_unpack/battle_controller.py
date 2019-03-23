@@ -38,3 +38,6 @@ class IBattleController(metaclass=ABCMeta):
     @map.setter
     def map(self, value: str):
         pass
+
+    def get_info(self) -> Dict:
+        pass

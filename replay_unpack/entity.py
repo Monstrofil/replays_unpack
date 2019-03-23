@@ -92,10 +92,14 @@ class Entity:
         args, kwargs = method.create_from_stream(payload)
         method_hash = self._spec.get_name() + '_' + method.get_name()
         for func in Entity._methods_subscriptions[self.Type.CLIENT].get(method_hash, []):
-            func(self, *args, **kwargs)
+            try:
+                func(self, *args, **kwargs)
+            except TypeError as e:
+                logging.error("Failed to call %s with args %s "
+                              "and kwargs %s, problem: '%s'", func, args, kwargs, e)
 
     def set_client_property(self, exposed_index, payload: BytesIO):
-        logging.debug('requested property %s of entity %s', exposed_index, self._spec.get_name(), end=' ')
+        logging.debug('requested property %s of entity %s', exposed_index, self._spec.get_name())
         prop = self.client_properties[exposed_index]
         logging.debug('setting %s client property %s', self._spec.get_name(), prop)
         self.properties['client'][prop.get_name()] = prop.create_from_stream(payload)
