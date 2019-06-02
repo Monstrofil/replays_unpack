@@ -8,3 +8,4 @@
 * [Packet 0x5 (Entity)](packets/0x5.md)
 * [Packet 0x6 (EntityProperties)](packets/0x6.md)
 * [Packet 0x27 (SpaceData)](packets/0x27.md)
+* [Packet 0x22 (NestedProperty)](packets/0x22.md)
