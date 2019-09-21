@@ -40,8 +40,17 @@ class ReplayParser(object):
     def get_info(self):
         json_data, replay_data = self._decrypter.get_replay_data()
 
+        client_version_full = '.'.join(json_data['clientVersionFromXml'].split(', ')[:4])
+        absolute_full_version = os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version_full)
         client_version = '.'.join(json_data['clientVersionFromXml'].split(', ')[:3])
-        sys.path.append(os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version))
+        absolute_client_version = os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version)
+        if os.path.exists(absolute_full_version):
+            sys.path.append(absolute_full_version)
+        elif os.path.exists(absolute_client_version):
+            sys.path.append(absolute_client_version)
+        else:
+            raise NotImplementedError()
+
         client.tags["clientVersionFromXml"] = client_version
 
         try:
