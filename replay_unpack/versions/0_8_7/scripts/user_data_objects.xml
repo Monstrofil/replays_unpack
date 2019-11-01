@@ -1,0 +1,16 @@
+<root>
+	<Area/>
+	<Building/>
+	<ControlPoint/>
+	<ConvoyWayPoint/>
+	<FogPoint/>
+	<Minefield/>
+	<MapBorder/>
+	<SoundedEffect/>
+	<SoundedModel/>
+	<SpaceDebugTool/>
+	<SpawnPoint/>
+	<StaticSoundEmitter/>
+	<Trigger/>
+	<WayPoint/>
+</root>

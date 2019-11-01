@@ -1,0 +1,56 @@
+<root>
+	<BaseMethods>
+	</BaseMethods>
+
+	<ClientMethods>
+	</ClientMethods>
+
+	<Properties>
+	</Properties>
+
+	<TempProperties>
+		<planesManager/>
+	</TempProperties>
+
+	<CellMethods>
+		<assignOrder>
+			<Arg>INT8</Arg> <!-- squadronId -->
+			<Arg>INT8</Arg> <!-- orderId -->
+			<Arg>GOAL_DEF</Arg> <!-- goal -->
+			<Arg>BOOL</Arg> <!-- toQueue -->
+			<Arg>BOOL</Arg> <!-- checkFake -->
+		</assignOrder>
+		<changeOrderGoal>
+			<Arg>INT8</Arg>
+			<Arg>UINT8</Arg>
+			<Arg>GOAL_DEF</Arg>
+			<Arg>BOOL</Arg> <!-- checkFake -->
+		</changeOrderGoal>
+        <changeMoveAngle>
+			<Arg>INT8</Arg>
+			<Arg>FLOAT</Arg> <!-- checkFake -->
+			<Arg>	BOOL	</Arg>
+		</changeMoveAngle>
+
+		<squadronRemoveOrder>
+			<Arg>INT8</Arg>
+			<Arg>UINT8</Arg>
+			<Arg>BOOL</Arg> <!-- checkFake -->
+		</squadronRemoveOrder>
+		<cancelCurrentOrder>
+			<Arg>INT8</Arg> <!-- squadronId -->
+			<Arg>BOOL</Arg> <!-- checkFake -->
+		</cancelCurrentOrder>
+		<cancelAllOrders>
+			<Arg>INT8</Arg> <!-- squadronId -->
+			<Arg>BOOL</Arg> <!-- checkFake -->
+		</cancelAllOrders>
+		<dev_killPlane>
+			<Exposed/>
+		</dev_killPlane>
+		<useSquadConsumable>
+		    <Arg>UINT32</Arg> <!-- squadronId -->
+			<Arg>INT8</Arg> <!-- consId -->
+		</useSquadConsumable>
+	</CellMethods>
+</root>

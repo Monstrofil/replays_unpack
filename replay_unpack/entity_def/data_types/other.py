@@ -207,6 +207,28 @@ class Array(_DataType):
         return "<Array> [{}, ...]".format(self.type)
 
 
+class UserType(_DataType):
+
+    def __init__(self, _type: DataType, header_size=1):
+        self.type = _type
+        super(UserType, self).__init__(header_size=header_size)
+
+    def _get_value_from_stream(self, stream: BytesIO, header_size: int):
+        return self.type.create_from_stream(stream, header_size=header_size)
+
+    @classmethod
+    def from_section(cls, alias, section: etree.ElementBase, header_size):
+        child_type = alias.get_data_type_from_section(
+            section.find('Type'))
+        return cls(child_type, header_size=1)
+
+    def get_size_in_bytes(self):
+        return self.type.get_size_in_bytes()
+
+    def __repr__(self):
+        return "<UserType> {}".format(self.type)
+
+
 class Mailbox(_DataType):
 
     _DATA_SIZE = INFINITY

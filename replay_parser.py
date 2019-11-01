@@ -56,7 +56,7 @@ class ReplayParser(object):
             try:
                 player.on_packet(packet)
             except Exception:
-                logging.error("Problem with packet %s:%s:%s", packet.time, packet.type, type(packet.data))
+                logging.exception("Problem with packet %s:%s:%s", packet.time, packet.type, type(packet.data))
                 if self._is_strict_mode:
                     raise
         return player.get_info()

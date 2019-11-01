@@ -23,7 +23,7 @@ class _NumericType(DataType):
         return struct.unpack(self.STRUCT_TYPE, stream.read(self._DATA_SIZE))[0]
 
     def _get_default_value_from_section(self, section: etree.ElementBase):
-        return self.PYTHON_TYPE(section.text)
+        return self.PYTHON_TYPE(section.text.strip())
 
 
 class Int8(_NumericType):
@@ -87,8 +87,8 @@ class UInt8(_NumericType):
 
     def _get_default_value_from_section(self, section: etree.ElementBase):
         # INT8 is alias for BOOL which has different DEFAULT values
-        if section.text in ['True', 'False']:
-            return section.text.lower() == 'true'
+        if section.text.strip().lower() in ['true', 'false']:
+            return section.text.strip().lower() == 'true'
         return super(UInt8, self)._get_default_value_from_section(section)
 
 

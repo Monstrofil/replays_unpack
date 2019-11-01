@@ -1,0 +1,71 @@
+<root>
+
+    <Domain> BASE </Domain>
+    <OptionsFlag>Enable</OptionsFlag>
+    <Properties>
+		<team>
+			<Type> INT8 </Type>
+			<Editable> true </Editable>
+		</team>
+		
+		<name>
+			<Type> STRING </Type>
+			<Editable> true </Editable>
+		</name>
+		
+		<mineType>
+			<Type> STRING </Type>
+			<Editable> true </Editable>
+			<resourceref/>			
+			<Default>PBPM001_SeaMine</Default>
+		</mineType>
+
+		
+		<depth>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>			
+		</depth>		
+		
+		<interval>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>
+			<Default>1.0</Default>
+			<Min>0.1</Min>
+		</interval>		
+		
+		<scatter>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>
+			<Default>0.5</Default>			
+		</scatter>		
+		
+		<width>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>	
+			<Default>10.0</Default>
+		</width>		
+		
+		<length>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>
+			<Default>50.0</Default>			
+		</length>
+		
+		<tag>
+		    <Type> STRING </Type>
+		    <Editable> True </Editable>
+	    </tag>
+		
+		<active>
+			<Type> BOOL </Type>
+			<Editable> true </Editable>
+			<Default> 1 </Default>
+		</active>
+		
+		<drawCircles>
+			<Type> BOOL </Type>
+			<Editable> True </Editable>
+		</drawCircles>
+		
+    </Properties>
+</root>

@@ -36,8 +36,8 @@ from .other import (
     String,
     FixedDict,
     Array,
-    Mailbox
-)
+    Mailbox,
+    UserType)
 
 
 class Alias:
@@ -63,7 +63,8 @@ class Alias:
         'PYTHON': Python,
         'FIXED_DICT': FixedDict,
         'ARRAY': Array,
-        'TUPLE': Array,  # almost the same
+        'TUPLE': Array,  # almost the same,
+        'USER_TYPE': UserType,  # almost the same
     }
 
     def __init__(self, base_dir: str):
