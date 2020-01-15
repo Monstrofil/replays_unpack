@@ -4,6 +4,8 @@ import json
 import os
 import sys
 import logging
+from json import JSONEncoder
+
 from StringIO import StringIO
 
 from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
@@ -11,6 +13,11 @@ from replay_unpack.replay_decrypt import WoWSReplayDecrypt
 from replay_unpack.sentry import client
 
 __author__ = "Aleksandr Shyshatsky"
+
+
+class DefaultEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
 
 
 def silence_stdout_until_process_exit():
@@ -40,9 +47,10 @@ class ReplayParser(object):
     def get_info(self):
         json_data, replay_data = self._decrypter.get_replay_data()
 
-        client_version_full = '.'.join(json_data['clientVersionFromXml'].split(', ')[:4])
+        version = json_data['clientVersionFromXml'].replace(' ', '')
+        client_version_full = '.'.join(version.split(',')[:4])
         absolute_full_version = os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version_full)
-        client_version = '.'.join(json_data['clientVersionFromXml'].split(', ')[:3])
+        client_version = '.'.join(version.split(',')[:3])
         absolute_client_version = os.path.join(self.BASE_PATH, 'replay_unpack', 'versions', client_version)
         if os.path.exists(absolute_full_version):
             sys.path.append(absolute_full_version)
@@ -85,5 +93,5 @@ if __name__ == '__main__':
     logging.basicConfig(
         level=logging.DEBUG if namespace.debug else logging.CRITICAL)
     replay_info = ReplayParser(namespace.replay).get_info()
-    print json.dumps(replay_info, indent=1)
+    print(json.dumps(replay_info, indent=1, cls=DefaultEncoder))
     silence_stdout_until_process_exit()
