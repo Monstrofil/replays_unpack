@@ -15,7 +15,7 @@ Regarding bigworld docs, exposed properties have the following flags:
 - ALL_CLIENTS
 - BASE_AND_CLIENT
 - OTHER_CLIENTS
-- OWN_CLIENTro
+- OWN_CLIENT
 - CELL_PUBLIC_AND_OWN
 All other properties are available only for server-side scripts.
 

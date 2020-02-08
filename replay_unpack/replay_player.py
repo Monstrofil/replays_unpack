@@ -1,15 +1,15 @@
 #!/usr/bin/python
 # coding=utf-8
 import importlib
+import logging
 import os
 import struct
-import logging
 from io import BytesIO
 
-from replay_unpack.entity_def.definitions import Definitions
-
+from replay_unpack import BigWorldPacket
 from replay_unpack.battle_controller import IBattleController
 from replay_unpack.entity import Entity
+from replay_unpack.entity_def.definitions import Definitions
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -48,16 +48,11 @@ class ReplayPlayer(object):
                                  "should contain BattleController class" % version)
         return conrtoller
 
-    def on_packet(self, packet):
+    def on_packet(self, packet: BigWorldPacket):
         if isinstance(packet.data, Map):
             self._battle_controller.map = packet.data.name
 
         elif isinstance(packet.data, BasePlayerCreate):
-            avatar = Entity(id_=packet.data.entityId,
-                            spec=self._definitions.get_entity_def_by_name('Avatar'))
-            self._battle_controller.create_entity(avatar)
-            self._battle_controller.on_player_enter_world(packet.data.entityId)
-
             # I'm not sure what is the order of cell/base/client player creation
             if packet.data.entityId in self._battle_controller.entities:
                 base_player = self._battle_controller.entities[packet.data.entityId]
@@ -66,9 +61,12 @@ class ReplayPlayer(object):
                                      spec=self._definitions.get_entity_def_by_name('Avatar'))
 
             # base is internal, so props are stored in order of xml file
+            io = BytesIO(packet.data.value.value)
             for index, prop in enumerate(base_player.base_properties):
-                base_player.set_base_property(index, BytesIO(packet.data.value.value))
+                base_player.set_base_property(index, io)
+
             self._battle_controller.create_entity(base_player)
+            self._battle_controller.on_player_enter_world(packet.data.entityId)
 
         elif isinstance(packet.data, CellPlayerCreate):
             # I'm not sure what is the order of cell/base/client player creation
@@ -79,8 +77,9 @@ class ReplayPlayer(object):
                                      spec=self._definitions.get_entity_def_by_name('Avatar'))
 
             # cell is internal, so props are stored in order of xml file
-            for index, prop in enumerate(cell_player.cell_properties):
-                cell_player.set_cell_property(index, packet.data.value.io())
+            io = packet.data.value.io()
+            for index, prop in enumerate(cell_player.client_properties_internal):
+                cell_player.set_client_property_internal(index, io)
             self._battle_controller.create_entity(cell_player)
 
         elif isinstance(packet.data, EntityCreate):
@@ -94,7 +93,6 @@ class ReplayPlayer(object):
                 k = values.read(1)
                 idx, = struct.unpack('B', k)
                 entity.set_client_property(idx, values)
-
             self._battle_controller.create_entity(entity)
 
         elif isinstance(packet.data, Position):

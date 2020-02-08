@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # coding=utf-8
+import logging
 from collections import OrderedDict
 from io import BytesIO
 from struct import unpack
@@ -9,7 +10,6 @@ from lxml import etree
 
 from replay_unpack.entity_def.constants import INFINITY
 from replay_unpack.entity_def.data_types import UInt8
-
 from replay_unpack.entity_def.nested_types import PyFixedDict, PyFixedList
 from .base import DataType
 
@@ -218,8 +218,11 @@ class UserType(_DataType):
 
     @classmethod
     def from_section(cls, alias, section: etree.ElementBase, header_size):
-        child_type = alias.get_data_type_from_section(
-            section.find('Type'))
+        type_section = section.find('Type')
+        if type_section is None:
+            logging.warning('%s does not provide type, what to do?', section)
+            return None
+        child_type = alias.get_data_type_from_section(type_section)
         return cls(child_type, header_size=1)
 
     def get_size_in_bytes(self):

@@ -1,0 +1,85 @@
+<root>
+	<BaseMethods>
+	</BaseMethods>
+
+	<ClientMethods>
+	    <setMiniGameCounter>
+			<Arg> UINT8 </Arg>
+		</setMiniGameCounter>
+
+		<miniGameEnded/>
+	</ClientMethods>
+
+	<Properties>
+		<oxygen>
+			<Type> FLOAT </Type>
+			<Flags> ALL_CLIENTS  </Flags>
+		</oxygen>
+		<buoyancyCurrentState>
+            <Type> UINT8 </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyCurrentState>
+        <buoyancyDesiredState>
+            <Type> UINT8 </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyDesiredState>
+        <buoyancyCurrentWaterline>
+            <Type> FLOAT </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyCurrentWaterline>
+	</Properties>
+
+	<TempProperties>
+	    <canChangeBuoyancy/>
+	    <oxygenBallon/>
+	    <hydrophone/>
+		<_BuoyancyOwner__hydrophoneHided/>
+
+		<_BuoyancyOwner__oldBuoyancyState/>
+		<_BuoyancyOwner__onAutopilot/>
+		<_BuoyancyOwner__miniGameIsActive/>
+		<_BuoyancyOwner__miniGameStatus/>
+		<_BuoyancyOwner__curMaxMiniGameCounter/>
+		<_BuoyancyOwner__currentBuoyancySpeedTime/>
+		<_BuoyancyOwner__targetBuoyancySpeedCoef/>
+		<_BuoyancyOwner__prevBuoyancySpeedCoef/>
+		<_BuoyancyOwner__buoyancySpeedTime/>
+		<buoyancyAutoStateSpeed/>
+		<buoyancyStates/>
+
+		<buoyancyStateMin/>
+		<buoyancyStateMax/>
+		<buoyancyStateDefaultMax/>
+		<buoyancyDesiredState/>
+		<buoyancyMin/>
+		<buoyancyMax/>
+		<buoyancyMinStopLine/>
+		<buoyancyMaxStopLine/>
+		<bCurrentStateMinStopLine/>
+		<bCurrentStateMaxStopLine/>
+		<buoyancyTargetWaterline/>
+		<buoyancyManualDesiredAnglePart/>
+		<buoyancyDesiredAnglePart/>
+		<buoyancySpeedReducer/>
+		<buoyancySpeedCoef/>
+		<buoyancyReducerBorder/>
+		<buoyancyAngleLimit/>
+		<cppShipPhysics/>
+		<oxygenSpentOnSpeed/>
+		<minOxygen/>
+		<maxOxygen/>
+		<oxygenRates/>
+		<buoyancyIsBlocked/>
+		<buoyancyRudderCoef/>
+		<shouldUseInvulnerableWaterline/>
+
+		<periscopeRotator/>
+		<buoyancyInvulnerableWaterline/>
+		<detectionBySurfaceHydrophone/>
+
+	</TempProperties>
+
+	<CellMethods>
+
+	</CellMethods>
+</root>

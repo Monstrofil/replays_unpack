@@ -57,13 +57,22 @@ class Entity:
             EntityFlags.ALL_CLIENTS,
             exposed_index=True
         )
+        self.client_properties_internal = spec.properties().get_properties_by_flags(
+            EntityFlags.ALL_CLIENTS |
+            # not used for some reason
+            # EntityFlags.BASE_AND_CLIENT |
+            EntityFlags.OTHER_CLIENTS |
+            EntityFlags.OWN_CLIENT |
+            EntityFlags.CELL_PUBLIC_AND_OWN |
+            EntityFlags.ALL_CLIENTS
+        )
         self.cell_properties = spec.properties().get_properties_by_flags(
             EntityFlags.CELL_PUBLIC_AND_OWN |
-            EntityFlags.CELL_PUBLIC |
-            EntityFlags.CELL_PRIVATE
+            EntityFlags.CELL_PUBLIC
+            # | EntityFlags.CELL_PRIVATE
         )
         self.base_properties = spec.properties().get_properties_by_flags(
-            EntityFlags.BASE |
+            # EntityFlags.BASE |
             EntityFlags.BASE_AND_CLIENT
         )
 
@@ -102,6 +111,12 @@ class Entity:
     def set_client_property(self, exposed_index, payload: BytesIO):
         logging.debug('requested property %s of entity %s', exposed_index, self._spec.get_name())
         prop = self.client_properties[exposed_index]
+        logging.debug('setting %s client property %s', self._spec.get_name(), prop)
+        self.properties['client'][prop.get_name()] = prop.create_from_stream(payload)
+
+    def set_client_property_internal(self, internal_index, payload: BytesIO):
+        logging.debug('requested property %s of entity %s', internal_index, self._spec.get_name())
+        prop = self.client_properties_internal[internal_index]
         logging.debug('setting %s client property %s', self._spec.get_name(), prop)
         self.properties['client'][prop.get_name()] = prop.create_from_stream(payload)
 

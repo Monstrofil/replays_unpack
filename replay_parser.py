@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # coding=utf-8
 import json
-import os
 import logging
+import os
 from io import BytesIO as StringIO
+from json import JSONEncoder
 
 from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
 from replay_unpack.replay_decrypt import WoWSReplayDecrypt
@@ -12,7 +13,10 @@ logging.basicConfig(
     level=logging.ERROR
 )
 
-__author__ = "Aleksandr Shyshatsky"
+
+class DefaultEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
 
 
 class ReplayParser(object):
@@ -26,7 +30,7 @@ class ReplayParser(object):
     def get_info(self):
         json_data, replay_data = self._decrypter.get_replay_data()
 
-        client_version = '.'.join(json_data['clientVersionFromXml'].split(', ')[:3])
+        client_version = '.'.join(json_data['clientVersionFromXml'].replace(' ', '').split(',')[:3])
         error = None
         try:
             hidden_data = self._get_hidden_data(replay_data, client_version)
@@ -83,4 +87,4 @@ if __name__ == '__main__':
         level=getattr(logging, namespace.log_level))
     replay_info = ReplayParser(
         namespace.replay, strict=namespace.strict_mode).get_info()
-    print(json.dumps(replay_info, indent=1))
+    print(json.dumps(replay_info, indent=1, cls=DefaultEncoder))

@@ -3,10 +3,9 @@
 import json
 import os
 import struct
-from io import BytesIO as StringIO
-
 import zlib
 from contextlib import contextmanager
+from io import BytesIO as StringIO
 
 from Cryptodome.Cipher import Blowfish
 from tqdm import tqdm
@@ -76,7 +75,7 @@ class WoWSReplayDecrypt(object):
         """
         Save decrypted data into file named as 
         given replay, but with '.hex' postfix;
-        :type decrypted_data: str 
+        :type decrypted_data: bytes
         :raises ParserException
         """
         try:
