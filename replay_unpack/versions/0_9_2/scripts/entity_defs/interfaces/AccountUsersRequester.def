@@ -1,0 +1,16 @@
+<root>
+	<Implements>
+	</Implements>
+
+	<TempProperties>
+	</TempProperties>
+
+	<BaseMethods>
+		<onGetUsersData>
+			<Args>
+				<usersData> ARRAY<of>PLAYER_DIGEST</of> </usersData>
+				<notFoundInDB> ARRAY <of>DB_ID</of> </notFoundInDB>
+			</Args>
+		</onGetUsersData>
+	</BaseMethods>
+</root>
