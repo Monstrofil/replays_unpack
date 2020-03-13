@@ -95,7 +95,7 @@ class BattleController(IBattleController):
         while learned_skills != 0:
             if learned_skills % 2 == 1:
                 yield skill_id
-            learned_skills /= 2
+            learned_skills //= 2
             skill_id += 1
 
     def _getCrewSkillsInfo(self):

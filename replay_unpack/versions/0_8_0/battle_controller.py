@@ -3,9 +3,9 @@
 import pickle
 
 from replay_unpack.battle_controller import IBattleController
+from replay_unpack.entity import Entity
 from .constants import DamageStatsType, Category, TaskType, Status
 from .players_info import PlayersInfo
-from replay_unpack.entity import Entity
 
 __author__ = "Aleksandr Shyshatsky"
 
@@ -95,7 +95,7 @@ class BattleController(IBattleController):
         while learned_skills != 0:
             if learned_skills % 2 == 1:
                 yield skill_id
-            learned_skills /= 2
+            learned_skills //= 2
             skill_id += 1
 
     def _getCrewSkillsInfo(self):
