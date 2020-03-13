@@ -2,9 +2,8 @@
 # coding=utf-8
 __author__ = "Aleksandr Shyshatsky"
 
-id_property_map = {0: 'accountDBID', 1: 'avatarId', 2: 'camouflageInfo', 3: 'clanColor', 4: 'clanID', 5: 'clanTag', 6: 'crewParams', 7: 'dogTag', 8: 'fragsCount', 9: 'friendlyFireEnabled', 10: 'id', 11: 'invitationsEnabled', 12: 'isAbuser', 13: 'isAlive', 14: 'isBot', 15: 'isClientLoaded', 16: 'isConnected', 17: 'isHidden', 18: 'isLeaver', 19: 'isPreBattleOwner', 20: 'isSpectator', 21: 'killedBuildingsCount', 22: 'maxHealth', 23: 'name', 24: 'preBattleIdOnStart', 25: 'preBattleSign', 26: 'prebattleId', 27: 'realm', 28: 'shipComponents', 29: 'shipId', 30: 'shipParamsId', 31: 'skinId', 32: 'teamId', 33: 'ttkStatus'}
-property_id_map = {value: key for key, value in id_property_map.items()}
-
+property_id_map = {'crewParams': 6, 'isLeaver': 18, 'camouflageInfo': 2, 'clanID': 4, 'dogTag': 7, 'isBot': 14, 'shipId': 29, 'avatarId': 1, 'id': 10, 'ttkStatus': 33, 'realm': 27, 'clanColor': 3, 'killedBuildingsCount': 20, 'playerMode': 23, 'maxHealth': 21, 'preBattleSign': 25, 'isAbuser': 12, 'clanTag': 5, 'isHidden': 17, 'isAlive': 13, 'preBattleIdOnStart': 24, 'prebattleId': 26, 'accountDBID': 0, 'isConnected': 16, 'isPreBattleOwner': 19, 'shipParamsId': 30, 'shipComponents': 28, 'name': 22, 'teamId': 32, 'invitationsEnabled': 11, 'fragsCount': 8, 'skinId': 31, 'friendlyFireEnabled': 9, 'isClientLoaded': 15}
+id_property_map = {value: key for key, value in property_id_map.items()}
 
 class DamageStatsType:
     """See Avatar.DamageStatsType"""
