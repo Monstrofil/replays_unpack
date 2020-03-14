@@ -1,10 +1,16 @@
 #!/usr/bin/python
 # coding=utf-8
+import logging
 import pickle
 
 from replay_unpack.battle_controller import IBattleController
 from replay_unpack.entity import Entity
 from .constants import DamageStatsType, Category, TaskType, Status
+
+try:
+    from .constants import DEATH_TYPES
+except ImportError:
+    DEATH_TYPES = {}
 from .players_info import PlayersInfo
 
 __author__ = "Aleksandr Shyshatsky"
@@ -30,6 +36,7 @@ class BattleController(IBattleController):
         Entity.subscribe_method_call('Avatar', Entity.Type.CLIENT, 'onArenaStateReceived', self.onArenaStateReceived)
         Entity.subscribe_method_call('Avatar', Entity.Type.CLIENT, 'onGameRoomStateChanged', self.onPlayerInfoUpdate)
         Entity.subscribe_method_call('Avatar', Entity.Type.CLIENT, 'receiveVehicleDeath', self.receiveVehicleDeath)
+        # Entity.subscribe_method_call('Vehicle', Entity.Type.CLIENT, 'setConsumables', self.onSetConsumable)
         Entity.subscribe_method_call('Avatar', Entity.Type.CLIENT, 'onRibbon', self.onRibbon)
         Entity.subscribe_method_call('Avatar', Entity.Type.CLIENT, 'onAchievementEarned', self.onAchievementEarned)
         Entity.subscribe_method_call('Avatar', Entity.Type.CLIENT, 'receiveDamageStat', self.receiveDamageStat)
@@ -37,6 +44,9 @@ class BattleController(IBattleController):
         Entity.subscribe_method_call('Avatar', Entity.Type.CLIENT, 'onNewPlayerSpawnedInBattle', self.onNewPlayerSpawnedInBattle)
 
         Entity.subscribe_method_call('Vehicle', Entity.Type.CLIENT, 'receiveDamagesOnShip', self.g_receiveDamagesOnShip)
+
+    def onSetConsumable(self, vehicle, blob):
+        print(pickle.loads(blob))
 
     @property
     def entities(self):
@@ -64,12 +74,28 @@ class BattleController(IBattleController):
             damage_map=self._damage_map,
             shots_damage_map=self._shots_damage_map,
             death_map=self._death_map,
+            death_info=self._getDeathsInfo(),
             map=self._map,
             player_id=self._player_id,
             control_points=self._getCapturePointsInfo(),
             tasks=list(self._getTasksInfo()),
             skills=dict(self._getCrewSkillsInfo())
         )
+
+    def _getDeathsInfo(self):
+        deaths = {}
+        for killedVehicleId, fraggerVehicleId, typeDeath in self._death_map:
+            death_type = DEATH_TYPES.get(typeDeath)
+            if death_type is None:
+                logging.warning('Unknown death type %s', typeDeath)
+                continue
+
+            deaths[killedVehicleId] = {
+                'killer_id': fraggerVehicleId,
+                'icon': death_type['icon'],
+                'name': death_type['name'],
+            }
+        return deaths
 
     def _getCapturePointsInfo(self):
         return self.battle_logic.properties['client']['state'].get('controlPoints', [])
