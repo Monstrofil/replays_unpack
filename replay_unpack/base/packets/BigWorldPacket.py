@@ -3,13 +3,13 @@
 import struct
 from io import BytesIO as StringIO
 
-from replay_unpack.base.decorators import bigworld_packet, g_Packets
+from replay_unpack.base.decorators import g_Packets
 
 __author__ = "Aleksandr Shyshatsky"
 
 
 class BigWorldPacket(object):
-    __slots__ = ['size', 'type', 'time', 'data']
+    __slots__ = ('size', 'type', 'time', 'data')
 
     def __init__(self, stream):
         self.size, = struct.unpack('I', stream.read(4))

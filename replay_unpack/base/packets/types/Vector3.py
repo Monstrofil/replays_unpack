@@ -8,6 +8,12 @@ __author__ = "Aleksandr Shyshatsky"
 
 
 class Vector3(PacketDataBase):
+    __slots__ = (
+        'x',
+        'y',
+        'z',
+    )
+
     def __init__(self, stream):
         self.x, = struct.unpack('f', stream.read(4))
         self.y, = struct.unpack('f', stream.read(4))

@@ -6,9 +6,8 @@ from io import BytesIO
 
 from replay_unpack.base.decorators import bigworld_packet
 from replay_unpack.base.packets.PacketData import PacketDataBase
-from replay_unpack.entity_def.nested_types import PyFixedDict, PyFixedList
 from replay_unpack.entity_def.bit_reader import BitReader
-
+from replay_unpack.entity_def.nested_types import PyFixedDict, PyFixedList
 
 __author__ = "Aleksandr Shyshatsky"
 
@@ -92,6 +91,7 @@ class NestedProperty(PacketDataBase):
                 logging.debug("replacing %s:%s with %s", index1, index2, new_elements)
                 obj[index1:index2] = new_elements
             else:
+                logging.debug("setting %s with %s", index1, new_elements[0])
                 obj[index1] = new_elements[0]
             logging.debug('new list object: %s', obj)
 

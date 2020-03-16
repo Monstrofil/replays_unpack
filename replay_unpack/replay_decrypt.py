@@ -5,10 +5,9 @@ import os
 import struct
 import zlib
 from contextlib import contextmanager
-from io import BytesIO as StringIO
+from io import BytesIO
 
 from Cryptodome.Cipher import Blowfish
-from tqdm import tqdm
 
 BASE_DIR = os.path.dirname(__file__)
 BLOWFISH_KEY = b''.join([b'\x29', b'\xB7', b'\xC9', b'\x09', b'\x38', b'\x3F', b'\x84', b'\x88',
@@ -119,25 +118,21 @@ class WoWSReplayDecrypt(object):
 
     def __decrypt_data(self, dirty_data):
         previous_block = None  # type: str
-        from Cryptodome.Cipher.Blowfish import MODE_ECB
-        blowfish = Blowfish.new(BLOWFISH_KEY, MODE_ECB)
-        decrypted_data = StringIO()
+        blowfish = Blowfish.new(BLOWFISH_KEY, Blowfish.MODE_ECB)
+        decrypted_data = BytesIO()
 
-        with self.__progressbar(len(dirty_data)) as pb:
-            for index, chunk in self.__chunkify_string(dirty_data):
-                # FIXME: what this chunk is used for??
-                if index == 0:
-                    continue
+        for index, chunk in self.__chunkify_string(dirty_data):
+            # FIXME: what this chunk is used for??
+            if index == 0:
+                continue
 
-                decrypted_block = blowfish.decrypt(chunk)
-                if previous_block:
-                    # get two blocks, each 8 bytes long and xor them
-                    # then pack them back to string
-                    x, y = struct.unpack('qq', decrypted_block + previous_block)
-                    decrypted_block = struct.pack('q', x ^ y)
-                decrypted_data.write(decrypted_block)
-                previous_block = decrypted_block
+            decrypted_block, = struct.unpack('q', blowfish.decrypt(chunk))
+            if previous_block:
+                # get two blocks, each 8 bytes long and xor them
+                # then pack them back to bytes
+                decrypted_block ^= previous_block
+            previous_block = decrypted_block
 
-                pb.update(8)
+            decrypted_data.write(struct.pack('q', decrypted_block))
 
         return decrypted_data.getvalue()

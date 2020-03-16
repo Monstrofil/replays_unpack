@@ -97,10 +97,14 @@ class Entity:
     def call_client_method(self, exposed_index: int, payload: BytesIO):
         method = self._methods[exposed_index]
         logging.debug('calling %s method %s', self._spec.get_name(), method)
+        method_hash = self._spec.get_name() + '_' + method.get_name()
+
+        subscriptions = Entity._methods_subscriptions[self.Type.CLIENT].get(method_hash, [])
+        if not subscriptions:
+            return
 
         args, kwargs = method.create_from_stream(payload)
-        method_hash = self._spec.get_name() + '_' + method.get_name()
-        for func in Entity._methods_subscriptions[self.Type.CLIENT].get(method_hash, []):
+        for func in subscriptions:
             try:
                 func(self, *args, **kwargs)
             except TypeError as e:
