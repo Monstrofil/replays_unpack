@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<root>
+    <IsManualAOI>True</IsManualAOI>
+    <Properties>
+        <radius>
+            <Type>FLOAT32</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>5.0</Default>
+        </radius>
+        <ownerId>
+            <Type>ENTITY_ID</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>0</Default>
+        </ownerId>
+        <name>
+            <Type>STRING</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>""</Default>
+        </name>
+        <teamId>
+            <Type>TEAM_ID</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>0</Default>
+        </teamId>
+        <state>
+            <Type>INTERACTIVE_ZONE_ENTITY_STATE</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </state>
+        <type>
+            <Type>UINT8</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </type>
+        <useRing>
+            <Type>BOOL</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>True</Default>
+        </useRing>
+    </Properties>
+    <CellMethods></CellMethods>
+</root>
+
