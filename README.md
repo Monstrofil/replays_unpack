@@ -7,7 +7,9 @@ This tool re-implements part of wows (BigWorld) client-server protocol allowing 
 ## Example
 
 Command
-  replay_parser.py --replay="C:\Users\shish\Desktop\replays\2326_1582297987_Indomitable_37_Ridge.wowsreplay" --strict
+```
+replay_parser.py --replay="C:\Users\shish\Desktop\replays\2326_1582297987_Indomitable_37_Ridge.wowsreplay" --strict
+```
 
 Output
 ```
