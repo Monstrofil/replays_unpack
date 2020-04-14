@@ -2,14 +2,13 @@
 # coding=utf-8
 import struct
 
-from replay_unpack.base.packets.types.Vector3 import Vector3
-from replay_unpack.base.decorators import bigworld_packet
 from replay_unpack.base.packets.PacketData import PacketDataBase
+from replay_unpack.base.packets.types.Vector3 import Vector3
 
 __author__ = "Aleksandr Shyshatsky"
 
 
-@bigworld_packet(type_=36)
+# @bigworld_packet(type_=36)
 class Camera(PacketDataBase):
     def __init__(self, stream):
         try:

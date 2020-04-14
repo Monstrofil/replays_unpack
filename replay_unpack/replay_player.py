@@ -4,14 +4,13 @@ import importlib
 import logging
 import os
 import struct
-from io import BytesIO
 
 from replay_unpack import BigWorldPacket
 from replay_unpack.battle_controller import IBattleController
 from replay_unpack.entity import Entity
 from replay_unpack.entity_def.definitions import Definitions
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.ERROR)
 
 from .packets import (
     Map,
@@ -30,15 +29,16 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 class ReplayPlayer(object):
     def __init__(self, version: str):
         self._battle_controller = self._get_controller(version)
-        self._definitions = Definitions(os.path.join(BASE_DIR, 'versions/' + version.replace('.', '_')))
+        self._definitions = Definitions(os.path.join(BASE_DIR, 'versions/wot/' + version.replace('.', '_')))
 
     def _get_controller(self, version) -> IBattleController:
         """
         Get real controller class by game version.
         """
         try:
-            module = importlib.import_module('.versions.%s' % version.replace('.', '_'), package=__package__)
+            module = importlib.import_module('.versions.wot.%s' % version.replace('.', '_'), package=__package__)
         except ImportError:
+            raise
             raise RuntimeError("version %s is not supported currently" % version)
 
         try:
@@ -61,9 +61,9 @@ class ReplayPlayer(object):
                                      spec=self._definitions.get_entity_def_by_name('Avatar'))
 
             # base is internal, so props are stored in order of xml file
-            io = BytesIO(packet.data.value.value)
-            for index, prop in enumerate(base_player.base_properties):
-                base_player.set_base_property(index, io)
+            # io = BytesIO(packet.data.value.value)
+            # for index, prop in enumerate(base_player.base_properties):
+            #     base_player.set_base_property(index, io)
 
             self._battle_controller.create_entity(base_player)
             self._battle_controller.on_player_enter_world(packet.data.entityId)
@@ -80,6 +80,8 @@ class ReplayPlayer(object):
             io = packet.data.value.io()
             for index, prop in enumerate(cell_player.client_properties_internal):
                 cell_player.set_client_property_internal(index, io)
+            # TODO: why this assert fails?
+            # assert io.read() == b''
             self._battle_controller.create_entity(cell_player)
 
         elif isinstance(packet.data, EntityCreate):
@@ -116,6 +118,9 @@ class ReplayPlayer(object):
             logging.debug('nested property request for id=%s isSlice=%s data=%s',
                           e.id, packet.data.is_slice, packet.data.payload.hex())
             packet.data.read_and_apply(e)
+        # else:
+        #     if b'\xf34\xab\x00' in packet.data.value:
+        #         print(packet)
 
     def get_info(self):
         return self._battle_controller.get_info()

@@ -12,7 +12,7 @@ from replay_unpack.entity_def.nested_types import PyFixedDict, PyFixedList
 __author__ = "Aleksandr Shyshatsky"
 
 
-@bigworld_packet(type_=34)
+@bigworld_packet(type_=0x24)
 class NestedProperty(PacketDataBase):
     def __init__(self, stream):
         self.entity_id, = struct.unpack('I', stream.read(4))
