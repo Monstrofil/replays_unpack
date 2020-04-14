@@ -3,6 +3,8 @@
 import struct
 from io import BytesIO
 
+from lxml.etree import Element
+
 from .base import DataType
 
 __author__ = "Aleksandr Shyshatsky"
@@ -20,7 +22,7 @@ class _MathType(DataType):
         return tuple(struct.unpack(
             self.STRUCT_TYPE, stream.read(self._DATA_SIZE)))
 
-    def _get_default_value_from_section(self, value: bytes):
+    def _get_default_value_from_section(self, value: Element):
         raise RuntimeError("_get_default_value_from_section for %s is not defined" % self.__class__.__name__)
 
 
@@ -33,6 +35,9 @@ class Vector2(_MathType):
     """
     STRUCT_TYPE = 'ff'
     _DATA_SIZE = 8
+
+    def _get_default_value_from_section(self, value: Element):
+        return list(map(float, value.text.strip().split(' ')))
 
 
 class Vector3(_MathType):

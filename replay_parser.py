@@ -16,7 +16,10 @@ logging.basicConfig(
 
 class DefaultEncoder(JSONEncoder):
     def default(self, o):
-        return o.__dict__
+        try:
+            return o.__dict__
+        except AttributeError:
+            return str(o)
 
 
 class ReplayParser(object):
@@ -28,9 +31,9 @@ class ReplayParser(object):
         self._decrypter = WoWSReplayDecrypt(replay_path)
 
     def get_info(self):
-        json_data, replay_data = self._decrypter.get_replay_data()
+        version, json_data, replay_data = self._decrypter.get_replay_data()
 
-        client_version = '.'.join(json_data['clientVersionFromXml'].replace(' ', '').split(',')[:3])
+        client_version = version # '.'.join(json_data['clientVersionFromXml'].replace(' ', '').split(',')[:3])
         error = None
         try:
             hidden_data = self._get_hidden_data(replay_data, client_version)

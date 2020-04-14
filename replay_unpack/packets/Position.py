@@ -10,7 +10,7 @@ from replay_unpack.base.packets.types.Vector3 import Vector3
 __author__ = "Aleksandr Shyshatsky"
 
 
-@bigworld_packet(type_=10)
+@bigworld_packet(type_=0x0a)
 class Position(PacketDataBase):
 
     __slots__ = (
@@ -34,3 +34,4 @@ class Position(PacketDataBase):
         self.pitch, = struct.unpack('f', stream.read(4))
         self.roll, = struct.unpack('f', stream.read(4))
         self.is_error, = struct.unpack('b', stream.read(1))
+

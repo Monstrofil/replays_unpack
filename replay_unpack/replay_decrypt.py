@@ -13,6 +13,11 @@ BASE_DIR = os.path.dirname(__file__)
 BLOWFISH_KEY = b''.join([b'\x29', b'\xB7', b'\xC9', b'\x09', b'\x38', b'\x3F', b'\x84', b'\x88',
                          b'\xFA', b'\x98', b'\xEC', b'\x4E', b'\x13', b'\x19', b'\x79', b'\xFB'])
 
+BLOWFISH_KEY = b''.join([b'\xDE', b'\x72', b'\xBE', b'\xA0', b'\xDE', b'\x04', b'\xBE', b'\xB1',
+                         b'\xDE', b'\xFE', b'\xBE', b'\xEF', b'\xDE', b'\xAD', b'\xBE', b'\xEF'])
+
+WOT_REPLAY_SIGNATURE = b'\x12\x32\x34\x11'
+
 
 class WoWSReplayDecrypt(object):
     """
@@ -52,23 +57,22 @@ class WoWSReplayDecrypt(object):
         :rtype: tuple[dict, str]
         """
         with open(self.__replay_path, 'rb') as f:
-            f.seek(4)  # skip signature
+            assert f.read(4) == WOT_REPLAY_SIGNATURE
             blocks_count = struct.unpack("i", f.read(4))[0]
 
-            # TODO: replay can contain up to 3 blocks
-            if blocks_count != 1:
-                raise Exception("Not implemented replay data structure. "
-                                "Expected blocks == 1, blocks == {0}".format(blocks_count))
-
-            block_size = struct.unpack("i", f.read(4))[0]
-            arena_info = json.loads(f.read(block_size).decode('utf-8'))
+            version = None
+            for _ in range(blocks_count):
+                block_size = struct.unpack("i", f.read(4))[0]
+                arena_info = json.loads(f.read(block_size).decode('utf-8'))
+                print(arena_info)
+                version = version or arena_info.get('clientVersionFromExe')
 
             decrypted_data = zlib.decompress(self.__decrypt_data(f.read()))
 
             if self.__dump_binary_data:
                 self.__save_decrypted_data(decrypted_data)
 
-            return arena_info, decrypted_data
+            return version, arena_info, decrypted_data
 
     def __save_decrypted_data(self, decrypted_data):
         """
