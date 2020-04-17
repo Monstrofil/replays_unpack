@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # coding=utf-8
 import logging
+from copy import copy
 from enum import Enum
 from io import BytesIO
 from typing import Callable, Dict, List, Tuple
@@ -46,7 +47,7 @@ class Entity:
         }
 
         # position, yaw, pitch, roll
-        self.volatiles = spec.volatiles()
+        self.volatiles = copy(spec.volatiles())
 
         self.client_properties = spec.properties().get_properties_by_flags(
             EntityFlags.ALL_CLIENTS |
