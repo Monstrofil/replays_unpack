@@ -1,22 +1,37 @@
-#!/usr/bin/python
 # coding=utf-8
 import json
 import os
 import struct
 import zlib
-from contextlib import contextmanager
 from io import BytesIO
+from typing import NamedTuple
 
 from Cryptodome.Cipher import Blowfish
 
 BASE_DIR = os.path.dirname(__file__)
-BLOWFISH_KEY = b''.join([b'\x29', b'\xB7', b'\xC9', b'\x09', b'\x38', b'\x3F', b'\x84', b'\x88',
-                         b'\xFA', b'\x98', b'\xEC', b'\x4E', b'\x13', b'\x19', b'\x79', b'\xFB'])
+WOWS_BLOWFISH_KEY = b''.join([b'\x29', b'\xB7', b'\xC9', b'\x09', b'\x38', b'\x3F', b'\x84', b'\x88',
+                              b'\xFA', b'\x98', b'\xEC', b'\x4E', b'\x13', b'\x19', b'\x79', b'\xFB'])
 
-BLOWFISH_KEY = b''.join([b'\xDE', b'\x72', b'\xBE', b'\xA0', b'\xDE', b'\x04', b'\xBE', b'\xB1',
-                         b'\xDE', b'\xFE', b'\xBE', b'\xEF', b'\xDE', b'\xAD', b'\xBE', b'\xEF'])
+WOT_BLOWFISH_KEY = b''.join([b'\xDE', b'\x72', b'\xBE', b'\xA0', b'\xDE', b'\x04', b'\xBE', b'\xB1',
+                             b'\xDE', b'\xFE', b'\xBE', b'\xEF', b'\xDE', b'\xAD', b'\xBE', b'\xEF'])
 
-WOT_REPLAY_SIGNATURE = b'\x12\x32\x34\x11'
+REPLAY_SIGNATURE = b'\x12\x32\x34\x11'
+
+WOWS_REPLAY = 'wowsreplay'
+WOT_REPLAY = 'wotreplay'
+TYPE_TO_KEY = {
+    'wowsreplay': WOWS_BLOWFISH_KEY,
+    'wotreplay': WOT_BLOWFISH_KEY
+}
+ALLOWED_TYPES = set(TYPE_TO_KEY.keys())
+
+ReplayInfo = NamedTuple('ReplayInfo', [
+    ('game', str),
+    ('version', str),
+    ('engine_data', dict),
+    ('extra_data', list),
+    ('decrypted_data', bytes),
+])
 
 
 class WoWSReplayDecrypt(object):
@@ -42,13 +57,18 @@ class WoWSReplayDecrypt(object):
     
     See http://wiki.vbaddict.net/pages/File_Replays for more details;
     """
-    def __init__(self, replay_path, show_progress=False, dump_binary=False):
-        self.__dump_binary_data = dump_binary
-        self.__show_progress = show_progress
-        self.__replay_path = replay_path
-        self.__check_replay_exists()
 
-    def get_replay_data(self):
+    def __init__(self, replay_path, dump_binary=False):
+        self._dump_binary_data = dump_binary
+        self._replay_path = replay_path
+        self._check_replay_exists()
+
+        self._type = self._replay_path.rsplit('.', 1)[-1]
+        if self._type not in ALLOWED_TYPES:
+            raise ValueError("Replay must be in following extensions: "
+                             "%s" % ALLOWED_TYPES)
+
+    def get_replay_data(self) -> ReplayInfo:
         """
         Get open info about replay 
         (stored as Json at the beginning of file) 
@@ -56,25 +76,44 @@ class WoWSReplayDecrypt(object):
         (after decrypt & decompress);
         :rtype: tuple[dict, str]
         """
-        with open(self.__replay_path, 'rb') as f:
-            assert f.read(4) == WOT_REPLAY_SIGNATURE
+        with open(self._replay_path, 'rb') as f:
+            if f.read(4) != REPLAY_SIGNATURE:
+                raise ValueError("File %s is not a valid replay" % self._replay_path)
+
             blocks_count = struct.unpack("i", f.read(4))[0]
 
-            version = None
-            for _ in range(blocks_count):
-                block_size = struct.unpack("i", f.read(4))[0]
-                arena_info = json.loads(f.read(block_size).decode('utf-8'))
-                print(arena_info)
-                version = version or arena_info.get('clientVersionFromExe')
+            block_size = struct.unpack("i", f.read(4))[0]
+            engine_data = json.loads(f.read(block_size))
 
+            extra_data = []
+            for i in range(blocks_count - 1):
+                block_size = struct.unpack("i", f.read(4))[0]
+                data = json.loads(f.read(block_size))
+                extra_data.append(data)
+
+            if self._type == WOWS_REPLAY:
+                version = engine_data.get('clientVersionFromXml').replace(',', '').split()
+            elif self._type == WOT_REPLAY:
+                # 'World of Tanks v.1.8.0.2 #252'
+                version = engine_data.get('clientVersionFromXml') \
+                    .replace('World of Tanks v.', '') \
+                    .replace(' ', '.') \
+                    .replace('#', '') \
+                    .split('.')
             decrypted_data = zlib.decompress(self.__decrypt_data(f.read()))
 
-            if self.__dump_binary_data:
-                self.__save_decrypted_data(decrypted_data)
+            if self._dump_binary_data:
+                self._save_decrypted_data(decrypted_data)
 
-            return version, arena_info, decrypted_data
+            return ReplayInfo(
+                game=self._type,
+                version=version,
+                engine_data=engine_data,
+                extra_data=extra_data,
+                decrypted_data=decrypted_data,
+            )
 
-    def __save_decrypted_data(self, decrypted_data):
+    def _save_decrypted_data(self, decrypted_data):
         """
         Save decrypted data into file named as 
         given replay, but with '.hex' postfix;
@@ -82,19 +121,19 @@ class WoWSReplayDecrypt(object):
         :raises ParserException
         """
         try:
-            replay_name = os.path.basename(self.__replay_path)
+            replay_name = os.path.basename(self._replay_path)
             with open('{}.hex'.format(replay_name), 'wb') as df:
                 df.write(decrypted_data)
         except IOError as e:
             print('Cannot dump replay: {}'.format(e))
 
-    def __check_replay_exists(self):
+    def _check_replay_exists(self):
         """
         Check if replay really exists. 
         Raises ParserException otherwise. 
         """
-        if not os.path.exists(self.__replay_path):
-            raise Exception("File does not exists: {}".format(self.__replay_path))
+        if not os.path.exists(self._replay_path):
+            raise Exception("File does not exists: {}".format(self._replay_path))
 
     @staticmethod
     def __chunkify_string(string, length=8):
@@ -107,22 +146,9 @@ class WoWSReplayDecrypt(object):
         for i in range(0, len(string), length):
             yield i, string[0 + i:length + i]
 
-    @contextmanager
-    def __progressbar(self, total_count):
-        """
-        Wrapper for tqdm written as context manager;
-        Usage: 
-        with self.__progressbar(len(x)) as pb:
-          pb.update(y)
-        :type total_count: int 
-        """
-        bar = tqdm(total=total_count, disable=not self.__show_progress)
-        yield bar
-        bar.close()
-
     def __decrypt_data(self, dirty_data):
         previous_block = None  # type: str
-        blowfish = Blowfish.new(BLOWFISH_KEY, Blowfish.MODE_ECB)
+        blowfish = Blowfish.new(TYPE_TO_KEY[self._type], Blowfish.MODE_ECB)
         decrypted_data = BytesIO()
 
         for index, chunk in self.__chunkify_string(dirty_data):
