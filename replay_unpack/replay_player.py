@@ -84,6 +84,12 @@ class ReplayPlayer(object):
             # assert io.read() == b''
             self._battle_controller.create_entity(cell_player)
 
+        elif isinstance(packet.data, EntityEnter):
+            self._battle_controller.entities[packet.data.entityId].enter_world()
+
+        elif isinstance(packet.data, EntityLeave):
+            self._battle_controller.entities[packet.data.entityId].leave_world()
+
         elif isinstance(packet.data, EntityCreate):
             entity = Entity(
                 id_=packet.data.entityID,
