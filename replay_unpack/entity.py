@@ -76,6 +76,18 @@ class Entity:
             EntityFlags.BASE_AND_CLIENT
         )
 
+        self._is_on_aoi = True
+
+    def enter_world(self):
+        self._is_on_aoi = True
+
+    def leave_world(self):
+        self._is_on_aoi = False
+
+    @property
+    def is_on_aoi(self):
+        return self._is_on_aoi
+
     @classmethod
     def subscribe_method_call(cls, entity_name: str, method_type: Type, method_name: str, func: Callable):
         """
