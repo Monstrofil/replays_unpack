@@ -1,13 +1,11 @@
-#!/usr/bin/python
 # coding=utf-8
 import json
 import logging
 import os
-from io import BytesIO as StringIO
 from json import JSONEncoder
 
-from replay_unpack.base.packets.BigWorldPacket import BigWorldPacket
-from replay_unpack.replay_decrypt import WoWSReplayDecrypt
+from replay_unpack.clients import wot, wows
+from replay_unpack.replay_decrypt import WoWSReplayDecrypt, ReplayInfo
 
 logging.basicConfig(
     level=logging.ERROR
@@ -31,12 +29,11 @@ class ReplayParser(object):
         self._decrypter = WoWSReplayDecrypt(replay_path)
 
     def get_info(self):
-        version, json_data, replay_data = self._decrypter.get_replay_data()
+        replay = self._decrypter.get_replay_data()
 
-        client_version = version # '.'.join(json_data['clientVersionFromXml'].replace(' ', '').split(',')[:3])
         error = None
         try:
-            hidden_data = self._get_hidden_data(replay_data, client_version)
+            hidden_data = self._get_hidden_data(replay)
         except Exception as e:
             if isinstance(e, RuntimeError):
                 error = str(e)
@@ -48,24 +45,22 @@ class ReplayParser(object):
                 raise
 
         return dict(
-            open=json_data,
+            open=replay.engine_data,
+            extra_data=replay.extra_data,
             hidden=hidden_data,
             error=error
         )
 
-    def _get_hidden_data(self, replay_data: bytes, client_version: str):
-        from replay_unpack.replay_player import ReplayPlayer
-        player = ReplayPlayer(client_version)
-        io = StringIO(replay_data)
-        while io.tell() != len(replay_data):
-            packet = BigWorldPacket(io)
-            # noinspection PyBroadException
-            try:
-                player.on_packet(packet)
-            except Exception:
-                logging.exception("Problem with packet %s:%s:%s", packet.time, packet.type, type(packet.data))
-                if self._is_strict_mode:
-                    raise
+    def _get_hidden_data(self, replay: ReplayInfo):
+        # more than enough almost always
+        client_version = '.'.join(replay.version[:3])
+        if replay.game == 'wotreplay':
+            player = wot.ReplayPlayer(client_version)
+        elif replay.game == 'wowsreplay':
+            player = wows.ReplayPlayer(client_version)
+        else:
+            raise NotImplementedError
+        player.play(replay.decrypted_data, self._is_strict_mode)
         return player.get_info()
 
 
