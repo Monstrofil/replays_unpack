@@ -2,8 +2,7 @@ import unittest
 from io import BytesIO
 
 from ddt import data, unpack, ddt
-
-from replay_unpack.common import BitReader
+from replay_unpack.c.entity_def.bit_reader import BitReader
 
 
 @ddt
