@@ -5,7 +5,7 @@ __author__ = "Aleksandr Shyshatsky"
 import importlib
 import os
 
-from replay_unpack.common.entity_def.definitions import Definitions
+from replay_unpack.core.entity_def.definitions import Definitions
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -16,11 +16,12 @@ def get_definitions(version):
 
 def get_controller(version):
     """
-            Get real controller class by game version.
-            """
+    Get real controller class by game version.
+    """
     try:
         module = importlib.import_module('.versions.%s' % version.replace('.', '_'), package=__package__)
     except ImportError:
+        raise
         raise RuntimeError("version %s is not supported currently" % version)
 
     try:

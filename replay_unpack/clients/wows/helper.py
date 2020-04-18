@@ -5,7 +5,7 @@ __author__ = "Aleksandr Shyshatsky"
 import importlib
 import os
 
-from replay_unpack.common.entity_def.definitions import Definitions
+from replay_unpack.core.entity_def.definitions import Definitions
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 

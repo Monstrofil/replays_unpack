@@ -2,7 +2,7 @@
 import os
 import struct
 
-from replay_unpack.base.pretty_print_mixin import PrettyPrintObjectMixin
+from replay_unpack.core.pretty_print_mixin import PrettyPrintObjectMixin
 
 
 class Map(PrettyPrintObjectMixin):

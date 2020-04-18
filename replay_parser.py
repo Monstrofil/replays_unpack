@@ -5,7 +5,7 @@ import os
 from json import JSONEncoder
 
 from replay_unpack.clients import wot, wows
-from replay_unpack.replay_decrypt import WoWSReplayDecrypt, ReplayInfo
+from replay_unpack.replay_reader import ReplayReader, ReplayInfo
 
 logging.basicConfig(
     level=logging.ERROR
@@ -26,10 +26,10 @@ class ReplayParser(object):
     def __init__(self, replay_path, strict: bool = False):
         self._replay_path = replay_path
         self._is_strict_mode = strict
-        self._decrypter = WoWSReplayDecrypt(replay_path)
+        self._reader = ReplayReader(replay_path)
 
     def get_info(self):
-        replay = self._decrypter.get_replay_data()
+        replay = self._reader.get_replay_data()
 
         error = None
         try:
@@ -52,12 +52,20 @@ class ReplayParser(object):
         )
 
     def _get_hidden_data(self, replay: ReplayInfo):
-        # more than enough almost always
-        client_version = '.'.join(replay.version[:3])
-        if replay.game == 'wotreplay':
-            player = wot.ReplayPlayer(client_version)
-        elif replay.game == 'wowsreplay':
-            player = wows.ReplayPlayer(client_version)
+        if replay.game == 'wot':
+            # 'World of Tanks v.1.8.0.2 #252'
+            version = '.'.join(replay.engine_data.get('clientVersionFromXml')
+                               .replace('World of Tanks v.', '')
+                               .replace(' ', '.')
+                               .replace('#', '')
+                               .split('.')[:3])
+            player = wot.ReplayPlayer(version)
+        elif replay.game == 'wows':
+            version = '.'.join(replay.engine_data
+                               .get('clientVersionFromXml')
+                               .replace(' ', '')
+                               .split(',')[:3])
+            player = wows.ReplayPlayer(version)
         else:
             raise NotImplementedError
         player.play(replay.decrypted_data, self._is_strict_mode)
@@ -66,6 +74,7 @@ class ReplayParser(object):
 
 if __name__ == '__main__':
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--replay', type=str, required=True)
     parser.add_argument(

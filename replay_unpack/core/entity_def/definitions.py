@@ -4,9 +4,9 @@ from typing import Dict
 
 from lxml import etree
 
-from replay_unpack.common.entity_def.entity_description import EntityDef
 from .constants import ENTITIES_DEFS_PATH
 from .data_types import Alias
+from .entity_description import EntityDef
 
 
 class Definitions:
