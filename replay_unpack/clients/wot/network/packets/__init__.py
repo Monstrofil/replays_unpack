@@ -1,5 +1,5 @@
 # coding=utf-8
-from replay_unpack.common.packets import (
+from replay_unpack.core.packets import (
     EntityControl,
     EntityEnter,
     EntityLeave,

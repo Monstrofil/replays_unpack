@@ -1,11 +1,10 @@
 # coding=utf-8
 import struct
 
-from replay_unpack.base.pretty_print_mixin import PrettyPrintObjectMixin
-from replay_unpack.common.network.types import Vector3
+from replay_unpack.core import PrettyPrintObjectMixin
+from replay_unpack.core.network.types import Vector3
 
 
-# @bigworld_packet(type_=36)
 class Camera(PrettyPrintObjectMixin):
     def __init__(self, stream):
         try:

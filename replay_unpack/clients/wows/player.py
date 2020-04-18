@@ -3,10 +3,10 @@ import logging
 import struct
 from io import BytesIO
 
-from replay_unpack.common import (
-    Entity,
-    PlayerBase
+from replay_unpack.core import (
+    Entity
 )
+from replay_unpack.core.network.player import ControlledPlayerBase
 from .helper import get_definitions, get_controller
 from .network.packets import (
     Map,
@@ -23,7 +23,7 @@ from .network.packets import (
 )
 
 
-class ReplayPlayer(PlayerBase):
+class ReplayPlayer(ControlledPlayerBase):
 
     def _get_definitions(self, version):
         return get_definitions(version)
@@ -73,10 +73,10 @@ class ReplayPlayer(PlayerBase):
             self._battle_controller.create_entity(cell_player)
 
         elif isinstance(packet, EntityEnter):
-            self._battle_controller.entities[packet.entityId].enter_world()
+            self._battle_controller.entities[packet.entityId].is_in_aoi = True
 
         elif isinstance(packet, EntityLeave):
-            self._battle_controller.entities[packet.entityId].leave_world()
+            self._battle_controller.entities[packet.entityId].is_in_aoi = False
 
         elif isinstance(packet, EntityCreate):
             entity = Entity(

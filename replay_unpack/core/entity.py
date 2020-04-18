@@ -5,8 +5,8 @@ from enum import Enum
 from io import BytesIO
 from typing import Callable, Dict, List, Tuple
 
-from replay_unpack.common.entity_def import EntityDef
-from replay_unpack.common.entity_def import EntityFlags
+from replay_unpack.core.entity_def import EntityDef
+from replay_unpack.core.entity_def import EntityFlags
 
 
 class Entity:
@@ -67,15 +67,13 @@ class Entity:
 
         self._is_on_aoi = True
 
-    def enter_world(self):
-        self._is_on_aoi = True
-
-    def leave_world(self):
-        self._is_on_aoi = False
-
     @property
     def is_on_aoi(self):
         return self._is_on_aoi
+
+    @is_on_aoi.setter
+    def is_on_aoi(self, value):
+        self._is_on_aoi = value
 
     @classmethod
     def subscribe_method_call(cls, entity_name: str, method_name: str, func: Callable):

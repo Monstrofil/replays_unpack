@@ -1,8 +1,8 @@
 # coding=utf-8
 import pickle
 
-from replay_unpack.base.battle_controller import IBattleController
-from replay_unpack.common.entity import Entity
+from replay_unpack.core import IBattleController
+from replay_unpack.core.entity import Entity
 from .constants import DamageStatsType, Category, TaskType, Status
 from .players_info import PlayersInfo
 

@@ -27,14 +27,13 @@ ALLOWED_TYPES = set(TYPE_TO_KEY.keys())
 
 ReplayInfo = NamedTuple('ReplayInfo', [
     ('game', str),
-    ('version', str),
     ('engine_data', dict),
     ('extra_data', list),
     ('decrypted_data', bytes),
 ])
 
 
-class WoWSReplayDecrypt(object):
+class ReplayReader(object):
     """
     # Header
     Every replay starts off with an 8 byte header, consisting of the following values:
@@ -92,22 +91,18 @@ class WoWSReplayDecrypt(object):
                 extra_data.append(data)
 
             if self._type == WOWS_REPLAY:
-                version = engine_data.get('clientVersionFromXml').replace(',', '').split()
+                game = 'wows'
             elif self._type == WOT_REPLAY:
-                # 'World of Tanks v.1.8.0.2 #252'
-                version = engine_data.get('clientVersionFromXml') \
-                    .replace('World of Tanks v.', '') \
-                    .replace(' ', '.') \
-                    .replace('#', '') \
-                    .split('.')
+                game = 'wot'
+            else:
+                raise
             decrypted_data = zlib.decompress(self.__decrypt_data(f.read()))
 
             if self._dump_binary_data:
                 self._save_decrypted_data(decrypted_data)
 
             return ReplayInfo(
-                game=self._type,
-                version=version,
+                game=game,
                 engine_data=engine_data,
                 extra_data=extra_data,
                 decrypted_data=decrypted_data,

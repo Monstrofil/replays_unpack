@@ -2,7 +2,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import Dict
 
-from replay_unpack.common.entity import Entity
+from replay_unpack.core.entity import Entity
 
 
 class IBattleController(metaclass=ABCMeta):

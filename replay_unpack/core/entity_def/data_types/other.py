@@ -7,9 +7,9 @@ from typing import Iterable, Dict
 
 from lxml import etree
 
-from replay_unpack.common.entity_def.nested_types import PyFixedDict, PyFixedList
 from .base import DataType
 from .constants import INFINITY
+from .nested_types import PyFixedDict, PyFixedList
 from .numeric import UInt8
 
 

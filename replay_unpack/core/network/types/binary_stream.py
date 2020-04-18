@@ -2,7 +2,7 @@
 import struct
 from io import BytesIO as StringIO
 
-from replay_unpack.base.pretty_print_mixin import PrettyPrintObjectMixin
+from replay_unpack.core import PrettyPrintObjectMixin
 
 
 class BinaryStream(PrettyPrintObjectMixin):

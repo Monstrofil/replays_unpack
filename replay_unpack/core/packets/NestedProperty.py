@@ -3,9 +3,10 @@ import logging
 import struct
 from io import BytesIO
 
-from replay_unpack.base.pretty_print_mixin import PrettyPrintObjectMixin
-from replay_unpack.common.entity_def.bit_reader import BitReader
-from replay_unpack.common.entity_def.nested_types import PyFixedDict, PyFixedList
+from replay_unpack.core import Entity
+from replay_unpack.core import PrettyPrintObjectMixin
+from replay_unpack.core.entity_def.bit_reader import BitReader
+from replay_unpack.core.entity_def.data_types.nested_types import PyFixedDict, PyFixedList
 
 
 class NestedProperty(PrettyPrintObjectMixin):
@@ -19,7 +20,6 @@ class NestedProperty(PrettyPrintObjectMixin):
         assert len(self.payload) == self.payload_size
 
     def read_and_apply(self, entity):
-        from replay_unpack.common.entity import Entity
         bit_reader = BitReader(self.payload)
         obj = entity
 
