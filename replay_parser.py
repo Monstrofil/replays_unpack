@@ -61,11 +61,10 @@ class ReplayParser(object):
                                .split('.')[:3])
             player = wot.ReplayPlayer(version)
         elif replay.game == 'wows':
-            version = '.'.join(replay.engine_data
-                               .get('clientVersionFromXml')
-                               .replace(' ', '')
-                               .split(',')[:3])
-            player = wows.ReplayPlayer(version)
+            player = wows.ReplayPlayer(replay.engine_data
+                                       .get('clientVersionFromXml')
+                                       .replace(' ', '')
+                                       .split(','))
         else:
             raise NotImplementedError
         player.play(replay.decrypted_data, self._is_strict_mode)

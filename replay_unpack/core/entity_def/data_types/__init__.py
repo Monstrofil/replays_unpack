@@ -77,6 +77,9 @@ class Alias:
 
     def _initialize(self, base_dir):
         alias_path = os.path.join(base_dir, 'scripts/entity_defs/alias.xml')
+        if not os.path.exists(alias_path):
+            raise RuntimeError("Not supported version")
+
         with open(alias_path, 'r') as f:
             xml = etree.parse(f, parser=etree.XMLParser(
                 remove_comments=True))

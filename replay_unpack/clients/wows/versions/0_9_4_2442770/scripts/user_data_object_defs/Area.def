@@ -1,0 +1,32 @@
+<root>
+    <Domain> BASE </Domain>
+    <Properties>
+        <description>
+            <Type> STRING </Type>
+            <Editable> true </Editable>
+        </description>
+
+        <linked>
+            <description>Link to other areas, so they could activate single trigger</description>
+            <Type>	ARRAY <of> UDO_REF </of> </Type>
+            <Editable>	True	</Editable>
+        </linked>
+
+        <radius>
+            <description>Area size definition</description>
+            <Type> FLOAT </Type>
+            <Editable> true </Editable>
+            <Widget>
+                RADIUS
+                <colour>	255 0 192 0	</colour>
+                <gizmoRadius>	1	</gizmoRadius>
+            </Widget>
+            <Default> 10.0 </Default>
+        </radius>
+
+        <tag>
+            <Type> STRING </Type>
+            <Editable> true </Editable>
+        </tag>
+    </Properties>
+</root>
