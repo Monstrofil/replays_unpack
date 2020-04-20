@@ -26,10 +26,20 @@ from .network.packets import (
 class ReplayPlayer(ControlledPlayerBase):
 
     def _get_definitions(self, version):
-        return get_definitions(version)
+        try:
+            version = '.'.join(version[:4])
+            return get_definitions(version)
+        except RuntimeError:
+            version = '.'.join(version[:3])
+            return get_definitions(version)
 
     def _get_controller(self, version):
-        return get_controller(version)
+        try:
+            version = '.'.join(version[:4])
+            return get_controller(version)
+        except RuntimeError:
+            version = '.'.join(version[:3])
+            return get_controller(version)
 
     def _get_packets_mapping(self):
         return PACKETS_MAPPING

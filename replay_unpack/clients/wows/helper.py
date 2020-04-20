@@ -16,8 +16,8 @@ def get_definitions(version):
 
 def get_controller(version):
     """
-            Get real controller class by game version.
-            """
+    Get real controller class by game version.
+    """
     try:
         module = importlib.import_module('.versions.%s' % version.replace('.', '_'), package=__package__)
     except ImportError:
