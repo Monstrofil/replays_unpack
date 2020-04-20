@@ -3,7 +3,7 @@ from io import BytesIO
 
 from ddt import data, unpack, ddt
 
-from replay_unpack.entity_def.bit_reader import BitReader
+from replay_unpack.core.entity_def.bit_reader import BitReader
 
 
 @ddt

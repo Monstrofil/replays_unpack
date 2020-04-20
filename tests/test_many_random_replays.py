@@ -1,13 +1,15 @@
 # coding=utf-8
 import glob
 import os
-from ddt import ddt, data, unpack
 from unittest import TestCase, main
+
+from ddt import ddt, data
 
 from replay_parser import ReplayParser
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-REPLAYS = glob.glob(os.path.join(BASE_DIR, 'data', 'random_replays', '*/*.wowsreplay'))
+REPLAYS = glob.glob(os.path.join(BASE_DIR, 'data', 'random_replays', '*/*.wowsreplay')) + \
+          glob.glob(os.path.join(BASE_DIR, 'data', 'random_replays', '*/*.wotreplay'))
 
 
 @ddt
