@@ -19,8 +19,8 @@ def get_controller(version):
     Get real controller class by game version.
     """
     try:
-        module = importlib.import_module('.versions.%s' % version.replace('.', '_'), package=__package__)
-    except ImportError:
+        module = importlib.import_module('.versions.%s' % version, package=__package__)
+    except ModuleNotFoundError:
         raise RuntimeError("version %s is not supported currently" % version)
 
     try:

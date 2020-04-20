@@ -27,19 +27,15 @@ class ReplayPlayer(ControlledPlayerBase):
 
     def _get_definitions(self, version):
         try:
-            version = '.'.join(version[:4])
-            return get_definitions(version)
+            return get_definitions('_'.join(version[:4]))
         except RuntimeError:
-            version = '.'.join(version[:3])
-            return get_definitions(version)
+            return get_definitions('_'.join(version[:3]))
 
     def _get_controller(self, version):
         try:
-            version = '.'.join(version[:4])
-            return get_controller(version)
+            return get_controller('_'.join(version[:4]))
         except RuntimeError:
-            version = '.'.join(version[:3])
-            return get_controller(version)
+            return get_controller('_'.join(version[:3]))
 
     def _get_packets_mapping(self):
         return PACKETS_MAPPING
