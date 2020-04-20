@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='World of Warships replays parser',
-    version='3.0.0',
+    version='3.1.0',
     description='Utility which loads .wowsreplay file, "plays" it '
                 'in memory and produces results in json format',
     author='Oleksandr Shyshatskyi',
