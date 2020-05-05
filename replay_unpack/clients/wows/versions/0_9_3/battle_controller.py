@@ -1,6 +1,7 @@
 # coding=utf-8
 import logging
 import pickle
+from io import BytesIO
 
 from replay_unpack.core import IBattleController
 from replay_unpack.core.entity import Entity
@@ -11,6 +12,9 @@ try:
 except ImportError:
     DEATH_TYPES = {}
 from .players_info import PlayersInfo
+
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 class BattleController(IBattleController):
@@ -27,6 +31,7 @@ class BattleController(IBattleController):
         self._map = {}
         self._player_id = None
         self._arena_id = None
+        self._minimap = {}
 
         self._dead_planes = {}
 
@@ -42,6 +47,54 @@ class BattleController(IBattleController):
         Entity.subscribe_method_call('Avatar', 'onNewPlayerSpawnedInBattle', self.onNewPlayerSpawnedInBattle)
 
         Entity.subscribe_method_call('Vehicle', 'receiveDamagesOnShip', self.g_receiveDamagesOnShip)
+        Entity.subscribe_method_call('Avatar', 'updateMinimapVisionInfo', self.updateMinimapVisionInfo)
+
+    def updateMinimapVisionInfo(self, avatar, shipsMinimapDiff, buildingsMinimapDiff):
+        pack_pattern = (
+            (-2500.0, 2500.0, 11),
+            (-2500.0, 2500.0, 11),
+            (-3.141592753589793, 3.141592753589793, 9)
+        )  # Avatar.PlayersInfo.MinimapInfoPacker.packPattern
+
+        for e in shipsMinimapDiff:
+            x, z, yaw = self.unpackValues(e['packedData'], pack_pattern)
+            self._minimap[e['vehicleID']] = (x, z, e['vehicleID'])
+            print(e['packedData'], x, z, yaw)
+
+        print(zip(*self._minimap.values()))
+        x, y, annotation = list(zip(*self._minimap.values()))
+        plt.cla()
+
+        # TODO: what it maxX and maxY here?
+        plt.ylim(-500, 500)
+        plt.xlim(-500, 500)
+        plt.scatter(x, y)
+        for x, y, annotation in self._minimap.values():
+            plt.annotate(annotation, (x, y))
+        plt.pause(0.00001)
+
+    def unpackValue(self, packed_value, value_min, value_max, bits):
+        """
+        Get packed_value and transform it into float value in range(value_min, value_max)
+        with precision if N bits (max packed_value is 2**bits - 1 and min is -2**bits)
+        """
+        return packed_value / (2 ** bits - 1) * (abs(value_min) + abs(value_max)) - abs(value_min)
+
+    def unpackValues(self, packed_value, pack_pattern):
+        """
+        Reads packed value and unpacks it by pack_pattern converting each
+        packed element into float value in range given in pack_pattern
+        with precision of N bits
+        """
+        values = []
+        for i, pattern in enumerate(pack_pattern):
+            min_value, max_value, bits = pattern
+            value = packed_value & (2 ** bits - 1)
+
+            values.append(self.unpackValue(value, min_value, max_value, bits))
+            packed_value = packed_value >> bits
+        assert packed_value == 0
+        return tuple(values)
 
     def onSetConsumable(self, vehicle, blob):
         print(pickle.loads(blob))
