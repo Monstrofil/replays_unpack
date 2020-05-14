@@ -1,0 +1,24 @@
+<root>
+	<BaseMethods>
+	</BaseMethods>
+
+	<ClientMethods>
+		<onPlayEffectOnce>
+			<Arg>STRING</Arg>   <!-- effect name -->
+			<Arg>STRING</Arg>   <!-- node name -->
+		</onPlayEffectOnce>
+	</ClientMethods>
+
+	<Properties>
+		<effects>
+			<Type>ARRAY<of>ENTITY_EFFECT_STATE</of></Type>
+			<Flags> ALL_CLIENTS </Flags>
+		</effects>
+	</Properties>
+
+	<TempProperties>
+	</TempProperties>
+
+	<CellMethods>
+	</CellMethods>
+</root>

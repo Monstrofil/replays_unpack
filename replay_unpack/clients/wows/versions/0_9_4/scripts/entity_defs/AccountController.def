@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<root>
+    <ExplicitDatabaseID>true</ExplicitDatabaseID>
+    <Implements>
+        <Interface>WalletProperties</Interface>
+        <Interface>AccountPData</Interface>
+        <Interface>GiveClientHelper</Interface>
+    </Implements>
+    <Properties></Properties>
+    <ClientMethods>
+        <onKickedFromServer>
+            <Args>
+                <checkoutPeripheryID>UINT32</checkoutPeripheryID>
+                <reasonID>UINT8</reasonID>
+            </Args>
+        </onKickedFromServer>
+        <onCheckGamePing>
+            <Arg>UINT64</Arg>
+        </onCheckGamePing>
+    </ClientMethods>
+    <BaseMethods>
+        <checkGamePing>
+            <Exposed></Exposed>
+            <Args>
+                <clientTime>UINT64</clientTime>
+            </Args>
+        </checkGamePing>
+    </BaseMethods>
+</root>
+
