@@ -1,0 +1,78 @@
+<root>
+	<BaseMethods>
+	</BaseMethods>
+
+	<ClientMethods>
+	    <setMiniGameCounter>
+			<Arg> UINT8 </Arg>
+		</setMiniGameCounter>
+
+	</ClientMethods>
+
+	<Properties>
+		<energy>
+			<Type> FLOAT </Type>
+			<Flags> ALL_CLIENTS  </Flags>
+		</energy>
+		<buoyancyCurrentState>
+            <Type> UINT8 </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyCurrentState>
+        <buoyancyDesiredState>
+            <Type> UINT8 </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyDesiredState>
+        <buoyancyCurrentWaterline>
+            <Type> FLOAT </Type>
+            <Flags> ALL_CLIENTS  </Flags>
+        </buoyancyCurrentWaterline>
+	</Properties>
+
+	<TempProperties>
+	    <canChangeBuoyancy/>
+	    <oxygenBallon/>
+	    <hydrophone/>
+
+		<_BuoyancyOwner__oldBuoyancyState/>
+		<_BuoyancyOwner__onAutopilot/>
+		<_BuoyancyOwner__currentBuoyancySpeedTime/>
+		<_BuoyancyOwner__targetBuoyancySpeedCoef/>
+		<_BuoyancyOwner__prevBuoyancySpeedCoef/>
+		<_BuoyancyOwner__buoyancySpeedTime/>
+		<_BuoyancyOwner__newBuoyancyLevelLock/>
+		<buoyancyAutoStateMinSpeed/>
+		<buoyancyStates/>
+
+		<buoyancyStateMin/>
+		<buoyancyStateMax/>
+		<buoyancyStateDefaultMax/>
+		<buoyancyDesiredState/>
+		<buoyancyMin/>
+		<buoyancyMax/>
+		<buoyancyMinStopLine/>
+		<buoyancyMaxStopLine/>
+		<bCurrentStateMinStopLine/>
+		<bCurrentStateMaxStopLine/>
+		<buoyancyTargetWaterline/>
+		<buoyancyManualDesiredAnglePart/>
+		<buoyancyDesiredAnglePart/>
+		<buoyancySpeedReducer/>
+		<buoyancySpeedCoef/>
+		<buoyancyReducerBorder/>
+		<buoyancyAngleLimit/>
+		<cppShipPhysics/>
+		<battery/>
+		<buoyancyIsBlocked/>
+		<shouldUseInvulnerableWaterline/>
+
+		<periscopeRotator/>
+		<buoyancyInvulnerableWaterline/>
+		<detectionBySurfaceHydrophone/>
+		<underwaterNoiseDist/>
+
+	</TempProperties>
+
+	<CellMethods>
+
+	</CellMethods>
+</root>
