@@ -118,8 +118,6 @@ class Entity:
         logging.debug('setting %s client property %s', self._spec.get_name(), prop)
         self.properties['client'][prop.get_name()] = prop.create_from_stream(payload)
         prop_hash = f"{self._spec.get_name()}_{prop.get_name()}"
-        if prop_hash == "BattleLogic_state":
-            print(prop_hash)
         subscriptions = Entity._properties_subscriptions.get(prop_hash, [])
         if not subscriptions:
             return
