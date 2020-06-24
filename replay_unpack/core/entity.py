@@ -85,13 +85,14 @@ class Entity:
         cls._methods_subscriptions[entity_name + '_' + method_name].append(func)
 
     @classmethod
-    def subscribe_property_change(cls, name: str, func: Callable):
+    def subscribe_property_change(cls, entity_name: str, prop_name: str, func: Callable):
         """
         Add callbacks that should be triggered when given method called
         """
-        if name not in cls._methods_subscriptions:
-            cls._methods_subscriptions[name] = []
-        cls._methods_subscriptions[name].append(func)
+        prop_hash = entity_name + '_' + prop_name
+        if prop_name not in cls._properties_subscriptions:
+            cls._properties_subscriptions[prop_hash] = []
+        cls._properties_subscriptions[prop_hash].append(func)
 
     def call_client_method(self, exposed_index: int, payload: BytesIO):
         method = self._methods[exposed_index]
@@ -116,6 +117,17 @@ class Entity:
         prop = self.client_properties[exposed_index]
         logging.debug('setting %s client property %s', self._spec.get_name(), prop)
         self.properties['client'][prop.get_name()] = prop.create_from_stream(payload)
+        prop_hash = f"{self._spec.get_name()}_{prop.get_name()}"
+        if prop_hash == "BattleLogic_state":
+            print(prop_hash)
+        subscriptions = Entity._properties_subscriptions.get(prop_hash, [])
+        if not subscriptions:
+            return
+        for func in subscriptions:
+            try:
+                func(self, prop)
+            except TypeError as e:
+                raise
 
     def set_client_property_internal(self, internal_index, payload: BytesIO):
         logging.debug('requested property %s of entity %s', internal_index, self._spec.get_name())
