@@ -187,5 +187,4 @@ class BattleController(IBattleController):
 
     @map.setter
     def map(self, value):
-        print("called")
         self._map = value.lstrip('spaces/')
