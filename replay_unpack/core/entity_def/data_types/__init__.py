@@ -80,7 +80,7 @@ class Alias:
         if not os.path.exists(alias_path):
             raise RuntimeError("Not supported version")
 
-        with open(alias_path, 'r', encoding="utf8") as f:
+        with open(alias_path, 'r') as f:
             xml = etree.parse(f, parser=etree.XMLParser(
                 remove_comments=True))
             for item in xml.getroot():
