@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<root>
+    <Implements>
+        <Interface>EntityHelperAPI</Interface>
+        <Interface>GiveClientHelper</Interface>
+    </Implements>
+    <Properties>
+        <accountDBID_s>
+            <Type>STRING</Type>
+            <Flags>BASE_AND_CLIENT</Flags>
+            <Persistent>true</Persistent>
+            <DatabaseLength>96</DatabaseLength>
+            <Identifier>true</Identifier>
+        </accountDBID_s>
+    </Properties>
+    <ClientMethods>
+        <onKickedFromServer>
+            <Args>
+                <checkoutPeripheryID>UINT32</checkoutPeripheryID>
+                <reasonID>UINT8</reasonID>
+                <extraInfo>STRING</extraInfo>
+            </Args>
+        </onKickedFromServer>
+        <receiveLoginQueueNumber>
+            <Args>
+                <processingType>UINT8</processingType>
+                <position>UINT64</position>
+            </Args>
+        </receiveLoginQueueNumber>
+    </ClientMethods>
+    <BaseMethods>
+        <checkGamePing>
+            <Exposed></Exposed>
+            <Args>
+                <clientTime>UINT64</clientTime>
+            </Args>
+        </checkGamePing>
+    </BaseMethods>
+</root>
+

@@ -1,0 +1,100 @@
+<root>
+	<Domain> BASE </Domain>
+	<OptionsFlag>Enable</OptionsFlag>
+
+	<Properties>
+
+		<name>
+			<Type> STRING </Type>
+			<Editable> true </Editable>
+		</name>
+		
+		<mineName>
+			<Type> STRING </Type>
+			<Editable> true </Editable>
+			<resourceref/>			
+			<Default>PBPM001_SeaMine</Default>
+		</mineName>
+
+		<mines>
+			<Type> STRING </Type>
+			<Editable> false </Editable>	
+			<Default>DADADADADADA</Default>
+		</mines>
+
+		<numberOfMines>
+			<Type> UINT16 </Type>
+			<Editable> false </Editable>
+			<Default>1</Default>
+		</numberOfMines>
+
+		<width>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>
+			<Default> 10.0 </Default>
+		</width>
+
+		<length>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>
+			<Default> 10.0 </Default>
+		</length>
+
+        <minBound>
+            <Type> VECTOR3 </Type>
+            <Editable> false </Editable>
+            <Default> 0.0 0.0 0.0 </Default>
+        </minBound>
+
+        <maxBound>
+            <Type> VECTOR3 </Type>
+            <Editable> false </Editable>
+            <Default> 0.0 0.0 0.0 </Default>
+        </maxBound>
+
+		<depth>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>
+			<Default> 0.0 </Default>
+		</depth>
+
+		<interval>
+			<Type> FLOAT </Type>
+			<Editable> true </Editable>
+			<Default>1.0</Default>
+			<Min>0.1</Min>
+		</interval>
+
+		<fieldDensity> <!-- Number of iterations for generation algorithm -->
+		    <Type> UINT8 </Type>
+		    <Editable> true </Editable>
+			<Default> 3 </Default>
+			<Min> 1 </Min>
+		</fieldDensity>
+
+		<tag>
+			<Type> STRING </Type>
+			<Editable> True </Editable>
+		</tag>
+		
+		<active>
+			<Type> BOOL </Type>
+			<Editable> true </Editable>
+			<Default> 1 </Default>
+		</active>
+		
+		<drawCircles>
+			<Type> BOOL </Type>
+			<Editable> True </Editable>
+			<Default> 1 </Default>
+		</drawCircles>
+
+		<debugCirclesRadius>
+	        <Type> FLOAT </Type>
+			<Editable> True </Editable>
+			<Default> 0.5 </Default>
+			<Min> 0 </Min>
+		</debugCirclesRadius>
+
+	</Properties>
+</root>
