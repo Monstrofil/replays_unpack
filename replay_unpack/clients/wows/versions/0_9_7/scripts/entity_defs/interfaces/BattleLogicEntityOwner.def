@@ -1,0 +1,16 @@
+<root>
+	<Properties>
+		<battleLogicId>
+			<Type> ENTITY_ID </Type>
+			<Flags> CELL_PRIVATE </Flags>
+		</battleLogicId>
+	</Properties>
+
+	<TempProperties>
+		<stage/>
+		<battleLogic/>
+	</TempProperties>
+
+	<CellMethods>
+	</CellMethods>
+</root>
