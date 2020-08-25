@@ -80,8 +80,8 @@ class Alias:
         if not os.path.exists(alias_path):
             raise RuntimeError("Not supported version")
 
-        with open(alias_path, 'r') as f:
-            xml = etree.parse(f, parser=etree.XMLParser(
+        with open(alias_path, 'rb') as f:
+            xml = etree.parse(f, parser=etree.XMLParser(encoding='utf8',
                 remove_comments=True))
             for item in xml.getroot():
                 self._alias[item.tag] = item
