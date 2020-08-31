@@ -116,14 +116,15 @@ class Entity:
         logging.debug('requested property %s of entity %s', exposed_index, self._spec.get_name())
         prop = self.client_properties[exposed_index]
         logging.debug('setting %s client property %s', self._spec.get_name(), prop)
-        self.properties['client'][prop.get_name()] = prop.create_from_stream(payload)
+        value = prop.create_from_stream(payload)
+        self.properties['client'][prop.get_name()] = value
         prop_hash = f"{self._spec.get_name()}_{prop.get_name()}"
         subscriptions = Entity._properties_subscriptions.get(prop_hash, [])
         if not subscriptions:
             return
         for func in subscriptions:
             try:
-                func(self, prop)
+                func(self, value)
             except TypeError as e:
                 raise
 
