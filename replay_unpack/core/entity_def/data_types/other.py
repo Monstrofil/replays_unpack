@@ -207,6 +207,8 @@ class Array(_DataType):
 class UserType(_DataType):
 
     def __init__(self, _type: DataType, header_size=1):
+        if _type is None:
+            _type = Blob()
         self.type = _type
         super(UserType, self).__init__(header_size=header_size)
 
@@ -217,9 +219,9 @@ class UserType(_DataType):
     def from_section(cls, alias, section: etree.ElementBase, header_size):
         type_section = section.find('Type')
         if type_section is None:
-            logging.warning('%s does not provide type, what to do?', section)
-            return None
-        child_type = alias.get_data_type_from_section(type_section)
+            child_type = Blob()
+        else:
+            child_type = alias.get_data_type_from_section(type_section)
         return cls(child_type, header_size=1)
 
     def get_size_in_bytes(self):
