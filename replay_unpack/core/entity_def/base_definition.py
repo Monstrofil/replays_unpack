@@ -29,8 +29,11 @@ class BaseDataObjectDef:
 
         for it in implements_list:
             path = os.path.join(self._base_dir, ENTITIES_DEFS_PATH, 'interfaces', it.text.strip() + '.def')
-            section = etree.parse(path, parser=etree.XMLParser(
-                remove_comments=True)).getroot()
+            parsed = etree.parse(path, parser=etree.XMLParser(
+                remove_comments=True,
+                # use recover to ignore bad xsi sections
+                recover=True))
+            section = parsed.getroot()
             self._parse_section(section)
 
     def _parse_properties(self, props_list: etree.ElementBase):
