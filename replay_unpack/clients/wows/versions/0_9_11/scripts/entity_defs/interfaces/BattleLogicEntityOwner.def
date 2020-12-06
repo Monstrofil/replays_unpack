@@ -1,0 +1,17 @@
+<root>
+	<Properties>
+		<battleLogicId>
+			<Type> ENTITY_ID </Type>
+			<Flags> CELL_PRIVATE </Flags>
+		</battleLogicId>
+	</Properties>
+
+	<TempProperties>
+		<battleLogic/>
+		<isRemovedFromWorld/>
+		<stage/>
+	</TempProperties>
+
+	<CellMethods>
+	</CellMethods>
+</root>
