@@ -1,0 +1,15 @@
+<root>
+	<BaseMethods>
+	</BaseMethods>
+	
+	<ClientMethods>
+		<updateHotFixData>
+			<updateData>PYTHON</updateData>
+		</updateHotFixData>
+	</ClientMethods>
+	
+	<ofEntity>
+		<Account/>
+		<Avatar/>
+	</ofEntity>
+</root>
