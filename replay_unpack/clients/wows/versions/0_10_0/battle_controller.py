@@ -77,7 +77,7 @@ class BattleController(IBattleController):
             player_id=self._player_id,
             control_points=self._getCapturePointsInfo(),
             tasks=list(self._getTasksInfo()),
-            skills=dict(self._getCrewSkillsInfo()),
+            skills=dict(),
             # planes are only updated in AOI
             # so information is not right
             # planes=self._dead_planes,
@@ -111,25 +111,6 @@ class BattleController(IBattleController):
                 "name": task['name'],
                 "type": TaskType.names[task['type']]
             }
-
-    def _get_learned_skills(self, vehicle):
-        """
-        Skill has his own skill id.
-        Packed format = sum(2 ** skill_id for skill_id in skills)
-        So to turn it back, we must divide number by two;
-        """
-        learned_skills = vehicle.properties['client']['crewModifiersCompactParams']['learnedSkills']
-        skill_id = 1
-        while learned_skills != 0:
-            if learned_skills % 2 == 1:
-                yield skill_id
-            learned_skills //= 2
-            skill_id += 1
-
-    def _getCrewSkillsInfo(self):
-        for e in self.entities.values():
-            if e.get_name() == 'Vehicle':
-                yield e.id, list(self._get_learned_skills(e))
 
     def onBattleEnd(self, avatar, teamId, state):
         self._battle_result = dict(
