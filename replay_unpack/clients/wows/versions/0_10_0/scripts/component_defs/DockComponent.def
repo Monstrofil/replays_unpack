@@ -1,0 +1,21 @@
+<root>
+    <BaseMethods>
+        <getMetashopBanner>
+            <Exposed/>
+        </getMetashopBanner>
+        <setMetashopBannerSeen>
+            <Arg> UNICODE_STRING </Arg>
+            <Exposed/>
+        </setMetashopBannerSeen>
+        <getPremiumShopBanner>
+            <Exposed/>
+        </getPremiumShopBanner>
+        <setPremiumShopBannerSeen>
+            <Arg> UNICODE_STRING </Arg>
+            <Exposed/>
+        </setPremiumShopBannerSeen>
+    </BaseMethods>
+    <ofEntity>
+        <Account/>
+    </ofEntity>
+</root>
