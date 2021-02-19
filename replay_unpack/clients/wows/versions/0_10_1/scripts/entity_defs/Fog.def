@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<root>
+    <Volatile>
+        <position></position>
+    </Volatile>
+    <Properties>
+        <radius>
+            <Type>FLOAT</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </radius>
+        <force>
+            <Type>FLOAT</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </force>
+        <height>
+            <Type>FLOAT32</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </height>
+    </Properties>
+    <CellMethods></CellMethods>
+</root>
+
