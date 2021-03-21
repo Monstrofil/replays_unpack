@@ -1,0 +1,26 @@
+<root>
+    <BaseMethods>
+        <getMetashopBanner>
+            <Exposed/>
+        </getMetashopBanner>
+        <setMetashopBannerSeen>
+            <Arg> UNICODE_STRING </Arg>
+            <Exposed/>
+        </setMetashopBannerSeen>
+        <getPremiumShopBanner>
+            <Exposed/>
+        </getPremiumShopBanner>
+        <setPremiumShopBannerSeen>
+            <Arg> UNICODE_STRING </Arg>
+            <Exposed/>
+        </setPremiumShopBannerSeen>
+        <uploadUserPrefs>
+            <Arg> BLOB </Arg>
+            <Arg> UINT32 </Arg>
+            <Exposed/>
+        </uploadUserPrefs>
+    </BaseMethods>
+    <ofEntity>
+        <Account/>
+    </ofEntity>
+</root>

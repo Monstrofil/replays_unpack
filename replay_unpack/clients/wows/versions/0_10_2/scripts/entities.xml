@@ -1,0 +1,20 @@
+<root>
+	
+
+	<ClientServerEntities>
+		<Avatar />
+		<Vehicle />
+		<Account />
+		<SmokeScreen />
+		<Fog />
+		<OfflineEntity />
+		<Login />
+		<Building />
+		<MasterChanger />
+		<BattleLogic />
+		<ReplayLeech />
+		<ReplayConnectionHandler />
+		<InteractiveZone />
+	</ClientServerEntities>
+	
+	</root>

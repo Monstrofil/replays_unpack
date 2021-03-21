@@ -1,0 +1,8 @@
+<root>
+	<TrainingRoomsManagerComponent/>
+	<DockComponent/>
+	<TrainingRoomComponent/>
+	<BrawlBattlesComponent/>
+	<RankedBattlesComponent/>
+	<AchievementsComponent/>
+</root>
