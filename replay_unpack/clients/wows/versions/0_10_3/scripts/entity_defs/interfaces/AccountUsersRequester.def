@@ -1,0 +1,18 @@
+<root>
+	<Implements>
+	</Implements>
+
+	<TempProperties>
+		<_AccountUsersRequester__userRequested/>
+		<_AccountUsersRequester__updateLocationTimerID/>
+	</TempProperties>
+
+	<BaseMethods>
+		<onGetUsersData>
+			<Args>
+				<usersData> ARRAY<of>PLAYER_DIGEST</of> </usersData>
+				<notFoundInDB> ARRAY <of>DB_ID</of> </notFoundInDB>
+			</Args>
+		</onGetUsersData>
+	</BaseMethods>
+</root>
