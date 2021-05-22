@@ -1,0 +1,12 @@
+<root>
+	<BaseMethods>
+		<uploadUserPrefs>
+			<Arg>BLOB</Arg>
+			<Arg>UINT32</Arg>
+			<Exposed/>
+		</uploadUserPrefs>
+	</BaseMethods>
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+</root>

@@ -1,0 +1,10 @@
+<root>
+	<TrainingRoomsManagerComponent/>
+	<DockComponent/>
+	<TrainingRoomComponent/>
+	<BrawlBattlesComponent/>
+	<RankedBattlesComponent/>
+	<AchievementsComponent/>
+	<AlmanacComponent/>
+	<VSEventComponent/>
+</root>
