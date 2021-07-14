@@ -1,0 +1,77 @@
+<root>
+	<BaseMethods>
+	    <chooseParticipate>
+	        <Exposed/>
+	    </chooseParticipate>
+		<chooseSide>
+			<Arg>INT8</Arg>
+			<Exposed/>
+		</chooseSide>
+		<finalScreenShown>
+			<Exposed/>
+		</finalScreenShown>
+		<dev_startStage>
+			<!-- event starts at, TS -->
+			<Arg> UINT32 </Arg>
+			<!-- event finishes at, TS -->
+			<Arg> UINT32 </Arg>
+			<Exposed/>
+		</dev_startStage>
+		<dev_stopStage>
+		    <Exposed/>
+		</dev_stopStage>
+		<dev_startPrimeTime>
+		    <!-- prime start at TS -->
+			<Arg> UINT32 </Arg>
+			<!-- prime stop at TS -->
+			<Arg> UINT32 </Arg>
+		    <Exposed/>
+		</dev_startPrimeTime>
+		<dev_stopPrimeTime>
+		     <Exposed/>
+		</dev_stopPrimeTime>
+		<dev_setAutoProgress>
+			<!-- set auto add players points active. -->
+			<Arg> BOOL </Arg>
+			<Exposed/>
+		</dev_setAutoProgress>
+
+		<dev_changeDay>
+			 <Exposed/>
+		</dev_changeDay>
+
+		<dev_changeStagePoints>
+			<!-- teams stage points -->
+			<Arg> UINT32 </Arg>
+			<!-- personal stage points  -->
+			<Arg> UINT32 </Arg>
+			 <Exposed/>
+		</dev_changeStagePoints>
+
+	</BaseMethods>
+
+	<ClientMethods>
+		<onSideChosen>
+			<Arg>INT8</Arg>
+		</onSideChosen>
+		<onParticipationChosen>
+		</onParticipationChosen>
+		<onChangeDay>
+		</onChangeDay>
+	</ClientMethods>
+
+	<TempProperties>
+		<_VSEventComponent__eventPdata/>
+		<_VSEventComponent__tasksProgress/>
+		<_VSEventComponent__shouldRequestFinalStats/>
+		<_VSEventComponent__notRequestedPersonalTasksRates/>
+		<_VSEventComponent__notSyncTasksProgress/>
+		<_VSEventComponent__notSyncFinalStats/>
+		<_VSEventComponent__shouldReSyncOnStageChanged/>
+		<_VSEventComponent__shouldSyncTasksProgressOnPrimeChanged/>
+	</TempProperties>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+</root>
