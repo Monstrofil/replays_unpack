@@ -7,10 +7,6 @@ from json import JSONEncoder
 from replay_unpack.clients import wot, wows
 from replay_unpack.replay_reader import ReplayReader, ReplayInfo
 
-logging.basicConfig(
-    level=logging.ERROR
-)
-
 
 class DefaultEncoder(JSONEncoder):
     def default(self, o):
