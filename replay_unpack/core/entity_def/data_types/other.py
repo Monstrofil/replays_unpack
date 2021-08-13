@@ -205,6 +205,7 @@ class Array(_DataType):
 
 
 class UserType(_DataType):
+    _DATA_SIZE = INFINITY
 
     def __init__(self, _type: DataType, header_size=1):
         if _type is None:
@@ -223,9 +224,6 @@ class UserType(_DataType):
         else:
             child_type = alias.get_data_type_from_section(type_section)
         return cls(child_type, header_size=1)
-
-    def get_size_in_bytes(self):
-        return self.type.get_size_in_bytes()
 
     def __repr__(self):
         return "<UserType> {}".format(self.type)
