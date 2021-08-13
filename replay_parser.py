@@ -19,10 +19,11 @@ class DefaultEncoder(JSONEncoder):
 class ReplayParser(object):
     BASE_PATH = os.path.dirname(__file__)
 
-    def __init__(self, replay_path, strict: bool = False):
+    def __init__(self, replay_path, strict: bool = False, raw_data_output=None):
         self._replay_path = replay_path
         self._is_strict_mode = strict
         self._reader = ReplayReader(replay_path)
+        self._raw_data_output = raw_data_output
 
     def get_info(self):
         replay = self._reader.get_replay_data()
@@ -63,6 +64,11 @@ class ReplayParser(object):
                                        .split(','))
         else:
             raise NotImplementedError
+
+        if self._raw_data_output:
+            with open(self._raw_data_output, 'wb') as f:
+                f.write(replay.decrypted_data)
+
         player.play(replay.decrypted_data, self._is_strict_mode)
         return player.get_info()
 
@@ -83,10 +89,17 @@ if __name__ == '__main__':
         action='store_true',
         required=False
     )
+    parser.add_argument(
+        '--raw_data_output',
+        help='File where raw replay content (decoded and decompressed) will be written',
+        required=False,
+        default=None
+    )
 
     namespace = parser.parse_args()
     logging.basicConfig(
         level=getattr(logging, namespace.log_level))
     replay_info = ReplayParser(
-        namespace.replay, strict=namespace.strict_mode).get_info()
+        namespace.replay, strict=namespace.strict_mode,
+        raw_data_output=namespace.raw_data_output).get_info()
     print(json.dumps(replay_info, indent=1, cls=DefaultEncoder))
