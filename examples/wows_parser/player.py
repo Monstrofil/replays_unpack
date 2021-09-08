@@ -1,7 +1,7 @@
 # coding=utf-8
 import os
 
-from replay_unpack.clients.wot.network.packets import (
+from replay_unpack.clients.wows.network.packets import (
     Position
 )
 from replay_unpack.clients.wows.player import ReplayPlayer as WoWSReplayPlayer
