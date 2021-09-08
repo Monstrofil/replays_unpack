@@ -19,6 +19,7 @@ from .network.packets import (
     NestedProperty,
     EntityEnter,
     EntityLeave,
+    PlayerPosition,
     PACKETS_MAPPING
 )
 
@@ -103,6 +104,45 @@ class ReplayPlayer(ControlledPlayerBase):
             self._battle_controller.entities[packet.entityId].yaw = packet.yaw
             self._battle_controller.entities[packet.entityId].pitch = packet.pitch
             self._battle_controller.entities[packet.entityId].roll = packet.roll
+
+        elif isinstance(packet, PlayerPosition):
+            try:
+                # Entity at ID 1 is the primary one's position being updated
+                # Avatar-only packets have no position until death, and 
+                # are linked to a vehicle. After death they have no ID for a 
+                # Vehicle anymore, and a position instead.
+                # Before death only "Vehicle in ID 1" packets have a position.
+                    
+                if packet.entityId2 != (0,):
+                    # This serves to link the positions of the two entities 
+                    # where the position of entity 1 is set by wherever entity 2
+                    # is, rather than by the position field.
+                    # e.g. Assigning the Avatar the position of the Vehicle
+                    master_entity = self._battle_controller.entities[packet.entityId2[0]]
+                    slave_entity = self._battle_controller.entities[packet.entityId1[0]]
+                    
+                    slave_entity.position = master_entity.position
+                    slave_entity.yaw = master_entity.yaw
+                    slave_entity.pitch = master_entity.pitch
+                    slave_entity.roll = master_entity.roll
+                    
+                elif packet.entityId1 != (0,) and packet.entityId2 == (0,):
+                    # This is a regular update for entity 1, without entity 2
+                    e = self._battle_controller.entities[packet.entityId1[0]]
+
+                    e.position = packet.position
+                    e.yaw = packet.yaw
+                    e.pitch = packet.pitch
+                    e.roll = packet.roll
+                    
+                else:
+                    # Shouldn't hit this case, with no primary OR secondary entity
+                    pass
+                    
+                    
+            except KeyError as e:
+                # entity not yet created
+                pass
 
         elif isinstance(packet, EntityMethod):
             entity = self._battle_controller.entities[packet.entityId]
