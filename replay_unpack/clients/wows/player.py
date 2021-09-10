@@ -118,17 +118,17 @@ class ReplayPlayer(ControlledPlayerBase):
                     # where the position of entity 1 is set by wherever entity 2
                     # is, rather than by the position field.
                     # e.g. Assigning the Avatar the position of the Vehicle
-                    master_entity = self._battle_controller.entities[packet.entityId2[0]]
-                    slave_entity = self._battle_controller.entities[packet.entityId1[0]]
+                    master_entity = self._battle_controller.entities[packet.entityId2]
+                    slave_entity = self._battle_controller.entities[packet.entityId1]
                     
                     slave_entity.position = master_entity.position
                     slave_entity.yaw = master_entity.yaw
                     slave_entity.pitch = master_entity.pitch
                     slave_entity.roll = master_entity.roll
                     
-                elif packet.entityId1 != (0,) and packet.entityId2 == (0,):
+                elif packet.entityId1 != 0 and packet.entityId2 == 0:
                     # This is a regular update for entity 1, without entity 2
-                    e = self._battle_controller.entities[packet.entityId1[0]]
+                    e = self._battle_controller.entities[packet.entityId1]
 
                     e.position = packet.position
                     e.yaw = packet.yaw
