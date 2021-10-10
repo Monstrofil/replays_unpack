@@ -27,6 +27,8 @@
 	<VISIBILITY_FLAG>UINT32</VISIBILITY_FLAG>
 	<SHOT_ID>UINT16</SHOT_ID>
 	<HISTORY_LOGGING_FLAGS>UINT32</HISTORY_LOGGING_FLAGS>
+    <ACES_TASK_PROGRESS>UINT32</ACES_TASK_PROGRESS>
+	<TEAM_INFO>UINT8</TEAM_INFO>
 
 	<ZIPPED_BLOB>
 		USER_TYPE
@@ -83,21 +85,19 @@
 		ARRAY <of> PLANE_WAYPOINT </of>
 	</PLANE_PATH>
 
-	<TEAM_INFO>
+	<TEAM_STATE>
 		FIXED_DICT
 		<Properties>
 			<teamId><Type>TEAM_ID</Type></teamId>
-			<detonation><Type>BOOL</Type></detonation>
-			<friendlyFire><Type>BOOL</Type></friendlyFire>
+			<state><Type>TEAM_INFO</Type></state>
 		</Properties>
-	</TEAM_INFO>
+	</TEAM_STATE>
 
 	<TEAMS_DEF>
 		FIXED_DICT
 		<Properties>
-			<detonation><Type>BOOL</Type></detonation>
-			<friendlyFire><Type>BOOL</Type></friendlyFire>
-			<teams><Type>ARRAY<of>TEAM_INFO</of></Type></teams>
+			<default><Type>TEAM_INFO</Type></default>
+			<teams><Type>ARRAY<of>TEAM_STATE</of></Type></teams>
 		</Properties>
 		<implementedBy>TeamsDef.converter</implementedBy>
 	</TEAMS_DEF>
@@ -1008,8 +1008,12 @@
 		<Properties>
 			<visibilityFactor><Type> FLOAT </Type></visibilityFactor>
 			<visibilityFactorByPlane><Type> FLOAT </Type></visibilityFactorByPlane>
+			<planeVisibilityFactor><Type> FLOAT </Type></planeVisibilityFactor>
+			<planeVisibilityFactorByPlane><Type> FLOAT </Type></planeVisibilityFactorByPlane>
 			<maxVisibilityDistance><Type> FLOAT </Type></maxVisibilityDistance>
 			<maxVisibilityDistanceByPlane><Type> FLOAT </Type></maxVisibilityDistanceByPlane>
+			<planeMaxVisibilityDistance><Type> FLOAT </Type></planeMaxVisibilityDistance>
+			<planeMaxVisibilityDistanceByPlane><Type> FLOAT </Type></planeMaxVisibilityDistanceByPlane>
 			<mgVisibilityTime><Type> FLOAT </Type></mgVisibilityTime>
 			<smokeVisibilityTime><Type> FLOAT </Type></smokeVisibilityTime>
 			<airDefenseVisibilityTime><Type> FLOAT </Type></airDefenseVisibilityTime>
@@ -1151,18 +1155,6 @@
 		</Properties>
 	</INDIVIDUAL_TASK_STATE>
 
-	<BUFF_STATE>
-		FIXED_DICT
-		<Properties>
-			<paramsId><Type>GAMEPARAMS_ID</Type></paramsId>
-			<entitySubtypeId><Type>UINT8</Type></entitySubtypeId>
-			<level><Type>INT8</Type></level>
-			<endTime><Type>INT16</Type></endTime>
-			<startTime><Type>INT16</Type></startTime>
-		</Properties>
-		<implementedBy>BuffDef.converter</implementedBy>
-	</BUFF_STATE>
-
 	<TRIGGERS_STATE>
 		FIXED_DICT
 		<Properties>
@@ -1198,11 +1190,11 @@
 		<AllowNone>true</AllowNone>
 	</BATTLE_LEVELING_STATE>
 
+	<!-- PRIVATE_BATTLE_LOGIC_STATE is deprecated, use PRIVATE_VEHICLE_STATE instead  (WWSD-171385)-->
 	<PRIVATE_BATTLE_LOGIC_STATE>
 		FIXED_DICT
 		<Properties>
 			<individualTasks><Type> ARRAY <of> INDIVIDUAL_TASK_STATE </of> </Type></individualTasks>
-			<buffs><Type> ARRAY <of> BUFF_STATE </of> </Type></buffs>
 			<battleItems><Type> ARRAY <of> STASHED_BATTLE_ITEM_STATE </of> </Type></battleItems>
 			<triggers><Type> TRIGGERS_STATE </Type></triggers>
 			<diplomacyTickets> <Type> DIPLOMACY_TICKETS_STATE </Type> </diplomacyTickets>
@@ -1665,4 +1657,39 @@
 		USER_TYPE
 		<implementedBy>Converters.ShootPositionConverter.converter</implementedBy>
 	</SHOOT_POSITION>
+
+	<BUFF_STATE>
+		FIXED_DICT
+		<Properties>
+			<paramsId><Type>GAMEPARAMS_ID</Type></paramsId>
+			<entitySubtypeId><Type>UINT8</Type></entitySubtypeId>
+			<level><Type>INT8</Type></level>
+			<endTime><Type>INT16</Type></endTime>
+			<startTime><Type>INT16</Type></startTime>
+		</Properties>
+		<implementedBy>BuffDef.converter</implementedBy>
+	</BUFF_STATE>
+
+	<BUFFS_STATE>
+		FIXED_DICT
+		<Properties>
+			<buffItems><Type> ARRAY <of> BUFF_STATE </of> </Type></buffItems>
+		</Properties>
+		<AllowNone> true </AllowNone>
+	</BUFFS_STATE>
+
+	<VEHICLE_STATE>
+		FIXED_DICT
+		<Properties>
+			<buffs><Type>BUFFS_STATE</Type></buffs>
+		</Properties>
+	</VEHICLE_STATE>
+
+	<PRIVATE_VEHICLE_STATE>
+		FIXED_DICT
+		<Properties>
+			<buffs><Type>BUFFS_STATE</Type></buffs>
+		</Properties>
+	</PRIVATE_VEHICLE_STATE>
+
 </root>

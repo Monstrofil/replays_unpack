@@ -31,7 +31,6 @@
 		<visionCoefficient/>
 		<permanentlyVisibleByTeammates/>
 		<permanentlyVisibleByEnemies/>
-		<_VisionOwner__componentsForVisibilityDistances/>
 	</TempProperties>
 	
 	<CellMethods>

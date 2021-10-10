@@ -209,7 +209,7 @@
         <setTrace>
             <Arg>BOOL</Arg>
         </setTrace>
-        <curVersion_release_10_8_0_4462593></curVersion_release_10_8_0_4462593>
+        <curVersion_release_10_9_0_4610639></curVersion_release_10_9_0_4610639>
         <updateSSEProgress>
             <Arg>STRING</Arg>
         </updateSSEProgress>
@@ -387,11 +387,18 @@
         <onUpdateAbuseStatus>
             <Arg>MSGPACK_BLOB</Arg>
         </onUpdateAbuseStatus>
-        <onUpdateParentControlRestrictionStatus>
-            <Arg>UINT32</Arg>
-            <Arg>UINT32</Arg>
-            <Arg>UINT32</Arg>
-        </onUpdateParentControlRestrictionStatus>
+        <onUpdateParentalControlRestrictionStatus>
+            <Args>
+                <status>UINT32</status>
+                <restrictionType>UINT32</restrictionType>
+                <expirationTime>UINT32</expirationTime>
+            </Args>
+        </onUpdateParentalControlRestrictionStatus>
+        <updateParentalControlRestrictions>
+            <Args>
+                <timeToKick>UINT64</timeToKick>
+            </Args>
+        </updateParentalControlRestrictions>
         <onOpenLootboxesStarted>
             <Arg>UINT16</Arg>
         </onOpenLootboxesStarted>

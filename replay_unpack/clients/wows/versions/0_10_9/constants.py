@@ -1,12 +1,14 @@
 # coding=utf-8
 
-id_property_map = {0: 'accountDBID', 1: 'avatarId', 2: 'camouflageInfo', 3: 'clanColor', 4: 'clanID', 5: 'clanTag',
-                   6: 'crewParams', 7: 'dogTag', 8: 'fragsCount', 9: 'friendlyFireEnabled', 10: 'id',
-                   11: 'invitationsEnabled', 12: 'isAbuser', 13: 'isAlive', 14: 'isBot', 15: 'isClientLoaded',
-                   16: 'isConnected', 17: 'isHidden', 18: 'isLeaver', 19: 'isPreBattleOwner', 20: 'isTShooter',
-                   21: 'killedBuildingsCount', 22: 'maxHealth', 23: 'name', 24: 'playerMode', 25: 'preBattleIdOnStart',
-                   26: 'preBattleSign', 27: 'prebattleId', 28: 'realm', 29: 'shipComponents', 30: 'shipId',
-                   31: 'shipParamsId', 32: 'skinId', 33: 'teamId', 34: 'ttkStatus'}
+id_property_map = {0: 'accountDBID', 1: 'antiAbuseEnabled', 2: 'avatarId', 3: 'camouflageInfo',
+                   4: 'clanColor', 5: 'clanID', 6: 'clanTag', 7: 'crewParams', 8: 'dogTag',
+                   9: 'fragsCount', 10: 'friendlyFireEnabled', 11: 'id', 12: 'invitationsEnabled',
+                   13: 'isAbuser', 14: 'isAlive', 15: 'isBot', 16: 'isClientLoaded', 17: 'isConnected',
+                   18: 'isHidden', 19: 'isLeaver', 20: 'isPreBattleOwner', 21: 'isTShooter',
+                   22: 'killedBuildingsCount', 23: 'maxHealth', 24: 'name', 25: 'playerMode',
+                   26: 'preBattleIdOnStart', 27: 'preBattleSign', 28: 'prebattleId', 29: 'realm',
+                   30: 'shipComponents', 31: 'shipConfigDump', 32: 'shipId', 33: 'shipParamsId',
+                   34: 'skinId', 35: 'teamId', 36: 'ttkStatus'}
 property_id_map = {value: key for key, value in id_property_map.items()}
 
 
@@ -77,5 +79,12 @@ DEATH_TYPES = {
     18: {'sound': 'Shell_HE', 'icon': 'icon_frag_main_caliber', 'id': 18, 'name': 'HE_SHELL'},
     19: {'sound': 'Shell_CS', 'icon': 'icon_frag_main_caliber', 'id': 19, 'name': 'CS_SHELL'},
     20: {'sound': 'Fel', 'icon': 'icon_frag_fel', 'id': 20, 'name': 'FEL'},
-    21: {'sound': 'Portal', 'icon': 'icon_frag_portal', 'id': 21, 'name': 'PORTAL'}
+    21: {'sound': 'Portal', 'icon': 'icon_frag_portal', 'id': 21, 'name': 'PORTAL'},
+    22: {'sound': 'SkipBomb', 'icon': 'icon_frag_skip', 'id': 22, 'name': 'SKIP_BOMB'},
+    23: {'sound': 'SECTOR_WAVE', 'icon': 'icon_frag_wave', 'id': 23, 'name': 'SECTOR_WAVE'},
+    24: {'sound': 'Health', 'icon': 'icon_frag_acid', 'id': 24, 'name': 'ACID'},
+    25: {'sound': 'LASER', 'icon': 'icon_frag_laser', 'id': 25, 'name': 'LASER'},
+    26: {'sound': 'Match', 'icon': 'icon_frag_octagon', 'id': 26, 'name': 'MATCH'},
+    27: {'sound': 'Timer', 'icon': 'icon_timer', 'id': 27, 'name': 'TIMER'},
+    28: {'sound': 'DepthCharge', 'icon': 'icon_frag_depthbomb', 'id': 28, 'name': 'ADBOMB'}
 }

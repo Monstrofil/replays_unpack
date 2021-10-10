@@ -104,6 +104,13 @@
             <Flags>ALL_CLIENTS</Flags>
             <SaveWowsServerReplays></SaveWowsServerReplays>
         </serverSpeedRaw>
+        <maxServerSpeedRaw>
+            <Type>UINT32</Type>
+            <Flags>ALL_CLIENTS</Flags>
+            <Default>0</Default>
+            <SaveWowsServerReplays></SaveWowsServerReplays>
+            <SendLatestOnly>true</SendLatestOnly>
+        </maxServerSpeedRaw>
         <speedSignDir>
             <Type>INT8</Type>
             <Flags>ALL_CLIENTS</Flags>
@@ -191,8 +198,13 @@
             <Type>GAMEPARAMS</Type>
             <Flags>ALL_CLIENTS</Flags>
         </deathSettings>
+        <state>
+            <Type>VEHICLE_STATE</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </state>
     </Properties>
     <ClientMethods>
+        <onAvatarReady></onAvatarReady>
         <onConsumableInterrupted>
             <Arg>UINT8</Arg>
         </onConsumableInterrupted>
@@ -316,6 +328,9 @@
             <Arg>BLOB</Arg>
             <VariableLengthHeaderSize>2</VariableLengthHeaderSize>
         </setReloadingStateForWeapon>
+        <setUniqueSkills>
+            <Arg>BLOB</Arg>
+        </setUniqueSkills>
         <setConsumables>
             <Arg>BLOB</Arg>
         </setConsumables>

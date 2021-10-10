@@ -39,6 +39,12 @@
             <Flags>CELL_PUBLIC_AND_OWN</Flags>
             <Default>0</Default>
         </selectedTorpedoGroup>
+        <hasFullPingDamageTorpedoes>
+            <Type>BOOL</Type>
+            <Flags>OWN_CLIENT</Flags>
+            <Default>False</Default>
+            <SendLatestOnly>true</SendLatestOnly>
+        </hasFullPingDamageTorpedoes>
         <isFlyMode>
             <Type>BOOL</Type>
             <Flags>OWN_CLIENT</Flags>
@@ -64,6 +70,10 @@
             <Type>PRIVATE_BATTLE_LOGIC_STATE</Type>
             <Flags>OWN_CLIENT</Flags>
         </privateBattleLogicState>
+        <privateVehicleState>
+            <Type>PRIVATE_VEHICLE_STATE</Type>
+            <Flags>OWN_CLIENT</Flags>
+        </privateVehicleState>
         <visibilityDistances>
             <Type>VISIBILITY_DISTANCES</Type>
             <Flags>ALL_CLIENTS</Flags>
@@ -484,8 +494,11 @@
             <Arg>ENTITY_ID</Arg>
         </onEndShipCollision>
         <onDisconnectedFromServer>
-            <Arg>UINT32</Arg>
-            <Arg>UINT8</Arg>
+            <Args>
+                <peripheryId>UINT32</peripheryId>
+                <reasonId>UINT8</reasonId>
+                <pickledInfo>BLOB</pickledInfo>
+            </Args>
         </onDisconnectedFromServer>
         <onArenaStateReceived>
             <Args>
