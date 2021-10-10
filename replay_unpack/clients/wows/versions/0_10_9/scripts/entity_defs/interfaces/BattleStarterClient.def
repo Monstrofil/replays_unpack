@@ -1,0 +1,28 @@
+<root>
+
+	<BaseMethods>
+
+		<onEnqueued>
+			<Arg>STRING</Arg>		<!-- Realm signature -->
+			<Arg>UINT16</Arg>		<!-- queueType see constants.QueueType -->
+			<Arg>SHIP_ID</Arg>		<!-- ship ID -->
+			<Arg>PYTHON</Arg>		<!-- matchmaker queue stats IDs -->
+			<Arg>PYTHON</Arg>		<!-- matchmaker description -->
+		</onEnqueued>
+
+		<onDequeued>
+			<Arg> UINT8 </Arg>		<!-- dequeue reason (see in ActionErrors.MATCHMAKER_LEAVE_REASON) -->
+		</onDequeued>
+
+		<onStartBattle>
+			<Args>
+				<battleInfo> PYTHON </battleInfo>
+			</Args>
+			<ReturnValues>
+				<resultCode> INT64 </resultCode>
+			</ReturnValues>
+		</onStartBattle>
+
+	</BaseMethods>
+
+</root>
