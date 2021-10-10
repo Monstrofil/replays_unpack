@@ -126,7 +126,7 @@ class BattleController(IBattleController):
                              observersState, buildingsInfo):
         self._arena_id = arenaUniqueId
         self._players.create_or_update_players(
-            pickle.loads(playersStates))
+            pickle.loads(playersStates, encoding='latin1'))
 
     def onPlayerInfoUpdate(self, avatar, playersData, observersData):
         self._players.create_or_update_players(
