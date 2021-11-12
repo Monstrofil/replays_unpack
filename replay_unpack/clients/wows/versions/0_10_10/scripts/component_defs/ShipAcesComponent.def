@@ -1,0 +1,38 @@
+<root>
+    <BaseMethods>
+        <updateSeasonInfo>
+            <Exposed/>
+        </updateSeasonInfo>
+        <onFinalStatsShown>
+			<Exposed/>
+		</onFinalStatsShown>
+        <onIntroScreenShown>
+			<Exposed/>
+		</onIntroScreenShown>
+
+		<devChangeProgress>
+		    <Exposed/>
+		    <Args>
+		        <shipId> SHIP_ID </shipId>
+		        <taskProgress> ACES_TASK_PROGRESS </taskProgress>
+		    </Args>
+		</devChangeProgress>
+    </BaseMethods>
+
+    <ClientMethods>
+        <receiveEmptyDump/>
+        <updateSeasonProgress>
+            <Args>
+				<shipId> SHIP_ID </shipId>
+				<taskProgress> ACES_TASK_PROGRESS </taskProgress>
+				<bestTaskProgress> ACES_TASK_PROGRESS </bestTaskProgress>
+				<doneTaskTotal> UINT16 </doneTaskTotal>
+				<incomeTotal> UINT32 </incomeTotal>
+			</Args>
+        </updateSeasonProgress>
+    </ClientMethods>
+
+    <ofEntity>
+        <Account/>
+    </ofEntity>
+</root>

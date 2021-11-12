@@ -22,7 +22,7 @@ class PlayerBase:
     def _deserialize_packet(self, packet: NetPacket):
         if packet.type in self._mapping:
             return self._mapping[packet.type](packet.raw_data)
-        logging.info('unknown packet %s', hex(packet.type))
+        logging.info('unknown packet %s %s', hex(packet.type), str(packet.raw_data.read().hex()))
         return None
 
     def _process_packet(self, packet):
