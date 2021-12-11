@@ -1,0 +1,48 @@
+<root>
+	<BaseMethods>
+		<enter>
+			<Exposed/>
+			<Args>
+				<shipID> SHIP_ID </shipID>
+				<queueType> QUEUE_TYPE </queueType>
+				<mapID> INT16 </mapID>  <!-- MAP_ID (UINT8) or -1 -->
+				<gameMode> INT32 </gameMode>  <!-- GAME_MODE (UINT16) or -1 -->
+				<event> UINT32 </event>
+			</Args>
+		</enter>
+		
+		<leave>
+			<Exposed/>
+		</leave>
+		
+		<devAddBotDivision>
+			<Exposed/>
+			<Args>
+				<queueType> QUEUE_TYPE </queueType>
+				<shipLevel> SHIP_LEVEL </shipLevel>
+				<sizePlatoon> UINT8 </sizePlatoon>
+				<data> INT32 </data>
+				<shipType> UNICODE_STRING </shipType>
+			</Args>
+		</devAddBotDivision>
+		
+		<onEnterViaDivision>  <!-- Callback from DivisionPreBattle -->
+			<Args>
+				<enqueueData> ENQUEUE_DATA </enqueueData>
+			</Args>
+		</onEnterViaDivision>
+		
+		<onLeave>  <!-- Callback from DivisionPreBattle -->
+			<Args>
+				<reason> UINT8 </reason>
+			</Args>
+		</onLeave>
+	</BaseMethods>
+	
+	<ClientMethods>
+	</ClientMethods>
+	
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+</root>
