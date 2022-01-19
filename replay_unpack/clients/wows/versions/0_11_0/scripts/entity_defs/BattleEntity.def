@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<root>
+    <Implements>
+        <Interface>BattleLogicEntityOwner</Interface>
+        <Interface>DamageDealerOwner</Interface>
+    </Implements>
+    <IsManualAoI>true</IsManualAoI>
+    <Properties>
+        <className>
+            <Type>STRING</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </className>
+        <name>
+            <Type>STRING</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </name>
+        <owner>
+            <Type>ENTITY_ID</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </owner>
+        <teamId>
+            <Type>TEAM_ID</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </teamId>
+    </Properties>
+    <ClientMethods></ClientMethods>
+    <CellMethods></CellMethods>
+    <BaseMethods></BaseMethods>
+    <shouldBackup>false</shouldBackup>
+</root>
+

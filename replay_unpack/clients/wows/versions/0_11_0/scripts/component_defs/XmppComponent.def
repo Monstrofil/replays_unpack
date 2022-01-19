@@ -1,0 +1,12 @@
+<root>
+    <ClientMethods>
+        <onChatCommunicationStatusChanged>
+            <!-- Session type -->
+            <Arg> BOOL </Arg>
+        </onChatCommunicationStatusChanged>
+    </ClientMethods>
+    <ofEntity>
+        <Account/>
+    </ofEntity>
+</root>
+
