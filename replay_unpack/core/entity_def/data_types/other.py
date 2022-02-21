@@ -214,6 +214,11 @@ class UserType(_DataType):
         super(UserType, self).__init__(header_size=header_size)
 
     def _get_value_from_stream(self, stream: BytesIO, header_size: int):
+        # even if type is set as non-blob
+        # we still must read header first
+        # otherwise we will get padding error
+        if not isinstance(self.type, Blob):
+            stream.read(header_size)
         return self.type.create_from_stream(stream, header_size=header_size)
 
     @classmethod
