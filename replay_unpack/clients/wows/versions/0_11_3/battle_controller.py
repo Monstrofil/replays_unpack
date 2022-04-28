@@ -120,7 +120,7 @@ class BattleController(IBattleController):
 
     def onNewPlayerSpawnedInBattle(self, avatar, pickle_data):
         self._players.create_or_update_players(
-            pickle.loads(pickle_data))
+            pickle.loads(pickle_data, encoding='latin1'))
 
     def onArenaStateReceived(self, avatar, arenaUniqueId, teamBuildTypeId, preBattlesInfo, playersStates,
                              observersState, buildingsInfo):
@@ -130,7 +130,7 @@ class BattleController(IBattleController):
 
     def onPlayerInfoUpdate(self, avatar, playersData, observersData):
         self._players.create_or_update_players(
-            pickle.loads(playersData))
+            pickle.loads(playersData, encoding='latin1'))
 
     def receiveDamageStat(self, avatar, blob):
         normalized = {}
