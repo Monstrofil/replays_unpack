@@ -147,8 +147,8 @@ class BattleController(IBattleController):
         self._ribbons[avatar.id][ribbon_id] += 1
 
     def onAchievementEarned(self, avatar, avatar_id, achievement_id):
-        self._achievements.setdefault(avatar_id, {}).setdefault(achievement_id, 0)
-        self._achievements[avatar_id][achievement_id] += 1
+        self._achievements.setdefault(avatar.id, {}).setdefault(achievement_id, 0)
+        self._achievements[avatar.id][achievement_id] += 1
 
     def receiveVehicleDeath(self, avatar, killedVehicleId, fraggerVehicleId, typeDeath):
         self._death_map.append((killedVehicleId, fraggerVehicleId, typeDeath))
