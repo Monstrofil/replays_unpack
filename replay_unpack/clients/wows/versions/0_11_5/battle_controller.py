@@ -1,4 +1,5 @@
 # coding=utf-8
+import copy
 import logging
 import pickle
 
@@ -64,10 +65,17 @@ class BattleController(IBattleController):
         self._player_id = entity_id
 
     def get_info(self):
+
+        # adding killed planes data
+        players = copy.deepcopy(self._players.get_info())
+        for player in players.values():
+            player['planesCount'] = self._dead_planes.get(
+                player.get('shipId', 0))
+
         return dict(
             achievements=self._achievements,
             ribbons=self._ribbons,
-            players=self._players.get_info(),
+            players=players,
             battle_result=self._battle_result,
             damage_map=self._damage_map,
             shots_damage_map=self._shots_damage_map,
@@ -78,9 +86,6 @@ class BattleController(IBattleController):
             control_points=self._getCapturePointsInfo(),
             tasks=list(self._getTasksInfo()),
             skills=dict(),
-            # planes are only updated in AOI
-            # so information is not right
-            # planes=self._dead_planes,
             arena_id=self._arena_id
         )
 
