@@ -10,7 +10,7 @@ try:
     from .constants import DEATH_TYPES
 except ImportError:
     DEATH_TYPES = {}
-from .players_info import PlayersInfo
+from .players_info import PlayersInfo, PlayerType
 
 
 class BattleController(IBattleController):
@@ -118,19 +118,49 @@ class BattleController(IBattleController):
             victory_type=state
         )
 
-    def onNewPlayerSpawnedInBattle(self, avatar, pickle_data):
+    def onNewPlayerSpawnedInBattle(self, avatar, playersStates, botsStates, observersState):
         self._players.create_or_update_players(
-            pickle.loads(pickle_data, encoding='latin1'))
+            pickle.loads(playersStates, encoding='latin1'),
+            PlayerType.PLAYER
+        )
+        self._players.create_or_update_players(
+            pickle.loads(botsStates, encoding='latin1'),
+            PlayerType.BOT
+        )
+        self._players.create_or_update_players(
+            pickle.loads(observersState, encoding='latin1'),
+            PlayerType.OBSERVER
+        )
 
     def onArenaStateReceived(self, avatar, arenaUniqueId, teamBuildTypeId, preBattlesInfo, playersStates, botsStates,
                              observersState, buildingsInfo):
         self._arena_id = arenaUniqueId
         self._players.create_or_update_players(
-            pickle.loads(playersStates, encoding='latin1'))
+            pickle.loads(playersStates, encoding='latin1'),
+            PlayerType.PLAYER
+        )
+        self._players.create_or_update_players(
+            pickle.loads(botsStates, encoding='latin1'),
+            PlayerType.BOT
+        )
+        self._players.create_or_update_players(
+            pickle.loads(observersState, encoding='latin1'),
+            PlayerType.OBSERVER
+        )
 
     def onPlayerInfoUpdate(self, avatar, playersData, botsData, observersData):
         self._players.create_or_update_players(
-            pickle.loads(playersData, encoding='latin1'))
+            pickle.loads(playersData, encoding='latin1'),
+            PlayerType.PLAYER
+        )
+        self._players.create_or_update_players(
+            pickle.loads(botsData, encoding='latin1'),
+            PlayerType.BOT
+        )
+        self._players.create_or_update_players(
+            pickle.loads(observersData, encoding='latin1'),
+            PlayerType.OBSERVER
+        )
 
     def receiveDamageStat(self, avatar, blob):
         normalized = {}

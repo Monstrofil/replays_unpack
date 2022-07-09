@@ -11,6 +11,24 @@ id_property_map = {0: 'accountDBID', 1: 'antiAbuseEnabled', 2: 'avatarId', 3: 'c
                    34: 'skinId', 35: 'teamId', 36: 'ttkStatus'}
 property_id_map = {value: key for key, value in id_property_map.items()}
 
+# ModsShell.API_v_1_0.battleGate.PlayersInfo.gSharedBotInfo._numMemberMap
+id_property_map_bots = {0: 'accountDBID', 1: 'antiAbuseEnabled', 2: 'camouflageInfo', 3: 'clanColor',
+                        4: 'clanID', 5: 'clanTag', 6: 'crewParams', 7: 'dogTag', 8: 'fragsCount',
+                        9: 'friendlyFireEnabled', 10: 'id', 11: 'isAbuser', 12: 'isAlive',
+                        13: 'isBot', 14: 'isHidden', 15: 'isTShooter', 16: 'killedBuildingsCount',
+                        17: 'maxHealth', 18: 'name', 19: 'realm', 20: 'shipComponents', 21: 'shipConfigDump',
+                        22: 'shipId', 23: 'shipParamsId', 24: 'skinId', 25: 'teamId', 26: 'ttkStatus'}
+property_id_map_bots = {value: key for key, value in id_property_map.items()}
+
+
+# ModsShell.API_v_1_0.battleGate.PlayersInfo.gSharedObserverInfo._numMemberMap
+id_property_map_observer = {0: 'accountDBID', 1: 'avatarId', 2: 'dogTag', 3: 'id', 4: 'invitationsEnabled', 5: 'isAlive',
+                            6: 'isClientLoaded', 7: 'isConnected', 8: 'isLeaver', 9: 'isPreBattleOwner', 10: 'name',
+                            11: 'playerMode', 12: 'preBattleIdOnStart', 13: 'preBattleSign', 14: 'prebattleId',
+                            15: 'realm', 16: 'teamId'}
+property_id_map_bots_observer = {value: key for key, value in id_property_map.items()}
+
+
 
 class DamageStatsType:
     """See Avatar.DamageStatsType"""
