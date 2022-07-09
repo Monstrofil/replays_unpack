@@ -70,7 +70,7 @@ class BattleController(IBattleController):
         players = copy.deepcopy(self._players.get_info())
         for player in players.values():
             player['planesCount'] = self._dead_planes.get(
-                player.get('shipId', 0))
+                player.get('shipId', 0), 0)
 
         return dict(
             achievements=self._achievements,
