@@ -8,6 +8,7 @@ from replay_unpack.core.packets import (
     NestedProperty,
     BasePlayerCreate,
     Position,
+    Version
 )
 from .CellPlayerCreate import CellPlayerCreate
 from .EntityCreate import EntityCreate
@@ -27,6 +28,7 @@ PACKETS_MAPPING = {
     0x27: Map,
     0x22: NestedProperty,
     0x0a: Position,
+    0x16: Version,
     0x2b: PlayerPosition
 }
 
@@ -43,6 +45,6 @@ __all__ = [
     'CellPlayerCreate',
     'NestedProperty',
     'PlayerPosition',
-
+    'Version',
     'PACKETS_MAPPING'
 ]
