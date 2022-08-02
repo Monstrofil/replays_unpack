@@ -20,6 +20,7 @@ class Entity:
 
     _methods_subscriptions = {}  # type: Dict[Type, List[Callable]]
     _properties_subscriptions = {}  # type: Dict[Type, List[Callable]]
+    _nested_properties_subscription = {}  # type: Dict[Type, List[Callable]]
 
     def __init__(self, id_: int, spec: EntityDef):
         self.id = id_
@@ -93,6 +94,24 @@ class Entity:
         if prop_name not in cls._properties_subscriptions:
             cls._properties_subscriptions[prop_hash] = []
         cls._properties_subscriptions[prop_hash].append(func)
+
+    @classmethod
+    def subscribe_nested_property_change(
+        cls, entity_name: str, prop_path: str, func: Callable
+    ):
+
+        prop_hash = entity_name + "_" + prop_path
+        if prop_path not in cls._nested_properties_subscription:
+            cls._nested_properties_subscription[prop_hash] = []
+        cls._nested_properties_subscription[prop_hash].append(func)
+
+    def set_client_nested_property(self, prop_path: list, obj):
+        prop_hash = f"{self.get_name()}_{'.'.join(map(str, prop_path))}"
+
+        for p_hash, funcs in Entity._nested_properties_subscription.items():
+            if p_hash in prop_hash:
+                for func in funcs:
+                    func(self, obj)
 
     def call_client_method(self, exposed_index: int, payload: BytesIO):
         method = self._methods[exposed_index]

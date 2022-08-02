@@ -12,6 +12,7 @@ from .EntityProperty import EntityProperty
 from .Map import Map
 from .NestedProperty import NestedProperty
 from .Position import Position
+from .Version import Version
 
 __all__ = [
     'EntityMethod',
@@ -26,4 +27,5 @@ __all__ = [
     'EntityProperty',
     'CellPlayerCreate',
     'NestedProperty',
+    'Version'
 ]

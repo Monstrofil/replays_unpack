@@ -20,6 +20,7 @@ from .network.packets import (
     EntityEnter,
     EntityLeave,
     PlayerPosition,
+    Version,
     PACKETS_MAPPING
 )
 
@@ -42,6 +43,8 @@ class ReplayPlayer(ControlledPlayerBase):
         return PACKETS_MAPPING
 
     def _process_packet(self, packet):
+        if isinstance(packet, Version):
+            logging.debug('Game version: %s', packet.version)
 
         if isinstance(packet, Map):
             logging.debug('Welcome to map %s: %s', packet.name, packet.arenaId)
