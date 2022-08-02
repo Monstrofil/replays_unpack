@@ -43,6 +43,11 @@ class BattleController(IBattleController):
         Entity.subscribe_method_call('Avatar', 'onNewPlayerSpawnedInBattle', self.onNewPlayerSpawnedInBattle)
 
         Entity.subscribe_method_call('Vehicle', 'receiveDamagesOnShip', self.g_receiveDamagesOnShip)
+        Entity.subscribe_nested_property_change('BattleLogic', 'state.controlPoints', self.controlPoints)
+
+    def controlPoints(self, entity, control_points):
+        # print(control_points)
+        pass
 
     def onSetConsumable(self, vehicle, blob):
         print(pickle.loads(blob))
