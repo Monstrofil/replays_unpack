@@ -22,6 +22,7 @@ class NestedProperty(PrettyPrintObjectMixin):
     def read_and_apply(self, entity):
         bit_reader = BitReader(self.payload)
         obj = entity
+        prop_path = []
 
         while bit_reader.get(1) and obj:
             l = len(obj.client_properties) if isinstance(obj, Entity) else len(obj)
@@ -36,6 +37,7 @@ class NestedProperty(PrettyPrintObjectMixin):
                 obj = obj.properties['client'][field]
             else:
                 raise NotImplementedError
+            prop_path.append(field)
             logging.debug('next path item: %s(%s)', field, property_id)
 
         logging.debug('object: %s %s', obj, type(obj))
@@ -49,6 +51,8 @@ class NestedProperty(PrettyPrintObjectMixin):
             logging.debug('old obj[%s] = %s', field, obj[field])
             obj[field] = obj.get_field_type_for_index(index1). \
                 create_from_stream(BytesIO(bit_reader.get_rest()))
+            prop_path.append(field)
+            entity.set_client_nested_property(prop_path, obj) 
             logging.debug('new obj[%s] = %s', field, obj[field])
 
         elif isinstance(obj, PyFixedList):
@@ -61,7 +65,10 @@ class NestedProperty(PrettyPrintObjectMixin):
             logging.debug('List index: %s', index1)
             if self.is_slice:
                 index2 = bit_reader.get(max_bits)
+                prop_path.append(f"{index1}:{index2}")
                 logging.debug('Slice index: %s', index2)
+            else:
+                prop_path.append(index1)
 
             rest = bit_reader.get_rest()
             if not rest:
@@ -88,7 +95,7 @@ class NestedProperty(PrettyPrintObjectMixin):
             else:
                 logging.debug("setting %s with %s", index1, new_elements[0])
                 obj[index1] = new_elements[0]
+            entity.set_client_nested_property(prop_path, obj) 
             logging.debug('new list object: %s', obj)
-
         else:
             raise NotImplementedError(type(obj))
