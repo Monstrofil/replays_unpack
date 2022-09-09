@@ -106,3 +106,45 @@ DEATH_TYPES = {
     27: {'sound': 'Timer', 'icon': 'icon_timer', 'id': 27, 'name': 'TIMER'},
     28: {'sound': 'DepthCharge', 'icon': 'icon_frag_depthbomb', 'id': 28, 'name': 'ADBOMB'}
 }
+
+# >>> CrewModifiers.SkillTypeEnum.ID_TO_NAME
+SKILL_TYPE_ID_TO_NAME = {
+    0: 'NoneSkill', 1: 'GmReloadAaDamageConstant', 2: 'DefenceCritFireFlooding', 3: 'GmTurn', 4: 'TorpedoReload',
+    5: 'ConsumablesCrashcrewRegencrewReload', 6: 'ConsumablesDuration', 7: 'DetectionTorpedoRange',
+    8: 'HeFireProbability',
+    9: 'GmRangeAaDamageBubbles', 10: 'PlanesDefenseDamageConstant', 11: 'PlanesForsageDuration',
+    12: 'DetectionVisibilityRange', 13: 'ConsumablesReload', 14: 'DefenceFireProbability', 15: 'PlanesAimingBoost',
+    16: 'PlanesSpeed', 17: 'ConsumablesAdditional', 18: 'DefenseCritProbability', 19: 'DetectionAlert',
+    20: 'Maneuverability', 21: 'GmShellReload', 22: 'PlanesConsumablesCallfightersUpgrade',
+    23: 'ArmamentReloadAaDamage',
+    24: 'TorpedoSpeed', 25: 'DefenseHp', 26: 'AtbaAccuracy', 27: 'AaPrioritysectorDamageConstant',
+    28: 'DetectionAiming',
+    29: 'PlanesReload', 30: 'TorpedoDamage', 31: 'ConsumablesFighterAdditional',
+    32: 'PlanesConsumablesSpeedboosterReload',
+    33: 'HePenetration', 34: 'DetectionDirection', 35: 'AaDamageConstantBubbles', 36: 'AaDamageConstantBubblesCv',
+    37: 'ApDamageBb', 38: 'ApDamageCa', 39: 'ApDamageDd', 40: 'AtbaRange', 41: 'AtbaUpgrade',
+    42: 'ConsumablesCrashcrewRegencrewUpgrade', 43: 'ConsumablesSpotterUpgrade', 44: 'DefenceUw',
+    45: 'DetectionVisibilityCrashcrew', 46: 'HeFireProbabilityCv', 47: 'HeSapDamage', 48: 'PlanesApDamage',
+    49: 'PlanesConsumablesCallfightersAdditional', 50: 'PlanesConsumablesCallfightersPreparationtime',
+    51: 'PlanesConsumablesCallfightersRange', 52: 'PlanesConsumablesRegeneratehealthUpgrade',
+    53: 'PlanesDefenseDamageBubbles', 54: 'PlanesDivebomberSpeed', 55: 'PlanesForsageRenewal', 56: 'PlanesHp',
+    57: 'PlanesTorpedoArmingrange', 58: 'PlanesTorpedoSpeed', 59: 'PlanesTorpedoUwReduced',
+    60: 'TorpedoFloodingProbability', 61: 'TriggerSpeedBb', 62: 'TriggerGmAtbaReloadBb', 63: 'TriggerGmAtbaReloadCa',
+    64: 'TriggerGmReload', 65: 'TriggerSpeed', 66: 'TriggerSpeedAccuracy', 67: 'TriggerSpreading',
+    68: 'TriggerPingerReloadBuff', 69: 'TriggerPingerSpeedBuff', 70: 'SubmarineHoldSectors',
+    71: 'TriggerConsSonarTimeCoeff', 72: 'TriggerSeenTorpedoReload', 73: 'SubmarineTorpedoPingDamage',
+    74: 'TriggerConsRudderTimeCoeff', 75: 'SubmarineBatteryCapacity', 76: 'SubmarineDangerAlert',
+    77: 'SubmarineBatteryBurnDown', 78: 'SubmarineSpeed', 79: 'SubmarineConsumablesReload',
+    80: 'SubmarineConsumablesDuration', 81: 'TriggerBurnGmReload', 82: 'ArmamentReloadSubmarine'
+}
+
+
+# CrewModifiers.ShipTypes.TYPE_BY_ID
+SHIP_TYPE_BY_ID = {
+    0: 'AirCarrier',
+    1: 'Battleship',
+    2: 'Cruiser',
+    3: 'Destroyer',
+    4: 'Auxiliary',
+    5: 'Submarine'
+}

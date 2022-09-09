@@ -8,7 +8,7 @@ from replay_unpack.core.entity import Entity
 from .constants import DamageStatsType, Category, TaskType, Status
 
 try:
-    from .constants import DEATH_TYPES
+    from .constants import DEATH_TYPES, SHIP_TYPE_BY_ID, SKILL_TYPE_ID_TO_NAME
 except ImportError:
     DEATH_TYPES = {}
 from .players_info import PlayersInfo, PlayerType
@@ -86,8 +86,33 @@ class BattleController(IBattleController):
             control_points=self._getCapturePointsInfo(),
             tasks=list(self._getTasksInfo()),
             skills=dict(),
+            crew=dict(self.getCrewInformation()),
             arena_id=self._arena_id
         )
+
+    def _getCrewInfo(self, vehicle):
+        learned_skills_packed = vehicle.properties['client']['crewModifiersCompactParams']['learnedSkills']
+
+        learned_skills = {}
+        for type_id, type_name in SHIP_TYPE_BY_ID.items():
+            if not learned_skills_packed[type_id]:
+                continue
+
+            learned_skills[type_name] = [
+                SKILL_TYPE_ID_TO_NAME.get(skill_id)
+                for skill_id in learned_skills_packed[type_id]
+            ]
+
+        return {
+            'crew_id': vehicle.properties['client']['crewModifiersCompactParams']['paramsId'],
+            'learned_skills': learned_skills
+        }
+
+    def getCrewInformation(self):
+        for e in self.entities.values():
+            if e.get_name() != 'Vehicle':
+                continue
+            yield e.id, self._getCrewInfo(e)
 
     def _getDeathsInfo(self):
         deaths = {}
