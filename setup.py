@@ -1,5 +1,5 @@
 # coding=utf-8
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='World of Warships replays parser',
@@ -9,8 +9,8 @@ setup(
     author='Oleksandr Shyshatskyi',
     author_email='shalal545@gmail.com',
     license='MIT',
-    packages=['replay_unpack'],
-    package_data={'': ['*.py']},
+    packages=find_packages(include='replay_unpack.*'),
+    package_data={'': ['*.py', '**/scripts/**/*.def', '**/scripts/**/*.xml']},
     include_package_data=True,
     scripts=['replay_parser.py'],
 )
