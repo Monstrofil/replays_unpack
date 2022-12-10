@@ -23,13 +23,17 @@ class MethodArgument:
 
 class EntityMethod:
 
-    def __init__(self, name, arguments: List[MethodArgument], header_size: int = DEFAULT_HEADER_SIZE):
+    def __init__(self, name, exposed, arguments: List[MethodArgument], header_size: int = DEFAULT_HEADER_SIZE):
         self._name = name or None
+        self._exposed = exposed
         self._arguments = arguments
         self._variable_header_size = header_size
 
     def get_name(self):
         return self._name
+
+    def is_exposed(self):
+        return self._exposed
 
     def get_size_in_bytes(self):
         size = sum(i.type.get_size_in_bytes() for i in self._arguments)
@@ -52,7 +56,7 @@ class EntityMethod:
         return None
 
     @classmethod
-    def from_section(cls, section: etree.ElementBase, alias):
+    def from_section(cls, section: etree.ElementBase, alias, exposed_by_default=False):
         args = []
         if section.find('Args') is not None:
             for item in section.find('Args'):
@@ -63,13 +67,15 @@ class EntityMethod:
                 args.append(MethodArgument(
                     type_=alias.get_data_type_from_section(item)))
 
+        exposed = (section.find('Exposed') is not None) or exposed_by_default
+
         header_section = section.find('VariableLengthHeaderSize')
         try:
             header_size = int(header_section.text.strip())
         except (ValueError, AttributeError):
             header_size = DEFAULT_HEADER_SIZE
 
-        return cls(section.tag, list(args), header_size)
+        return cls(section.tag, exposed, list(args), header_size)
 
     def create_from_stream(self, stream: BytesIO) -> Tuple[List, Dict[str, object]]:
         unpacked_args = []
@@ -93,9 +99,9 @@ class MethodDescriptions:
         self._internal_index = []
         self._methods_by_name: Dict[EntityMethod] = {}
 
-    def parse(self, section: etree.ElementBase, alias):
+    def parse(self, section: etree.ElementBase, alias, exposed_by_default=False):
         for method in section:
-            obj = EntityMethod.from_section(method, alias)
+            obj = EntityMethod.from_section(method, alias, exposed_by_default=exposed_by_default)
             if obj.get_name() in self._methods_by_name:
                 continue
             self._internal_index.append(obj)
@@ -103,6 +109,7 @@ class MethodDescriptions:
 
     def get_exposed_index_map(self) -> List[EntityMethod]:
         array = self._internal_index[:]
+        array = list(filter(lambda method: method.is_exposed(), array))
         array.sort(key=lambda i: i.get_size_in_bytes())
         return array
 
@@ -156,7 +163,7 @@ class EntityDef(BaseDataObjectDef):
     def _parse_client_methods(self, section: etree.ElementBase):
         if section is None:
             return
-        self._client_methods.parse(section, self._alias)
+        self._client_methods.parse(section, self._alias, exposed_by_default=True)
 
     def _parse_section(self, section: etree.ElementBase):
         super(EntityDef, self)._parse_section(section)
