@@ -33,16 +33,26 @@ class Blob(_DataType):
     """
     _DATA_SIZE = INFINITY
 
-    def _get_value_from_stream(self, stream: BytesIO, header_size: int):
+    def _get_size_from_stream(self, stream):
         size, = unpack('B', stream.read(1))
-        # hack for arenaStateReceived
-        if size == 0xff:
-            size, = unpack('H', stream.read(2))
-            # some dummy shit
-            unpack('B', stream.read(1))
 
-            return stream.read(size)
-        return stream.read(size)
+        if size == 0xff:
+            data_0, data_1, data_2 = unpack('BBB', stream.read(3))
+            # dirty magic of packing integer in 3 bytes
+            # https://github.com/Monstrofil/bigworld-2.0/blob/5969290b3f1710910c7cecdad6a34b2016fad9e7/lib/cstdmf/binary_stream.hpp#L265
+            # https://github.com/Monstrofil/bigworld-2.0/blob/5969290b3f1710910c7cecdad6a34b2016fad9e7/lib/cstdmf/binary_stream.ipp#L162
+            size = (data_2 << 16) | (data_1 << 8) | data_0
+            return size
+        return size
+
+    def _get_value_from_stream(self, stream: BytesIO, header_size: int):
+        size = self._get_size_from_stream(stream)
+
+        payload = stream.read(size)
+
+        assert len(payload) == size, "Expected: %s, size: %s" % (size, len(payload))
+
+        return payload
 
 
 class String(_DataType):
