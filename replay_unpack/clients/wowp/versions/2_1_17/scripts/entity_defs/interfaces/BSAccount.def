@@ -1,0 +1,15 @@
+<BSAccount.def>
+  <BaseMethods>
+    <onPlayerLeaveArena>
+      <Args>
+        <arenaUID>	ARENA_UID	</arenaUID>
+        <reason>	KICK_REASON	</reason>
+      </Args>
+    </onPlayerLeaveArena>
+    <onAvatarDestroy>
+      <Args>
+        <avatarID>	OBJECT_ID	</avatarID>
+      </Args>
+    </onAvatarDestroy>
+  </BaseMethods>
+</BSAccount.def>

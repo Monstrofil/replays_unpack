@@ -1,0 +1,8 @@
+<BSEntity.def>
+  <Properties>
+    <arenaBase>
+      <Type>	MAILBOX	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaBase>
+  </Properties>
+</BSEntity.def>

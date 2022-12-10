@@ -1,0 +1,93 @@
+<BSArenaManager.def>
+  <Properties></Properties>
+  <BaseMethods>
+    <getArenasIDs>
+      <Args></Args>
+      <ReturnValues>
+        <arenasIDs>	ARRAY	  <of>	OBJECT_ID	</of>
+        </arenasIDs>
+      </ReturnValues>
+    </getArenasIDs>
+    <getArenas>
+      <Args></Args>
+      <ReturnValues>
+        <arenas>	ARRAY	  <of>	MAILBOX	</of>
+        </arenas>
+      </ReturnValues>
+    </getArenas>
+    <getArena>
+      <Args>
+        <arenaID>	OBJECT_ID	</arenaID>
+      </Args>
+      <ReturnValues>
+        <arena>	MAILBOX	</arena>
+      </ReturnValues>
+    </getArena>
+    <getArenasCount>
+      <Args>
+        <key>	STRING	</key>
+      </Args>
+      <ReturnValues>
+        <count>	PYTHON	</count>
+      </ReturnValues>
+    </getArenasCount>
+    <createArenaD>
+      <Args>
+        <mapID>	MAP_ID	</mapID>
+        <reusable>	BOOL	</reusable>
+        <expectPlayersNum>	UINT16	</expectPlayersNum>
+        <userData>	PYTHON	</userData>
+      </Args>
+      <ReturnValues>
+        <arena>	MAILBOX	</arena>
+        <arenaUID>	ARENA_UID	</arenaUID>
+      </ReturnValues>
+    </createArenaD>
+    <createArena>
+      <Args>
+        <requestor>	MAILBOX	</requestor>
+        <requestID>	INT32	</requestID>
+        <mapID>	MAP_ID	</mapID>
+        <reusable>	BOOL	</reusable>
+        <expectPlayersNum>	UINT16	</expectPlayersNum>
+        <userData>	PYTHON	</userData>
+      </Args>
+    </createArena>
+    <deleteArena>
+      <Arg>	OBJECT_ID	</Arg>
+    </deleteArena>
+    <onArenaCreated>
+      <Args>
+        <waitID>	UINT32	</waitID>
+        <arena>	MAILBOX	</arena>
+        <arenaUID>	ARENA_UID	</arenaUID>
+      </Args>
+    </onArenaCreated>
+    <onArenaCreationFailed>
+      <Args>
+        <waitID>	UINT32	</waitID>
+      </Args>
+    </onArenaCreationFailed>
+    <updateArenaCellappID>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	APP_ID	</Arg>
+    </updateArenaCellappID>
+    <clearArenasPool></clearArenasPool>
+    <restoreArena>
+      <Args>
+        <arenaData>	ARENA_DATA	</arenaData>
+        <isPooled>	BOOL	</isPooled>
+      </Args>
+    </restoreArena>
+    <onArenaDestroy>
+      <Args>
+        <arenaID>	OBJECT_ID	</arenaID>
+      </Args>
+    </onArenaDestroy>
+    <onArenaRelease>
+      <Args>
+        <arena>	MAILBOX	</arena>
+      </Args>
+    </onArenaRelease>
+  </BaseMethods>
+</BSArenaManager.def>

@@ -1,0 +1,47 @@
+<BSAvatar.def>
+  <Implements>
+    <Interface>	BSEntity	</Interface>
+  </Implements>
+  <Properties>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+    <account>
+      <Type>	MAILBOX	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </account>
+    <accDBID>
+      <Type>	DB_ID	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </accDBID>
+    <playerID>
+      <Type>	ARENA_PLAYER_ID	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </playerID>
+    <isDestroying>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </isDestroying>
+    <clientReleased>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </clientReleased>
+  </Properties>
+  <BaseMethods>
+    <smartDestroy></smartDestroy>
+    <kickFromArena>
+      <Args>
+        <reason>	KICK_REASON	</reason>
+      </Args>
+    </kickFromArena>
+    <giveClientToAccount></giveClientToAccount>
+  </BaseMethods>
+  <CellMethods>
+    <kickFromArena>
+      <Args>
+        <reason>	KICK_REASON	</reason>
+      </Args>
+    </kickFromArena>
+  </CellMethods>
+</BSAvatar.def>
