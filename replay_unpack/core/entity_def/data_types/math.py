@@ -1,6 +1,7 @@
 # coding=utf-8
 import struct
 from io import BytesIO
+from typing import Tuple
 
 from lxml.etree import Element
 
@@ -18,6 +19,9 @@ class _MathType(DataType):
     def _get_value_from_stream(self, stream: BytesIO, header_size: int):
         return tuple(struct.unpack(
             self.STRUCT_TYPE, stream.read(self._DATA_SIZE)))
+
+    def _add_value_to_stream(self, stream: BytesIO, payload: Tuple, header_size: int):
+        stream.write(struct.pack(self.STRUCT_TYPE, *payload))
 
     def _get_default_value_from_section(self, value: Element):
         raise RuntimeError("_get_default_value_from_section for %s is not defined" % self.__class__.__name__)

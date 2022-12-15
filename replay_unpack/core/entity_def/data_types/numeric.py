@@ -1,7 +1,6 @@
 # coding=utf-8
 import struct
 from io import BytesIO
-
 from lxml import etree
 
 from .base import DataType
@@ -18,6 +17,9 @@ class _NumericType(DataType):
 
     def _get_value_from_stream(self, stream: BytesIO, header_size: int):
         return struct.unpack(self.STRUCT_TYPE, stream.read(self._DATA_SIZE))[0]
+
+    def _add_value_to_stream(self, stream: BytesIO, payload, header_size: int):
+        stream.write(struct.pack(self.STRUCT_TYPE, payload))
 
     def _get_default_value_from_section(self, section: etree.ElementBase):
         return self.PYTHON_TYPE(section.text.strip())

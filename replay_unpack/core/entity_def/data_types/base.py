@@ -1,6 +1,7 @@
 # coding=utf-8
 import logging
 from io import BytesIO
+from typing import Any
 
 from lxml import etree
 
@@ -36,8 +37,11 @@ class DataType:
     def _get_value_from_stream(self, stream: BytesIO, header_size: int):
         raise NotImplementedError()
 
-    def write_to_stream(self, stream: BytesIO):
-        raise RuntimeError("Not supported for now")
+    def _add_value_to_stream(self, stream: BytesIO, payload: Any, header_size: int):
+        raise NotImplementedError()
+
+    def write_to_stream(self, stream: BytesIO, payload: Any, header_size: int = 1):
+        return self._add_value_to_stream(stream, payload, header_size)
 
     def _get_default_value_from_section(self, value: etree.ElementBase):
         raise NotImplementedError
