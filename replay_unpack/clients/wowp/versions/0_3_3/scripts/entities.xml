@@ -1,0 +1,31 @@
+<entities.xml>
+  <Account></Account>
+  <Login></Login>
+  <Avatar></Avatar>
+  <Arena></Arena>
+  <ArenaManager></ArenaManager>
+  <Prebattle></Prebattle>
+  <PrebattleManager></PrebattleManager>
+  <MsgManager></MsgManager>
+  <AMQPManager></AMQPManager>
+  <AccountRegistrator></AccountRegistrator>
+  <Node></Node>
+  <InvoiceManager></InvoiceManager>
+  <AvatarBot></AvatarBot>
+  <DominationArea></DominationArea>
+  <SpaceBound></SpaceBound>
+  <WaterLevel></WaterLevel>
+  <VoiceChatMgr></VoiceChatMgr>
+  <TeamObject></TeamObject>
+  <TeamCannon></TeamCannon>
+  <TeamTurret></TeamTurret>
+  <SpawnPoint></SpawnPoint>
+  <BomberStartPoint></BomberStartPoint>
+  <BomberEndPoint></BomberEndPoint>
+  <BasePoint></BasePoint>
+  <Turret></Turret>
+  <Cannon></Cannon>
+  <ObjectsArea></ObjectsArea>
+  <DominationBasePoint></DominationBasePoint>
+  <BombingBasePoint></BombingBasePoint>
+</entities.xml>

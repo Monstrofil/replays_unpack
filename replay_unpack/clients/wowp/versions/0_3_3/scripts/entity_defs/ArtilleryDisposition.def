@@ -1,0 +1,14 @@
+<ArtilleryDisposition.def>
+  <Volatile></Volatile>
+  <Properties>
+    <teamID>
+      <Type>	INT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </teamID>
+  </Properties>
+  <ClientMethods></ClientMethods>
+  <CellMethods></CellMethods>
+  <BaseMethods></BaseMethods>
+</ArtilleryDisposition.def>

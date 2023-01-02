@@ -1,0 +1,72 @@
+<Turret.def>
+  <Properties>
+    <teamID>
+      <Type>	INT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </teamID>
+    <modelID>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </modelID>
+    <groupName>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </groupName>
+    <respawnTime>
+      <Type>	FLOAT32	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </respawnTime>
+    <alwaysVisible>
+      <Type>	BOOL	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+      <Default>	0	</Default>
+    </alwaysVisible>
+    <actualModes>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </actualModes>
+    <battleLevels>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </battleLevels>
+    <isRandomPoint>
+      <Type>	UINT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+      <Default>	1	</Default>
+    </isRandomPoint>
+    <movementStrategyName>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </movementStrategyName>
+    <movementStrategyDataPath>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </movementStrategyDataPath>
+    <movementStrategyStartPosPrc>
+      <Type>	FLOAT32	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </movementStrategyStartPosPrc>
+  </Properties>
+</Turret.def>

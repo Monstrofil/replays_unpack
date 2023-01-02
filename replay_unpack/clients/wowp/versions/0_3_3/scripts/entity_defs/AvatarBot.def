@@ -1,0 +1,37 @@
+<AvatarBot.def>
+  <Implements>
+    <Interface>	AvatarInterface	</Interface>
+  </Implements>
+  <TempProperties>
+    <fireTime></fireTime>
+  </TempProperties>
+  <Properties>
+    <botType>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </botType>
+    <initHealthPrc>
+      <Type>	FLOAT	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+      <Default>	1.0	</Default>
+    </initHealthPrc>
+  </Properties>
+  <CellMethods>
+    <setPosition>
+      <Arg>	VECTOR3	</Arg>
+    </setPosition>
+    <lookAt>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </lookAt>
+    <configureFlight>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	INT8	</Arg>
+    </configureFlight>
+    <setupWaypointStrategySpline>
+      <Arg>	INT8	</Arg>
+    </setupWaypointStrategySpline>
+  </CellMethods>
+</AvatarBot.def>

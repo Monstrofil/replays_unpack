@@ -1,0 +1,14 @@
+<VoiceChatMgr.def>
+  <Properties></Properties>
+  <BaseMethods>
+    <registerAccount>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </registerAccount>
+    <createVoiceChannel>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+    </createVoiceChannel>
+  </BaseMethods>
+</VoiceChatMgr.def>

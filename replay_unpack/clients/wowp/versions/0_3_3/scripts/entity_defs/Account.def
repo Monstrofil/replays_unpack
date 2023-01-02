@@ -1,0 +1,479 @@
+<Account.def>
+  <Volatile>
+    <position></position>
+    <yaw></yaw>
+  </Volatile>
+  <Properties>
+    <Name>
+      <Type>	UNICODE_STRING	</Type>
+      <Persistent>	true	</Persistent>
+      <Default>	noName	</Default>
+      <DatabaseLength>	96	</DatabaseLength>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+    </Name>
+    <normalizedName>
+      <Type>	STRING	</Type>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+      <Persistent>	true	</Persistent>
+      <DatabaseLength>	96	</DatabaseLength>
+    </normalizedName>
+    <tmpName>
+      <Type>	STRING	</Type>
+      <Persistent>	true	</Persistent>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+      <DatabaseLength>	96	</DatabaseLength>
+    </tmpName>
+    <isDeveloper>
+      <Type>	BOOL	</Type>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+      <Flags>	BASE	</Flags>
+    </isDeveloper>
+    <spaID>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </spaID>
+    <attrs>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </attrs>
+    <premiumExpiryTime>
+      <Type>	UINT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </premiumExpiryTime>
+    <accountType>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </accountType>
+    <keeperTime>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </keeperTime>
+    <peripheryID>
+      <Type>	INT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </peripheryID>
+    <vhID>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </vhID>
+    <restrictions>
+      <Type>	ARRAY	  <of>	ACCOUNT_RESTRICTION	</of>
+      </Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </restrictions>
+    <clanID>
+      <Type>	INT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Default>	-1	</Default>
+      <Persistent>	true	</Persistent>
+    </clanID>
+    <clanLevelID>
+      <Type>	INT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Default>	-1	</Default>
+      <Persistent>	true	</Persistent>
+    </clanLevelID>
+    <autoBanTime>
+      <Type>	UINT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </autoBanTime>
+    <pdata>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <DatabaseLength>	1024000	</DatabaseLength>
+    </pdata>
+    <vivoxCredentials>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </vivoxCredentials>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+  </Properties>
+  <ClientMethods>
+    <onCmdResponse>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </onCmdResponse>
+    <updateArenaData>
+      <Arg>	ARENA_DATA	</Arg>
+    </updateArenaData>
+    <updateQueueList>
+      <Arg>	ACCOUNTS_QUEUE_DATA	</Arg>
+    </updateQueueList>
+    <receiveMessage>
+      <Arg>	STRING	</Arg>
+    </receiveMessage>
+    <receiveServerConsts>
+      <Arg>	STRING	</Arg>
+    </receiveServerConsts>
+    <receivePlayersCount>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </receivePlayersCount>
+    <receiveAccountInfo>
+      <Arg>	ACCOUNT_INFO	</Arg>
+    </receiveAccountInfo>
+    <receivePlayerInfo>
+      <Arg>	INITIAL_LOBBY_PLAYER_INFO	</Arg>
+    </receivePlayerInfo>
+    <updateCarouselResponse>
+      <Arg>	CAROUSEL_DATA	</Arg>
+    </updateCarouselResponse>
+    <getShopAirplanesResponse>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </getShopAirplanesResponse>
+    <receiveBuySlot>
+      <Arg>	INT32	</Arg>
+    </receiveBuySlot>
+    <receiveBuyPlane>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </receiveBuyPlane>
+    <receiveSellPlane>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </receiveSellPlane>
+    <receiveRepairPlane>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </receiveRepairPlane>
+    <setPrebattleStatistic>
+      <Arg>	STRING	</Arg>
+    </setPrebattleStatistic>
+    <receiveVOIPCredentials>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </receiveVOIPCredentials>
+    <onKickedFromServer>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	UINT32	</Arg>
+    </onKickedFromServer>
+    <onLeftQueue></onLeftQueue>
+    <updateTraningRoom>
+      <Arg>	STRING	</Arg>
+    </updateTraningRoom>
+    <removeTraningRoom>
+      <Arg>	INT32	</Arg>
+    </removeTraningRoom>
+    <refreshRoomListResponse>
+      <Arg>	ARRAY	  <of>	PREBATTLES_INFO	</of>
+      </Arg>
+    </refreshRoomListResponse>
+    <getInitDataOnEnterToTrainingRoomResponse>
+      <Arg>	STRING	</Arg>
+    </getInitDataOnEnterToTrainingRoomResponse>
+    <updatePrebattleCreateRoomAvailableFilters></updatePrebattleCreateRoomAvailableFilters>
+    <updateRoomTeamAccount>
+      <Arg>	STRING	</Arg>
+    </updateRoomTeamAccount>
+    <removeRoomTeamAccount>
+      <Arg>	INT32	</Arg>
+    </removeRoomTeamAccount>
+    <forceLeaveRoom></forceLeaveRoom>
+    <showTrainingRoom></showTrainingRoom>
+    <updateCarouselAirplaneResponse>
+      <Arg>	CAROUSEL_AIRPLANE_DATA	</Arg>
+    </updateCarouselAirplaneResponse>
+    <hideForceStartButton>
+      <Arg>	BOOL	</Arg>
+    </hideForceStartButton>
+    <onChoosenByBalancer>
+      <Arg>	BOOL	</Arg>
+    </onChoosenByBalancer>
+    <receviveBanInfo>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT32	</Arg>
+    </receviveBanInfo>
+    <startTutorial>
+      <Arg>	INT8	</Arg>
+    </startTutorial>
+  </ClientMethods>
+  <BaseMethods>
+    <setLoadNextTutorialLesson>
+      <Arg>	INT8	</Arg>
+    </setLoadNextTutorialLesson>
+    <onTutorialLessonComplete>
+      <Arg>	UINT16	</Arg>
+    </onTutorialLessonComplete>
+    <onTutorialInitialized></onTutorialInitialized>
+    <printDebugInformation>
+      <Arg>	UINT32	</Arg>
+    </printDebugInformation>
+    <startTutorial>
+      <Arg>	UINT16	</Arg>
+      <Exposed></Exposed>
+    </startTutorial>
+    <setPrebattleStatistic>
+      <Arg>	STRING	</Arg>
+    </setPrebattleStatistic>
+    <doCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </doCommand>
+    <onFarCommandRespond>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </onFarCommandRespond>
+    <onAvatarCreated>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </onAvatarCreated>
+    <giveClientToAvatar>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </giveClientToAvatar>
+    <onAvatarClientDeath></onAvatarClientDeath>
+    <connect2Arena>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Exposed></Exposed>
+    </connect2Arena>
+    <selectActiveSlot>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </selectActiveSlot>
+    <selectActivePlane>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </selectActivePlane>
+    <connect2Queue>
+      <Exposed></Exposed>
+    </connect2Queue>
+    <connect2SingleQueue>
+      <Exposed></Exposed>
+    </connect2SingleQueue>
+    <startRoom>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </startRoom>
+    <leaveQueue>
+      <Exposed></Exposed>
+    </leaveQueue>
+    <onLeftQueue>
+      <Arg>	BOOL	</Arg>
+    </onLeftQueue>
+    <startQueue>
+      <Exposed></Exposed>
+    </startQueue>
+    <sendQueueMessage>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </sendQueueMessage>
+    <processSpaAttributes>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </processSpaAttributes>
+    <exportDiffToAMQP></exportDiffToAMQP>
+    <exportToAMQP></exportToAMQP>
+    <takeClientFrom>
+      <Arg>	MAILBOX	</Arg>
+    </takeClientFrom>
+    <releaseClient>
+      <Arg>	MAILBOX	</Arg>
+    </releaseClient>
+    <keepAliveFor>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT16	</Arg>
+    </keepAliveFor>
+    <stopKeepingAlive>
+      <Arg>	UINT8	</Arg>
+    </stopKeepingAlive>
+    <kickSelf>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	UINT32	</Arg>
+    </kickSelf>
+    <onKickedFromArena>
+      <Arg>	UINT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT16	</Arg>
+    </onKickedFromArena>
+    <unlockFromBattle></unlockFromBattle>
+    <setRestriction>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </setRestriction>
+    <delRestriction>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </delRestriction>
+    <setType>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </setType>
+    <onArenaCreated>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </onArenaCreated>
+    <receiveArenas>
+      <Arg>	ARRAY	  <of>	MAILBOX	</of>
+      </Arg>
+    </receiveArenas>
+    <receiveArenasData>
+      <Arg>	ARRAY	  <of>	ARENA_DATA	</of>
+      </Arg>
+    </receiveArenasData>
+    <getCreatedArenaList>
+      <Exposed></Exposed>
+    </getCreatedArenaList>
+    <createDevArena>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Exposed></Exposed>
+    </createDevArena>
+    <deleteArena>
+      <Arg>	OBJECT_ID	</Arg>
+      <Exposed></Exposed>
+    </deleteArena>
+    <onAvatarLeftArena>
+      <Arg>	BATTLE_RESULTS_EXT	</Arg>
+      <Arg>	INT16	</Arg>
+    </onAvatarLeftArena>
+    <getPlayersCount>
+      <Exposed></Exposed>
+    </getPlayersCount>
+    <requestAccountInfo>
+      <Exposed></Exposed>
+    </requestAccountInfo>
+    <updateCarouselSlotRequest>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </updateCarouselSlotRequest>
+    <getShopAirplanesRequest>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </getShopAirplanesRequest>
+    <requestBuySlot>
+      <Exposed></Exposed>
+    </requestBuySlot>
+    <requestBuyPlane>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </requestBuyPlane>
+    <requestSellPlane>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </requestSellPlane>
+    <requestRepairPlane>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </requestRepairPlane>
+    <requestRefillShells>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </requestRefillShells>
+    <onVoipAccountCreated>
+      <Arg>	STRING	</Arg>
+    </onVoipAccountCreated>
+    <sendSystemMessage>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </sendSystemMessage>
+    <sendPropertiesTo>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+    </sendPropertiesTo>
+    <createAvatar>
+      <Arg>	ARENA_INFO	</Arg>
+      <Arg>	SHORT_AVATAR_INFO	</Arg>
+    </createAvatar>
+    <onGetPrebattleFilters>
+      <Arg>	STRING	</Arg>
+    </onGetPrebattleFilters>
+    <onGetPrebattleCreationAvailableParameters>
+      <Arg>	STRING	</Arg>
+    </onGetPrebattleCreationAvailableParameters>
+    <onPrebattleAvailableTraningCreateRoomFilters>
+      <Arg>	STRING	</Arg>
+    </onPrebattleAvailableTraningCreateRoomFilters>
+    <refreshRoomListResponse>
+      <Arg>	ARRAY	  <of>	PREBATTLES_INFO	</of>
+      </Arg>
+    </refreshRoomListResponse>
+    <getInitDataOnEnterToTrainingRoomResponse>
+      <Arg>	STRING	</Arg>
+    </getInitDataOnEnterToTrainingRoomResponse>
+    <onEnterTrainingRoom>
+      <Arg>	MAILBOX	</Arg>
+    </onEnterTrainingRoom>
+    <addBotsToTrainingRoom>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </addBotsToTrainingRoom>
+    <updateRoomTeamAccount>
+      <Arg>	STRING	</Arg>
+    </updateRoomTeamAccount>
+    <removeRoomTeamAccount>
+      <Arg>	INT32	</Arg>
+    </removeRoomTeamAccount>
+    <forceLeaveRoom></forceLeaveRoom>
+    <forceStartBalancerBattle>
+      <Exposed></Exposed>
+    </forceStartBalancerBattle>
+    <onChoosenByBalancer>
+      <Arg>	BOOL	</Arg>
+    </onChoosenByBalancer>
+    <processInvoices></processInvoices>
+  </BaseMethods>
+</Account.def>

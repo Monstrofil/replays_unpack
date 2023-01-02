@@ -1,0 +1,28 @@
+<TeamCannon.def>
+  <Implements>
+    <Interface>	TeamObjectInterface	</Interface>
+  </Implements>
+  <TempProperties>
+    <weapons></weapons>
+    <logic></logic>
+    <updatableManager></updatableManager>
+  </TempProperties>
+  <Properties>
+    <siegeActivated>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </siegeActivated>
+  </Properties>
+  <CellMethods>
+    <shoot>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </shoot>
+    <receiveDamageFromCannon>
+      <Arg>	FLOAT32	</Arg>
+    </receiveDamageFromCannon>
+    <onSiegeActivating>
+      <Arg>	BOOL	</Arg>
+    </onSiegeActivating>
+  </CellMethods>
+</TeamCannon.def>

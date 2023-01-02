@@ -1,0 +1,37 @@
+<Avatar.def>
+  <Implements>
+    <Interface>	AvatarInterface	</Interface>
+  </Implements>
+  <Properties>
+    <isChatBan>
+      <Type>	INT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </isChatBan>
+  </Properties>
+  <BaseMethods>
+    <updateObjectsData>
+      <Arg>	ARRAY	  <of>	UPDATE_OBJECT_INFO	</of>
+      </Arg>
+    </updateObjectsData>
+  </BaseMethods>
+  <ClientMethods>
+    <sendInitialData>
+      <Arg>	STRING	</Arg>
+    </sendInitialData>
+    <onPartFlagSwitchedOn>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </onPartFlagSwitchedOn>
+    <onPartStateChanging>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+    </onPartStateChanging>
+    <updateObjectsData>
+      <Arg>	ARRAY	  <of>	UPDATE_OBJECT_INFO	</of>
+      </Arg>
+    </updateObjectsData>
+  </ClientMethods>
+</Avatar.def>

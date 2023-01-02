@@ -1,0 +1,18 @@
+<Node.def>
+  <Properties>
+    <baseappID>
+      <Type>	INT32	</Type>
+      <Flags>	BASE	</Flags>
+    </baseappID>
+  </Properties>
+  <BaseMethods>
+    <sync>
+      <Arg>	PYTHON	</Arg>
+    </sync>
+    <onBroadcastMessage>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </onBroadcastMessage>
+  </BaseMethods>
+</Node.def>

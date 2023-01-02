@@ -1,0 +1,48 @@
+<Prebattle.def>
+  <Properties>
+    <settings>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </settings>
+  </Properties>
+  <BaseMethods>
+    <addPlayer>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT8	</Arg>
+    </addPlayer>
+    <addBot>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </addBot>
+    <setTeamReady>
+      <Arg>	INT8	</Arg>
+    </setTeamReady>
+    <getInitDataOnEnterToTrainingRoom>
+      <Arg>	MAILBOX	</Arg>
+    </getInitDataOnEnterToTrainingRoom>
+    <removePlayer>
+      <Arg>	OBJECT_ID	</Arg>
+    </removePlayer>
+    <updateAccountTeamID>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+    </updateAccountTeamID>
+    <startPrebattleGame>
+      <Arg>	MAILBOX	</Arg>
+    </startPrebattleGame>
+    <onArenaCreated>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	INT16	</Arg>
+    </onArenaCreated>
+    <forceCloseRoomWindowOnAccounts></forceCloseRoomWindowOnAccounts>
+    <destroySelf></destroySelf>
+    <unlockAccountInPrebattle>
+      <Arg>	OBJECT_ID	</Arg>
+    </unlockAccountInPrebattle>
+  </BaseMethods>
+</Prebattle.def>

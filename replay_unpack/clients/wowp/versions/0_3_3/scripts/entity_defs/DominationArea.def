@@ -1,0 +1,20 @@
+<DominationArea.def>
+  <Volatile></Volatile>
+  <Properties>
+    <teamID>
+      <Type>	INT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </teamID>
+    <radius>
+      <Type>	FLOAT32	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </radius>
+  </Properties>
+  <ClientMethods></ClientMethods>
+  <CellMethods></CellMethods>
+  <BaseMethods></BaseMethods>
+</DominationArea.def>

@@ -1,0 +1,88 @@
+<PrebattleManager.def>
+  <Properties></Properties>
+  <BaseMethods>
+    <registerPrebattle>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </registerPrebattle>
+    <updatePrebattleInfo>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </updatePrebattleInfo>
+    <retrievePrebattleFilters>
+      <Arg>	MAILBOX	</Arg>
+    </retrievePrebattleFilters>
+    <retrievePrebattleCreationAvailableParameters>
+      <Arg>	MAILBOX	</Arg>
+    </retrievePrebattleCreationAvailableParameters>
+    <retrievePrebattleAvailableTraningCreateRoomFilters>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+    </retrievePrebattleAvailableTraningCreateRoomFilters>
+    <requestPrebattlesListByFilter>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </requestPrebattlesListByFilter>
+    <joinPrebattle>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </joinPrebattle>
+    <getInitDataOnEnterToTrainingRoom>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </getInitDataOnEnterToTrainingRoom>
+    <leaveTrainingRoom>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </leaveTrainingRoom>
+    <updateAccountTeamID>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+    </updateAccountTeamID>
+    <startPrebattleGame>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </startPrebattleGame>
+    <subscribeRoomList>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+    </subscribeRoomList>
+    <unSubscribeRoomList>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+    </unSubscribeRoomList>
+    <destroySelf></destroySelf>
+    <onPrebattleCreated>
+      <Arg>	MAILBOX	</Arg>
+    </onPrebattleCreated>
+    <unlockAccountInPrebattle>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </unlockAccountInPrebattle>
+    <addBotToTrainingRoom>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </addBotToTrainingRoom>
+  </BaseMethods>
+</PrebattleManager.def>

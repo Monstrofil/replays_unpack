@@ -1,0 +1,24 @@
+<ObjectsArea.def>
+  <Volatile></Volatile>
+  <Properties>
+    <areaID>
+      <Type>	INT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </areaID>
+    <radius>
+      <Type>	FLOAT32	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </radius>
+    <actualModes>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </actualModes>
+  </Properties>
+  <BaseMethods></BaseMethods>
+</ObjectsArea.def>

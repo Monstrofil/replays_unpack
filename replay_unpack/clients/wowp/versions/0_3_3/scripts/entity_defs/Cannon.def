@@ -1,0 +1,40 @@
+<Cannon.def>
+  <Properties>
+    <teamID>
+      <Type>	INT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </teamID>
+    <modelID>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </modelID>
+    <groupName>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </groupName>
+    <respawnTime>
+      <Type>	FLOAT32	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </respawnTime>
+    <alwaysVisible>
+      <Type>	BOOL	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </alwaysVisible>
+    <actualModes>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </actualModes>
+  </Properties>
+</Cannon.def>

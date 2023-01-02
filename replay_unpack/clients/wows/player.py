@@ -24,7 +24,8 @@ from .network.packets import (
     PACKETS_MAPPING
 )
 
-
+last_gap = 0
+last_negative = 0xffffffff
 class ReplayPlayer(ControlledPlayerBase):
 
     def _get_definitions(self, version):
@@ -103,6 +104,13 @@ class ReplayPlayer(ControlledPlayerBase):
             self._battle_controller.create_entity(entity)
 
         elif isinstance(packet, Position):
+            if packet.entityId == 1154822:
+                print(packet.entityId, packet.position, )
+            # print('unknown', last_gap, packet.entityId, packet)
+            # with open('pack.raw', 'a') as f:
+            #     f.write("%s %s %s %s\n" % (packet.entityId, "{0:019b}".format((0b011111111111111111100000 - 32 * packet.entityId) >> 5), (0b011111111111111111100000 - 32 * packet.entityId) >> 5,
+            #                           packet.position.x))
+            # return
             self._battle_controller.entities[packet.entityId].position = packet.position
             self._battle_controller.entities[packet.entityId].yaw = packet.yaw
             self._battle_controller.entities[packet.entityId].pitch = packet.pitch

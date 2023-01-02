@@ -1,0 +1,16 @@
+<SpawnPoint.def>
+  <Properties>
+    <teamID>
+      <Type>	INT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </teamID>
+    <battleLevels>
+      <Type>	STRING	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </battleLevels>
+  </Properties>
+</SpawnPoint.def>

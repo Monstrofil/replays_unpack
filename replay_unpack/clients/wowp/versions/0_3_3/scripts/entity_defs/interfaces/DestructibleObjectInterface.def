@@ -1,0 +1,143 @@
+<DestructibleObjectInterface.def>
+  <TempProperties>
+    <controllers></controllers>
+    <lastServerTime></lastServerTime>
+    <settings></settings>
+    <maxHealth></maxHealth>
+    <p></p>
+    <profiler></profiler>
+    <timersLastServerTime></timersLastServerTime>
+    <objID></objID>
+    <partTypes></partTypes>
+  </TempProperties>
+  <Properties>
+    <cp>
+      <Type>	PYTHON	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </cp>
+    <battleLevel>
+      <Type>	INT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </battleLevel>
+    <arena>
+      <Type>	MAILBOX	</Type>
+      <Flags>	BASE	</Flags>
+    </arena>
+    <arenaBase>
+      <Type>	MAILBOX	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaBase>
+    <arenaData>
+      <Type>	CLIENT_ARENA_DATA	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaData>
+    <alwaysVisible>
+      <Type>	BOOL	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </alwaysVisible>
+    <objectName>
+      <Type>	UNICODE_STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <Persistent>	true	</Persistent>
+    </objectName>
+    <state>
+      <Type>	INT32	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </state>
+    <partFlags>
+      <Type>	ARRAY	  <of>	KEY_VALUE_PAIR_UINT8	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </partFlags>
+    <partStates>
+      <Type>	ARRAY	  <of>	KEY_VALUE_PAIR_UINT8	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </partStates>
+    <health>
+      <Type>	FLOAT32	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </health>
+    <healthPrc>
+      <Type>	UINT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </healthPrc>
+    <rammed>
+      <Type>	INT32	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </rammed>
+    <lastDamagerID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </lastDamagerID>
+    <lastDamagedPartID>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </lastDamagedPartID>
+    <lastDamageReason>
+      <Type>	INT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </lastDamageReason>
+    <vector>
+      <Type>	VECTOR3	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </vector>
+    <rotation>
+      <Type>	VECTOR4	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </rotation>
+    <mass>
+      <Type>	FLOAT32	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </mass>
+    <actionDealerType>
+      <Type>	INT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </actionDealerType>
+    <visibleByEnemy>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </visibleByEnemy>
+    <unitNumber>
+      <Type>	INT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </unitNumber>
+  </Properties>
+  <CellMethods>
+    <getKillerData>
+      <Arg>	MAILBOX	</Arg>
+    </getKillerData>
+    <wasDetected>
+      <Arg>	OBJECT_ID	</Arg>
+    </wasDetected>
+    <wasLost>
+      <Arg>	OBJECT_ID	</Arg>
+    </wasLost>
+    <ramming>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </ramming>
+    <receiveSignal>
+      <Arg>	INT16	</Arg>
+    </receiveSignal>
+    <receiveBullet>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_UINT8_FLOAT32	</of>
+      </Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT16	</Arg>
+    </receiveBullet>
+    <receiveExplosiveDamage>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_UINT8_FLOAT32	</of>
+      </Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+    </receiveExplosiveDamage>
+  </CellMethods>
+  <ClientMethods></ClientMethods>
+</DestructibleObjectInterface.def>

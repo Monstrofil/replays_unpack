@@ -1,0 +1,59 @@
+<MsgManager.def>
+  <Properties>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+  </Properties>
+  <BaseMethods>
+    <sendChatMessage>
+      <Arg>	UINT32	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	UNICODE_STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </sendChatMessage>
+    <sendChatMessageHistory>
+      <Arg>	MAILBOX	</Arg>
+    </sendChatMessageHistory>
+    <setMOTDMessage>
+      <Arg>	STRING	</Arg>
+    </setMOTDMessage>
+    <setRebootMessage>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </setRebootMessage>
+    <setBroadcastMessage>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </setBroadcastMessage>
+    <register>	!-- Account Name --&gt;	  <Arg>	OBJECT_ID	</Arg>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UNICODE_STRING	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </register>
+    <deregister>
+      <Arg>	OBJECT_ID	</Arg>
+    </deregister>
+    <deregisterAll></deregisterAll>
+    <printDebugInformation>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </printDebugInformation>
+    <doCmdUserBan>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </doCmdUserBan>
+    <onAccountKept>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT32	</Arg>
+    </onAccountKept>
+    <onAccountPropertiesChanged>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </onAccountPropertiesChanged>
+  </BaseMethods>
+</MsgManager.def>

@@ -1,0 +1,225 @@
+<Arena.def>
+  <Properties>
+    <battleLevel>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+      <Default>	5	</Default>
+    </battleLevel>
+    <typeID>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+    </typeID>
+    <arenaMODType>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+    </arenaMODType>
+    <gameMode>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+    </gameMode>
+    <creatorMailBox>
+      <Type>	MAILBOX	</Type>
+      <Flags>	BASE	</Flags>
+    </creatorMailBox>
+    <ready>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </ready>
+    <playerCount>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+    </playerCount>
+    <arenaState>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+    </arenaState>
+    <locked>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </locked>
+    <cellTypeID>
+      <Type>	INT16	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </cellTypeID>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+    <battleDuration>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+    </battleDuration>
+  </Properties>
+  <ClientMethods></ClientMethods>
+  <CellMethods></CellMethods>
+  <BaseMethods>
+    <receiveTutorialData>
+      <Arg>	ARRAY	  <of>	UINT16	</of>
+      </Arg>
+      <Arg>	UINT16	</Arg>
+    </receiveTutorialData>
+    <receiveStatsFromTeamObject>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </receiveStatsFromTeamObject>
+    <updateObjectData>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	TUPLE	  <of>	UINT8	</of>
+        <size>	2	</size>
+      </Arg>
+      <Arg>	BOOL	</Arg>
+    </updateObjectData>
+    <receiveOperationResponse>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </receiveOperationResponse>
+    <onCannonShellExplosion>
+      <Arg>	OBJECT_ID	</Arg>
+    </onCannonShellExplosion>
+    <onAreaOccupation>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+    </onAreaOccupation>
+    <receiveBomberInfo>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </receiveBomberInfo>
+    <onBombingSuccess></onBombingSuccess>
+    <getPlayersList>
+      <Arg>	MAILBOX	</Arg>
+    </getPlayersList>
+    <joinAccount>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	AVATAR_ARENA_CONNECTION_INFO	</Arg>
+    </joinAccount>
+    <joinBot>
+      <Arg>	BOT_ARENA_CONNECTION_INFO	</Arg>
+      <Arg>	INT8	</Arg>
+    </joinBot>
+    <sendTextMessage>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </sendTextMessage>
+    <sendMarkerMessage>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </sendMarkerMessage>
+    <onArenaLoaded>
+      <Arg>	OBJECT_ID	</Arg>
+    </onArenaLoaded>
+    <onAvatarCreated>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </onAvatarCreated>
+    <onBotCreated>
+      <Arg>	MAILBOX	</Arg>
+    </onBotCreated>
+    <onPlayerLeave>
+      <Arg>	MAILBOX	</Arg>
+    </onPlayerLeave>
+    <onDestruction>
+      <Arg>	KILLING_REPORT	</Arg>
+    </onDestruction>
+    <onRespawn>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	BOOL	</Arg>
+    </onRespawn>
+    <onTeamObjectResurrection>
+      <Arg>	OBJECT_ID	</Arg>
+    </onTeamObjectResurrection>
+    <ask2StartTheGame></ask2StartTheGame>
+    <kickoutAllPlayers>
+      <Arg>	UINT8	</Arg>
+    </kickoutAllPlayers>
+    <kickoutPlayers>
+      <Arg>	UINT8	</Arg>
+    </kickoutPlayers>
+    <deleteArena></deleteArena>
+    <doFarCall>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </doFarCall>
+    <forAllBaseCall>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </forAllBaseCall>
+    <receiveStatsFromAvatar>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </receiveStatsFromAvatar>
+    <onClientCreated>
+      <Arg>	OBJECT_ID	</Arg>
+    </onClientCreated>
+    <updateCellappID>
+      <Arg>	INT32	</Arg>
+    </updateCellappID>
+    <doFarCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </doFarCommand>
+    <respondFarCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </respondFarCommand>
+    <request4Data>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </request4Data>
+    <requestPlayerData>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </requestPlayerData>
+    <respondPlayerData>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </respondPlayerData>
+    <switchFreezeArena></switchFreezeArena>
+    <stopByFailure>
+      <Arg>	UINT8	</Arg>
+    </stopByFailure>
+    <reuse>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </reuse>
+    <smartDestroy>
+      <Arg>	UINT8	</Arg>
+    </smartDestroy>
+    <onVoiceChannelCreated>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT16	</Arg>
+    </onVoiceChannelCreated>
+    <onUpdateTeamObjectTakenDamage>
+      <Arg>	OBJECT_ID	</Arg>
+    </onUpdateTeamObjectTakenDamage>
+    <respawnNewAirplane>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT16	</Arg>
+    </respawnNewAirplane>
+    <onAvatarLost>
+      <Arg>	OBJECT_ID	</Arg>
+    </onAvatarLost>
+  </BaseMethods>
+</Arena.def>

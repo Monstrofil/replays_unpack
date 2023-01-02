@@ -1,0 +1,20 @@
+<BomberEndPoint.def>
+  <Volatile></Volatile>
+  <Properties>
+    <teamID>
+      <Type>	INT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </teamID>
+    <index>
+      <Type>	INT8	</Type>
+      <Flags>	EDITOR_ONLY	</Flags>
+      <Persistent>	true	</Persistent>
+      <Editable>	true	</Editable>
+    </index>
+  </Properties>
+  <ClientMethods></ClientMethods>
+  <CellMethods></CellMethods>
+  <BaseMethods></BaseMethods>
+</BomberEndPoint.def>

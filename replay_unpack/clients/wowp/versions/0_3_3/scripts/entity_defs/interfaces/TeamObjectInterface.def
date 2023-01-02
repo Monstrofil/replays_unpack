@@ -1,0 +1,55 @@
+<TeamObjectInterface.def>
+  <Implements>
+    <Interface>	DestructibleObjectInterface	</Interface>
+  </Implements>
+  <Volatile>
+    <position></position>
+    <yaw></yaw>
+    <pitch></pitch>
+  </Volatile>
+  <TempProperties>
+    <stealthFactor></stealthFactor>
+    <_damageController></_damageController>
+    <vector></vector>
+    <maxHealth></maxHealth>
+  </TempProperties>
+  <Properties>
+    <initialYaw>
+      <Type>	FLOAT32	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </initialYaw>
+    <modelID>
+      <Type>	INT32	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </modelID>
+    <teamIndex>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </teamIndex>
+    <arenaType>
+      <Type>	INT16	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaType>
+    <movementStrategyName>
+      <Type>	STRING	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </movementStrategyName>
+    <movementStrategyDataPath>
+      <Type>	STRING	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </movementStrategyDataPath>
+    <movementStrategyStartPosPrc>
+      <Type>	FLOAT32	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </movementStrategyStartPosPrc>
+  </Properties>
+  <CellMethods>
+    <respawnWithDelay>
+      <Arg>	FLOAT32	</Arg>
+    </respawnWithDelay>
+    <requestFinalStats></requestFinalStats>
+  </CellMethods>
+  <BaseMethods>
+    <smartDestroy></smartDestroy>
+  </BaseMethods>
+</TeamObjectInterface.def>

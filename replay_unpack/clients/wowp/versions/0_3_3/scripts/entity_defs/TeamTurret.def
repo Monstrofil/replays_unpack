@@ -1,0 +1,24 @@
+<TeamTurret.def>
+  <Implements>
+    <Interface>	TeamObjectInterface	</Interface>
+  </Implements>
+  <TempProperties></TempProperties>
+  <Properties>
+    <turretsRotation>
+      <Type>	ARRAY	  <of>	UINT16	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turretsRotation>
+    <armamentStates>
+      <Type>	ARRAY	  <of>	INT32	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </armamentStates>
+    <targetsAltitude>
+      <Type>	ARRAY	  <of>	INT16	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </targetsAltitude>
+  </Properties>
+  <CellMethods></CellMethods>
+</TeamTurret.def>
