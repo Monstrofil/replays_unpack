@@ -89,6 +89,10 @@ class EntityMethod:
 
         return unpacked_args, unpacked_kwargs
 
+    def write_to_stream(self, stream: BytesIO, *args):
+        for arg, value in zip(self._arguments, args):
+            arg.type.write_to_stream(stream, value, self._variable_header_size)
+
     def __repr__(self):
         return "{name} ({args})".format(
             name=self._name, args=self._arguments)
@@ -111,6 +115,12 @@ class MethodDescriptions:
         array = self._internal_index[:]
         array = list(filter(lambda method: method.is_exposed(), array))
         array.sort(key=lambda i: i.get_size_in_bytes())
+        return array
+
+    def get_internal_index_map(self) -> List[EntityMethod]:
+        array = self._internal_index[:]
+        array = list(filter(lambda method: method.is_exposed(), array))
+        # array.sort(key=lambda i: i.get_size_in_bytes())
         return array
 
 

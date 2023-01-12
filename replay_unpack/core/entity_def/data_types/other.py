@@ -10,7 +10,7 @@ from lxml import etree
 from .base import DataType
 from .constants import INFINITY
 from .nested_types import PyFixedDict, PyFixedList
-from .numeric import UInt8
+from .numeric import UInt8, UInt16
 
 
 class _DataType(DataType):
@@ -82,6 +82,17 @@ class String(_DataType):
             # probably this is a pickle string or smtg like that
             return _str
 
+    def _add_value_to_stream(self, stream: BytesIO, payload: str, header_size: int):
+        if len(payload) < 0xff:
+            UInt8().write_to_stream(stream, len(payload))
+        else:
+            UInt8().write_to_stream(stream, 0xff)
+            UInt16().write_to_stream(stream, len(payload))
+            # TODO: actually this is 3'd byte of len, but who cares?
+            UInt8().write_to_stream(stream, 0x00)
+
+        stream.write(payload.encode('utf-8'))
+
     def _get_default_value_from_section(self, section: etree.ElementBase):
         assert isinstance(section.text, str)
         return section.text
@@ -131,6 +142,15 @@ class FixedDict(_DataType):
             kw[key] = _type.create_from_stream(stream, header_size=header_size)
         return kw
 
+    def _add_value_to_stream(self, stream: BytesIO, payload: dict, header_size: int):
+        if self.allow_none:
+            if payload is None:
+                UInt8().write_to_stream(stream, 0)
+            else:
+                UInt8().write_to_stream(stream, 1)
+        for key, _type in self.attributes.items():
+            _type.write_to_stream(stream, payload[key], header_size=header_size)
+
     @classmethod
     def from_section(cls, alias, section: etree.ElementBase, header_size=1):
         attributes = OrderedDict()
@@ -176,6 +196,14 @@ class Array(_DataType):
         for _ in range(size):
             result.append(self.type.create_from_stream(stream, header_size=header_size))
         return result
+
+    def _add_value_to_stream(self, stream: BytesIO, payload: list, header_size: int):
+        if self.array_size is None:
+            UInt8(header_size=header_size). \
+                write_to_stream(stream, len(payload), header_size=header_size)
+
+        for value in payload:
+            self.type.write_to_stream(stream, value, header_size=header_size)
 
     @classmethod
     def from_section(cls, alias, section: etree.ElementBase, header_size):
