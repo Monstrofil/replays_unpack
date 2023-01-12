@@ -1,0 +1,12 @@
+<BigTeamObject.def>
+  <TempProperties>
+    <presentPartsMap></presentPartsMap>
+  </TempProperties>
+  <AppealRadius>	2000	</AppealRadius>
+  <DetailedPosition>
+    <SendLatestOnly>	true	</SendLatestOnly>
+  </DetailedPosition>
+  <Implements>
+    <Interface>	TeamObjectInterface	</Interface>
+  </Implements>
+</BigTeamObject.def>

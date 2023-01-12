@@ -1,0 +1,35 @@
+<BattleEntryPoint.def>
+  <Properties>
+    <name>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+    </name>
+    <configModule>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+    </configModule>
+  </Properties>
+  <BaseMethods>
+    <addAccount>
+      <Arg>	PYTHON	</Arg>
+    </addAccount>
+    <addSquad>
+      <Arg>	PYTHON	</Arg>
+    </addSquad>
+    <deleteAccount>
+      <Arg>	DB_ID	</Arg>
+    </deleteAccount>
+    <deleteSquad>
+      <Arg>	OBJECT_ID	</Arg>
+    </deleteSquad>
+    <forceStartBattle>
+      <Arg>	DB_ID	</Arg>
+    </forceStartBattle>
+    <getAvaregeTime>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT16	</Arg>
+    </getAvaregeTime>
+  </BaseMethods>
+</BattleEntryPoint.def>

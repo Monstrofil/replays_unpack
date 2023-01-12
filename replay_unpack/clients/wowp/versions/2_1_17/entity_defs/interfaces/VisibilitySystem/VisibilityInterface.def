@@ -1,0 +1,31 @@
+<VisibilityInterface.def>
+  <Properties>
+    <alwaysVisible>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </alwaysVisible>
+    <visibilityDistance>
+      <Type>	FLOAT32	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </visibilityDistance>
+    <baseVisionDistance>
+      <Type>	FLOAT32	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </baseVisionDistance>
+    <visibleByTeams>
+      <Type>	ARRAY	  <of>	UINT8	</of>
+      </Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </visibleByTeams>
+  </Properties>
+  <TempProperties>
+    <wasDetected></wasDetected>
+  </TempProperties>
+  <CellMethods>
+    <onWasDetected>
+      <Args>
+        <entityID>	OBJECT_ID	</entityID>
+      </Args>
+    </onWasDetected>
+  </CellMethods>
+</VisibilityInterface.def>

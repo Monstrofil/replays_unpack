@@ -1,0 +1,32 @@
+<ChatChannel.def>
+  <Properties>
+    <typeName>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+    </typeName>
+    <settings>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+      <Default>	{}	</Default>
+    </settings>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+      <Default>	{}	</Default>
+    </bp>
+  </Properties>
+  <BaseMethods>
+    <messenger_onActionByClient>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	GENERIC_MESSENGER_ARGS	</Arg>
+    </messenger_onActionByClient>
+    <messenger_onActionByServer>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	GENERIC_MESSENGER_ARGS	</Arg>
+    </messenger_onActionByServer>
+  </BaseMethods>
+</ChatChannel.def>

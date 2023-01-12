@@ -1,0 +1,93 @@
+<Prebattle.def>
+  <Implements>
+    <Interface>	ArenaRequestor	</Interface>
+  </Implements>
+  <Properties>
+    <settings>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </settings>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+  </Properties>
+  <BaseMethods>
+    <addPlayer>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </addPlayer>
+    <updatePlayerPlaneConfiguration>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+    </updatePlayerPlaneConfiguration>
+    <addBot>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT8	</Arg>
+    </addBot>
+    <botsAutoFill>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </botsAutoFill>
+    <editBot>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT8	</Arg>
+    </editBot>
+    <swapTeams></swapTeams>
+    <moveTeam>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </moveTeam>
+    <botsRemove>
+      <Arg>	OBJECT_ID	</Arg>
+    </botsRemove>
+    <setTeamReady>
+      <Arg>	INT8	</Arg>
+    </setTeamReady>
+    <getInitDataOnEnterToTrainingRoom>
+      <Arg>	MAILBOX	</Arg>
+    </getInitDataOnEnterToTrainingRoom>
+    <removePlayer>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+    </removePlayer>
+    <updateAccountTeamID>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+    </updateAccountTeamID>
+    <startPrebattleGame>
+      <Arg>	INT32	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </startPrebattleGame>
+    <forceCloseRoomWindowOnAccounts></forceCloseRoomWindowOnAccounts>
+    <destroySelf></destroySelf>
+    <updateAccountStatus>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </updateAccountStatus>
+    <selectPlane>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </selectPlane>
+    <changeMapID>
+      <Arg>	INT16	</Arg>
+    </changeMapID>
+    <changeDescription>
+      <Arg>	STRING	</Arg>
+    </changeDescription>
+  </BaseMethods>
+</Prebattle.def>

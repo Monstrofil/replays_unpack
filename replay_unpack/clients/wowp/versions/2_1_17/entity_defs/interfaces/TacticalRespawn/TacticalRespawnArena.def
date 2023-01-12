@@ -1,0 +1,23 @@
+<TacticalRespawnArena.def>
+  <BaseMethods>
+    <requestTacticalRespawnAvailable>
+      <Args>
+        <avatarID>	OBJECT_ID	</avatarID>
+        <planeID>	INT16	</planeID>
+      </Args>
+    </requestTacticalRespawnAvailable>
+    <requestTacticalRespawn>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <planeID>	INT16	</planeID>
+        <sectorID>	STRING	</sectorID>
+      </Args>
+    </requestTacticalRespawn>
+    <receivePlaneBattleData>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <planeBattleData>	PLANE_BATTLE_DATA	</planeBattleData>
+      </Args>
+    </receivePlaneBattleData>
+  </BaseMethods>
+</TacticalRespawnArena.def>

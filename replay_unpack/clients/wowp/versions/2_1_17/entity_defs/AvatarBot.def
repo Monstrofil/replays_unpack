@@ -1,0 +1,155 @@
+<AvatarBot.def>
+  <Parent>	Avatar	</Parent>
+  <Implements>
+    <Interface>	DefenderInterface	</Interface>
+  </Implements>
+  <TempProperties>
+    <fireTime></fireTime>
+    <_AvatarBot__skill></_AvatarBot__skill>
+    <_AvatarBot__enemiesPositions></_AvatarBot__enemiesPositions>
+    <_AvatarBot__dangerRatingData></_AvatarBot__dangerRatingData>
+    <_AvatarBot__trackPositionData></_AvatarBot__trackPositionData>
+    <_AvatarBot__targetEntityLastDirection></_AvatarBot__targetEntityLastDirection>
+    <_AvatarBot__targetEntityLastAnalyzeTime></_AvatarBot__targetEntityLastAnalyzeTime>
+    <_AvatarBot__targetDodgeFactor></_AvatarBot__targetDodgeFactor>
+    <_AvatarBot__botsSettings></_AvatarBot__botsSettings>
+    <_AvatarBot__initialData></_AvatarBot__initialData>
+    <_AvatarBot__potentialTargetId></_AvatarBot__potentialTargetId>
+    <_AvatarBot__botState></_AvatarBot__botState>
+    <_AvatarBot__targetEntityEscapeAxis></_AvatarBot__targetEntityEscapeAxis>
+    <_AvatarBot__sector></_AvatarBot__sector>
+    <startTurretReductionAt></startTurretReductionAt>
+  </TempProperties>
+  <Properties>
+    <botType>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </botType>
+    <initHealthPrc>
+      <Type>	FLOAT	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+      <Default>	1.0	</Default>
+    </initHealthPrc>
+  </Properties>
+  <BaseMethods>
+    <updatePlayersDangerRating>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_OBJECTID_FLOAT32	</of>
+      </Arg>
+    </updatePlayersDangerRating>
+    <setInitialBotData>
+      <Arg>	ARRAY	  <of>	INITIAL_BOT_DATA	</of>
+      </Arg>
+    </setInitialBotData>
+    <updateEnemiesPositions>
+      <Arg>	ARRAY	  <of>	UPDATE_OBJECT_INFO_SIMPLE	</of>
+      </Arg>
+    </updateEnemiesPositions>
+  </BaseMethods>
+  <CellMethods>
+    <setPosition>
+      <Arg>	VECTOR3	</Arg>
+    </setPosition>
+    <lookAt>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </lookAt>
+    <configureFlight>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	INT8	</Arg>
+    </configureFlight>
+    <setupWaypointStrategySpline>
+      <Arg>	STRING	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </setupWaypointStrategySpline>
+    <setupBotStrategySimpleMode>
+      <Arg>	BOOL	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </setupBotStrategySimpleMode>
+    <setupWaypointStrategySpeed>
+      <Arg>	FLOAT	</Arg>
+    </setupWaypointStrategySpeed>
+    <setupBotScenarioStrategy>
+      <Arg>	BOOL	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </setupBotScenarioStrategy>
+    <setupBotStrategyParams>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </setupBotStrategyParams>
+    <setupWaypointStrategyParams>
+      <Arg>	BOOL	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </setupWaypointStrategyParams>
+    <setupWaypointStrategyEvasionParams>
+      <Arg>	BOOL	</Arg>
+    </setupWaypointStrategyEvasionParams>
+    <setupBotStrategyArea>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </setupBotStrategyArea>
+    <setupBotSafetyStrategy>
+      <Arg>	BOOL	</Arg>
+    </setupBotSafetyStrategy>
+    <setupAutopilotStrategy>
+      <Arg>	FLOAT	</Arg>
+    </setupAutopilotStrategy>
+    <setupSeekEnemyStrategy>
+      <Arg>	BOOL	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </setupSeekEnemyStrategy>
+    <setupWeaponFocus>
+      <Arg>	FLOAT	</Arg>
+    </setupWeaponFocus>
+    <setFlightBehaviour>
+      <Arg>	INT8	</Arg>
+    </setFlightBehaviour>
+    <setupAutoAiming>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </setupAutoAiming>
+    <setupBombing>
+      <Arg>	INT8	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	BOOL	</Arg>
+    </setupBombing>
+    <setInitialBotData>
+      <Arg>	ARRAY	  <of>	INITIAL_BOT_DATA	</of>
+      </Arg>
+    </setInitialBotData>
+    <updatePlayersDangerRating>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_OBJECTID_FLOAT32	</of>
+      </Arg>
+    </updatePlayersDangerRating>
+    <updateEnemiesPositions>
+      <Arg>	ARRAY	  <of>	UPDATE_OBJECT_INFO_SIMPLE	</of>
+      </Arg>
+    </updateEnemiesPositions>
+    <trackPositionReached>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </trackPositionReached>
+  </CellMethods>
+</AvatarBot.def>

@@ -1,0 +1,130 @@
+<BotInterface.def>
+  <Implements>
+    <Interface>	ACStrategyBotInterface	</Interface>
+  </Implements>
+  <Properties>
+    <AIState>
+      <Type>	INT32	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </AIState>
+    <targetID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </targetID>
+    <targetEntity>
+      <Type>	MAILBOX	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </targetEntity>
+    <groupID>
+      <Type>	INT8	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </groupID>
+    <possibleAttackerID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </possibleAttackerID>
+    <movePoint>
+      <Type>	VECTOR3	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </movePoint>
+    <isSquadLead>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </isSquadLead>
+    <partnerID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </partnerID>
+    <flockID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </flockID>
+  </Properties>
+  <BaseMethods>
+    <findTargetCallback>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </findTargetCallback>
+    <findAllyCallback>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </findAllyCallback>
+    <updateGameModeData>
+      <Arg>	ARRAY	  <of>	FLOAT	</of>
+      </Arg>
+      <Arg>	ARRAY	  <of>	GAME_MODE_DATA	</of>
+      </Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	BOOL	</Arg>
+    </updateGameModeData>
+    <updateBaseIsUnderAttack>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </updateBaseIsUnderAttack>
+    <setSquadPartner>
+      <Arg>	OBJECT_ID	</Arg>
+    </setSquadPartner>
+    <setIsSquadLead>
+      <Arg>	BOOL	</Arg>
+    </setIsSquadLead>
+    <updateFlockInfo>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	ARRAY	  <of>	OBJECT_ID	</of>
+      </Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+    </updateFlockInfo>
+    <setStartingMovePoints>
+      <Arg>	ARRAY	  <of>	VECTOR3	</of>
+      </Arg>
+    </setStartingMovePoints>
+  </BaseMethods>
+  <CellMethods>
+    <findTargetCallback>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </findTargetCallback>
+    <findAllyCallback>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </findAllyCallback>
+    <updateGameModeData>
+      <Arg>	ARRAY	  <of>	FLOAT	</of>
+      </Arg>
+      <Arg>	ARRAY	  <of>	GAME_MODE_DATA	</of>
+      </Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	BOOL	</Arg>
+    </updateGameModeData>
+    <updateTeamCommunicationState>
+      <Arg>	FLOAT64	</Arg>
+      <Arg>	FLOAT64	</Arg>
+      <Arg>	INT8	</Arg>
+    </updateTeamCommunicationState>
+    <assignStartingMovePoint>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	INT8	</Arg>
+    </assignStartingMovePoint>
+    <setStartingMovePoints>
+      <Arg>	ARRAY	  <of>	VECTOR3	</of>
+      </Arg>
+    </setStartingMovePoints>
+    <updateBaseIsUnderAttack>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </updateBaseIsUnderAttack>
+    <setSquadPartner>
+      <Arg>	OBJECT_ID	</Arg>
+    </setSquadPartner>
+    <setIsSquadLead>
+      <Arg>	BOOL	</Arg>
+    </setIsSquadLead>
+    <updateFlockInfo>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	ARRAY	  <of>	OBJECT_ID	</of>
+      </Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+    </updateFlockInfo>
+  </CellMethods>
+</BotInterface.def>

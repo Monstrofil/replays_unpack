@@ -1,0 +1,13 @@
+<WGMoneyProcessor.def>
+  <Implements>
+    <Interface>	AccountEditor	</Interface>
+  </Implements>
+  <BaseMethods>
+    <callAPI>
+      <Args>
+        <method_name>	STRING	</method_name>
+        <parameters>	PYTHON	</parameters>
+      </Args>
+    </callAPI>
+  </BaseMethods>
+</WGMoneyProcessor.def>

@@ -1,0 +1,224 @@
+<DestructibleObjectInterface.def>
+  <Implements>
+    <Interface>	VisibilitySystem/VisibilityInterface	</Interface>
+    <Interface>	EntityTimerDispatcherMixin	</Interface>
+  </Implements>
+  <TempProperties>
+    <controllers></controllers>
+    <lastServerTime></lastServerTime>
+    <settings></settings>
+    <p></p>
+    <profiler></profiler>
+    <timerValidationFuncs></timerValidationFuncs>
+    <timersLastServerTime></timersLastServerTime>
+    <_ControllerManager__orderedControllers></_ControllerManager__orderedControllers>
+    <_ControllerManager__freezeControllers></_ControllerManager__freezeControllers>
+    <_ControllerManager__additionalInfo></_ControllerManager__additionalInfo>
+    <_ControllerManager__log></_ControllerManager__log>
+    <_DestructibleObject__time></_DestructibleObject__time>
+    <_DestructibleObject__timers></_DestructibleObject__timers>
+    <justDestroyed></justDestroyed>
+    <arenaData></arenaData>
+    <shootingSync></shootingSync>
+    <presentPartsMap></presentPartsMap>
+    <_lastTurretFireTime></_lastTurretFireTime>
+  </TempProperties>
+  <Properties>
+    <objTypeID>
+      <Type>	INT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </objTypeID>
+    <arenaType>
+      <Type>	INT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </arenaType>
+    <gameMode>
+      <Type>	INT16	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </gameMode>
+    <entityGroupMask>
+      <Type>	UINT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </entityGroupMask>
+    <cp>
+      <Type>	PYTHON	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </cp>
+    <battleLevel>
+      <Type>	INT8	</Type>
+      <Flags>	CELL_PUBLIC_AND_OWN	</Flags>
+    </battleLevel>
+    <sectorRadius>
+      <Type>	FLOAT	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </sectorRadius>
+    <arena>
+      <Type>	MAILBOX	</Type>
+      <Flags>	BASE	</Flags>
+    </arena>
+    <objectName>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <Persistent>	true	</Persistent>
+    </objectName>
+    <state>
+      <ClientQueue></ClientQueue>
+      <Type>	INT32	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </state>
+    <partFlags>
+      <Type>	ARRAY	  <of>	ARRAY	  <of>	UINT8	</of>
+          <size>	2	</size>
+        </of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </partFlags>
+    <partStates>
+      <ClientQueue></ClientQueue>
+      <Type>	ARRAY	  <of>	ARRAY	  <of>	UINT8	</of>
+          <size>	2	</size>
+        </of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </partStates>
+    <health>
+      <ClientQueue></ClientQueue>
+      <SendLatestOnly>	true	</SendLatestOnly>
+      <Type>	FLOAT32	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </health>
+    <maxHealth>
+      <Type>	FLOAT32	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </maxHealth>
+    <rammed>
+      <Type>	INT32	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </rammed>
+    <damagersTimers>
+      <Type>	UINT64	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </damagersTimers>
+    <damagers>
+      <SendLatestOnly>	true	</SendLatestOnly>
+      <Type>	UINT64	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </damagers>
+    <allyDamagers>
+      <SendLatestOnly>	true	</SendLatestOnly>
+      <Type>	UINT64	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </allyDamagers>
+    <lastDamagerID>
+      <SendLatestOnly>	true	</SendLatestOnly>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </lastDamagerID>
+    <lastDamagedPartID>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </lastDamagedPartID>
+    <lastDamageReason>
+      <SendLatestOnly>	true	</SendLatestOnly>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </lastDamageReason>
+    <vector>
+      <Type>	VECTOR3	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </vector>
+    <rotation>
+      <Type>	VECTOR4	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </rotation>
+    <mass>
+      <Type>	FLOAT32	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </mass>
+    <actionDealerType>
+      <Type>	INT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </actionDealerType>
+    <unitNumber>
+      <Type>	UINT8	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </unitNumber>
+    <lastPositionOnArena>
+      <Type>	VECTOR3	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </lastPositionOnArena>
+  </Properties>
+  <CellMethods>
+    <onHitTarget>
+      <Arg>	ARRAY	  <of>	MAILBOX	</of>
+      </Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+    </onHitTarget>
+    <onHitTargetTeamObject>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </onHitTargetTeamObject>
+    <getKillerData>
+      <Arg>	MAILBOX	</Arg>
+    </getKillerData>
+    <suicide></suicide>
+    <delayedSuicide>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	UINT8	</Arg>
+    </delayedSuicide>
+    <applyNewVector>
+      <Arg>	VECTOR3	</Arg>
+    </applyNewVector>
+    <receiveSignal>
+      <Arg>	INT16	</Arg>
+    </receiveSignal>
+    <receiveBullet>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	ARRAY	  <of>	UINT8	</of>
+      </Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </receiveBullet>
+    <receiveExplosiveDamage>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_UINT8_FLOAT32	</of>
+      </Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+    </receiveExplosiveDamage>
+    <receiveTurretDamage>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+    </receiveTurretDamage>
+    <updateTeamIndex>
+      <Arg>	INT8	</Arg>
+    </updateTeamIndex>
+    <receiveDamage>
+      <Args>
+        <damage>	UINT16	</damage>
+        <authorID>	OBJECT_ID	</authorID>
+        <damageReason>	UINT8	</damageReason>
+      </Args>
+    </receiveDamage>
+  </CellMethods>
+  <ClientMethods></ClientMethods>
+</DestructibleObjectInterface.def>

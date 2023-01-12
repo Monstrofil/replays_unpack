@@ -1,0 +1,29 @@
+<GameDataStorage.def>
+  <Implements>
+    <Interface>	EPSTransfer	</Interface>
+  </Implements>
+  <Properties>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+  </Properties>
+  <BaseMethods>
+    <setIntegerValue>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT64	</Arg>
+    </setIntegerValue>
+    <setDictValue>
+      <Arg>	INT8	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </setDictValue>
+    <setGameData>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </setGameData>
+    <getGameData>
+      <Arg>	INT8	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </getGameData>
+  </BaseMethods>
+</GameDataStorage.def>

@@ -1,0 +1,39 @@
+<VoiceChatMgr.def>
+  <Properties></Properties>
+  <BaseMethods>
+    <createVoiceChannel>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+    </createVoiceChannel>
+    <updateVoiceChannel>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+    </updateVoiceChannel>
+    <deleteVoiceChannel>
+      <Arg>	STRING	</Arg>
+    </deleteVoiceChannel>
+    <onVoiceClientStateChanged>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT16	</Arg>
+    </onVoiceClientStateChanged>
+    <generateIdentities>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT32	</Arg>
+    </generateIdentities>
+    <deinit></deinit>
+  </BaseMethods>
+</VoiceChatMgr.def>

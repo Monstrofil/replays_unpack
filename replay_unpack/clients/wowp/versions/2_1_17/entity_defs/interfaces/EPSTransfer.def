@@ -1,0 +1,20 @@
+<EPSTransfer.def>
+  <BaseMethods>
+    <handleEPSInRealEntity>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT64	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </handleEPSInRealEntity>
+    <handleEPSInRealEntityWithObjects>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT64	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </handleEPSInRealEntityWithObjects>
+    <handleEPSInRealEntityWithBufferedObjects>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </handleEPSInRealEntityWithBufferedObjects>
+  </BaseMethods>
+</EPSTransfer.def>

@@ -1,0 +1,891 @@
+<Account.def>
+  <Implements>
+    <Interface>	BSAccount	</Interface>
+    <Interface>	AccountMessenger	</Interface>
+    <Interface>	AccountEditor	</Interface>
+    <Interface>	TransactionUser	</Interface>
+    <Interface>	ClientStats	</Interface>
+    <Interface>	RequestAccountDataInterface	</Interface>
+    <Interface>	ArenaRequestor	</Interface>
+    <Interface>	EPSTransfer	</Interface>
+  </Implements>
+  <TempProperties>
+    <squadID></squadID>
+  </TempProperties>
+  <Properties>
+    <name>
+      <Type>	STRING	</Type>
+      <Persistent>	true	</Persistent>
+      <Default>	noName	</Default>
+      <DatabaseLength>	96	</DatabaseLength>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+    </name>
+    <normalizedName>
+      <Type>	STRING	</Type>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+      <Persistent>	true	</Persistent>
+      <DatabaseLength>	96	</DatabaseLength>
+      <Default>	noName	</Default>
+      <Identifier>	true	</Identifier>
+    </normalizedName>
+    <isDeveloper>
+      <Type>	BOOL	</Type>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+      <Flags>	BASE	</Flags>
+    </isDeveloper>
+    <spaID>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </spaID>
+    <ver>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </ver>
+    <attrs>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </attrs>
+    <premiumExpiryTime>
+      <Type>	UINT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </premiumExpiryTime>
+    <accountType>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </accountType>
+    <saveTime>
+      <Type>	UINT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Default>	1	</Default>
+      <Persistent>	true	</Persistent>
+    </saveTime>
+    <keeperTime>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </keeperTime>
+    <peripheryID>
+      <Type>	INT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </peripheryID>
+    <vhID>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </vhID>
+    <restrictions>
+      <Type>	ARRAY	  <of>	ACCOUNT_RESTRICTION	</of>
+      </Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </restrictions>
+    <clanDBID>
+      <Type>	DB_ID	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </clanDBID>
+    <clanAttrs>
+      <Type>	UINT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Default>	0	</Default>
+      <Persistent>	true	</Persistent>
+    </clanAttrs>
+    <lastSessionKey>
+      <Type>	INT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Default>	-1	</Default>
+      <Persistent>	true	</Persistent>
+    </lastSessionKey>
+    <autoBanTime>
+      <Type>	UINT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </autoBanTime>
+    <pdata>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <DatabaseLength>	1024000	</DatabaseLength>
+    </pdata>
+    <teamspeakIdentities>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </teamspeakIdentities>
+    <voipMuteList>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </voipMuteList>
+    <jabberCredentials>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <DatabaseLength>	36	</DatabaseLength>
+    </jabberCredentials>
+    <active>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+      <Default>	0	</Default>
+    </active>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+    <walletID>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </walletID>
+    <extWalletID>
+      <Type>	UINT64	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </extWalletID>
+    <nextOffloadToPeripheryTime>
+      <Type>	INT32	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	true	</Persistent>
+    </nextOffloadToPeripheryTime>
+  </Properties>
+  <ClientMethods>
+    <version_444></version_444>
+    <isPendingResponses></isPendingResponses>
+    <respondCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </respondCommand>
+    <updateArenaData>
+      <Arg>	CLIENT_ARENA_DATA	</Arg>
+    </updateArenaData>
+    <receiveServerConsts>
+      <Arg>	STRING	</Arg>
+    </receiveServerConsts>
+    <receivePlayerInfo>
+      <Arg>	INITIAL_LOBBY_PLAYER_INFO	</Arg>
+    </receivePlayerInfo>
+    <updateCarouselResponse>
+      <Arg>	CAROUSEL_DATA	</Arg>
+    </updateCarouselResponse>
+    <getShopAirplanesResponse>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </getShopAirplanesResponse>
+    <receiveBuyPlane>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </receiveBuyPlane>
+    <receiveSellPlane>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </receiveSellPlane>
+    <receiveRepairPlane>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </receiveRepairPlane>
+    <setPrebattleStatistic>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </setPrebattleStatistic>
+    <onKickedFromServer>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	UINT32	</Arg>
+    </onKickedFromServer>
+    <onEnterToQueue>
+      <Arg>	UINT8	</Arg>
+    </onEnterToQueue>
+    <onEnterArena>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+    </onEnterArena>
+    <onLeftQueue></onLeftQueue>
+    <refreshRoomListResponse>
+      <Arg>	ARRAY	  <of>	PREBATTLES_INFO	</of>
+      </Arg>
+    </refreshRoomListResponse>
+    <updatePrebattleCreateRoomAvailableFilters></updatePrebattleCreateRoomAvailableFilters>
+    <updateTrainingRoom>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </updateTrainingRoom>
+    <onJoinedToPrebattle></onJoinedToPrebattle>
+    <forceLeaveRoom></forceLeaveRoom>
+    <leaveRoomWithReason>
+      <Arg>	INT8	</Arg>
+    </leaveRoomWithReason>
+    <showTrainingRoom></showTrainingRoom>
+    <updateCarouselAirplane>
+      <Arg>	INT32	</Arg>
+    </updateCarouselAirplane>
+    <hideForceStartButton>
+      <Arg>	BOOL	</Arg>
+    </hideForceStartButton>
+    <receviveBanInfo>
+      <Arg>	INT8	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT32	</Arg>
+    </receviveBanInfo>
+    <onTokenReceived>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </onTokenReceived>
+    <voipServerStatus>
+      <Arg>	UINT16	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_STRING	</of>
+      </Arg>
+    </voipServerStatus>
+    <updatePlayerResources>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </updatePlayerResources>
+    <clientReceiveResponse>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </clientReceiveResponse>
+    <receiveOperationTimeout>
+      <Arg>	UINT32	</Arg>
+    </receiveOperationTimeout>
+    <voipReceiveSquadChannel>
+      <Arg>	STRING	</Arg>
+      <Arg>	ARRAY	  <of>	DB_ID	</of>
+      </Arg>
+    </voipReceiveSquadChannel>
+    <clanMembersListDiff>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </clanMembersListDiff>
+    <updateClanInfo>
+      <Arg>	STRING	</Arg>
+    </updateClanInfo>
+    <debugViewer_addNewKey>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </debugViewer_addNewKey>
+    <debugViewer_removeKey>
+      <Arg>	INT32	</Arg>
+    </debugViewer_removeKey>
+    <debugViewer_pushToView>
+      <Arg>	STRING	</Arg>
+    </debugViewer_pushToView>
+    <onPrebattleArenaCreationFailed></onPrebattleArenaCreationFailed>
+  </ClientMethods>
+  <BaseMethods>
+    <joinPreBattle>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </joinPreBattle>
+    <leavePreBattle>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+    </leavePreBattle>
+    <processIGRData>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </processIGRData>
+    <onCenterIsLongDisconnected>
+      <Arg>	BOOL	</Arg>
+    </onCenterIsLongDisconnected>
+    <onEnqueuedRandom>
+      <Arg>	UINT8	</Arg>
+    </onEnqueuedRandom>
+    <onSwitchSquadState>
+      <Arg>	BOOL	</Arg>
+    </onSwitchSquadState>
+    <onExcludedFromSquad>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT32	</Arg>
+    </onExcludedFromSquad>
+    <onTakeInvitation>
+      <Arg>	OBJECT_ID	</Arg>
+    </onTakeInvitation>
+    <onRejectInvitation>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT32	</Arg>
+    </onRejectInvitation>
+    <onSquadJoinded>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	BOOL	</Arg>
+    </onSquadJoinded>
+    <requestAccountData>
+      <Arg>	MAILBOX	</Arg>
+    </requestAccountData>
+    <requestSquadForJoin>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </requestSquadForJoin>
+    <responseForJoinSquad>
+      <Arg>	MAILBOX	</Arg>
+    </responseForJoinSquad>
+    <accountNotifyStateForSquad>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+    </accountNotifyStateForSquad>
+    <editSquadMember>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </editSquadMember>
+    <requestTeamspeakIdentity4Squad>
+      <Arg>	MAILBOX	</Arg>
+    </requestTeamspeakIdentity4Squad>
+    <responseSender>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </responseSender>
+    <responseSenderWithMethod>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+    </responseSenderWithMethod>
+    <responseSenderAdd>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </responseSenderAdd>
+    <responseSenderDelete>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </responseSenderDelete>
+    <deferredResponseSender>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </deferredResponseSender>
+    <deferredResponseSenderEditDelayed>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </deferredResponseSenderEditDelayed>
+    <deferredResponseSenderAdd>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </deferredResponseSenderAdd>
+    <deferredResponseSenderDelete>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </deferredResponseSenderDelete>
+    <deferredResponseSenderDeleteDelayed>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </deferredResponseSenderDeleteDelayed>
+    <responsePackSender>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </responsePackSender>
+    <setCropKarma>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+    </setCropKarma>
+    <printDebugInformation>
+      <Arg>	UINT32	</Arg>
+    </printDebugInformation>
+    <setPrebattleStatistic>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </setPrebattleStatistic>
+    <doCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </doCommand>
+    <receiveOperation>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </receiveOperation>
+    <receiveOperationTimeout>
+      <Arg>	UINT32	</Arg>
+      <Exposed></Exposed>
+    </receiveOperationTimeout>
+    <onFarCommandRespond>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </onFarCommandRespond>
+    <onPrebattleGameStart>
+      <Arg>	OBJECT_ID	</Arg>
+    </onPrebattleGameStart>
+    <onJoinedArena>
+      <Args>
+        <arenaMB>	MAILBOX	</arenaMB>
+        <arenaUID>	ARENA_UID	</arenaUID>
+        <userData>	PYTHON	</userData>
+        <avatarBaseMB>	MAILBOX	</avatarBaseMB>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+      </Args>
+    </onJoinedArena>
+    <giveClientToAvatar>
+      <Arg>	MAILBOX	</Arg>
+    </giveClientToAvatar>
+    <onCannotReconnectArena></onCannotReconnectArena>
+    <onAvatarGetClient>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT16	</Arg>
+    </onAvatarGetClient>
+    <onAvatarClientDeath>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </onAvatarClientDeath>
+    <connect2Arena>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Exposed></Exposed>
+    </connect2Arena>
+    <selectActivePlane>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </selectActivePlane>
+    <prebattleNotCreated>
+      <Arg>	INT32	</Arg>
+    </prebattleNotCreated>
+    <onPrebattleArenaCreationFailed>
+      <Args>
+        <rosterID>	OBJECT_ID	</rosterID>
+      </Args>
+    </onPrebattleArenaCreationFailed>
+    <sendQueueMessage>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </sendQueueMessage>
+    <processSpaAttributes>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </processSpaAttributes>
+    <processExternalResponse>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </processExternalResponse>
+    <exportDiffToWeb></exportDiffToWeb>
+    <exportToWeb></exportToWeb>
+    <exportToWebFull></exportToWebFull>
+    <exportForTeleport>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </exportForTeleport>
+    <extraWriteToDB>
+      <Arg>	BOOL	</Arg>
+    </extraWriteToDB>
+    <releaseClient>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </releaseClient>
+    <keepAliveFor>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT16	</Arg>
+    </keepAliveFor>
+    <stopKeepingAlive>
+      <Arg>	UINT8	</Arg>
+    </stopKeepingAlive>
+    <kickSelf>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	UINT32	</Arg>
+    </kickSelf>
+    <unlockFromBattle></unlockFromBattle>
+    <setRestriction>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </setRestriction>
+    <delRestriction>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </delRestriction>
+    <setType>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </setType>
+    <getCreatedArenaList>
+      <Exposed></Exposed>
+    </getCreatedArenaList>
+    <createDevArena>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Exposed></Exposed>
+    </createDevArena>
+    <deleteArena>
+      <Arg>	OBJECT_ID	</Arg>
+      <Exposed></Exposed>
+    </deleteArena>
+    <updateCarouselSlotRequest>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </updateCarouselSlotRequest>
+    <getShopAirplanesRequest>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Exposed></Exposed>
+    </getShopAirplanesRequest>
+    <sendSystemMessage>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+    </sendSystemMessage>
+    <sendSystemAction>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </sendSystemAction>
+    <restoreAccountFromPoint>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	ARRAY	  <of>	UINT64	</of>
+      </Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </restoreAccountFromPoint>
+    <processSessionTrackerData>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </processSessionTrackerData>
+    <sendPropertiesTo>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+    </sendPropertiesTo>
+    <onPrebattleCreated>
+      <Arg>	MAILBOX	</Arg>
+    </onPrebattleCreated>
+    <refreshRoomListResponse>
+      <Arg>	ARRAY	  <of>	PREBATTLES_INFO	</of>
+      </Arg>
+    </refreshRoomListResponse>
+    <updateTrainingRoom>
+      <Arg>	STRING	</Arg>
+    </updateTrainingRoom>
+    <onEnterTrainingRoom>
+      <Arg>	MAILBOX	</Arg>
+    </onEnterTrainingRoom>
+    <onPlaneUpgraded>
+      <Arg>	INT16	</Arg>
+    </onPlaneUpgraded>
+    <changeBlockTypeReadyInTrainingRoom>
+      <Arg>	INT16	</Arg>
+    </changeBlockTypeReadyInTrainingRoom>
+    <updateRoomTeamAccount>
+      <Arg>	STRING	</Arg>
+    </updateRoomTeamAccount>
+    <removeRoomTeamAccount>
+      <Arg>	INT32	</Arg>
+    </removeRoomTeamAccount>
+    <forceLeaveRoom></forceLeaveRoom>
+    <leaveRoomWithReason>
+      <Arg>	INT8	</Arg>
+    </leaveRoomWithReason>
+    <forceStartBalancerBattle>
+      <Exposed></Exposed>
+    </forceStartBalancerBattle>
+    <onChoosenByBalancer>
+      <Arg>	BOOL	</Arg>
+    </onChoosenByBalancer>
+    <processInvoices></processInvoices>
+    <requestToken>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Exposed></Exposed>
+    </requestToken>
+    <setToken>
+      <Arg>	INT64	</Arg>
+      <Arg>	INT32	</Arg>
+    </setToken>
+    <onJoinedToPrebattle>
+      <Args>
+        <prebattleID>	OBJECT_ID	</prebattleID>
+        <arena>	MAILBOX	</arena>
+        <teamIndex>	INT8	</teamIndex>
+        <rateID>	INT8	</rateID>
+      </Args>
+    </onJoinedToPrebattle>
+    <voipRequestInitData>
+      <Arg>	MAILBOX	</Arg>
+    </voipRequestInitData>
+    <voipClientStatus>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Exposed></Exposed>
+    </voipClientStatus>
+    <voipSquadStatus>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Exposed></Exposed>
+    </voipSquadStatus>
+    <voipMuteClient>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Exposed></Exposed>
+    </voipMuteClient>
+    <voipReceiveSquadChannel>
+      <Arg>	STRING	</Arg>
+      <Arg>	ARRAY	  <of>	DB_ID	</of>
+      </Arg>
+    </voipReceiveSquadChannel>
+    <voipServerStatus>
+      <Arg>	UINT16	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_STRING	</of>
+      </Arg>
+    </voipServerStatus>
+    <onHangarLoaded>
+      <Exposed></Exposed>
+    </onHangarLoaded>
+    <updateClientStats>
+      <Arg>	UINT16	</Arg>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </updateClientStats>
+    <crashReport>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </crashReport>
+    <makeDenunciation>
+      <Exposed></Exposed>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+    </makeDenunciation>
+    <saveTeamspeakIdentities>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+    </saveTeamspeakIdentities>
+    <destroySelfForPeriphery>
+      <Arg>	INT32	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </destroySelfForPeriphery>
+    <wipe>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </wipe>
+    <createClan>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </createClan>
+    <enterLeaveClan>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </enterLeaveClan>
+    <receiveClanMemberInfo>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </receiveClanMemberInfo>
+    <receiveClanMembersListDiff>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </receiveClanMembersListDiff>
+    <lastProcessedPkg>
+      <Arg>	UINT32	</Arg>
+      <Exposed></Exposed>
+    </lastProcessedPkg>
+    <setClientLocalization>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </setClientLocalization>
+    <onSquadFinderJoined>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+    </onSquadFinderJoined>
+    <onJoinFinder>
+      <Arg>	INT32	</Arg>
+    </onJoinFinder>
+    <onLeaveFinder>
+      <Arg>	INT32	</Arg>
+    </onLeaveFinder>
+    <onPrebattleTeamIDChanged>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT32	</Arg>
+    </onPrebattleTeamIDChanged>
+    <updateRecruiterProgress>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </updateRecruiterProgress>
+    <updateRecruitStatus>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+    </updateRecruitStatus>
+    <sendMessageRecruiterOnline></sendMessageRecruiterOnline>
+    <onProgressUpdated>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </onProgressUpdated>
+    <processNotificationResponse>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </processNotificationResponse>
+    <requestPlaneBattleData>
+      <Args>
+        <requester>	MAILBOX	</requester>
+        <arenaUID>	ARENA_UID	</arenaUID>
+        <planeID>	INT16	</planeID>
+      </Args>
+    </requestPlaneBattleData>
+    <requestPlaneBattleTooltipData>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT16	</Arg>
+    </requestPlaneBattleTooltipData>
+    <requestCrewData>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT16	</Arg>
+    </requestCrewData>
+    <debugViewer_subscribe>
+      <Exposed></Exposed>
+    </debugViewer_subscribe>
+    <debugViewer_setFilterSettings>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </debugViewer_setFilterSettings>
+    <debugViewer_addNewKey>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </debugViewer_addNewKey>
+    <debugViewer_removeKey>
+      <Arg>	INT32	</Arg>
+    </debugViewer_removeKey>
+    <debugViewer_pushToView>
+      <Arg>	STRING	</Arg>
+    </debugViewer_pushToView>
+  </BaseMethods>
+</Account.def>

@@ -1,0 +1,29 @@
+<SquadFinder.def>
+  <BaseMethods>
+    <joinToFinder>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT32	</Arg>
+    </joinToFinder>
+    <leaveFinder>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT32	</Arg>
+    </leaveFinder>
+    <changeStatusAndMask>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </changeStatusAndMask>
+    <requestWaitList>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	ARRAY	  <of>	DB_ID	</of>
+      </Arg>
+    </requestWaitList>
+  </BaseMethods>
+</SquadFinder.def>

@@ -1,0 +1,23 @@
+<GameActionsManagerBotInterface.def>
+  <Properties>
+    <waveFocusCountByTeam>
+      <Type>	PYTHON	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </waveFocusCountByTeam>
+  </Properties>
+  <CellMethods>
+    <onASWaveBotFocusChanged>
+      <Args>
+        <teamID>	INT8	</teamID>
+        <waveID>	STRING	</waveID>
+        <isFocused>	BOOL	</isFocused>
+      </Args>
+    </onASWaveBotFocusChanged>
+    <getASWaveBotFocusCount>
+      <Args>
+        <teamID>	INT8	</teamID>
+        <waveID>	STRING	</waveID>
+      </Args>
+    </getASWaveBotFocusCount>
+  </CellMethods>
+</GameActionsManagerBotInterface.def>

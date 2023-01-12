@@ -1,0 +1,5 @@
+<WarActionBalancer.def>
+  <Implements>
+    <Interface>	BattleEntryPoint	</Interface>
+  </Implements>
+</WarActionBalancer.def>

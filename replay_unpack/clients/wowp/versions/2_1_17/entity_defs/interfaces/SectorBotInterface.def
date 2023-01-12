@@ -1,0 +1,13 @@
+<SectorBotInterface.def>
+  <Implements>
+    <Interface>	BSEntity	</Interface>
+  </Implements>
+  <Properties>
+    <botFocusCount>
+      <Type>	ARRAY	  <of>	INT8	</of>
+        <size>	2	</size>
+      </Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </botFocusCount>
+  </Properties>
+</SectorBotInterface.def>
