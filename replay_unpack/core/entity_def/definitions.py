@@ -39,4 +39,7 @@ class Definitions:
         root = tree.getroot()
         client_server_entities = root.find('ClientServerEntities')
         # older versions have the entities.xml just pure list
-        self._parse_entities(base_dir, client_server_entities or root)
+        if client_server_entities is not None:
+            self._parse_entities(base_dir, client_server_entities)
+        else:
+            self._parse_entities(base_dir, root)

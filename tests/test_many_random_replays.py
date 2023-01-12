@@ -9,7 +9,8 @@ from replay_parser import ReplayParser
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 REPLAYS = glob.glob(os.path.join(BASE_DIR, 'data', 'random_replays', '*/*.wowsreplay')) + \
-          glob.glob(os.path.join(BASE_DIR, 'data', 'random_replays', '*/*.wotreplay'))
+          glob.glob(os.path.join(BASE_DIR, 'data', 'random_replays', '*/*.wotreplay')) + \
+          glob.glob(os.path.join(BASE_DIR, 'data', 'random_replays', '*/*.wowpreplay'))
 
 
 @ddt
