@@ -38,7 +38,7 @@ class DataType:
         raise NotImplementedError()
 
     def _add_value_to_stream(self, stream: BytesIO, payload: Any, header_size: int):
-        raise NotImplementedError()
+        raise NotImplementedError("%s does not support stream writing" % str(self))
 
     def write_to_stream(self, stream: BytesIO, payload: Any, header_size: int = 1):
         return self._add_value_to_stream(stream, payload, header_size)

@@ -12,6 +12,9 @@ BASE_DIR = os.path.dirname(__file__)
 WOWS_BLOWFISH_KEY = b''.join([b'\x29', b'\xB7', b'\xC9', b'\x09', b'\x38', b'\x3F', b'\x84', b'\x88',
                               b'\xFA', b'\x98', b'\xEC', b'\x4E', b'\x13', b'\x19', b'\x79', b'\xFB'])
 
+WOWP_BLOWFISH_KEY = b''.join([b'\xDE', b'\x72', b'\xBE', b'\xEF', b'\xDE', b'\xAD', b'\xBE', b'\xEF',
+                              b'\xDE', b'\xAD', b'\xBE', b'\xEF', b'\xDE', b'\xAD', b'\xBE', b'\xEF'])
+
 WOT_BLOWFISH_KEY = b''.join([b'\xDE', b'\x72', b'\xBE', b'\xA0', b'\xDE', b'\x04', b'\xBE', b'\xB1',
                              b'\xDE', b'\xFE', b'\xBE', b'\xEF', b'\xDE', b'\xAD', b'\xBE', b'\xEF'])
 
@@ -19,9 +22,11 @@ REPLAY_SIGNATURE = b'\x12\x32\x34\x11'
 
 WOWS_REPLAY = 'wowsreplay'
 WOT_REPLAY = 'wotreplay'
+WOWP_REPLAY = 'wowpreplay'
 TYPE_TO_KEY = {
     'wowsreplay': WOWS_BLOWFISH_KEY,
-    'wotreplay': WOT_BLOWFISH_KEY
+    'wotreplay': WOT_BLOWFISH_KEY,
+    'wowpreplay': WOWP_BLOWFISH_KEY
 }
 ALLOWED_TYPES = set(TYPE_TO_KEY.keys())
 
@@ -67,7 +72,7 @@ class ReplayReader(object):
             raise ValueError("Replay must be in following extensions: "
                              "%s" % ALLOWED_TYPES)
 
-    def get_replay_data(self) -> ReplayInfo:
+    def get_replay_data(self, is_compressed=True) -> ReplayInfo:
         """
         Get open info about replay 
         (stored as Json at the beginning of file) 
@@ -94,9 +99,16 @@ class ReplayReader(object):
                 game = 'wows'
             elif self._type == WOT_REPLAY:
                 game = 'wot'
+            elif self._type == WOWP_REPLAY:
+                game = 'wowp'
             else:
                 raise
-            decrypted_data = zlib.decompress(self.__decrypt_data(f.read()))
+
+            if is_compressed:
+                decrypted = self.__decrypt_data(f.read())
+                decrypted_data = zlib.decompress(decrypted)
+            else:
+                decrypted_data = f.read()
 
             if self._dump_binary_data:
                 self._save_decrypted_data(decrypted_data)

@@ -1,0 +1,7 @@
+<BSArenaManagerSimple.def>
+  <Implements>
+    <Interface>	BSArenaManager	</Interface>
+  </Implements>
+  <Properties></Properties>
+  <BaseMethods></BaseMethods>
+</BSArenaManagerSimple.def>

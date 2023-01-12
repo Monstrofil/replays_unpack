@@ -4,7 +4,7 @@ import logging
 import os
 from json import JSONEncoder
 
-from replay_unpack.clients import wot, wows
+from replay_unpack.clients import wot, wows, wowp
 from replay_unpack.replay_reader import ReplayReader, ReplayInfo
 
 
@@ -62,6 +62,11 @@ class ReplayParser(object):
                                        .get('clientVersionFromXml')
                                        .replace(' ', '')
                                        .split(','))
+        elif replay.game == 'wowp':
+            player = wowp.ReplayPlayer(replay.engine_data
+                                       .get('clientVersion')[len('World of Warplanes '):]
+                                       .replace(' ', '')
+                                       .split('.'))
         else:
             raise NotImplementedError
 

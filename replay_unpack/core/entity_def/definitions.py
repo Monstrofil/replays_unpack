@@ -37,4 +37,6 @@ class Definitions:
         tree = etree.parse(os.path.join(base_dir, 'scripts/entities.xml'),
                            parser=etree.XMLParser(remove_comments=True))
         root = tree.getroot()
-        self._parse_entities(base_dir, root.find('ClientServerEntities'))
+        client_server_entities = root.find('ClientServerEntities')
+        # older versions have the entities.xml just pure list
+        self._parse_entities(base_dir, client_server_entities or root)

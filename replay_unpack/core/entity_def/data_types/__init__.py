@@ -86,6 +86,14 @@ class Alias:
             for item in xml.getroot():
                 self._alias[item.tag] = item
 
+        alias_ext_path = os.path.join(base_dir, 'scripts/entity_defs/alias_ext.xml')
+        if os.path.exists(alias_ext_path):
+            with open(alias_ext_path, 'rb') as f:
+                xml = etree.parse(f, parser=etree.XMLParser(encoding='utf8',
+                                                            remove_comments=True))
+                for item in xml.getroot():
+                    self._alias[item.tag] = item
+
         for key, section in self._alias.items():
             _type = self.get_data_type_from_section(section)
             self._mapping[key] = _type
