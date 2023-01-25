@@ -36,7 +36,7 @@ class BattleController(IBattleController):
         Entity.subscribe_method_call('Avatar', 'onGameRoomStateChanged', self.onPlayerInfoUpdate)
         Entity.subscribe_method_call('Avatar', 'receiveVehicleDeath', self.receiveVehicleDeath)
         # Entity.subscribe_method_call('Vehicle', 'setConsumables', self.onSetConsumable)
-        Entity.subscribe_method_call('Vehicle', 'onRibbon', self.onRibbon)
+        # Entity.subscribe_method_call('Vehicle', 'onRibbon', self.onRibbon)
         Entity.subscribe_method_call('Avatar', 'onAchievementEarned', self.onAchievementEarned)
         Entity.subscribe_method_call('Avatar', 'receiveDamageStat', self.receiveDamageStat)
         Entity.subscribe_method_call('Avatar', 'receive_planeDeath', self.receive_planeDeath)
@@ -65,6 +65,12 @@ class BattleController(IBattleController):
         self._player_id = entity_id
 
     def get_info(self):
+
+        # use avatar id here for backward compatibility
+        avatar = next(entity for entity in self.entities.values() if entity.get_name() == 'Avatar')
+        self._ribbons[avatar.id] = {}
+        for ribbon_info in avatar.properties['client']['privateVehicleState']['ribbons']:
+            self._ribbons[avatar.id][ribbon_info['ribbonId']] = ribbon_info['count']
 
         # adding killed planes data
         players = copy.deepcopy(self._players.get_info())
@@ -201,11 +207,6 @@ class BattleController(IBattleController):
             normalized.setdefault(type_, {}).setdefault(bool_, 0)
             normalized[type_][bool_] = value
         self._damage_map.update(normalized)
-
-    def onRibbon(self, vehicle, ribbon_id):
-        # use avatar id here for backward compatibility
-        self._ribbons.setdefault(vehicle.properties['client']['owner'], {}).setdefault(ribbon_id, 0)
-        self._ribbons[vehicle.properties['client']['owner']][ribbon_id] += 1
 
     def onAchievementEarned(self, avatar, avatar_id, achievement_id):
         # also rearrange ids for backward compatibility
