@@ -114,15 +114,15 @@ class MethodDescriptions:
             self._internal_index.append(obj)
             self._methods_by_name[obj.get_name()] = obj
 
-    def get_exposed_index_map(self) -> List[EntityMethod]:
+    def get_exposed_index_map(self, exposed_only=True) -> List[EntityMethod]:
         array = self._internal_index[:]
-        array = list(filter(lambda method: method.is_exposed(), array))
+        array = list(filter(lambda method: method.is_exposed() or not exposed_only, array))
         array.sort(key=lambda i: i.get_size_in_bytes())
         return array
 
-    def get_internal_index_map(self) -> List[EntityMethod]:
+    def get_internal_index_map(self, exposed_only=True) -> List[EntityMethod]:
         array = self._internal_index[:]
-        array = list(filter(lambda method: method.is_exposed(), array))
+        array = list(filter(lambda method: method.is_exposed() or not exposed_only, array))
         # array.sort(key=lambda i: i.get_size_in_bytes())
         return array
 
