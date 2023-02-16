@@ -4,7 +4,7 @@ This file provides the implementation of the UserDataObjectDescription class.
 """
 import os
 from io import BytesIO
-from typing import List, Dict
+from typing import List, Dict, Any
 
 from lxml import etree
 
@@ -108,6 +108,9 @@ class Property:
 
     def create_from_stream(self, stream: BytesIO):
         return self._type.create_from_stream(stream)
+
+    def write_to_stream(self, stream: BytesIO, payload: Any):
+        return self._type.write_to_stream(stream, payload)
 
     def __repr__(self):
         return "{name} ({args})".format(

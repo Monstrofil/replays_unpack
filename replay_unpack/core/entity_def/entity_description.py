@@ -90,6 +90,9 @@ class EntityMethod:
         return unpacked_args, unpacked_kwargs
 
     def write_to_stream(self, stream: BytesIO, *args):
+        if len(args) != len(self._arguments):
+            raise RuntimeError('Arguments count mismatch: expected %s and got only %s'
+                               '' % (len(self._arguments), len(args)))
         for arg, value in zip(self._arguments, args):
             arg.type.write_to_stream(stream, value, self._variable_header_size)
 

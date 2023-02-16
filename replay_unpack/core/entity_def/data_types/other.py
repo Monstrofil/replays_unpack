@@ -179,6 +179,8 @@ class FixedDict(_DataType):
 
 class Array(_DataType):
 
+    SIZE_TYPE = UInt8
+
     def __init__(self, _type: DataType, array_size=None, allow_none=False, header_size=1):
         self.allow_none = allow_none
         self.array_size = array_size
@@ -190,7 +192,7 @@ class Array(_DataType):
 
         size = self.array_size
         if self.array_size is None:
-            size = UInt8(header_size=header_size). \
+            size = self.SIZE_TYPE(header_size=header_size). \
                 create_from_stream(stream, header_size=header_size)
 
         for _ in range(size):
@@ -199,7 +201,7 @@ class Array(_DataType):
 
     def _add_value_to_stream(self, stream: BytesIO, payload: list, header_size: int):
         if self.array_size is None:
-            UInt8(header_size=header_size). \
+            self.SIZE_TYPE(header_size=header_size). \
                 write_to_stream(stream, len(payload), header_size=header_size)
 
         for value in payload:
