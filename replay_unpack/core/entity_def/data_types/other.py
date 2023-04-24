@@ -1,9 +1,11 @@
 # coding=utf-8
 import logging
+import socket
+import struct
 from collections import OrderedDict
 from io import BytesIO
 from struct import unpack
-from typing import Iterable, Dict
+from typing import Iterable, Dict, Tuple
 
 from lxml import etree
 
@@ -53,6 +55,17 @@ class Blob(_DataType):
         assert len(payload) == size, "Expected: %s, size: %s" % (size, len(payload))
 
         return payload
+
+    def _add_value_to_stream(self, stream: BytesIO, payload: bytes, header_size: int):
+        if len(payload) < 0xff:
+            UInt8().write_to_stream(stream, len(payload))
+        else:
+            UInt8().write_to_stream(stream, 0xff)
+            UInt16().write_to_stream(stream, len(payload))
+            # TODO: actually this is 3'd byte of len, but who cares?
+            UInt8().write_to_stream(stream, 0x00)
+
+        stream.write(payload)
 
 
 class String(_DataType):
@@ -278,7 +291,20 @@ class Mailbox(_DataType):
     _DATA_SIZE = INFINITY
 
     def _get_value_from_stream(self, stream: BytesIO, header_size: int):
-        pass
+        # UInt8(header_size=header_size). \
+        #     create_from_stream(stream, header_size=header_size)
+
+        # return ip-port pair ('127.0.0.1', 6000)
+        return (
+            socket.inet_ntoa(stream.read(4)),
+            struct.unpack('>H', stream.read(2))[0])
+
+    def _add_value_to_stream(self, stream: BytesIO, payload: Tuple[str, int], header_size: int):
+        # UInt8(header_size=header_size). \
+        #     write_to_stream(stream, 6, header_size=header_size)
+
+        stream.write(socket.inet_aton(payload[0]))
+        stream.write(struct.pack('>H', payload[1]))
 
     def __repr__(self):
         return "<Mailbox>".format()
