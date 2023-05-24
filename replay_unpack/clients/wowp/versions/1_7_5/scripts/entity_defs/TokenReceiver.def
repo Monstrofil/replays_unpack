@@ -1,0 +1,9 @@
+<TokenReceiver.def>
+  <Properties>
+    <consumer_tag>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+    </consumer_tag>
+  </Properties>
+  <BaseMethods></BaseMethods>
+</TokenReceiver.def>

@@ -1,0 +1,22 @@
+<Arbiter.def>
+  <Properties></Properties>
+  <BaseMethods>
+    <subscribe>
+      <Arg>	MAILBOX	</Arg>
+    </subscribe>
+    <unsubscribe>
+      <Arg>	MAILBOX	</Arg>
+    </unsubscribe>
+    <pushToView>
+      <Arg>	STRING	</Arg>
+    </pushToView>
+    <filterSettings>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	STRING	</Arg>
+    </filterSettings>
+    <addNewKey>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </addNewKey>
+  </BaseMethods>
+</Arbiter.def>

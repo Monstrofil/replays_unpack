@@ -1,0 +1,10 @@
+<MovingTeamObject.def>
+  <Volatile>
+    <position></position>
+    <yaw></yaw>
+    <pitch></pitch>
+  </Volatile>
+  <Implements>
+    <Interface>	TeamObjectInterface	</Interface>
+  </Implements>
+</MovingTeamObject.def>

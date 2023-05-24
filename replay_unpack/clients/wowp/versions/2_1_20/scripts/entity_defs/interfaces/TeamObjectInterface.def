@@ -1,0 +1,80 @@
+<TeamObjectInterface.def>
+  <Implements>
+    <Interface>	BSEntity	</Interface>
+    <Interface>	DestructibleObjectInterface	</Interface>
+    <Interface>	ScenarioObjectInterface	</Interface>
+    <Interface>	turrets/GroundTurretInterface	</Interface>
+    <Interface>	ACTeamObjectInterface	</Interface>
+  </Implements>
+  <TempProperties>
+    <_damageController></_damageController>
+    <vector></vector>
+    <syncedRandom></syncedRandom>
+  </TempProperties>
+  <Properties>
+    <teamIndex>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </teamIndex>
+    <arenaObjID>
+      <Type>	UINT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </arenaObjID>
+    <curStrategyStartTime>
+      <Type>	FLOAT	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </curStrategyStartTime>
+    <curStrategyPausedAt>
+      <Type>	FLOAT	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </curStrategyPausedAt>
+    <battleType>
+      <Type>	UINT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </battleType>
+  </Properties>
+  <CellMethods>
+    <ramming>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	UINT8	</Arg>
+    </ramming>
+    <spawnWithTeamIndex>
+      <Arg>	UINT8	</Arg>
+    </spawnWithTeamIndex>
+    <enableTurretsLogic>
+      <Arg>	BOOL	</Arg>
+    </enableTurretsLogic>
+    <respawnWithDelay>
+      <Arg>	FLOAT	</Arg>
+    </respawnWithDelay>
+    <respawnInactive></respawnInactive>
+    <requestFinalStats></requestFinalStats>
+    <reuse>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	UINT8	</Arg>
+    </reuse>
+    <modifyTurretBooster>
+      <Arg>	FLOAT32	</Arg>
+    </modifyTurretBooster>
+    <setBattleLevel>
+      <Arg>	UINT16	</Arg>
+    </setBattleLevel>
+    <pause>
+      <Arg>	BOOL	</Arg>
+    </pause>
+    <updateBaseHealthInfo></updateBaseHealthInfo>
+  </CellMethods>
+  <BaseMethods>
+    <smartDestroy></smartDestroy>
+  </BaseMethods>
+</TeamObjectInterface.def>

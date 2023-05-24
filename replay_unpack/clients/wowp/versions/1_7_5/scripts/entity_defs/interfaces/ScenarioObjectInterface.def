@@ -1,0 +1,19 @@
+<ScenarioObjectInterface.def>
+  <Properties>
+    <timelinesTime>
+      <Type>	ARRAY	  <of>	FLOAT	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </timelinesTime>
+    <scenarioName>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </scenarioName>
+  </Properties>
+  <CellMethods>
+    <onScenarioEvent>
+      <Arg>	STRING	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </onScenarioEvent>
+  </CellMethods>
+</ScenarioObjectInterface.def>

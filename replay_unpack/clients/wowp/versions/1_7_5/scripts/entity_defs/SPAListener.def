@@ -1,0 +1,18 @@
+<SPAListener.def>
+  <Implements>
+    <Interface>	AccountEditor	</Interface>
+  </Implements>
+  <Properties>
+    <consumer_tag>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	false	</Persistent>
+    </consumer_tag>
+    <consumer_tag2>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	false	</Persistent>
+    </consumer_tag2>
+  </Properties>
+  <BaseMethods></BaseMethods>
+</SPAListener.def>

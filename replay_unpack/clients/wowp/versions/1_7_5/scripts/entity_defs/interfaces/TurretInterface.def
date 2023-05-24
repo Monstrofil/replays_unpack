@@ -1,0 +1,16 @@
+<TurretInterface.def>
+  <Properties>
+    <isTurretFiring>
+      <Type>	BOOL	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </isTurretFiring>
+    <turretTargetID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turretTargetID>
+    <turretBooster>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turretBooster>
+  </Properties>
+</TurretInterface.def>

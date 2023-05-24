@@ -1,0 +1,38 @@
+<Node.def>
+  <Properties>
+    <baseappID>
+      <Type>	INT32	</Type>
+      <Flags>	BASE	</Flags>
+    </baseappID>
+  </Properties>
+  <BaseMethods>
+    <sync>
+      <Arg>	PYTHON	</Arg>
+    </sync>
+    <onBroadcastMessage>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </onBroadcastMessage>
+    <sendSystemMessage>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+    </sendSystemMessage>
+    <onAccountDestroySelfForPeripheryFailed>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </onAccountDestroySelfForPeripheryFailed>
+    <proxyCmdToPeriphery>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	ARRAY	  <of>	OBJECT_ID	</of>
+      </Arg>
+    </proxyCmdToPeriphery>
+  </BaseMethods>
+</Node.def>

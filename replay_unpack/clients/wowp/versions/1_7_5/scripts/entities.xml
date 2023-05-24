@@ -1,0 +1,41 @@
+<entities.xml>
+  <ServerOnlyEntities>
+    <Arbiter></Arbiter>
+    <LoginQueue></LoginQueue>
+    <ArenaManager></ArenaManager>
+    <ArenaManagerFake></ArenaManagerFake>
+    <Squad></Squad>
+    <MsgManager></MsgManager>
+    <AMQPManager></AMQPManager>
+    <SquadFinder></SquadFinder>
+    <AccountRegistrator></AccountRegistrator>
+    <Node></Node>
+    <InvoiceManager></InvoiceManager>
+    <JabberMgr></JabberMgr>
+    <TokenReceiver></TokenReceiver>
+    <Arena></Arena>
+    <Prebattle></Prebattle>
+    <VoiceChatMgr></VoiceChatMgr>
+    <EventTrigger></EventTrigger>
+    <TutorialQueue></TutorialQueue>
+    <PVEQueue></PVEQueue>
+    <WalletResponseListener></WalletResponseListener>
+    <SPAListener></SPAListener>
+    <Clan></Clan>
+    <GameStatsCollector></GameStatsCollector>
+    <CenterStatusReader></CenterStatusReader>
+    <IGRNotificationsListener></IGRNotificationsListener>
+  </ServerOnlyEntities>
+  <ClientServerEntities>
+    <Account></Account>
+    <Login></Login>
+    <Avatar></Avatar>
+    <AvatarBot></AvatarBot>
+    <SimpleTeamObject></SimpleTeamObject>
+    <MovingTeamObject></MovingTeamObject>
+    <BigTeamObject></BigTeamObject>
+
+    <!-- TODO: remove me -->
+    <Arena></Arena>
+  </ClientServerEntities>
+</entities.xml>

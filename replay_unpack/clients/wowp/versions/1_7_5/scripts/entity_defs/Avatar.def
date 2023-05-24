@@ -1,0 +1,233 @@
+<Avatar.def>
+  <Implements>
+    <Interface>	AvatarInterface	</Interface>
+    <Interface>	AvatarMessenger	</Interface>
+    <Interface>	ClientStats	</Interface>
+  </Implements>
+  <Properties>
+    <isChatBan>
+      <Type>	INT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </isChatBan>
+    <isPvPUnlocked>
+      <Type>	BOOL	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </isPvPUnlocked>
+    <denunciationsLeft>
+      <Type>	INT16	</Type>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+    </denunciationsLeft>
+  </Properties>
+  <BaseMethods>
+    <makeDenunciation>
+      <Exposed></Exposed>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+    </makeDenunciation>
+    <setClientReady></setClientReady>
+    <updateClientSettingsStats>
+      <Exposed></Exposed>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_STRING	</of>
+      </Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_STRING	</of>
+      </Arg>
+    </updateClientSettingsStats>
+    <voipInitDataReady>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	ARRAY	  <of>	UINT32	</of>
+      </Arg>
+    </voipInitDataReady>
+    <voipClientStatus>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Exposed></Exposed>
+    </voipClientStatus>
+    <voipSquadStatus>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Exposed></Exposed>
+    </voipSquadStatus>
+    <voipMuteClient>
+      <Arg>	UINT32	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Exposed></Exposed>
+    </voipMuteClient>
+    <voipReceiveSquadChannel>
+      <Arg>	STRING	</Arg>
+      <Arg>	ARRAY	  <of>	UINT32	</of>
+      </Arg>
+    </voipReceiveSquadChannel>
+    <voipServerStatus>
+      <Arg>	UINT16	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_STRING	</of>
+      </Arg>
+    </voipServerStatus>
+    <receiveOperation>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </receiveOperation>
+    <onKickedFromArena>
+      <Arg>	UINT8	</Arg>
+    </onKickedFromArena>
+    <debugViewer_subscribe>
+      <Exposed></Exposed>
+    </debugViewer_subscribe>
+    <debugViewer_setFilterSettings>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </debugViewer_setFilterSettings>
+  </BaseMethods>
+  <CellMethods>
+    <sendMouseLock>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </sendMouseLock>
+    <sendMouseMoved>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </sendMouseMoved>
+    <sendMixingMethod>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendMixingMethod>
+    <sendIntensityAlignmentInCenter>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendIntensityAlignmentInCenter>
+    <sendRollSpeedCfc>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendRollSpeedCfc>
+    <sendCameraModType>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendCameraModType>
+    <sendTrackingCamera>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendTrackingCamera>
+    <sendInputSimpleMode>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+    </sendInputSimpleMode>
+    <sendInputAxis>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </sendInputAxis>
+    <sendInputJoyAxis>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT16	</Arg>
+    </sendInputJoyAxis>
+    <sendAutomaticFlapsChanged>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+    </sendAutomaticFlapsChanged>
+    <sendLiningFlag>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendLiningFlag>
+    <sendJoyVersionFlag>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </sendJoyVersionFlag>
+    <sendFlipFlag>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendFlipFlag>
+    <sendNotControlledByUser>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </sendNotControlledByUser>
+    <sendMouseDirData>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	FLOAT64	</Arg>
+      <Arg>	TUPLE	  <of>	INT16	</of>
+        <size>	3	</size>
+      </Arg>
+    </sendMouseDirData>
+    <sendMouseExtRSpeed>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	TUPLE	  <of>	INT16	</of>
+        <size>	3	</size>
+      </Arg>
+    </sendMouseExtRSpeed>
+    <sendMouseUp>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	TUPLE	  <of>	INT16	</of>
+        <size>	3	</size>
+      </Arg>
+    </sendMouseUp>
+    <sendInputSystemState>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendInputSystemState>
+    <sendDirectionalMouseMode>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendDirectionalMouseMode>
+    <onConnectionRestore></onConnectionRestore>
+    <reloadShells>
+      <Arg>	BOOL	</Arg>
+      <Arg>	BOOL	</Arg>
+    </reloadShells>
+  </CellMethods>
+  <ClientMethods>
+    <cantSwitchVehicleResponse></cantSwitchVehicleResponse>
+    <requestClientStats></requestClientStats>
+    <sendInitialData>
+      <Arg>	STRING	</Arg>
+    </sendInitialData>
+    <onResponseFromServer>
+      <Arg>	FLOAT64	</Arg>
+      <Arg>	FLOAT64	</Arg>
+    </onResponseFromServer>
+    <onPartFlagSwitchedOn>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </onPartFlagSwitchedOn>
+    <onPartStateChanging>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+    </onPartStateChanging>
+    <clientReceiveResponse>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </clientReceiveResponse>
+    <voipReceiveSquadChannel>
+      <Arg>	STRING	</Arg>
+      <Arg>	ARRAY	  <of>	DB_ID	</of>
+      </Arg>
+    </voipReceiveSquadChannel>
+    <voipServerStatus>
+      <Arg>	UINT16	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_STRING	</of>
+      </Arg>
+    </voipServerStatus>
+    <onTokenReceived>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </onTokenReceived>
+    <autoAlightFromDestroyedTransport></autoAlightFromDestroyedTransport>
+    <debugViewer_addNewKey>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </debugViewer_addNewKey>
+    <debugViewer_pushToView>
+      <Arg>	STRING	</Arg>
+    </debugViewer_pushToView>
+  </ClientMethods>
+</Avatar.def>

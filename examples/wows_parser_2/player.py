@@ -29,7 +29,7 @@ class ReplayPlayer(WoWSReplayPlayer):
             0x18: UnknownPacket,
         }
 
-    def _process_packet(self, packet):
+    def _process_packet(self, time, packet):
 
         if isinstance(packet, Position):
             print('Entity %s had position %s; new position is %s' % (

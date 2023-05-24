@@ -1,0 +1,37 @@
+<SpawnPoint.def>
+  <Domain>	BASE	</Domain>
+  <Properties>
+    <teamID>
+      <Type>	INT8	</Type>
+      <Editable>	true	</Editable>
+    </teamID>
+    <battleLevels>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </battleLevels>
+    <aircraftClassPriorities>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </aircraftClassPriorities>
+    <flightSpline>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </flightSpline>
+    <cameraPreset>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </cameraPreset>
+    <gameModeOnly>
+      <Type>	UINT8	</Type>
+      <Editable>	true	</Editable>
+    </gameModeOnly>
+    <sectorName>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </sectorName>
+    <defenderOnly>
+      <Type>	UINT8	</Type>
+      <Editable>	true	</Editable>
+    </defenderOnly>
+  </Properties>
+</SpawnPoint.def>

@@ -1,0 +1,139 @@
+<GameActionsManager.def>
+  <Implements>
+    <Interface>	GameActionsManagerBotInterface	</Interface>
+  </Implements>
+  <AppealRadius>	2000	</AppealRadius>
+  <TempProperties>
+    <_GameActionsManager__subscribersOnLeavingCell></_GameActionsManager__subscribersOnLeavingCell>
+    <_GameActionsManager__battleTriggerEventMap></_GameActionsManager__battleTriggerEventMap>
+    <logger></logger>
+    <destroyed></destroyed>
+  </TempProperties>
+  <Properties>
+    <arena>
+      <Type>	MAILBOX	</Type>
+      <Flags>	BASE	</Flags>
+    </arena>
+    <arenaBase>
+      <Type>	MAILBOX	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaBase>
+    <preparedASWaves>
+      <Type>	ARRAY	  <of>	AIR_STRIKE_WAVE_RECORD	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </preparedASWaves>
+    <additionalASInfo>
+      <Type>	ARRAY	  <of>	AIR_STRIKE_ADDITIONAL_INFO	</of>
+      </Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </additionalASInfo>
+    <targets>
+      <Type>	ARRAY	  <of>	AIR_STRIKE_TARGET_RECORD	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </targets>
+    <activeASWaves>
+      <Type>	ARRAY	  <of>	AIR_STRIKE_WAVE_RECORD	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </activeASWaves>
+  </Properties>
+  <BaseMethods>
+    <onASWaveLaunched>
+      <Args>
+        <waveID>	STRING	</waveID>
+      </Args>
+    </onASWaveLaunched>
+    <onASWavePrepared>
+      <Args>
+        <teamIndex>	UINT8	</teamIndex>
+        <waveID>	STRING	</waveID>
+        <bomberIDs>	ARRAY	  <of>	OBJECT_ID	</of>
+        </bomberIDs>
+        <splineName>	STRING	</splineName>
+        <startTime>	FLOAT32	</startTime>
+        <targetDict>	PYTHON	</targetDict>
+        <lastWave>	FLOAT32	</lastWave>
+        <valueCoefficient>	FLOAT32	</valueCoefficient>
+      </Args>
+    </onASWavePrepared>
+    <onASWaveDied>
+      <Args>
+        <waveID>	STRING	</waveID>
+      </Args>
+    </onASWaveDied>
+    <onBomberDeactivated>
+      <Args>
+        <waveID>	STRING	</waveID>
+        <bomberID>	OBJECT_ID	</bomberID>
+      </Args>
+    </onBomberDeactivated>
+    <onASWaveStateChanged>
+      <Args>
+        <waveID>	STRING	</waveID>
+        <state>	UINT8	</state>
+        <actionPointType>	STRING	</actionPointType>
+      </Args>
+    </onASWaveStateChanged>
+    <onASBomberStateChanged>
+      <Args>
+        <waveID>	STRING	</waveID>
+        <bomberID>	OBJECT_ID	</bomberID>
+        <state>	UINT8	</state>
+        <actionPointType>	STRING	</actionPointType>
+      </Args>
+    </onASBomberStateChanged>
+  </BaseMethods>
+  <CellMethods>
+    <onASWaveLaunched>
+      <Args>
+        <waveID>	STRING	</waveID>
+      </Args>
+    </onASWaveLaunched>
+    <onASWavePrepared>
+      <Args>
+        <teamIndex>	UINT8	</teamIndex>
+        <waveID>	STRING	</waveID>
+        <bomberIDs>	ARRAY	  <of>	OBJECT_ID	</of>
+        </bomberIDs>
+        <splineName>	STRING	</splineName>
+        <startTime>	FLOAT32	</startTime>
+        <targetDict>	PYTHON	</targetDict>
+        <lastWave>	FLOAT32	</lastWave>
+        <valueCoefficient>	FLOAT32	</valueCoefficient>
+      </Args>
+    </onASWavePrepared>
+    <onASWaveDied>
+      <Args>
+        <waveID>	STRING	</waveID>
+      </Args>
+    </onASWaveDied>
+    <onBomberDeactivated>
+      <Args>
+        <waveID>	STRING	</waveID>
+        <bomberID>	OBJECT_ID	</bomberID>
+      </Args>
+    </onBomberDeactivated>
+    <onASWaveStateChanged>
+      <Args>
+        <waveID>	STRING	</waveID>
+        <state>	UINT8	</state>
+        <actionPointType>	STRING	</actionPointType>
+      </Args>
+    </onASWaveStateChanged>
+    <onASBomberStateChanged>
+      <Args>
+        <waveID>	STRING	</waveID>
+        <bomberID>	OBJECT_ID	</bomberID>
+        <state>	UINT8	</state>
+        <actionPointType>	STRING	</actionPointType>
+      </Args>
+    </onASBomberStateChanged>
+    <onBattleTriggerEvent>
+      <Args>
+        <triggerEvent>	INT8	</triggerEvent>
+      </Args>
+    </onBattleTriggerEvent>
+  </CellMethods>
+</GameActionsManager.def>

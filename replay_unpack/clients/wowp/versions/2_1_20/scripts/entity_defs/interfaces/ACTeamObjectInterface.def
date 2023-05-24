@@ -1,0 +1,14 @@
+<ACTeamObjectInterface.def>
+  <Properties>
+    <areaConquestType>
+      <Type>	UINT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </areaConquestType>
+    <sectorID>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </sectorID>
+  </Properties>
+  <BaseMethods></BaseMethods>
+  <CellMethods></CellMethods>
+</ACTeamObjectInterface.def>

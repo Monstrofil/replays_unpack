@@ -1,0 +1,9 @@
+<CandiesInterface.def>
+  <ClientMethods>
+    <onGainCandies>
+      <Args>
+        <count>	INT32	</count>
+      </Args>
+    </onGainCandies>
+  </ClientMethods>
+</CandiesInterface.def>

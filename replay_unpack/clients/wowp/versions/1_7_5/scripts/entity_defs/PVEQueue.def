@@ -1,0 +1,13 @@
+<PVEQueue.def>
+  <Properties></Properties>
+  <BaseMethods>
+    <enqueue>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	BOOL	</Arg>
+    </enqueue>
+    <dequeue>
+      <Arg>	OBJECT_ID	</Arg>
+    </dequeue>
+  </BaseMethods>
+</PVEQueue.def>

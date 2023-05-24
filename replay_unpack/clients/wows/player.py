@@ -43,7 +43,7 @@ class ReplayPlayer(ControlledPlayerBase):
     def _get_packets_mapping(self):
         return PACKETS_MAPPING
 
-    def _process_packet(self, packet):
+    def _process_packet(self, time, packet):
         if isinstance(packet, Version):
             logging.debug('Game version: %s', packet.version)
 

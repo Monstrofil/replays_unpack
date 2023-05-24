@@ -1,0 +1,21 @@
+<BSArenaManagerOCOB.def>
+  <Implements>
+    <Interface>	BSArenaManager	</Interface>
+  </Implements>
+  <Properties></Properties>
+  <BaseMethods>
+    <registerCellapp>
+      <Args>
+        <cellappID>	APP_ID	</cellappID>
+        <addr>	IP_ADDR	</addr>
+        <port>	PORT	</port>
+      </Args>
+    </registerCellapp>
+    <updateCellappLoad>
+      <Args>
+        <cellappID>	APP_ID	</cellappID>
+        <load>	FLOAT32	</load>
+      </Args>
+    </updateCellappLoad>
+  </BaseMethods>
+</BSArenaManagerOCOB.def>

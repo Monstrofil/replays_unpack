@@ -1,0 +1,31 @@
+<GroundTurretInterface.def>
+  <TempProperties>
+    <turretDelayRandom></turretDelayRandom>
+  </TempProperties>
+  <Properties>
+    <isTurretFiring>
+      <Type>	BOOL	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </isTurretFiring>
+    <turretTargetID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turretTargetID>
+    <turretTargetPosition>
+      <Type>	VECTOR3	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turretTargetPosition>
+    <turretShootSync>
+      <Type>	UINT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turretShootSync>
+    <turretShootCount>
+      <Type>	INT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turretShootCount>
+    <turretBooster>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turretBooster>
+  </Properties>
+</GroundTurretInterface.def>

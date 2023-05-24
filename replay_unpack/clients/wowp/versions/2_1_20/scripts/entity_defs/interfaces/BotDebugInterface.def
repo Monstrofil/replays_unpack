@@ -1,0 +1,84 @@
+<BotDebugInterface.def>
+  <Properties>
+    <MovementSystemState>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </MovementSystemState>
+    <targetDistance>
+      <Type>	FLOAT64	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </targetDistance>
+    <strategyTargetPosition>
+      <Type>	VECTOR3	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </strategyTargetPosition>
+    <profile>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </profile>
+    <difficulty>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </difficulty>
+    <turnAttackDistanceEnter>
+      <Type>	FLOAT64	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turnAttackDistanceEnter>
+    <turnAttackDistanceExit>
+      <Type>	FLOAT64	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </turnAttackDistanceExit>
+    <breakDistance>
+      <Type>	FLOAT64	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </breakDistance>
+    <shootDistance>
+      <Type>	FLOAT	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </shootDistance>
+    <startAttackDistance>
+      <Type>	FLOAT	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </startAttackDistance>
+    <stopAttackDistance>
+      <Type>	FLOAT	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </stopAttackDistance>
+    <targetPoint>
+      <Type>	VECTOR3	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </targetPoint>
+    <movementDirection>
+      <Type>	VECTOR3	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </movementDirection>
+    <avoidGroundData>
+      <Type>	PYTHON	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </avoidGroundData>
+    <navigationPathData>
+      <Type>	PYTHON	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </navigationPathData>
+    <subTargetPoint>
+      <Type>	PYTHON	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </subTargetPoint>
+    <combatMode>
+      <Type>	UINT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </combatMode>
+    <bombsCount>
+      <Type>	INT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </bombsCount>
+    <rocketsCount>
+      <Type>	INT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </rocketsCount>
+    <defendSector>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </defendSector>
+  </Properties>
+</BotDebugInterface.def>

@@ -1,0 +1,5 @@
+<InvasionBalancer.def>
+  <Implements>
+    <Interface>	BattleEntryPoint	</Interface>
+  </Implements>
+</InvasionBalancer.def>

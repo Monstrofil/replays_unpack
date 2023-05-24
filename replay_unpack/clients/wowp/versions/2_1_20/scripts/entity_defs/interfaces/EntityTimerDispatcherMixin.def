@@ -1,0 +1,6 @@
+<EntityTimerDispatcherMixin.def>
+  <TempProperties>
+    <_timers></_timers>
+    <cancelTimerMethod></cancelTimerMethod>
+  </TempProperties>
+</EntityTimerDispatcherMixin.def>

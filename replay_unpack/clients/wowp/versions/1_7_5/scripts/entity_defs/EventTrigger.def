@@ -1,0 +1,76 @@
+<EventTrigger.def>
+  <TempProperties>
+    <lastServerTime></lastServerTime>
+    <timersLastServerTime></timersLastServerTime>
+    <_EventTrigger__timers></_EventTrigger__timers>
+    <pos2D></pos2D>
+  </TempProperties>
+  <Properties>
+    <cp>
+      <Type>	PYTHON	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </cp>
+    <arena>
+      <Type>	MAILBOX	</Type>
+      <Flags>	BASE	</Flags>
+    </arena>
+    <arenaBase>
+      <Type>	MAILBOX	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaBase>
+    <arenaType>
+      <Type>	INT16	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaType>
+    <state>
+      <Type>	INT32	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </state>
+    <r>
+      <Type>	FLOAT	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </r>
+    <h>
+      <Type>	FLOAT	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </h>
+    <objectsForEvent>
+      <Type>	INT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </objectsForEvent>
+    <arenaObjID>
+      <Type>	INT16	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaObjID>
+    <event>
+      <Type>	STRING	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </event>
+    <teamId>
+      <Type>	INT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </teamId>
+    <groupId>
+      <Type>	STRING	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </groupId>
+    <DsName>
+      <Type>	STRING	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </DsName>
+    <entityGroups>
+      <Type>	INT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </entityGroups>
+    <tag>
+      <Type>	UINT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </tag>
+  </Properties>
+  <CellMethods>
+    <receiveSignal>
+      <Arg>	INT16	</Arg>
+    </receiveSignal>
+  </CellMethods>
+  <ClientMethods></ClientMethods>
+</EventTrigger.def>

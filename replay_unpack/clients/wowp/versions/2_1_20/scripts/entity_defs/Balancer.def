@@ -1,0 +1,5 @@
+<Balancer.def>
+  <Implements>
+    <Interface>	BattleEntryPoint	</Interface>
+  </Implements>
+</Balancer.def>

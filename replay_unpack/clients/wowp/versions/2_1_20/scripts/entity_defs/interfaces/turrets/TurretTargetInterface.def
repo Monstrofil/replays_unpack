@@ -1,0 +1,29 @@
+<TurretTargetInterface.def>
+  <CellMethods>
+    <onLockedByTurret>
+      <Arg>	OBJECT_ID	</Arg>
+    </onLockedByTurret>
+    <onUnLockedByTurret>
+      <Arg>	OBJECT_ID	</Arg>
+    </onUnLockedByTurret>
+  </CellMethods>
+  <TempProperties>
+    <_updateMoveHistoryLast></_updateMoveHistoryLast>
+  </TempProperties>
+  <Properties>
+    <moveHistory>
+      <Type>	ARRAY	  <of>	VECTOR3	</of>
+        <size>	4	</size>
+      </Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </moveHistory>
+    <lockedByTurretsCounter>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </lockedByTurretsCounter>
+    <_updateMoveHistoryLast>
+      <Type>	INT32	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </_updateMoveHistoryLast>
+  </Properties>
+</TurretTargetInterface.def>

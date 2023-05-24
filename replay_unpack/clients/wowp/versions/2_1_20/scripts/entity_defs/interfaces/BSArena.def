@@ -1,0 +1,131 @@
+<BSArena.def>
+  <TempProperties>
+    <logger></logger>
+  </TempProperties>
+  <Properties>
+    <mapID>
+      <Type>	MAP_ID	</Type>
+      <Flags>	BASE	</Flags>
+    </mapID>
+    <cellMapID>
+      <Type>	MAP_ID	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </cellMapID>
+    <reusable>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </reusable>
+    <userData>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </userData>
+    <waitID>
+      <Type>	UINT32	</Type>
+      <Flags>	BASE	</Flags>
+    </waitID>
+    <isDestroying>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </isDestroying>
+    <expectPlayersNum>
+      <Type>	UINT16	</Type>
+      <Flags>	BASE	</Flags>
+    </expectPlayersNum>
+    <cellappID>
+      <Type>	APP_ID	</Type>
+      <Flags>	BASE	</Flags>
+    </cellappID>
+    <isPooled>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </isPooled>
+    <playerMaxID>
+      <Type>	ARENA_PLAYER_ID	</Type>
+      <Flags>	BASE	</Flags>
+    </playerMaxID>
+    <uid>
+      <Type>	ARENA_UID	</Type>
+      <Flags>	BASE	</Flags>
+    </uid>
+    <players>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </players>
+    <ready>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </ready>
+    <destCellapp>
+      <Type>	FIXED_DICT	  <TypeName>	DestCallAppData	</TypeName>
+        <Properties>
+          <addr>
+            <Type>	IP_ADDR	</Type>
+          </addr>
+          <port>
+            <Type>	PORT	</Type>
+          </port>
+        </Properties>
+        <AllowNone>	true	</AllowNone>
+      </Type>
+      <Flags>	BASE	</Flags>
+    </destCellapp>
+  </Properties>
+  <BaseMethods>
+    <onPlayerLeave>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <reason>	KICK_REASON	</reason>
+      </Args>
+    </onPlayerLeave>
+    <kickPlayers>
+      <Args>
+        <reason>	KICK_REASON	</reason>
+        <playerIDs>	ARRAY	  <of>	ARENA_PLAYER_ID	</of>
+        </playerIDs>
+      </Args>
+    </kickPlayers>
+    <reuse>
+      <Args>
+        <expectPlayersNum>	UINT16	</expectPlayersNum>
+        <arenaType>	INT16	</arenaType>
+        <userData>	PYTHON	</userData>
+        <waitID>	UINT32	</waitID>
+      </Args>
+    </reuse>
+    <onPooled></onPooled>
+    <getInfo>
+      <ReturnValues>
+        <specs>	ARENA_INFO	</specs>
+      </ReturnValues>
+    </getInfo>
+    <getPlayer>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+      </Args>
+      <ReturnValues>
+        <playerData>	ARENA_PLAYER	</playerData>
+      </ReturnValues>
+    </getPlayer>
+    <updateCellappID>
+      <Arg>	APP_ID	</Arg>
+    </updateCellappID>
+    <onAvatarCreated>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <mailbox>	MAILBOX	</mailbox>
+      </Args>
+    </onAvatarCreated>
+    <onAvatarCreationFailed>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <mailbox>	MAILBOX	</mailbox>
+      </Args>
+    </onAvatarCreationFailed>
+    <joinPlayers>
+      <Arg>	ARRAY	  <of>	ARENA_PLAYER_CONNECTION_DATA	</of>
+      </Arg>
+    </joinPlayers>
+    <smartDestroy></smartDestroy>
+    <onEntityLeavingCell></onEntityLeavingCell>
+  </BaseMethods>
+</BSArena.def>

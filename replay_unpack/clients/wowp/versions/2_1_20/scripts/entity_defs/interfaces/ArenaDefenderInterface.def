@@ -1,0 +1,8 @@
+<ArenaDefenderInterface.def>
+  <Properties></Properties>
+  <BaseMethods>
+    <requestPatrolPointsForDefenderWithID>
+      <Arg>	OBJECT_ID	</Arg>
+    </requestPatrolPointsForDefenderWithID>
+  </BaseMethods>
+</ArenaDefenderInterface.def>

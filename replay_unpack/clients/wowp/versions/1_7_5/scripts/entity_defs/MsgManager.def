@@ -1,0 +1,64 @@
+<MsgManager.def>
+  <Properties>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+  </Properties>
+  <BaseMethods>
+    <saveAccountData>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	ARRAY	  <of>	PYTHON_ARRAY	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	STRING	</Arg>
+    </saveAccountData>
+    <retrieveAccountData>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+    </retrieveAccountData>
+    <sendChatMessage>
+      <Arg>	UINT32	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </sendChatMessage>
+    <sendChatMessageHistory>
+      <Arg>	MAILBOX	</Arg>
+    </sendChatMessageHistory>
+    <setMOTDMessage>
+      <Arg>	STRING	</Arg>
+    </setMOTDMessage>
+    <setRebootMessage>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </setRebootMessage>
+    <setBroadcastMessage>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </setBroadcastMessage>
+    <register>	!-- Account Name --&gt;	  <Arg>	OBJECT_ID	</Arg>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	DB_ID	</Arg>
+    </register>
+    <deregister>
+      <Arg>	DB_ID	</Arg>
+    </deregister>
+    <deregisterAll></deregisterAll>
+    <printDebugInformation>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+    </printDebugInformation>
+    <onAccountKept>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT32	</Arg>
+    </onAccountKept>
+    <onAccountPropertiesChanged>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </onAccountPropertiesChanged>
+  </BaseMethods>
+</MsgManager.def>

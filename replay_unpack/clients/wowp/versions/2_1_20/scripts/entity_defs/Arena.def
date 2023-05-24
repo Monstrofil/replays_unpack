@@ -1,0 +1,390 @@
+<Arena.def>
+  <Implements>
+    <Interface>	ArenaBotInterface	</Interface>
+    <Interface>	BSArena	</Interface>
+    <Interface>	ArenaDefenderInterface	</Interface>
+    <Interface>	EPSTransfer	</Interface>
+    <Interface>	TacticalRespawn/TacticalRespawnArena	</Interface>
+    <Interface>	EntityTimerDispatcherMixin	</Interface>
+  </Implements>
+  <TempProperties>
+    <arenaScripts></arenaScripts>
+    <destroyed></destroyed>
+    <_arenaSettings></_arenaSettings>
+    <_botCommandManager></_botCommandManager>
+  </TempProperties>
+  <Properties>
+    <arenaState>
+      <Type>	INT16	</Type>
+      <Flags>	BASE	</Flags>
+    </arenaState>
+    <locked>
+      <Type>	BOOL	</Type>
+      <Flags>	BASE	</Flags>
+    </locked>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+    <stats>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </stats>
+    <spaceScripts>
+      <Type>	TUPLE	  <of>	STRING	</of>
+      </Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </spaceScripts>
+  </Properties>
+  <ClientMethods></ClientMethods>
+  <CellMethods>
+    <globalEventFromClient>
+      <Arg>	STRING	</Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+    </globalEventFromClient>
+    <customEventFromClient>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+    </customEventFromClient>
+    <startArenaScripts></startArenaScripts>
+    <stopArenaScripts></stopArenaScripts>
+    <doUnownedExplosion>
+      <Args>
+        <position>	VECTOR3	</position>
+        <explosionDamage>	INT32	</explosionDamage>
+        <explosionRadius>	INT32	</explosionRadius>
+        <explosionRadiusEffective>	INT32	</explosionRadiusEffective>
+        <teamIndex>	UINT8	</teamIndex>
+        <damageReason>	INT8	</damageReason>
+      </Args>
+    </doUnownedExplosion>
+  </CellMethods>
+  <BaseMethods>
+    <sendToAllTeamMatesInRange>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </sendToAllTeamMatesInRange>
+    <updatePlayerSectorID>
+      <Arg>	ARENA_PLAYER_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </updatePlayerSectorID>
+    <receiveCollectedAccuracy>
+      <Arg>	ARENA_PLAYER_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </receiveCollectedAccuracy>
+    <receiveCollectedFastCommands>
+      <Arg>	ARENA_PLAYER_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </receiveCollectedFastCommands>
+    <updateUsedAmmo>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <usedAmmo>	PYTHON	</usedAmmo>
+      </Args>
+    </updateUsedAmmo>
+    <requestSpawnPoint>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <sectorID>	STRING	</sectorID>
+      </Args>
+    </requestSpawnPoint>
+    <avatarEvent>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </avatarEvent>
+    <updateObjectPosition>
+      <Args>
+        <objectID>	OBJECT_ID	</objectID>
+        <position>	VECTOR3	</position>
+      </Args>
+    </updateObjectPosition>
+    <updateObjectVisibility>
+      <Args>
+        <objectID>	OBJECT_ID	</objectID>
+        <visibleByTeams>	ARRAY	  <of>	UINT8	</of>
+        </visibleByTeams>
+      </Args>
+    </updateObjectVisibility>
+    <updateAvatarVector>
+      <Args>
+        <avatarID>	OBJECT_ID	</avatarID>
+        <vector>	VECTOR3	</vector>
+      </Args>
+    </updateAvatarVector>
+    <changeRespawnSectorCounter>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </changeRespawnSectorCounter>
+    <receivePartDestroyedByCriticalPart>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	ARRAY	  <of>	TUPLE	  <of>	INT16	</of>
+        </of>
+      </Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </receivePartDestroyedByCriticalPart>
+    <onBotReachedPosition>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </onBotReachedPosition>
+    <onBotEnterGame>
+      <Arg>	ARENA_PLAYER_ID	</Arg>
+    </onBotEnterGame>
+    <receiveStatsFromTeamObject>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </receiveStatsFromTeamObject>
+    <receiveOperationResponse>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </receiveOperationResponse>
+    <requestEconomicDebugInfo>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </requestEconomicDebugInfo>
+    <sendTextMessage>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </sendTextMessage>
+    <sendMarkerMessage>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	INT16	</Arg>
+    </sendMarkerMessage>
+    <sendBattleMessageReactionResult>
+      <Arg>	UINT8	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </sendBattleMessageReactionResult>
+    <sendCustomEvent2AllClients>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+    </sendCustomEvent2AllClients>
+    <sendGlobalEvent2AllClients>
+      <Arg>	STRING	</Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+    </sendGlobalEvent2AllClients>
+    <onArenaLoaded>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+      </Args>
+    </onArenaLoaded>
+    <onPlayerDesert>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+      </Args>
+    </onPlayerDesert>
+    <onDestruction>
+      <Arg>	KILLING_REPORT	</Arg>
+    </onDestruction>
+    <onRespawn>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <anticipant>	MAILBOX	</anticipant>
+        <activate>	BOOL	</activate>
+      </Args>
+    </onRespawn>
+    <onTeamObjectResurrection>
+      <Arg>	OBJECT_ID	</Arg>
+    </onTeamObjectResurrection>
+    <receiveLaunch>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_UINT8	</of>
+      </Arg>
+    </receiveLaunch>
+    <ask2StartTheGame></ask2StartTheGame>
+    <onCriticalDamage>
+      <Args>
+        <playerID>	INT32	</playerID>
+        <victimID>	INT32	</victimID>
+        <partToCrit>	STRING	</partToCrit>
+      </Args>
+    </onCriticalDamage>
+    <doFarCall>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </doFarCall>
+    <forAllBaseCall>
+      <Arg>	STRING	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </forAllBaseCall>
+    <receiveStatsFromAvatar>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </receiveStatsFromAvatar>
+    <onBotLeaveGame>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+      </Args>
+    </onBotLeaveGame>
+    <onBomberReachedActionPoint>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <actionPointType>	STRING	</actionPointType>
+      </Args>
+    </onBomberReachedActionPoint>
+    <onBomberNotifiedActionPoint>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <actionPointType>	STRING	</actionPointType>
+      </Args>
+    </onBomberNotifiedActionPoint>
+    <onClientCreated>
+      <Arg>	OBJECT_ID	</Arg>
+    </onClientCreated>
+    <doFarCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </doFarCommand>
+    <respondFarCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </respondFarCommand>
+    <request4Data>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </request4Data>
+    <requestPlayerData>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </requestPlayerData>
+    <respondPlayerData>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </respondPlayerData>
+    <switchFreezeArena></switchFreezeArena>
+    <stopByFailure>
+      <Arg>	KICK_REASON	</Arg>
+    </stopByFailure>
+    <onVoiceChannelCreated>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+    </onVoiceChannelCreated>
+    <onVoiceChannelUpdated>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+    </onVoiceChannelUpdated>
+    <onUpdateTeamObjectTakenDamage>
+      <Arg>	OBJECT_ID	</Arg>
+    </onUpdateTeamObjectTakenDamage>
+    <onObjectCriticalHit>
+      <Arg>	UINT8	</Arg>
+    </onObjectCriticalHit>
+    <onChangeAvatarPilotDamaged>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+      </Args>
+    </onChangeAvatarPilotDamaged>
+    <onSecondHits>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	ARRAY	  <of>	TIMED_HIT	</of>
+      </Arg>
+    </onSecondHits>
+    <respawnNewAirplane>
+      <Args>
+        <playerID>	ARENA_PLAYER_ID	</playerID>
+        <globalID>	OBJECT_ID	</globalID>
+      </Args>
+    </respawnNewAirplane>
+    <onAvatarLost>
+      <Arg>	ARENA_PLAYER_ID	</Arg>
+    </onAvatarLost>
+    <restoreAvatarConnection>
+      <Arg>	ARENA_PLAYER_ID	</Arg>
+    </restoreAvatarConnection>
+    <onScenarioEvent>
+      <Arg>	STRING	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </onScenarioEvent>
+    <onScenarioTeamLoose>
+      <Arg>	UINT8	</Arg>
+    </onScenarioTeamLoose>
+    <onScenarioTeamWin>
+      <Arg>	UINT8	</Arg>
+    </onScenarioTeamWin>
+    <onPartGroupDestroyed>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	ARRAY	  <of>	DESTROYED_PART_DATA	</of>
+      </Arg>
+      <Arg>	BOOL	</Arg>
+    </onPartGroupDestroyed>
+    <updateBaseHealthInfo>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </updateBaseHealthInfo>
+    <onScenarioSetIcon>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </onScenarioSetIcon>
+    <onScenarioSetText>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+    </onScenarioSetText>
+    <onScenarioSpawnBot>
+      <Arg>	STRING	</Arg>
+    </onScenarioSpawnBot>
+    <onScenarioHideBot>
+      <Arg>	STRING	</Arg>
+    </onScenarioHideBot>
+    <joinNPCPlayers>
+      <Arg>	ARRAY	  <of>	ARENA_PLAYER_CONNECTION_DATA	</of>
+      </Arg>
+    </joinNPCPlayers>
+    <receiveCriticalHitsData>
+      <Arg>	ARENA_PLAYER_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </receiveCriticalHitsData>
+    <requestPlaneTypeObjectives>
+      <Arg>	ARENA_PLAYER_ID	</Arg>
+      <ReturnValues>
+        <objectives>	PYTHON	</objectives>
+      </ReturnValues>
+    </requestPlaneTypeObjectives>
+    <requestFastCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	FCOM_REQUEST_DATA	</Arg>
+    </requestFastCommand>
+  </BaseMethods>
+</Arena.def>

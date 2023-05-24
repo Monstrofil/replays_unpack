@@ -1,0 +1,10 @@
+<AccountRegistrator.def>
+  <Properties>
+    <consumer_tag>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+      <Persistent>	false	</Persistent>
+    </consumer_tag>
+  </Properties>
+  <BaseMethods></BaseMethods>
+</AccountRegistrator.def>

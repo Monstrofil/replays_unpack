@@ -1,0 +1,63 @@
+<ACSector.def>
+  <Implements>
+    <Interface>	SectorBotInterface	</Interface>
+  </Implements>
+  <AppealRadius>	2000	</AppealRadius>
+  <TempProperties>
+    <hasCell></hasCell>
+    <logger></logger>
+    <state></state>
+    <teamIndex></teamIndex>
+    <_settings></_settings>
+    <_eManager></_eManager>
+    <eStateChanged></eStateChanged>
+  </TempProperties>
+  <Properties>
+    <arena>
+      <Type>	MAILBOX	</Type>
+      <Flags>	BASE	</Flags>
+    </arena>
+    <ident>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </ident>
+    <mapID>
+      <Type>	INT16	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </mapID>
+    <captureStatus>
+      <Type>	ARRAY	  <of>	INT32	</of>
+      </Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </captureStatus>
+    <capturePoints>
+      <Type>	INT32	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </capturePoints>
+    <stateContainer>
+      <Type>	AC_SECTOR_STATE	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <SendLatestOnly>	true	</SendLatestOnly>
+    </stateContainer>
+    <nextBonusTick>
+      <Type>	INT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <SendLatestOnly>	true	</SendLatestOnly>
+    </nextBonusTick>
+    <rocketV2TargetSectorID>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </rocketV2TargetSectorID>
+  </Properties>
+  <CellMethods>
+    <setAttribute>
+      <Args>
+        <name>	STRING	</name>
+        <value>	PYTHON	</value>
+      </Args>
+    </setAttribute>
+    <stateChanged>
+      <Arg>	INT8	</Arg>
+    </stateChanged>
+  </CellMethods>
+</ACSector.def>

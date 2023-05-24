@@ -1,0 +1,44 @@
+<JabberMgr.def>
+  <Properties></Properties>
+  <BaseMethods>
+    <createClanChatChannel>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT64	</Arg>
+    </createClanChatChannel>
+    <syncClanChannelByClientRequest>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT64	</Arg>
+    </syncClanChannelByClientRequest>
+    <setClanChannelMembership>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	BOOL	</Arg>
+    </setClanChannelMembership>
+    <destroyClanChatChannel>
+      <Arg>	STRING	</Arg>
+    </destroyClanChatChannel>
+  </BaseMethods>
+  <_BaseMethods>
+    <createOrSyncClanChatRoom>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	ARRAY	  <of>	DB_ID	</of>
+      </Arg>
+      <Arg>	ARRAY	  <of>	DB_ID	</of>
+      </Arg>
+    </createOrSyncClanChatRoom>
+    <removeClanChatRoom>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	DB_ID	</Arg>
+    </removeClanChatRoom>
+  </_BaseMethods>
+</JabberMgr.def>

@@ -33,7 +33,7 @@ class ReplayPlayer(ControlledPlayerBase):
     def _get_packets_mapping(self):
         return PACKETS_MAPPING
 
-    def _process_packet(self, packet):
+    def _process_packet(self, time, packet):
 
         if isinstance(packet, Map):
             logging.debug('Welcome to map %s: %s', packet.name, packet.arenaId)

@@ -1,0 +1,15 @@
+<ClientStats.def>
+  <BaseMethods>
+    <updateGameOptionsStats>
+      <Exposed></Exposed>
+      <Arg>	UINT8	</Arg>
+      <Arg>	ARRAY	  <of>	GAME_OPTION_STATS	</of>
+      </Arg>
+    </updateGameOptionsStats>
+    <updateClientDetails>
+      <Exposed></Exposed>
+      <Arg>	FLOAT	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </updateClientDetails>
+  </BaseMethods>
+</ClientStats.def>

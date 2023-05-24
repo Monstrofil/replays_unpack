@@ -1,0 +1,17 @@
+<AvatarModifiers.def>
+  <ClientMethods>
+    <syncModifiers>
+      <Args>
+        <modifiersTypes>	ARRAY	  <of>	UINT8	</of>
+        </modifiersTypes>
+        <modifiersValues>	ARRAY	  <of>	FLOAT32	</of>
+        </modifiersValues>
+      </Args>
+    </syncModifiers>
+  </ClientMethods>
+  <CellMethods>
+    <onClientControllersCreated>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </onClientControllersCreated>
+  </CellMethods>
+</AvatarModifiers.def>

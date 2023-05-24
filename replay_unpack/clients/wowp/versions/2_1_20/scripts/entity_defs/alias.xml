@@ -1,0 +1,114 @@
+<alias.xml>
+  <BOOL>	UINT8	</BOOL>
+  <OBJECT_ID>	INT32	</OBJECT_ID>
+  <MAP_ID>	INT32	</MAP_ID>
+  <ARENA_UID>	UINT64	</ARENA_UID>
+  <APP_ID>	INT32	</APP_ID>
+  <IP_ADDR>	UINT32	</IP_ADDR>
+  <PORT>	UINT16	</PORT>
+  <ARENA_PLAYER_ID>	UINT16	</ARENA_PLAYER_ID>
+  <KICK_REASON>	UINT8	</KICK_REASON>
+  <DB_ID>	UINT64	</DB_ID>
+  <ARENA_DATA>	FIXED_DICT	  <TypeName>	ArenaData	</TypeName>
+    <Properties>
+      <expectPlayersNum>
+        <Type>	UINT16	</Type>
+      </expectPlayersNum>
+      <mapID>
+        <Type>	MAP_ID	</Type>
+      </mapID>
+      <reusable>
+        <Type>	BOOL	</Type>
+      </reusable>
+      <cellappID>
+        <Type>	INT32	</Type>
+      </cellappID>
+      <mailbox>
+        <Type>	MAILBOX	</Type>
+      </mailbox>
+      <uid>
+        <Type>	ARENA_UID	</Type>
+      </uid>
+      <userData>
+        <Type>	PYTHON	</Type>
+      </userData>
+    </Properties>
+  </ARENA_DATA>
+  <ARENA_INFO>	FIXED_DICT	  <TypeName>	ArenaInfo	</TypeName>
+    <Properties>
+      <playersIDs>
+        <Type>	ARRAY	  <of>	ARENA_PLAYER_ID	</of>
+        </Type>
+      </playersIDs>
+      <destroying>
+        <Type>	BOOL	</Type>
+      </destroying>
+      <mapID>
+        <Type>	MAP_ID	</Type>
+      </mapID>
+      <reusable>
+        <Type>	BOOL	</Type>
+      </reusable>
+      <cellappID>
+        <Type>	APP_ID	</Type>
+      </cellappID>
+      <uid>
+        <Type>	ARENA_UID	</Type>
+      </uid>
+      <isPooled>
+        <Type>	BOOL	</Type>
+      </isPooled>
+      <userData>
+        <Type>	PYTHON	</Type>
+      </userData>
+    </Properties>
+  </ARENA_INFO>
+  <ARENA_PLAYER>	FIXED_DICT	  <TypeName>	ArenaPlayer	</TypeName>
+    <implementedBy>	BSArenaPlayerConverter.instance	</implementedBy>
+    <Properties>
+      <id>
+        <Type>	ARENA_PLAYER_ID	</Type>
+      </id>
+      <account>
+        <Type>	MAILBOX	</Type>
+      </account>
+      <accDBID>
+        <Type>	DB_ID	</Type>
+      </accDBID>
+      <avatar>
+        <Type>	MAILBOX	</Type>
+      </avatar>
+      <avatarData>
+        <Type>	PYTHON	</Type>
+      </avatarData>
+      <avatarClass>
+        <Type>	STRING	</Type>
+      </avatarClass>
+      <userData>
+        <Type>	PYTHON	</Type>
+      </userData>
+      <leftArena>
+        <Type>	BOOL	</Type>
+      </leftArena>
+    </Properties>
+  </ARENA_PLAYER>
+  <ARENA_PLAYER_CONNECTION_DATA>	FIXED_DICT	  <TypeName>	ArenaPlayerConnectionData	</TypeName>
+    <Properties>
+      <account>
+        <Type>	MAILBOX	</Type>
+      </account>
+      <accDBID>
+        <Type>	DB_ID	</Type>
+      </accDBID>
+      <avatarData>
+        <Type>	PYTHON	</Type>
+      </avatarData>
+      <userData>
+        <Type>	PYTHON	</Type>
+      </userData>
+      <avatarClass>
+        <Type>	STRING	</Type>
+      </avatarClass>
+    </Properties>
+  </ARENA_PLAYER_CONNECTION_DATA>
+</alias.xml>

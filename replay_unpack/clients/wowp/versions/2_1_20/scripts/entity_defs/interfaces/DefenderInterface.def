@@ -1,0 +1,37 @@
+<DefenderInterface.def>
+  <Properties>
+    <defenderType>
+      <Type>	UINT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <Default>	0	</Default>
+    </defenderType>
+    <isPatrolLeader>
+      <Type>	BOOL	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </isPatrolLeader>
+  </Properties>
+  <BaseMethods>
+    <setPatrolPoints>
+      <Arg>	ARRAY	  <of>	VECTOR3	</of>
+      </Arg>
+    </setPatrolPoints>
+    <setIsPatrolLeader>
+      <Arg>	BOOL	</Arg>
+    </setIsPatrolLeader>
+  </BaseMethods>
+  <CellMethods>
+    <weaken>
+      <Arg>	BOOL	</Arg>
+    </weaken>
+    <setPatrolPoints>
+      <Arg>	ARRAY	  <of>	VECTOR3	</of>
+      </Arg>
+    </setPatrolPoints>
+    <setIsPatrolLeader>
+      <Arg>	BOOL	</Arg>
+    </setIsPatrolLeader>
+    <spawnWithTeamIndex>
+      <Arg>	UINT8	</Arg>
+    </spawnWithTeamIndex>
+  </CellMethods>
+</DefenderInterface.def>

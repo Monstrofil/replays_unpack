@@ -1,0 +1,480 @@
+<AvatarInterface.def>
+  <Implements>
+    <Interface>	DestructibleObjectInterface	</Interface>
+    <Interface>	ScenarioObjectInterface	</Interface>
+    <Interface>	FMAvatarInterface	</Interface>
+  </Implements>
+  <Volatile>
+    <position></position>
+    <yaw></yaw>
+    <roll></roll>
+    <pitch></pitch>
+  </Volatile>
+  <TempProperties>
+    <SETTINGS></SETTINGS>
+    <logicalParts></logicalParts>
+    <weaponSlots></weaponSlots>
+    <syncedRandom></syncedRandom>
+    <p></p>
+    <weaponsSettings></weaponsSettings>
+    <aircraftClassSettings></aircraftClassSettings>
+    <controllers></controllers>
+    <oneSecondList></oneSecondList>
+    <oneTickList></oneTickList>
+    <settings></settings>
+    <qaWrapper></qaWrapper>
+    <debugInfo></debugInfo>
+    <onReceiveDamage></onReceiveDamage>
+    <onChangeModeAutoAiming></onChangeModeAutoAiming>
+    <eLiningFlag></eLiningFlag>
+    <eJoyVersionSwitch></eJoyVersionSwitch>
+    <eRawReceiveInputAxis></eRawReceiveInputAxis>
+    <eChangeAutopilot></eChangeAutopilot>
+    <eNotControlledByUser></eNotControlledByUser>
+    <onLaunchShell></onLaunchShell>
+    <startSpeed></startSpeed>
+    <respawnTime></respawnTime>
+    <playerReadyTimeout></playerReadyTimeout>
+    <_Avatar__hull></_Avatar__hull>
+    <_Avatar__engine></_Avatar__engine>
+    <fm></fm>
+    <effectsConsumables></effectsConsumables>
+  </TempProperties>
+  <Properties>
+    <clanAbbrev>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </clanAbbrev>
+    <shouldSaveClientsStats>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </shouldSaveClientsStats>
+    <battleType>
+      <Type>	INT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </battleType>
+    <asymptoteVMaxPitch>
+      <Type>	FLOAT	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </asymptoteVMaxPitch>
+    <reduction>
+      <Type>	FLOAT	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <SendLatestOnly>	true	</SendLatestOnly>
+    </reduction>
+    <reductionMod>
+      <Type>	FLOAT	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <SendLatestOnly>	true	</SendLatestOnly>
+    </reductionMod>
+    <wepWorkTime>
+      <Type>	FLOAT	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </wepWorkTime>
+    <squadID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </squadID>
+    <globalID>
+      <Type>	INT32	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </globalID>
+    <lowAltitudeVisibilityFactor>
+      <Type>	UINT8	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </lowAltitudeVisibilityFactor>
+    <crewSkills>
+      <Type>	ARRAY	  <of>	CREW_MEMBER_SKILLS	</of>
+      </Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </crewSkills>
+    <consumables>
+      <Type>	ARRAY	  <of>	KEY_VALUE_PAIR_INT8	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </consumables>
+    <equipment>
+      <Type>	ARRAY	  <of>	INT8	</of>
+      </Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </equipment>
+    <teamIndex>
+      <Type>	INT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </teamIndex>
+    <battleDuration>
+      <Type>	INT16	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </battleDuration>
+    <introSpline>
+      <Type>	STRING	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </introSpline>
+    <introSplineEnd>
+      <Type>	VECTOR3	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </introSplineEnd>
+    <introSplineEndDirection>
+      <Type>	VECTOR3	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </introSplineEndDirection>
+    <introFakeSpeed>
+      <Type>	FLOAT	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </introFakeSpeed>
+    <introCameraScenario>
+      <Type>	STRING	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </introCameraScenario>
+    <disguise>
+      <Type>	UINT8	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </disguise>
+    <arenaStartTime>
+      <Type>	FLOAT32	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </arenaStartTime>
+    <arenaStartDelay>
+      <Type>	INT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </arenaStartDelay>
+    <curVehicleID>
+      <Type>	OBJECT_ID	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </curVehicleID>
+    <autopilot>
+      <Type>	BOOL	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </autopilot>
+    <isWarEmergencyPower>
+      <Type>	BOOL	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </isWarEmergencyPower>
+    <engineTemperature>
+      <Type>	UINT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </engineTemperature>
+    <debugMode>
+      <Type>	BOOL	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </debugMode>
+    <isDeveloper>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </isDeveloper>
+    <isSpectatorCell>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </isSpectatorCell>
+    <isDisclosed>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PUBLIC	</Flags>
+    </isDisclosed>
+    <armamentStates>
+      <Type>	UINT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <SendLatestOnly>	true	</SendLatestOnly>
+    </armamentStates>
+    <shootingSync>
+      <Type>	UINT16	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+      <SendLatestOnly>	true	</SendLatestOnly>
+    </shootingSync>
+    <behaviorIndex>
+      <Type>	UINT8	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </behaviorIndex>
+    <normalPosition>
+      <Type>	VECTOR3	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </normalPosition>
+    <account>
+      <Type>	MAILBOX	</Type>
+      <Flags>	BASE	</Flags>
+    </account>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+    <accountDBID>
+      <Type>	UINT64	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </accountDBID>
+    <gameMode>
+      <Type>	INT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </gameMode>
+    <shellsCount>
+      <Type>	ARRAY	  <of>	KEY_VALUE_PAIR_UINT8	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </shellsCount>
+    <ammoBelts>
+      <Type>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_UINT16	</of>
+      </Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </ammoBelts>
+    <isArenaFreezed>
+      <Type>	BOOL	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </isArenaFreezed>
+    <flightStrategyName>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </flightStrategyName>
+    <wasLaunch>
+      <Type>	BOOL	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </wasLaunch>
+  </Properties>
+  <ClientMethods>
+    <updateDebugHUD>
+      <Arg>	STRING	</Arg>
+    </updateDebugHUD>
+    <syncGuns>
+      <Arg>	ARRAY	  <of>	FLOAT32	</of>
+      </Arg>
+    </syncGuns>
+    <syncUpdatableState>
+      <Arg>	INT64	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </syncUpdatableState>
+    <createUpdatable>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </createUpdatable>
+    <updateArena>
+      <Arg>	UINT16	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </updateArena>
+    <respondCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </respondCommand>
+    <onKickedFromServer>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	UINT32	</Arg>
+    </onKickedFromServer>
+    <receiveOperationTimeout>
+      <Arg>	UINT32	</Arg>
+    </receiveOperationTimeout>
+    <syncGunState>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </syncGunState>
+    <createWorldEffect>
+      <Arg>	UINT8	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </createWorldEffect>
+  </ClientMethods>
+  <CellMethods>
+    <onTriggerEvent>
+      <Arg>	UINT8	</Arg>
+    </onTriggerEvent>
+    <requestPosition>
+      <Arg>	MAILBOX	</Arg>
+    </requestPosition>
+    <receiveEntityPosition>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </receiveEntityPosition>
+    <restoreAmmo></restoreAmmo>
+    <respawn>
+      <Arg>	BOOL	</Arg>
+    </respawn>
+    <receiveOperation>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </receiveOperation>
+    <receiveOperationTimeout>
+      <Arg>	UINT32	</Arg>
+    </receiveOperationTimeout>
+    <farDataRequest>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </farDataRequest>
+    <farDataRespond>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </farDataRespond>
+    <onRescue></onRescue>
+    <debugHudEnable>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT16	</Arg>
+    </debugHudEnable>
+    <launchShell>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT16	</Arg>
+    </launchShell>
+    <onFire>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </onFire>
+    <createBot>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </createBot>
+    <createNamedBot>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+    </createNamedBot>
+    <sendTextMessage>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </sendTextMessage>
+    <sendMarkerMessage>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	INT16	</Arg>
+    </sendMarkerMessage>
+    <setArenaStartTime>
+      <Arg>	FLOAT32	</Arg>
+    </setArenaStartTime>
+    <useConsumable>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </useConsumable>
+    <switchToVehicle>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	OBJECT_ID	</Arg>
+    </switchToVehicle>
+    <onClientCreated>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </onClientCreated>
+    <onArenaLoaded>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </onArenaLoaded>
+    <kickoutArena>
+      <Arg>	INT16	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </kickoutArena>
+    <leaveArena>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </leaveArena>
+    <setDebugMode>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </setDebugMode>
+    <stopGame></stopGame>
+    <ask2StartTheGame>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </ask2StartTheGame>
+    <receiveAliveTeamMates>
+      <Arg>	ARRAY	  <of>	OBJECT_ID	</of>
+      </Arg>
+    </receiveAliveTeamMates>
+    <reconnectDead>
+      <Arg>	ARRAY	  <of>	OBJECT_ID	</of>
+      </Arg>
+    </reconnectDead>
+    <requestGameResult></requestGameResult>
+    <onAvatarClientDeath></onAvatarClientDeath>
+    <setDebugViewPosition>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </setDebugViewPosition>
+    <debugMoveAvatar>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	VECTOR3	</Arg>
+    </debugMoveAvatar>
+    <resetDebugMoveVector>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </resetDebugMoveVector>
+    <switchFreezeArena>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </switchFreezeArena>
+    <inputProviderRequest>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </inputProviderRequest>
+    <debugRotate>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	VECTOR3	</Arg>
+    </debugRotate>
+    <setClientStats>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	CLIENT_STATISTIC	</Arg>
+    </setClientStats>
+    <doCommand>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </doCommand>
+    <doFarCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </doFarCommand>
+    <respondFarCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </respondFarCommand>
+    <onReceiveKillerData>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	VECTOR3	</Arg>
+    </onReceiveKillerData>
+    <setFreeze>
+      <Arg>	BOOL	</Arg>
+    </setFreeze>
+    <pause>
+      <Arg>	BOOL	</Arg>
+    </pause>
+  </CellMethods>
+  <BaseMethods>
+    <receiveOperationResponse>
+      <Exposed></Exposed>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </receiveOperationResponse>
+    <smartDestroy></smartDestroy>
+    <releaseClient></releaseClient>
+    <reAssignClient>
+      <Arg>	MAILBOX	</Arg>
+    </reAssignClient>
+    <releaseClientToAccount></releaseClientToAccount>
+    <syncUpdatableState>
+      <Arg>	INT64	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	FLOAT32	</Arg>
+    </syncUpdatableState>
+    <createUpdatable>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </createUpdatable>
+    <updateArena>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </updateArena>
+    <onCreateCellSuccess>
+      <Arg>	FLOAT	</Arg>
+    </onCreateCellSuccess>
+    <kickSelf>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	UINT32	</Arg>
+    </kickSelf>
+  </BaseMethods>
+</AvatarInterface.def>

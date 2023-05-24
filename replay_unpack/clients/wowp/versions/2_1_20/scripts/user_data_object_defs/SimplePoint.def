@@ -1,0 +1,17 @@
+<SimplePoint.def>
+  <Domain>	BASE	</Domain>
+  <Properties>
+    <ident>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </ident>
+    <groupName>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </groupName>
+    <actualModes>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </actualModes>
+  </Properties>
+</SimplePoint.def>

@@ -1,0 +1,71 @@
+<BasePoint.def>
+  <Domain>	BASE	</Domain>
+  <Properties>
+    <teamID>
+      <Type>	INT8	</Type>
+      <Editable>	true	</Editable>
+    </teamID>
+    <modelID>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </modelID>
+    <isRandomPoint>
+      <Type>	UINT8	</Type>
+      <Editable>	true	</Editable>
+      <Default>	1	</Default>
+    </isRandomPoint>
+    <groupName>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </groupName>
+    <respawnTime>
+      <Type>	FLOAT32	</Type>
+      <Editable>	true	</Editable>
+    </respawnTime>
+    <actualModes>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </actualModes>
+    <battleLevels>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </battleLevels>
+    <movementStrategyName>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </movementStrategyName>
+    <movementStrategyDataPath>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </movementStrategyDataPath>
+    <movementStrategyStartPosPrc>
+      <Type>	FLOAT32	</Type>
+      <Editable>	true	</Editable>
+    </movementStrategyStartPosPrc>
+    <turretBooster>
+      <Type>	UINT8	</Type>
+      <Editable>	true	</Editable>
+    </turretBooster>
+    <isBigObject>
+      <Type>	BOOL	</Type>
+      <Editable>	true	</Editable>
+    </isBigObject>
+    <scenarioName>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </scenarioName>
+    <DsName>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </DsName>
+    <allowSnapToTerrain>
+      <Type>	BOOL	</Type>
+      <Editable>	true	</Editable>
+      <Default>	1	</Default>
+    </allowSnapToTerrain>
+    <spawnControllerName>
+      <Type>	STRING	</Type>
+      <Editable>	true	</Editable>
+    </spawnControllerName>
+  </Properties>
+</BasePoint.def>

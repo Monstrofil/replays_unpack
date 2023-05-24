@@ -1,0 +1,28 @@
+<AccountMessenger.def>
+  <BaseMethods>
+    <messenger_onActionByClient>
+      <Exposed></Exposed>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	GENERIC_MESSENGER_ARGS	</Arg>
+    </messenger_onActionByClient>
+    <messenger_onActionByServer>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	GENERIC_MESSENGER_ARGS	</Arg>
+    </messenger_onActionByServer>
+    <messenger_onActionForClient>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	GENERIC_MESSENGER_ARGS	</Arg>
+    </messenger_onActionForClient>
+  </BaseMethods>
+  <ClientMethods>
+    <messenger_onActionByServer>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	GENERIC_MESSENGER_ARGS	</Arg>
+    </messenger_onActionByServer>
+  </ClientMethods>
+</AccountMessenger.def>

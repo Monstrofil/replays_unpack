@@ -9,6 +9,7 @@ from replay_unpack.core.network.types import Vector3
 class Position(PrettyPrintObjectMixin):
     __slots__ = (
         'entityId',
+        # 'spaceId',
         'vehicleId',
         'position',
         'positionError',
@@ -21,6 +22,7 @@ class Position(PrettyPrintObjectMixin):
     def __init__(self, stream):
         # type: (BytesIO) -> ()
         self.entityId, = struct.unpack('i', stream.read(4))
+        # self.spaceId, = struct.unpack('i', stream.read(4))
         self.vehicleId, = struct.unpack('i', stream.read(4))
         self.position = Vector3(stream)
         self.positionError = Vector3(stream)

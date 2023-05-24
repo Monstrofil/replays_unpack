@@ -1,0 +1,9 @@
+<AvatarQuestsInterface.def>
+  <ClientMethods>
+    <onQuestCompleted>
+      <Args>
+        <questID>	INT32	</questID>
+      </Args>
+    </onQuestCompleted>
+  </ClientMethods>
+</AvatarQuestsInterface.def>

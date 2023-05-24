@@ -1,0 +1,26 @@
+<LeaderboardManager.def>
+  <Implements>
+    <Interface>	EPSTransfer	</Interface>
+  </Implements>
+  <Properties></Properties>
+  <BaseMethods>
+    <processScore>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	INT32	</Arg>
+    </processScore>
+    <processScoreByID>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	INT32	</Arg>
+    </processScoreByID>
+    <onPrizeReceived>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	ARRAY	  <of>	UINT64	</of>
+      </Arg>
+    </onPrizeReceived>
+    <setActive>
+      <Arg>	STRING	</Arg>
+    </setActive>
+  </BaseMethods>
+</LeaderboardManager.def>

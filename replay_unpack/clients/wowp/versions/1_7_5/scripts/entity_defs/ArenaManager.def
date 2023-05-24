@@ -1,0 +1,129 @@
+<ArenaManager.def>
+  <Properties>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+  </Properties>
+  <BaseMethods>
+    <getArenaForJoin>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+    </getArenaForJoin>
+    <toQueue>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	UINT8	</Arg>
+    </toQueue>
+    <squadToQueue>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	ARRAY	  <of>	MAILBOX	</of>
+      </Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	UINT8	</Arg>
+    </squadToQueue>
+    <addFakePlayerToQueue>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </addFakePlayerToQueue>
+    <setFakeOnlinePlayers>
+      <Arg>	INT64	</Arg>
+    </setFakeOnlinePlayers>
+    <addFakeSquad>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </addFakeSquad>
+    <getWaitLists></getWaitLists>
+    <squadFromQueue>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	ARRAY	  <of>	OBJECT_ID	</of>
+      </Arg>
+    </squadFromQueue>
+    <unQueue>
+      <Arg>	INT32	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </unQueue>
+    <setNormalBalancerVersion>
+      <Arg>	UINT8	</Arg>
+    </setNormalBalancerVersion>
+    <setPveBalancerEnabled>
+      <Arg>	BOOL	</Arg>
+    </setPveBalancerEnabled>
+    <createDevArena>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	MAILBOX	</Arg>
+    </createDevArena>
+    <deleteArena>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	BOOL	</Arg>
+    </deleteArena>
+    <forceStartBalancerBattle>
+      <Arg>	MAILBOX	</Arg>
+    </forceStartBalancerBattle>
+    <getArenas>
+      <Arg>	MAILBOX	</Arg>
+    </getArenas>
+    <getArenasList>
+      <Arg>	MAILBOX	</Arg>
+    </getArenasList>
+    <updateArenaState>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+    </updateArenaState>
+    <onArenaCreated>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	UINT64	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	BOOL	</Arg>
+    </onArenaCreated>
+    <updateArenaCellappID>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT32	</Arg>
+    </updateArenaCellappID>
+    <doFarCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	STRING	</Arg>
+    </doFarCommand>
+    <clearPool></clearPool>
+    <createPrebattleArena>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	UINT64	</Arg>
+    </createPrebattleArena>
+    <createTutorialArena>
+      <Arg>	INT16	</Arg>
+      <Arg>	PYTHON	</Arg>
+    </createTutorialArena>
+    <createArena>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT16	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+    </createArena>
+  </BaseMethods>
+</ArenaManager.def>

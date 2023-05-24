@@ -1,0 +1,59 @@
+<TacticalRespawnAvatar.def>
+  <TempProperties>
+    <_TacticalRespawnCellAvatar__nextPlaneID></_TacticalRespawnCellAvatar__nextPlaneID>
+    <_TacticalRespawnCellAvatar__currentPlaneID></_TacticalRespawnCellAvatar__currentPlaneID>
+    <_TacticalRespawnCellAvatar__nextPlaneBattleData></_TacticalRespawnCellAvatar__nextPlaneBattleData>
+    <_TacticalRespawnCellAvatar__respawnOnNewPlaneIsDone></_TacticalRespawnCellAvatar__respawnOnNewPlaneIsDone>
+    <_TacticalRespawnCellAvatar__globalConsumablesCooldowns></_TacticalRespawnCellAvatar__globalConsumablesCooldowns>
+    <_TacticalRespawnCellAvatar__saveConsumablesCooldowns></_TacticalRespawnCellAvatar__saveConsumablesCooldowns>
+    <_TacticalRespawnCellAvatar__applyConsumablesCooldowns></_TacticalRespawnCellAvatar__applyConsumablesCooldowns>
+    <_TacticalRespawnCellAvatar__performRespawnOnNewPlane></_TacticalRespawnCellAvatar__performRespawnOnNewPlane>
+    <_TacticalRespawnCellAvatar__markRespawnOnNewPlaneBegin></_TacticalRespawnCellAvatar__markRespawnOnNewPlaneBegin>
+    <_TacticalRespawnCellAvatar__controllersForBackup></_TacticalRespawnCellAvatar__controllersForBackup>
+    <_TacticalRespawnCellAvatar__globalShellsCounts></_TacticalRespawnCellAvatar__globalShellsCounts>
+  </TempProperties>
+  <Properties>
+    <availablePlanes>
+      <Type>	PYTHON	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </availablePlanes>
+    <elitePlanes>
+      <Type>	ARRAY	  <of>	INT16	</of>
+      </Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </elitePlanes>
+    <primaryPlanes>
+      <Type>	ARRAY	  <of>	INT16	</of>
+      </Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </primaryPlanes>
+    <tacticalRespawnInProgress>
+      <Type>	BOOL	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </tacticalRespawnInProgress>
+  </Properties>
+  <CellMethods>
+    <selectPlaneToRespawn>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Args>
+        <PlaneID>	INT16	</PlaneID>
+      </Args>
+    </selectPlaneToRespawn>
+    <debugRespawnOnNewPlane>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Args>
+        <globalID>	INT32	</globalID>
+      </Args>
+    </debugRespawnOnNewPlane>
+    <receiveTacticalRespawnData>
+      <Args>
+        <planeBattleData>	PLANE_BATTLE_DATA	</planeBattleData>
+      </Args>
+    </receiveTacticalRespawnData>
+    <onTacticalRespawnConfirmed>
+      <Args>
+        <planeID>	INT16	</planeID>
+      </Args>
+    </onTacticalRespawnConfirmed>
+  </CellMethods>
+</TacticalRespawnAvatar.def>

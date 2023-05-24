@@ -1,0 +1,53 @@
+<ScenarioObjectInterface.def>
+  <Properties>
+    <timelinesTime>
+      <Type>	ARRAY	  <of>	FLOAT	</of>
+      </Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </timelinesTime>
+    <scenarioName>
+      <Type>	STRING	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </scenarioName>
+  </Properties>
+  <ClientMethods>
+    <customEventFromCell>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+    </customEventFromCell>
+    <globalEventFromCell>
+      <Arg>	STRING	</Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+    </globalEventFromCell>
+  </ClientMethods>
+  <CellMethods>
+    <onScenarioEvent>
+      <Arg>	STRING	</Arg>
+      <Arg>	FLOAT	</Arg>
+    </onScenarioEvent>
+    <customEventFromClient>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+    </customEventFromClient>
+    <globalEventFromClient>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	STRING	</Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	TUPLE	  <of>	STRING	</of>
+      </Arg>
+    </globalEventFromClient>
+  </CellMethods>
+</ScenarioObjectInterface.def>

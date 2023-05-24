@@ -1,0 +1,28 @@
+<ACStrategyBotInterface.def>
+  <Properties>
+    <strategyTargetType>
+      <Type>	UINT8	</Type>
+      <Flags>	ALL_CLIENTS	</Flags>
+    </strategyTargetType>
+    <strategyTargetData>
+      <Type>	PYTHON	</Type>
+      <Flags>	CELL_PRIVATE	</Flags>
+    </strategyTargetData>
+  </Properties>
+  <BaseMethods>
+    <updateStrategyTarget>
+      <Args>
+        <strategyTargetType>	UINT8	</strategyTargetType>
+        <extraData>	PYTHON	</extraData>
+      </Args>
+    </updateStrategyTarget>
+  </BaseMethods>
+  <CellMethods>
+    <updateStrategyTarget>
+      <Args>
+        <strategyTargetType>	UINT8	</strategyTargetType>
+        <extraData>	PYTHON	</extraData>
+      </Args>
+    </updateStrategyTarget>
+  </CellMethods>
+</ACStrategyBotInterface.def>

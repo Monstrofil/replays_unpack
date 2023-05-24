@@ -1,0 +1,50 @@
+<FMAvatarInterface.def>
+  <TempProperties>
+    <_Avatar__fmInit></_Avatar__fmInit>
+    <_Avatar__fmInput></_Avatar__fmInput>
+    <_Avatar__fmClientUpdates></_Avatar__fmClientUpdates>
+    <_Avatar__fmInputToProcess></_Avatar__fmInputToProcess>
+    <_Avatar__fmOffsets></_Avatar__fmOffsets>
+    <_Avatar__fmTimeOffset></_Avatar__fmTimeOffset>
+    <_Avatar__fmSentData></_Avatar__fmSentData>
+    <_Avatar__fmData></_Avatar__fmData>
+    <_Avatar__fmSyncData></_Avatar__fmSyncData>
+    <_Avatar__fmStarted></_Avatar__fmStarted>
+    <_Avatar__fmTime></_Avatar__fmTime>
+    <_Avatar__fmLaunchedShell></_Avatar__fmLaunchedShell>
+    <_Avatar__fmSentBinData></_Avatar__fmSentBinData>
+    <_Avatar__fmBinData></_Avatar__fmBinData>
+    <_Avatar__fmStarted></_Avatar__fmStarted>
+    <_Avatar__fmCSPSU></_Avatar__fmCSPSU>
+  </TempProperties>
+  <CellMethods>
+    <fmInit>
+      <Exposed>	OWN_CLIENT	</Exposed>
+    </fmInit>
+    <fmSync>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	FLOAT32	</Arg>
+    </fmSync>
+  </CellMethods>
+  <ClientMethods>
+    <fmData>
+      <Arg>	STRING	</Arg>
+    </fmData>
+    <fmInit>
+      <Arg>	UINT8	</Arg>
+      <Arg>	VECTOR3	</Arg>
+      <Arg>	VECTOR4	</Arg>
+    </fmInit>
+    <fmSync>
+      <Arg>	UINT8	</Arg>
+    </fmSync>
+    <fmDiff>
+      <Arg>	STRING	</Arg>
+    </fmDiff>
+    <fmBinDataBegin></fmBinDataBegin>
+    <fmBinData>
+      <Arg>	STRING	</Arg>
+    </fmBinData>
+    <fmBinDataComplete></fmBinDataComplete>
+  </ClientMethods>
+</FMAvatarInterface.def>

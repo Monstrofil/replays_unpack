@@ -1,0 +1,16 @@
+<AvatarAchievementsInterface.def>
+  <Properties>
+    <unlockedAchievements>
+      <Type>	ARRAY	  <of>	INT32	</of>
+      </Type>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+    </unlockedAchievements>
+  </Properties>
+  <ClientMethods>
+    <onAchievementUnlocked>
+      <Args>
+        <achievementID>	INT32	</achievementID>
+      </Args>
+    </onAchievementUnlocked>
+  </ClientMethods>
+</AvatarAchievementsInterface.def>

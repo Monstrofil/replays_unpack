@@ -104,7 +104,10 @@ class String(_DataType):
             # TODO: actually this is 3'd byte of len, but who cares?
             UInt8().write_to_stream(stream, 0x00)
 
-        stream.write(payload.encode('utf-8'))
+        if not isinstance(payload, bytes):
+            stream.write(payload.encode('utf-8'))
+        else:
+            stream.write(payload)
 
     def _get_default_value_from_section(self, section: etree.ElementBase):
         assert isinstance(section.text, str)

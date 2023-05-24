@@ -1,0 +1,158 @@
+<Squad.def>
+  <TempProperties>
+    <_Squad__id></_Squad__id>
+    <_Squad__leaderDBID></_Squad__leaderDBID>
+    <_Squad__members></_Squad__members>
+    <_Squad__owner></_Squad__owner>
+    <_Squad__maxSquadSize></_Squad__maxSquadSize>
+    <_Squad__inBattle></_Squad__inBattle>
+    <_Squad__requestedMailboxes></_Squad__requestedMailboxes>
+    <_Squad__mailboxesRequestExpiredAt></_Squad__mailboxesRequestExpiredAt>
+    <_Squad__mailboxesRequestID></_Squad__mailboxesRequestID>
+    <_Squad__jid></_Squad__jid>
+    <_Squad__channelPassword></_Squad__channelPassword>
+    <_Squad__voipChannel></_Squad__voipChannel>
+    <_Squad__enterBattleRequestID></_Squad__enterBattleRequestID>
+    <_Squad__accountsInBattleQueue></_Squad__accountsInBattleQueue>
+    <_Squad__becomeEmptyAt></_Squad__becomeEmptyAt>
+    <_Squad__arenaType></_Squad__arenaType>
+  </TempProperties>
+  <Properties>
+    <bp>
+      <Type>	PYTHON	</Type>
+      <Flags>	BASE	</Flags>
+    </bp>
+    <creatorDBID>
+      <Type>	DB_ID	</Type>
+      <Flags>	BASE	</Flags>
+    </creatorDBID>
+    <peripheryID>
+      <Type>	INT32	</Type>
+      <Flags>	BASE	</Flags>
+    </peripheryID>
+  </Properties>
+  <BaseMethods>
+    <onValidateSquadMemberGameQueueConnection>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+    </onValidateSquadMemberGameQueueConnection>
+    <queueEnterGame></queueEnterGame>
+    <updatePremiumAttr>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+    </updatePremiumAttr>
+    <receiveMemberData>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	ARRAY	  <of>	UINT8	</of>
+      </Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT8	</Arg>
+    </receiveMemberData>
+    <updateMemberSupportedModes>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	ARRAY	  <of>	UINT8	</of>
+      </Arg>
+    </updateMemberSupportedModes>
+    <receiveTeamspeakIdentity>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+    </receiveTeamspeakIdentity>
+    <accountNotifyStateChanging>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+    </accountNotifyStateChanging>
+    <onAcceptAnotherSquad>
+      <Arg>	DB_ID	</Arg>
+    </onAcceptAnotherSquad>
+    <onMemberBaseCrash></onMemberBaseCrash>
+    <init>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	ARRAY	  <of>	UINT8	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </init>
+    <editSquad>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </editSquad>
+    <getSquad>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </getSquad>
+    <deleteSquad>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </deleteSquad>
+    <enterQueue>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </enterQueue>
+    <getMember>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </getMember>
+    <editMember>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </editMember>
+    <getInvitation>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </getInvitation>
+    <getChatChannel>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </getChatChannel>
+    <editChatChannel>
+      <Arg>	MAILBOX	</Arg>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </editChatChannel>
+    <setVoiceChannelStatus>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+    </setVoiceChannelStatus>
+    <onVoiceChannelCreated>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+    </onVoiceChannelCreated>
+    <onVoiceChannelUpdated>
+      <Arg>	STRING	</Arg>
+      <Arg>	INT32	</Arg>
+    </onVoiceChannelUpdated>
+    <delMember>
+      <Arg>	DB_ID	</Arg>
+    </delMember>
+  </BaseMethods>
+</Squad.def>

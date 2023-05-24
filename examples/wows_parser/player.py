@@ -11,7 +11,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class ReplayPlayer(WoWSReplayPlayer):
 
-    def _process_packet(self, packet):
+    def _process_packet(self, time, packet):
         if isinstance(packet, Position):
             print('Entity %s had position %s; new position is %s' % (
                 packet.entityId,

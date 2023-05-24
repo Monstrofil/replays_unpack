@@ -51,7 +51,7 @@ class ReplayPlayer(PlayerBase):
         #     print('unknown packet %s %s', packet.type, packet.raw_data.read())
         return p
 
-    def _process_packet(self, packet):
+    def _process_packet(self, time, packet):
 
         if isinstance(packet, Tick):
             print(packet)

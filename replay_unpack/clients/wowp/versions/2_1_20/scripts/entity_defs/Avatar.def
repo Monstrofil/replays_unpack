@@ -1,0 +1,366 @@
+<Avatar.def>
+  <Implements>
+    <Interface>	AvatarInterface	</Interface>
+    <Interface>	AvatarMessenger	</Interface>
+    <Interface>	ClientStats	</Interface>
+    <Interface>	EPSTransfer	</Interface>
+    <Interface>	BotInterface	</Interface>
+    <Interface>	BotDebugInterface	</Interface>
+  </Implements>
+  <Properties>
+    <isChatBan>
+      <Type>	INT8	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </isChatBan>
+    <isPvPUnlocked>
+      <Type>	BOOL	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </isPvPUnlocked>
+    <questSelectConsist>
+      <Type>	ARRAY	  <of>	QUEST_CONSIST	</of>
+      </Type>
+      <Flags>	BASE	</Flags>
+    </questSelectConsist>
+    <clientLocale>
+      <Type>	STRING	</Type>
+      <Flags>	BASE	</Flags>
+    </clientLocale>
+    <denunciationsLeft>
+      <Type>	INT16	</Type>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+    </denunciationsLeft>
+    <turretReduction>
+      <Type>	FLOAT32	</Type>
+      <Flags>	OWN_CLIENT	</Flags>
+    </turretReduction>
+    <economicsBattlePoints>
+      <Type>	INT32	</Type>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+    </economicsBattlePoints>
+    <economicsMasteryPoints>
+      <Type>	INT32	</Type>
+      <Flags>	BASE_AND_CLIENT	</Flags>
+    </economicsMasteryPoints>
+  </Properties>
+  <BaseMethods>
+    <updateEconomicsPoints>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT32	</Arg>
+    </updateEconomicsPoints>
+    <makeDenunciation>
+      <Exposed></Exposed>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	INT8	</Arg>
+    </makeDenunciation>
+    <setClientReady></setClientReady>
+    <voipInitDataReady>
+      <Arg>	ARRAY	  <of>	STRING	</of>
+      </Arg>
+      <Arg>	ARRAY	  <of>	UINT32	</of>
+      </Arg>
+    </voipInitDataReady>
+    <voipClientStatus>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Exposed></Exposed>
+    </voipClientStatus>
+    <voipSquadStatus>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Exposed></Exposed>
+    </voipSquadStatus>
+    <voipMuteClient>
+      <Arg>	DB_ID	</Arg>
+      <Arg>	BOOL	</Arg>
+      <Exposed></Exposed>
+    </voipMuteClient>
+    <voipReceiveSquadChannel>
+      <Arg>	STRING	</Arg>
+      <Arg>	ARRAY	  <of>	DB_ID	</of>
+      </Arg>
+    </voipReceiveSquadChannel>
+    <voipServerStatus>
+      <Arg>	UINT16	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_STRING	</of>
+      </Arg>
+    </voipServerStatus>
+    <receiveOperation>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </receiveOperation>
+    <debugViewer_subscribe>
+      <Exposed></Exposed>
+    </debugViewer_subscribe>
+    <debugViewer_setFilterSettings>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </debugViewer_setFilterSettings>
+    <requestEconomicDebugInfo>
+      <Arg>	STRING	</Arg>
+      <Exposed></Exposed>
+    </requestEconomicDebugInfo>
+    <requestPlaneBattleTooltipData>
+      <Arg>	UINT16	</Arg>
+      <Exposed></Exposed>
+    </requestPlaneBattleTooltipData>
+    <receivePlaneBattleTooltipData>
+      <Arg>	UINT16	</Arg>
+      <Arg>	PLANE_BATTLE_TOOLTIP_DATA	</Arg>
+    </receivePlaneBattleTooltipData>
+    <requestPlaneBattleCrewData>
+      <Arg>	UINT16	</Arg>
+      <Exposed></Exposed>
+    </requestPlaneBattleCrewData>
+    <receivePlaneBattleCrewData>
+      <Arg>	UINT16	</Arg>
+      <Arg>	CREW_DATA	</Arg>
+    </receivePlaneBattleCrewData>
+    <requestFastCommand>
+      <Arg>	UINT16	</Arg>
+      <Arg>	FCOM_REQUEST_DATA	</Arg>
+      <Exposed></Exposed>
+    </requestFastCommand>
+    <sendFastCommandResponse>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </sendFastCommandResponse>
+    <requestPlaneTypeObjectives>
+      <Exposed></Exposed>
+    </requestPlaneTypeObjectives>
+    <closeGamePlayHint>
+      <Arg>	INT16	</Arg>
+      <Exposed></Exposed>
+    </closeGamePlayHint>
+    <onObjectiveProgressChanged>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT16	</Arg>
+    </onObjectiveProgressChanged>
+    <onObjectiveProgressRawValueChanged>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT16	</Arg>
+    </onObjectiveProgressRawValueChanged>
+    <updateClosedHint>
+      <Arg>	PYTHON	</Arg>
+      <Arg>	INT8	</Arg>
+    </updateClosedHint>
+    <onGameplayHint>
+      <Arg>	INT16	</Arg>
+      <Arg>	ARRAY	  <of>	INT32	</of>
+      </Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+    </onGameplayHint>
+  </BaseMethods>
+  <CellMethods>
+    <sendMouseLock>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </sendMouseLock>
+    <sendMouseMoved>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </sendMouseMoved>
+    <sendMixingMethod>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendMixingMethod>
+    <sendIntensityAlignmentInCenter>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendIntensityAlignmentInCenter>
+    <sendRollSpeedCfc>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendRollSpeedCfc>
+    <sendCameraModType>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendCameraModType>
+    <sendTrackingCamera>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendTrackingCamera>
+    <sendInputSimpleMode>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+    </sendInputSimpleMode>
+    <sendInputAxis>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+    </sendInputAxis>
+    <sendInputJoyAxis>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT16	</Arg>
+    </sendInputJoyAxis>
+    <sendAutomaticFlapsChanged>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	INT8	</Arg>
+    </sendAutomaticFlapsChanged>
+    <sendLiningFlag>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendLiningFlag>
+    <sendJoyVersionFlag>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </sendJoyVersionFlag>
+    <sendFlipFlag>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendFlipFlag>
+    <sendNotControlledByUser>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </sendNotControlledByUser>
+    <sendMouseDirData>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	FLOAT32	</Arg>
+      <Arg>	TUPLE	  <of>	INT16	</of>
+        <size>	3	</size>
+      </Arg>
+    </sendMouseDirData>
+    <sendMouseExtRSpeed>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	TUPLE	  <of>	INT16	</of>
+        <size>	3	</size>
+      </Arg>
+    </sendMouseExtRSpeed>
+    <sendMouseUp>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	TUPLE	  <of>	INT16	</of>
+        <size>	3	</size>
+      </Arg>
+    </sendMouseUp>
+    <gunnerDirData>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	TUPLE	  <of>	INT16	</of>
+        <size>	3	</size>
+      </Arg>
+    </gunnerDirData>
+    <clientTurretActivate>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	BOOL	</Arg>
+    </clientTurretActivate>
+    <onTurretsFire>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </onTurretsFire>
+    <reloadBombAndRockets>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </reloadBombAndRockets>
+    <sendInputSystemState>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendInputSystemState>
+    <sendDirectionalMouseMode>
+      <Exposed>	OWN_CLIENT	</Exposed>
+      <Arg>	UINT8	</Arg>
+    </sendDirectionalMouseMode>
+    <onConnectionRestore></onConnectionRestore>
+    <reloadShells>
+      <Arg>	BOOL	</Arg>
+      <Arg>	BOOL	</Arg>
+    </reloadShells>
+  </CellMethods>
+  <ClientMethods>
+    <cantSwitchVehicleResponse></cantSwitchVehicleResponse>
+    <requestClientStats></requestClientStats>
+    <sendInitialData>
+      <Arg>	STRING	</Arg>
+    </sendInitialData>
+    <onResponseFromServer>
+      <Arg>	FLOAT64	</Arg>
+      <Arg>	FLOAT64	</Arg>
+    </onResponseFromServer>
+    <onPartFlagSwitchedOn>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+    </onPartFlagSwitchedOn>
+    <onPartStateChanging>
+      <Arg>	INT8	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+    </onPartStateChanging>
+    <victimInformAboutCrit>
+      <Arg>	INT8	</Arg>
+      <Arg>	OBJECT_ID	</Arg>
+      <Arg>	INT8	</Arg>
+    </victimInformAboutCrit>
+    <clientReceiveResponse>
+      <Arg>	UINT8	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT32	</Arg>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </clientReceiveResponse>
+    <voipReceiveSquadChannel>
+      <Arg>	STRING	</Arg>
+      <Arg>	ARRAY	  <of>	DB_ID	</of>
+      </Arg>
+    </voipReceiveSquadChannel>
+    <voipServerStatus>
+      <Arg>	UINT16	</Arg>
+      <Arg>	ARRAY	  <of>	KEY_VALUE_PAIR_STRING_STRING	</of>
+      </Arg>
+    </voipServerStatus>
+    <onTokenReceived>
+      <Arg>	UINT16	</Arg>
+      <Arg>	UINT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </onTokenReceived>
+    <autoAlightFromDestroyedTransport></autoAlightFromDestroyedTransport>
+    <debugViewer_addNewKey>
+      <Arg>	INT32	</Arg>
+      <Arg>	STRING	</Arg>
+    </debugViewer_addNewKey>
+    <debugViewer_removeKey>
+      <Arg>	INT32	</Arg>
+    </debugViewer_removeKey>
+    <debugViewer_pushToView>
+      <Arg>	STRING	</Arg>
+    </debugViewer_pushToView>
+    <receivePlaneBattleTooltipData>
+      <Arg>	UINT16	</Arg>
+      <Arg>	PLANE_BATTLE_TOOLTIP_DATA	</Arg>
+    </receivePlaneBattleTooltipData>
+    <receivePlaneBattleCrewData>
+      <Arg>	UINT16	</Arg>
+      <Arg>	CREW_DATA	</Arg>
+    </receivePlaneBattleCrewData>
+    <receivePlaneTypeObjectives>
+      <Arg>	PYTHON	</Arg>
+    </receivePlaneTypeObjectives>
+    <onObjectiveProgressChanged>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT16	</Arg>
+    </onObjectiveProgressChanged>
+    <onObjectiveProgressRawValueChanged>
+      <Arg>	INT32	</Arg>
+      <Arg>	UINT16	</Arg>
+    </onObjectiveProgressRawValueChanged>
+    <onGameplayHint>
+      <Arg>	INT16	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	STRING	</Arg>
+      <Arg>	BOOL	</Arg>
+    </onGameplayHint>
+    <responseFastCommand>
+      <Arg>	UINT32	</Arg>
+      <Arg>	UINT16	</Arg>
+      <Arg>	INT8	</Arg>
+      <Arg>	STRING	</Arg>
+    </responseFastCommand>
+  </ClientMethods>
+</Avatar.def>
