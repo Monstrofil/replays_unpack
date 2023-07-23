@@ -15,7 +15,7 @@ from .EntityCreate import EntityCreate
 from .Map import Map
 from .PlayerPosition import PlayerPosition
 
-PACKETS_MAPPING = {
+PACKETS_MAPPING_GENERIC = {
     0x0: BasePlayerCreate,
     0x1: CellPlayerCreate,
     0x2: EntityControl,
@@ -25,11 +25,21 @@ PACKETS_MAPPING = {
     # 0x6
     0x7: EntityProperty,
     0x8: EntityMethod,
-    0x27: Map,
-    0x22: NestedProperty,
     0x0a: Position,
     0x16: Version,
     0x2b: PlayerPosition
+}
+
+PACKETS_MAPPING = {
+    **PACKETS_MAPPING_GENERIC,
+    0x27: Map,
+    0x22: NestedProperty,
+}
+
+PACKETS_MAPPING_12_6 = {
+    **PACKETS_MAPPING_GENERIC,
+    0x23: NestedProperty,
+    0x28: Map,
 }
 
 __all__ = [
@@ -46,5 +56,6 @@ __all__ = [
     'NestedProperty',
     'PlayerPosition',
     'Version',
-    'PACKETS_MAPPING'
+    'PACKETS_MAPPING',
+    'PACKETS_MAPPING_12_6'
 ]

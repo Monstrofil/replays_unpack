@@ -30,7 +30,7 @@ class ReplayPlayer(ControlledPlayerBase):
     def _get_controller(self, version):
         return get_controller(version)
 
-    def _get_packets_mapping(self):
+    def _get_packets_mapping(self, version):
         return PACKETS_MAPPING
 
     def _process_packet(self, time, packet):

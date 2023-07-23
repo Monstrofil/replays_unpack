@@ -1,6 +1,7 @@
 # coding=utf-8
 import logging
 import struct
+from distutils.version import LooseVersion
 from io import BytesIO
 
 from replay_unpack.core import (
@@ -21,13 +22,13 @@ from .network.packets import (
     EntityLeave,
     PlayerPosition,
     Version,
-    PACKETS_MAPPING
+    PACKETS_MAPPING,
+    PACKETS_MAPPING_12_6
 )
 
 last_gap = 0
 last_negative = 0xffffffff
 class ReplayPlayer(ControlledPlayerBase):
-
     def _get_definitions(self, version):
         try:
             return get_definitions('_'.join(version[:4]))
@@ -40,7 +41,9 @@ class ReplayPlayer(ControlledPlayerBase):
         except RuntimeError:
             return get_controller('_'.join(version[:3]))
 
-    def _get_packets_mapping(self):
+    def _get_packets_mapping(self, version):
+        if LooseVersion('.'.join(version)) >= LooseVersion('12.6.0'):
+            return PACKETS_MAPPING_12_6
         return PACKETS_MAPPING
 
     def _process_packet(self, time, packet):

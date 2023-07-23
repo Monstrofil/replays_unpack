@@ -11,12 +11,12 @@ class PlayerBase:
     def __init__(self, version: str):
         self._definitions = self._get_definitions(version)
 
-        self._mapping = self._get_packets_mapping()
+        self._mapping = self._get_packets_mapping(version)
 
     def _get_definitions(self, version):
         raise NotImplementedError
 
-    def _get_packets_mapping(self):
+    def _get_packets_mapping(self, version):
         raise NotImplementedError
 
     def _deserialize_packet(self, packet: NetPacket):

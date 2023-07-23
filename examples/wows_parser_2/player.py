@@ -24,7 +24,7 @@ class UnknownPacket(PrettyPrintObjectMixin):
 
 class ReplayPlayer(WoWSReplayPlayer):
 
-    def _get_packets_mapping(self):
+    def _get_packets_mapping(self, version):
         return {
             0x18: UnknownPacket,
         }

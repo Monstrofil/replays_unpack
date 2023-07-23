@@ -35,7 +35,7 @@ class ReplayPlayer(ControlledPlayerBase):
         except RuntimeError:
             return get_controller('_'.join(version[:3]))
 
-    def _get_packets_mapping(self):
+    def _get_packets_mapping(self, version):
         return PACKETS_MAPPING
 
     def _process_packet(self, time, packet):

@@ -38,7 +38,7 @@ class ReplayPlayer(PlayerBase):
     def _get_definitions(self, version):
         return Definitions(os.path.join(BASE_DIR, 'versions', version.replace('.', '_')))
 
-    def _get_packets_mapping(self):
+    def _get_packets_mapping(self, version):
         return {
             31: Tick,
             0x20: Test,
