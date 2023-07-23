@@ -92,7 +92,12 @@ class ReplayReader(object):
             extra_data = []
             for i in range(blocks_count - 1):
                 block_size = struct.unpack("i", f.read(4))[0]
-                data = json.loads(f.read(block_size))
+                block = f.read(block_size)
+
+                if block:
+                    data = json.loads(block)
+                else:
+                    data = None
                 extra_data.append(data)
 
             if self._type == WOWS_REPLAY:
