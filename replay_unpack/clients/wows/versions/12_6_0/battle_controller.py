@@ -148,10 +148,10 @@ class BattleController(IBattleController):
                 "type": TaskType.names[task['type']]
             }
 
-    def onBattleEnd(self, avatar, teamId, state):
+    def onBattleEnd(self, avatar):
         self._battle_result = dict(
-            winner_team_id=teamId,
-            victory_type=state
+            winner_team_id=self.battle_logic.properties['client']['battleResult']['winnerTeamId'],
+            victory_type=self.battle_logic.properties['client']['battleResult']['finishReason'],
         )
 
     def onNewPlayerSpawnedInBattle(self, avatar, playersStates, botsStates, observersState):
