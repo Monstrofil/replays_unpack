@@ -10,6 +10,7 @@ from replay_unpack.core.packets import (
     Position,
     Version
 )
+from .BattleStats import BattleStats
 from .CellPlayerCreate import CellPlayerCreate
 from .EntityCreate import EntityCreate
 from .Map import Map
@@ -38,6 +39,7 @@ PACKETS_MAPPING = {
 
 PACKETS_MAPPING_12_6 = {
     **PACKETS_MAPPING_GENERIC,
+    0x22: BattleStats,
     0x23: NestedProperty,
     0x28: Map,
 }
