@@ -23,7 +23,7 @@ from .network.packets import (
     PlayerPosition,
     Version,
     PACKETS_MAPPING,
-    PACKETS_MAPPING_12_6
+    PACKETS_MAPPING_12_6, BattleStats
 )
 
 last_gap = 0
@@ -173,3 +173,7 @@ class ReplayPlayer(ControlledPlayerBase):
             logging.debug('nested property request for id=%s isSlice=%s packet=%s',
                           e.id, packet.is_slice, packet.payload.hex())
             packet.read_and_apply(e)
+
+        elif isinstance(packet, BattleStats) and\
+                hasattr(self._battle_controller, 'onPostBattleResultsReceived'):
+            self._battle_controller.onPostBattleResultsReceived(packet.serverData)

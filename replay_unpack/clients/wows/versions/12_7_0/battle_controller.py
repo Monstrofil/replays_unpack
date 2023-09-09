@@ -12,6 +12,12 @@ try:
 except ImportError:
     DEATH_TYPES = {}
 from .players_info import PlayersInfo, PlayerType
+from .battle_results import (
+    unpackCommonRes,
+    unpackPlayerPrivateRes,
+    unpackClientPublicRes,
+    unpackBuildinsRes,
+)
 
 
 class BattleController(IBattleController):
@@ -28,6 +34,7 @@ class BattleController(IBattleController):
         self._map = {}
         self._player_id = None
         self._arena_id = None
+        self.postBattleResult = None
 
         self._dead_planes = {}
 
@@ -93,7 +100,8 @@ class BattleController(IBattleController):
             tasks=list(self._getTasksInfo()),
             skills=dict(),
             crew=dict(self.getCrewInformation()),
-            arena_id=self._arena_id
+            arena_id=self._arena_id,
+            post_battle=self.postBattleResult
         )
 
     def _getCrewInfo(self, vehicle):
@@ -144,7 +152,7 @@ class BattleController(IBattleController):
             yield {
                 "category": Category.names[task['category']],
                 "status": Status.names[task['status']],
-                "name": task['name'],
+                "name": task['id'],
                 "type": TaskType.names[task['type']]
             }
 
@@ -154,17 +162,17 @@ class BattleController(IBattleController):
             victory_type=self.battle_logic.properties['client']['battleResult']['finishReason'],
         )
 
-    def onNewPlayerSpawnedInBattle(self, avatar, playersStates, botsStates, observersState):
+    def onNewPlayerSpawnedInBattle(self, avatar, playersData, botsData, observersData):
         self._players.create_or_update_players(
-            pickle.loads(playersStates, encoding='latin1'),
+            pickle.loads(playersData, encoding='latin1'),
             PlayerType.PLAYER
         )
         self._players.create_or_update_players(
-            pickle.loads(botsStates, encoding='latin1'),
+            pickle.loads(botsData, encoding='latin1'),
             PlayerType.BOT
         )
         self._players.create_or_update_players(
-            pickle.loads(observersState, encoding='latin1'),
+            pickle.loads(observersData, encoding='latin1'),
             PlayerType.OBSERVER
         )
 
@@ -225,6 +233,20 @@ class BattleController(IBattleController):
     def receive_planeDeath(self, avatar, squadronID, planeIDs, reason, attackerId):
         self._dead_planes.setdefault(attackerId, 0)
         self._dead_planes[attackerId] += len(planeIDs)
+
+    def onPostBattleResultsReceived(self, serverData):
+        self.postBattleResult = {
+            'common': unpackCommonRes(serverData['commonList']),
+            'private': unpackPlayerPrivateRes(serverData['privateDataList']),
+            'public': {
+                playerId: unpackClientPublicRes(data)
+                for playerId, data in serverData['playersPublicInfo'].items()
+            },
+            'buildings': {
+                buildingId: unpackBuildinsRes(data)
+                for buildingId, data in serverData['buildings'].items()
+            },
+        }
 
     @property
     def map(self):
