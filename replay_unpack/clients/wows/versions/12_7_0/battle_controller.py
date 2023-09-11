@@ -149,6 +149,9 @@ class BattleController(IBattleController):
     def _getTasksInfo(self):
         tasks = self.battle_logic.properties['client']['state'].get('tasks', [])
         for task in tasks:
+            if not task['showOnHUD']:
+                continue
+
             yield {
                 "category": Category.names[task['category']],
                 "status": Status.names[task['status']],
