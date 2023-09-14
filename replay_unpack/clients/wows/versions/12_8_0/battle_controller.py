@@ -12,12 +12,6 @@ try:
 except ImportError:
     DEATH_TYPES = {}
 from .players_info import PlayersInfo, PlayerType
-from .battle_results import (
-    unpackCommonRes,
-    unpackPlayerPrivateRes,
-    unpackClientPublicRes,
-    unpackBuildinsRes,
-)
 
 
 class BattleController(IBattleController):
