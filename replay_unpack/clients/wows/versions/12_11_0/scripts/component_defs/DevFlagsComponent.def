@@ -1,0 +1,40 @@
+<root>
+
+	<TempProperties>
+		<devFlags/>
+	</TempProperties>
+
+    <BaseMethods>
+
+    	<setDevFlag>
+    		<Exposed/>
+			<Args>
+				<flag> STRING </flag>
+				<enabled> BOOL </enabled>
+			</Args>
+    	</setDevFlag>
+
+    </BaseMethods>
+
+	<ClientMethods>
+
+		<syncDevFlag>
+	    	<Args>
+				<flag> STRING </flag>
+				<enabled> BOOL </enabled>
+			</Args>
+		</syncDevFlag>
+
+		<syncAllDevFlags>
+			<Args>
+				<mask> DEV_FLAGS </mask>
+			</Args>
+		</syncAllDevFlags>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+		<Avatar/>
+	</ofEntity>
+</root>

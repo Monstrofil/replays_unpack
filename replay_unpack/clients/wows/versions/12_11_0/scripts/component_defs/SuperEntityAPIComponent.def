@@ -11,7 +11,7 @@
 		<loadAccount>
 			<Args>
 				<accountDBID> DB_ID </accountDBID>
-				<loadArgs> ENTITY_LOAD_ARGS </loadArgs>
+				<loadArgs> ACCOUNT_LOAD_ARGS </loadArgs>
 			</Args>
 			<ReturnValues>
 				<account> MAILBOX </account>
@@ -21,10 +21,10 @@
 		<loadAccountController>
 			<Args>
 				<accountControllerDBID> DB_ID </accountControllerDBID>
-				<loadArgs> ENTITY_LOAD_ARGS </loadArgs>
+				<loadArgs> ACCOUNT_LOAD_ARGS </loadArgs>
 			</Args>
 			<ReturnValues>
-				<account> MAILBOX </account>
+				<account> MAILBOX </account>\
 			</ReturnValues>
 		</loadAccountController>
 

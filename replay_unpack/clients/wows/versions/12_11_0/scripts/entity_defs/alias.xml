@@ -39,6 +39,7 @@
 	<RIBBON_ID>INT8</RIBBON_ID>
 	<STATE>UINT8</STATE>
 	<FIELD_ID>UINT16</FIELD_ID>
+	<MINEFIELDS_RELATION_STATE>UINT8</MINEFIELDS_RELATION_STATE>
 	<HIT_TYPE>UINT8</HIT_TYPE>
 	<BUOYANCY_STATE>UINT8</BUOYANCY_STATE>
 
@@ -149,6 +150,7 @@
 			<realms><Type>ARRAY<of>STRING</of></Type></realms>
 			<holderTeams><Type>ARRAY<of>TEAM_ID</of></Type></holderTeams>
 			<operationID><Type>GAMEPARAMS_ID</Type></operationID>
+			<battleItemTreeGpId><Type>INT64</Type></battleItemTreeGpId>		<!-- place in which we can use GAMEPARAMS_ID or EMPTY_BATTLE_ITEM_TREE (-1) -->
 		</Properties>
 		<implementedBy>BattleDef.converter</implementedBy>
 	</BATTLE_DEF>
@@ -328,7 +330,8 @@
 		FIXED_DICT
 		<Properties>
 			<vehicleID><Type>ENTITY_ID</Type></vehicleID>
-			<damage><Type>FLOAT</Type></damage>
+			<instantDamage><Type>FLOAT</Type></instantDamage>
+			<periodicDamage><Type>FLOAT</Type></periodicDamage>
 		</Properties>
 	</DAMAGES>
 
@@ -509,6 +512,16 @@
 		</Properties>
 	</EXPLOSION>
 
+	<MINE_EXPLOSION>
+		FIXED_DICT
+		<Properties>
+			<ownerId> <Type> ENTITY_ID </Type> </ownerId>
+			<position> <Type> VECTOR3 </Type> </position>
+			<paramsId> <Type> GAMEPARAMS_ID </Type> </paramsId>
+			<hitType> <Type> HIT_TYPE </Type> </hitType>
+		</Properties>
+	</MINE_EXPLOSION>
+
 	<LASER_BEAM>
 		FIXED_DICT
 		<Properties>
@@ -612,6 +625,14 @@
 		</Properties>
 	</GENERIC_MESSENGER_ARGS>
 
+	<BACKUPED_PROPERTY>
+		FIXED_DICT
+		<Properties>
+			<data> <Type> PYTHON </Type> </data>
+		</Properties>
+		<implementedBy>BackupedProperty.converter</implementedBy>
+	</BACKUPED_PROPERTY>
+
 	<SQUADRON_STATE>
 		FIXED_DICT
 		<Properties>
@@ -628,8 +649,6 @@
 			<hasProjectiles>	<Type>  BOOL		</Type> </hasProjectiles>
 			<isSpawned>			<Type>	BOOL		</Type> </isSpawned>
 			<consumablesStates>	<Type>	UINT8 		</Type> </consumablesStates>
-			<isJatoActive>		<Type>	BOOL 		</Type> </isJatoActive>
-
 		</Properties>
 		<implementedBy>AirPlanes.AirplaneUtils.squadronStateConverter</implementedBy>
 	</SQUADRON_STATE>
@@ -1018,10 +1037,18 @@
 	<FIELD_PACK>
 		FIXED_DICT
 		<Properties>
-			<fieldId><Type>UINT32</Type></fieldId>
+			<fieldId><Type>FIELD_ID</Type></fieldId>
 			<layers><Type>ARRAY<of>FIELD_LAYER_PACK</of></Type></layers>
 		</Properties>
 	</FIELD_PACK>
+
+	<KILLED_MINES_FIELD_PACK>
+		FIXED_DICT
+		<Parent>FIELD_PACK</Parent>
+		<Properties>
+			<hitType><Type>HIT_TYPE</Type></hitType>
+		</Properties>
+	</KILLED_MINES_FIELD_PACK>
 
 	<LOCAL_WEATHER_STATE>
 		FIXED_DICT
@@ -1123,7 +1150,7 @@
 	<CONTROL_POINT_STATE>
 		FIXED_DICT
 		<Properties>
-			<buoyVisualId><Type>GAMEPARAMS_ID</Type></buoyVisualId>
+			<buoy_modelID><Type>GAMEPARAMS_ID</Type></buoy_modelID>
 			<nextControlPoint><Type>ENTITY_ID</Type></nextControlPoint>
 			<type><Type>UINT8</Type></type>
 			<timerName><Type>STRING</Type></timerName>
@@ -1159,6 +1186,11 @@
 		USER_TYPE
 		<implementedBy>Modifiers.ModifierDef.converter</implementedBy>
 	</MODIFIER_STATE>
+
+	<DEV_FLAGS>
+		USER_TYPE
+		<implementedBy>DevFlags.converter</implementedBy>
+	</DEV_FLAGS>
 
 	<DROP_ITEM_STATE>
 		FIXED_DICT
@@ -1728,6 +1760,17 @@
 		<implementedBy>NullableDef.nullableFloatConverter</implementedBy>
 	</NULLABLE_FLOAT>
 
+	<ACCOUNT_LOAD_ARGS>
+		FIXED_DICT
+		<Properties>
+			<loadReason><Type>UINT8</Type></loadReason>
+			<ignoreMasterShutdown><Type>BOOL</Type></ignoreMasterShutdown>
+			<loadMode><Type>UINT8</Type></loadMode>
+			<additionalArgs><Type>PICKLED_BLOB</Type></additionalArgs>
+		</Properties>
+		<implementedBy>AccountLoadArgsDef.converter</implementedBy>
+	</ACCOUNT_LOAD_ARGS>
+
 	<VS_EVENT_TASK_KEY>
 		TUPLE<of>STRING</of><size>3</size>
 	</VS_EVENT_TASK_KEY>
@@ -1934,7 +1977,6 @@
 			<ownerId><Type>ENTITY_ID</Type></ownerId>
 			<position><Type>VECTOR3</Type></position>
 			<spawnTime><Type>FLOAT</Type></spawnTime>
-			<isDefused><Type>BOOL</Type></isDefused>
 			<lifeTime><Type>FLOAT</Type></lifeTime>
 			<spawnedMines><Type>UINT16</Type></spawnedMines>
 			<despawnedMines><Type>UINT16</Type></despawnedMines>
@@ -2000,39 +2042,4 @@
 		</Properties>
 		<implementedBy>RestorePointConverter.converter</implementedBy>
 	</RESTORE_POINT>
-
-	<ENTITYAPI_TIMEOUT>
-		USER_TYPE
-		<implementedBy>EntityAPI.EntityAPITimeoutDef.converter</implementedBy>
-	</ENTITYAPI_TIMEOUT>
-
-	<ENTITY_LOAD_ARGS>
-		FIXED_DICT
-		<Properties>
-			<loadReason><Type>UINT8</Type></loadReason>
-			<ignoreMasterShutdown><Type>BOOL</Type></ignoreMasterShutdown>
-			<entityAPITimeout><Type>ENTITYAPI_TIMEOUT</Type></entityAPITimeout>
-			<additionalArgs><Type>PICKLED_BLOB</Type></additionalArgs>
-		</Properties>
-		<implementedBy>EntityAPIDefs.loadConverter</implementedBy>
-	</ENTITY_LOAD_ARGS>
-
-	<ENTITY_LOOKUP_ARGS>
-		FIXED_DICT
-		<Properties>
-			<additionalArgs><Type>PICKLED_BLOB</Type></additionalArgs>
-			<entityAPITimeout><Type>ENTITYAPI_TIMEOUT</Type></entityAPITimeout>
-		</Properties>
-		<implementedBy>EntityAPIDefs.lookupConverter</implementedBy>
-	</ENTITY_LOOKUP_ARGS>
-
-	<ENTITY_CREATE_ARGS>
-		FIXED_DICT
-		<Properties>
-			<additionalArgs><Type>PICKLED_BLOB</Type></additionalArgs>
-			<entityAPITimeout><Type>ENTITYAPI_TIMEOUT</Type></entityAPITimeout>
-		</Properties>
-		<implementedBy>EntityAPIDefs.createConverter</implementedBy>
-	</ENTITY_CREATE_ARGS>
-
 </root>

@@ -41,7 +41,8 @@
 			<Args>
 				<territoryID> STRING </territoryID>
 				<progress> UINT16 </progress>
-				<progressData> ARRAY<of>STRING</of> </progressData>
+				<unlocks> ARRAY <of> STRING </of> </unlocks>
+				<autoselectedTerritoryID> STRING </autoselectedTerritoryID>
 			</Args>
 		</onProgressUpdated>
 		<onCurrentTaskChanged>

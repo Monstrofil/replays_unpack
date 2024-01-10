@@ -93,6 +93,19 @@
 			<Exposed/>
 		</cmdI5S1>
 
+		<cmdI5S2>
+			<Arg> UINT8 </Arg>
+			<Arg> UINT8 </Arg>
+			<Arg> UINT32 </Arg>
+			<Arg> UINT32 </Arg>
+			<Arg> UINT32 </Arg>
+			<Arg> UINT32 </Arg>
+			<Arg> UINT32 </Arg>
+			<Arg> UNICODE_STRING </Arg>
+			<Arg> UNICODE_STRING </Arg>
+			<Exposed/>
+		</cmdI5S2>
+
 		<cmdI6S1>
 			<Arg> UINT8 </Arg>
 			<Arg> UINT8 </Arg>
@@ -105,20 +118,6 @@
 			<Arg> UNICODE_STRING </Arg>
 			<Exposed/>
 		</cmdI6S1>
-
-		<cmdI6S2>
-			<Arg> UINT8 </Arg>
-			<Arg> UINT8 </Arg>
-			<Arg> UINT32 </Arg>
-			<Arg> UINT32 </Arg>
-			<Arg> UINT32 </Arg>
-			<Arg> UINT32 </Arg>
-			<Arg> UINT32 </Arg>
-			<Arg> UINT32 </Arg>
-			<Arg> UNICODE_STRING </Arg>
-			<Arg> UNICODE_STRING </Arg>
-			<Exposed/>
-		</cmdI6S2>
 
 		<cmdI7S1>
 			<Arg> UINT8 </Arg>

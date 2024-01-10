@@ -12,7 +12,7 @@
 
 		<getReadyAccountMBox>
 		    <Args>
-		        <timeout>ENTITYAPI_TIMEOUT</timeout>
+		        <timeout>UINT16</timeout>
 		    </Args>
 			<ReturnValues>
 				<Arg> MAILBOX </Arg>
@@ -29,7 +29,7 @@
 			<Args>
 				<masterID>MASTER_ID</masterID>
 				<masterService>MAILBOX</masterService>
-				<loadArgs>ENTITY_LOAD_ARGS</loadArgs>
+				<loadArgs>ACCOUNT_LOAD_ARGS</loadArgs>
 			</Args>
  			<ReturnValues>
 				<mailbox> MAILBOX </mailbox>
@@ -43,6 +43,8 @@
 				<masterChanger> MAILBOX </masterChanger>
 			</Args>
 		</onAccountDestroy>
+
+		<onMasterChangeProcessStarted/>
 	</BaseMethods>
 
 	<ofEntity>

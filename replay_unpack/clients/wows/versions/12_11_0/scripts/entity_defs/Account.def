@@ -111,7 +111,7 @@
             </VariableLengthHeaderSize>
         </enterPreBattle>
         <changePreBattleGrants>
-            <Arg>INT32</Arg>
+            <Arg>INT64</Arg>
         </changePreBattleGrants>
         <onPreBattleCountdown>
             <Arg>UINT8</Arg>
@@ -129,7 +129,7 @@
         <enterTrainingRoom>
             <Arg>BLOB</Arg>
             <Arg>COUNTDOWN_INFO</Arg>
-            <Arg>INT32</Arg>
+            <Arg>INT64</Arg>
             <Arg>BOOL</Arg>
             <VariableLengthHeaderSize>
                 <WarnLevel>none</WarnLevel>
@@ -199,7 +199,7 @@
         <setTrace>
             <Arg>BOOL</Arg>
         </setTrace>
-        <curVersion_12_11_1_7814610></curVersion_12_11_1_7814610>
+        <curVersion_12_11_0_7880979></curVersion_12_11_0_7880979>
         <updateSSEProgress>
             <Arg>STRING</Arg>
             <VariableLengthHeaderSize>

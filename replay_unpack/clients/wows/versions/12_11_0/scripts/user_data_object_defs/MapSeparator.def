@@ -4,17 +4,10 @@
 	</AdditionalProperties>
     <Domain> BASE </Domain>
     <Properties>
-        <face>
-            <Type>	ARRAY <of> STRING </of>
-            </Type>
-            <Editable> True </Editable>
-        </face>
-
         <linked>
             <Type>	ARRAY <of> UDO_REF </of>
             </Type>
             <Editable>	True	</Editable>
         </linked>
-
     </Properties>
 </root>

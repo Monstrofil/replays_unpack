@@ -80,12 +80,12 @@
             <Default>10</Default>
         </buoys>
 
-        <buoyVisual>
+        <buoy_model>
             <Type>STRING</Type>
-            <Editable>true</Editable>
-            <Default>PCOU001_Buoy_LMY003</Default>
+            <Editable>True</Editable>
+            <Default>LMY003</Default>
             <resourceref/>
-        </buoyVisual>
+        </buoy_model>
 
         <baked>
             <Type>BOOL</Type>

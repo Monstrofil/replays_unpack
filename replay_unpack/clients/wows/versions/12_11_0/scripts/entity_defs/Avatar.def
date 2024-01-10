@@ -103,11 +103,11 @@
             <Type>VISION</Type>
             <Flags>OWN_CLIENT</Flags>
         </spottedEntities>
-        <isInMinefield>
-            <Type>BOOL</Type>
+        <isInMinefieldState>
+            <Type>MINEFIELDS_RELATION_STATE</Type>
             <Flags>OWN_CLIENT</Flags>
-            <Default>0</Default>
-        </isInMinefield>
+            <Default>1</Default>
+        </isInMinefieldState>
     </Properties>
     <ClientMethods>
         <torpedoParamsUpdate>
@@ -191,6 +191,11 @@
                 <of>EXPLOSION</of>
             </Arg>
         </receiveExplosions>
+        <receiveMineExplosions>
+            <Arg>ARRAY
+                <of>MINE_EXPLOSION</of>
+            </Arg>
+        </receiveMineExplosions>
         <receivePlaneProjectilePack>
             <Arg>ARRAY
                 <of>PLANE_PROJECTILE_PACK</of>
@@ -294,10 +299,22 @@
         <receiveMineKills>
             <Args>
                 <fieldPacks>ARRAY
-                    <of>FIELD_PACK</of>
+                    <of>KILLED_MINES_FIELD_PACK</of>
                 </fieldPacks>
             </Args>
         </receiveMineKills>
+        <receivePlaneMinefieldPrediction>
+            <Args>
+                <ownerID>ENTITY_ID</ownerID>
+                <signalBombParams>GAMEPARAMS_ID</signalBombParams>
+                <dropPosition>VECTOR3</dropPosition>
+                <fieldCenterX>FLOAT</fieldCenterX>
+                <fieldCenterZ>FLOAT</fieldCenterZ>
+                <fieldRadius>FLOAT</fieldRadius>
+                <predictionSpawnTime>FLOAT</predictionSpawnTime>
+                <predictionLifetime>FLOAT</predictionLifetime>
+            </Args>
+        </receivePlaneMinefieldPrediction>
         <receiveProjectileTrace>
             <Arg>INT32</Arg>
             <Arg>BLOB</Arg>
@@ -433,18 +450,18 @@
             <Arg>UINT8</Arg>
             <Arg>BOOL</Arg>
         </squadronConsumableEnabled>
-        <ownSquadronConsumableInterrupted>
-            <Args>
-                <squadronIndex>PLANE_ID</squadronIndex>
-                <consType>UINT8</consType>
-            </Args>
-        </ownSquadronConsumableInterrupted>
         <squadronConsumableInterrupted>
             <Args>
                 <squadronID>PLANE_ID</squadronID>
                 <consType>UINT8</consType>
             </Args>
         </squadronConsumableInterrupted>
+        <squadronIndependentConsumableInterrupted>
+            <Args>
+                <squadronIndex>UINT8</squadronIndex>
+                <consumableType>UINT8</consumableType>
+            </Args>
+        </squadronIndependentConsumableInterrupted>
         <squadronConsumableStopWorking>
             <Args>
                 <squadronID>PLANE_ID</squadronID>
@@ -607,7 +624,7 @@
         </updatePreBattlesInfo>
         <changePreBattleGrants>
             <Args>
-                <grants>INT32</grants>
+                <grants>INT64</grants>
             </Args>
         </changePreBattleGrants>
         <onActionFailed>
@@ -824,13 +841,26 @@
             <Arg>UINT8</Arg>
             <Arg>FLOAT</Arg>
         </onOilLeakStateChanged>
-        <onDrawMinefieldPrediction>
+        <dev_inviteBotToDynamicDivision>
+            <Arg>STRING</Arg>
+        </dev_inviteBotToDynamicDivision>
+        <dev_removeBotFromDynamicDivision>
             <Args>
-                <position>VECTOR3</position>
-                <radius>FLOAT</radius>
-                <drawTime>FLOAT</drawTime>
+                <botName>STRING</botName>
             </Args>
-        </onDrawMinefieldPrediction>
+        </dev_removeBotFromDynamicDivision>
+        <dev_createDynamicDivisionOfBots>
+            <Args>
+                <botList>ARRAY
+                    <of>STRING</of>
+                </botList>
+            </Args>
+        </dev_createDynamicDivisionOfBots>
+        <dev_changeDynamicDivisionOwnerToBot>
+            <Args>
+                <botName>STRING</botName>
+            </Args>
+        </dev_changeDynamicDivisionOwnerToBot>
     </ClientMethods>
     <CellMethods>
         <useConsumable>
@@ -966,10 +996,12 @@
             <Arg>PLANE_ID</Arg>
             <Arg>INT8</Arg>
         </setSquadronThrottle>
-        <cancelJato>
+        <dropJato>
             <Exposed>OWN_CLIENT</Exposed>
-            <Arg>PLANE_ID</Arg>
-        </cancelJato>
+            <Args>
+                <squadronId>PLANE_ID</squadronId>
+            </Args>
+        </dropJato>
         <setSquadronTurnDirection>
             <Exposed>OWN_CLIENT</Exposed>
             <Arg>PLANE_ID</Arg>
@@ -1065,6 +1097,13 @@
         <dev_respawnPlanes>
             <Exposed>OWN_CLIENT</Exposed>
         </dev_respawnPlanes>
+        <dev_spawnMinefield>
+            <Exposed>OWN_CLIENT</Exposed>
+            <Args>
+                <position>VECTOR3</position>
+                <paramsId>GAMEPARAMS_ID</paramsId>
+            </Args>
+        </dev_spawnMinefield>
         <setObservedTeamId>
             <Exposed>OWN_CLIENT</Exposed>
             <Arg>TEAM_ID</Arg>
@@ -1260,6 +1299,37 @@
             <Arg>UINT8</Arg>
             <Exposed>OWN_CLIENT</Exposed>
         </setInvitationsEnabled>
+        <dev_inviteBotToDynamicDivision>
+            <Args>
+                <botName>STRING</botName>
+                <divisionId>PRE_BATTLE_ID</divisionId>
+            </Args>
+            <Exposed>OWN_CLIENT</Exposed>
+        </dev_inviteBotToDynamicDivision>
+        <dev_removeBotFromDynamicDivision>
+            <Args>
+                <botName>STRING</botName>
+                <divisionId>PRE_BATTLE_ID</divisionId>
+            </Args>
+            <Exposed>OWN_CLIENT</Exposed>
+        </dev_removeBotFromDynamicDivision>
+        <dev_changeDynamicDivisionOwnerToBot>
+            <Args>
+                <botName>STRING</botName>
+                <divisionId>PRE_BATTLE_ID</divisionId>
+            </Args>
+            <Exposed>OWN_CLIENT</Exposed>
+        </dev_changeDynamicDivisionOwnerToBot>
+        <dev_fillDynamicDivisionWithBots>
+            <Args>
+                <botList>ARRAY
+                    <of>STRING</of>
+                </botList>
+                <divisionId>PRE_BATTLE_ID</divisionId>
+                <playersLimit>INT8</playersLimit>
+            </Args>
+            <Exposed>OWN_CLIENT</Exposed>
+        </dev_fillDynamicDivisionWithBots>
     </BaseMethods>
     <shouldBackup>false</shouldBackup>
 </root>

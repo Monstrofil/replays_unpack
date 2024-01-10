@@ -28,4 +28,5 @@
 	<MasterEntityAPIComponent/>
 	<PdataResetComponent/>
 	<StrategicActionsComponent/>
+	<DevFlagsComponent/>
 </root>

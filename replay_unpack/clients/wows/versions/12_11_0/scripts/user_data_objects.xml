@@ -9,10 +9,14 @@
 	<MapPartInfo/>
 	<MapBorder/>
 	<MapSeparator/>
+	<SoundedEffect/>
+	<InteractiveRadio/>
+	<InteractiveObject/>
 	<SpaceDebugTool/>
 	<SpatialUIDebugTool/>
 	<SquadronReticleTool/>
 	<SpawnPoint/>
+	<StaticSoundEmitter/>
 	<Trigger/>
 	<WayPoint/>
 </root>

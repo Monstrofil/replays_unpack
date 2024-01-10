@@ -225,7 +225,7 @@ class BattleController(IBattleController):
     def g_receiveDamagesOnShip(self, vehicle, damages):
         for damage_info in damages:
             self._shots_damage_map.setdefault(vehicle.id, {}).setdefault(damage_info['vehicleID'], 0)
-            self._shots_damage_map[vehicle.id][damage_info['vehicleID']] += damage_info['damage']
+            self._shots_damage_map[vehicle.id][damage_info['vehicleID']] += damage_info['instantDamage'] + damage_info['periodicDamage']
 
     def receive_planeDeath(self, avatar, squadronID, planeIDs, reason, attackerId):
         self._dead_planes.setdefault(attackerId, 0)
