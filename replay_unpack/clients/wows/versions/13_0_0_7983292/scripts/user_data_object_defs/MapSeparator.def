@@ -1,0 +1,13 @@
+<root>
+    <OptionsFlag>Enable</OptionsFlag>
+    <AdditionalProperties>
+	</AdditionalProperties>
+    <Domain> BASE </Domain>
+    <Properties>
+        <linked>
+            <Type>	ARRAY <of> UDO_REF </of>
+            </Type>
+            <Editable>	True	</Editable>
+        </linked>
+    </Properties>
+</root>
