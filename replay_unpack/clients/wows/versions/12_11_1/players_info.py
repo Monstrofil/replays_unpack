@@ -1,4 +1,5 @@
 # coding=utf-8
+from replay_unpack.core.unicoding import unicodize
 from .constants import (
     id_property_map,
     id_property_map_bots,
@@ -29,7 +30,12 @@ class PlayersInfo(object):
 
         player_dict = dict()
         for key, value in player_info:
+            # wargaming still uses python 2 which has poor unicode support
+            # as we are unpickling the data, we have to guess what is unicode
+            # and what was originally intended to be bytes
+            value = unicodize(value)
             player_dict[property_map[key]] = value
+
         return player_dict
 
     def create_or_update_players(self, players_info, players_type=PlayerType.PLAYER):

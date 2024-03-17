@@ -1,6 +1,11 @@
 __author__ = "Aleksandr Shyshatsky"
 
+from replay_unpack.core.unicoding import unicodize
+
 
 class PlayerMode(object):
-    def __init__(self, fixedDict):
-        self.fixedDict = fixedDict
+    playerModeType: int
+    observedTeamId: int
+
+    def __setstate__(self, d):
+        self.__dict__ = unicodize(d)

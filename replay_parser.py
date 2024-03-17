@@ -107,4 +107,4 @@ if __name__ == '__main__':
     replay_info = ReplayParser(
         namespace.replay, strict=namespace.strict_mode,
         raw_data_output=namespace.raw_data_output).get_info()
-    print(json.dumps(replay_info, indent=1, cls=DefaultEncoder))
+    print(json.dumps(replay_info, indent=1, cls=DefaultEncoder, ensure_ascii=False))

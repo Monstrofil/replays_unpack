@@ -161,15 +161,15 @@ class BattleController(IBattleController):
 
     def onNewPlayerSpawnedInBattle(self, avatar, playersData, botsData, observersData):
         self._players.create_or_update_players(
-            pickle.loads(playersData, encoding='latin1'),
+            pickle.loads(playersData, encoding='bytes'),
             PlayerType.PLAYER
         )
         self._players.create_or_update_players(
-            pickle.loads(botsData, encoding='latin1'),
+            pickle.loads(botsData, encoding='bytes'),
             PlayerType.BOT
         )
         self._players.create_or_update_players(
-            pickle.loads(observersData, encoding='latin1'),
+            pickle.loads(observersData, encoding='bytes'),
             PlayerType.OBSERVER
         )
 
@@ -177,29 +177,29 @@ class BattleController(IBattleController):
                              observersState, buildingsInfo):
         self._arena_id = arenaUniqueId
         self._players.create_or_update_players(
-            pickle.loads(playersStates, encoding='latin1'),
+            pickle.loads(playersStates, encoding='bytes'),
             PlayerType.PLAYER
         )
         self._players.create_or_update_players(
-            pickle.loads(botsStates, encoding='latin1'),
+            pickle.loads(botsStates, encoding='bytes'),
             PlayerType.BOT
         )
         self._players.create_or_update_players(
-            pickle.loads(observersState, encoding='latin1'),
+            pickle.loads(observersState, encoding='bytes'),
             PlayerType.OBSERVER
         )
 
     def onPlayerInfoUpdate(self, avatar, playersData, botsData, observersData):
         self._players.create_or_update_players(
-            pickle.loads(playersData, encoding='latin1'),
+            pickle.loads(playersData, encoding='bytes'),
             PlayerType.PLAYER
         )
         self._players.create_or_update_players(
-            pickle.loads(botsData, encoding='latin1'),
+            pickle.loads(botsData, encoding='bytes'),
             PlayerType.BOT
         )
         self._players.create_or_update_players(
-            pickle.loads(observersData, encoding='latin1'),
+            pickle.loads(observersData, encoding='bytes'),
             PlayerType.OBSERVER
         )
 
