@@ -4,4 +4,3 @@ mock
 ddt
 raven
 lxml
-distutils
