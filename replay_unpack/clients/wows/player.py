@@ -1,7 +1,7 @@
 # coding=utf-8
 import logging
 import struct
-from distutils.version import LooseVersion
+from packaging.version import Version as LooseVersion
 from io import BytesIO
 
 from replay_unpack.core import (
@@ -23,7 +23,8 @@ from .network.packets import (
     PlayerPosition,
     Version,
     PACKETS_MAPPING,
-    PACKETS_MAPPING_12_6, BattleStats
+    PACKETS_MAPPING_12_6,
+    BattleStats
 )
 
 last_gap = 0
