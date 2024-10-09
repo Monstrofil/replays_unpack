@@ -269,6 +269,26 @@
 		ARRAY <of> PLAYER_DEF </of>
 	</PLAYERS_DEFS>
 
+	<BATTLE_RESULTS_DEF>
+		FIXED_DICT
+		<Properties>
+			<spaID><Type>DB_ID</Type></spaID>
+			<realm><Type>STRING</Type></realm>
+			<battleId><Type>PRE_BATTLE_ID</Type></battleId>
+			<type_><Type>BOOL</Type></type_>
+			<reason><Type>UINT8</Type></reason>
+			<compressedResults><Type>BLOB</Type></compressedResults>
+			<arenaUniqueID><Type>INT64</Type></arenaUniqueID>
+			<arenaClusterID><Type>INT32</Type></arenaClusterID>
+			<teamBuildType><Type>INT16</Type></teamBuildType>
+			<operationID><Type>GAMEPARAMS_ID</Type></operationID>
+			<pickledArenaInfo><Type>BLOB</Type></pickledArenaInfo>
+			<battleSessionUniqueID><Type>INT64</Type></battleSessionUniqueID>
+			<gameVersion><Type>STRING</Type></gameVersion>
+		</Properties>
+		<implementedBy>BattleResultsDef.converter</implementedBy>
+	</BATTLE_RESULTS_DEF>
+
 	<!-- Alias is used by matchmaker to send pack of players divided on teams to battle session -->
 	<TEAMSLIST>
 		ARRAY <of> PLAYERS_DEFS </of>
