@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<root>
+    <Volatile></Volatile>
+    <Properties>
+        <shipId>
+            <Type>SHIP_ID</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </shipId>
+        <exteriorId>
+            <Type>INT64</Type>
+            <Flags>ALL_CLIENTS</Flags>
+        </exteriorId>
+    </Properties>
+    <ClientMethods></ClientMethods>
+    <CellMethods></CellMethods>
+    <BaseMethods></BaseMethods>
+</root>
+
