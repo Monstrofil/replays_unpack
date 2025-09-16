@@ -2,8 +2,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='World of Warships replays parser',
-    version='3.4.1',
+    name='World-of-Warships-replays-parser',
+    version='3.4.2',
     description='Utility which loads .wowsreplay file, "plays" it '
                 'in memory and produces results in json format',
     author='Oleksandr Shyshatskyi',
