@@ -1,0 +1,192 @@
+name: Update WoWS Version
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install wgc-download
+        run: pip install git+https://github.com/Monstrofil/wgc-download.git
+
+      - name: Check for new version
+        id: version_check
+        run: |
+          VERSION_OUTPUT=$(wgc-download list WOWS.WW.PRODUCTION 2>&1)
+          echo "$VERSION_OUTPUT"
+
+          FULL_VERSION=$(echo "$VERSION_OUTPUT" | grep -oP 'Latest version:\s+\K\S+')
+          if [ -z "$FULL_VERSION" ]; then
+            echo "::error::Failed to parse version from wgc-download output"
+            exit 1
+          fi
+          echo "Full version: $FULL_VERSION"
+
+          # Version format: 15.2.0.0.12116141
+          SHORT_VERSION=$(echo "$FULL_VERSION" | cut -d. -f1-3)
+          BUILD_NUMBER=$(echo "$FULL_VERSION" | cut -d. -f5)
+          DIR_VERSION=$(echo "$SHORT_VERSION" | tr '.' '_')
+
+          echo "full_version=$FULL_VERSION" >> "$GITHUB_OUTPUT"
+          echo "short_version=$SHORT_VERSION" >> "$GITHUB_OUTPUT"
+          echo "dir_version=$DIR_VERSION" >> "$GITHUB_OUTPUT"
+          echo "build_number=$BUILD_NUMBER" >> "$GITHUB_OUTPUT"
+
+          VERSIONS_DIR="replay_unpack/clients/wows/versions"
+          if [ -d "$VERSIONS_DIR/$DIR_VERSION" ]; then
+            echo "Version $DIR_VERSION already exists, skipping."
+            echo "new_version=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "New version detected: $DIR_VERSION (build $BUILD_NUMBER)"
+            echo "new_version=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Find previous version
+        if: steps.version_check.outputs.new_version == 'true'
+        id: prev_version
+        run: |
+          VERSIONS_DIR="replay_unpack/clients/wows/versions"
+          PREV=$(ls -d "$VERSIONS_DIR"/[0-9]*_[0-9]*_[0-9]* | \
+            sed 's|.*/||' | \
+            sed 's/_/./g' | \
+            sort -V | \
+            tail -1 | \
+            tr '.' '_')
+          echo "prev_dir=$PREV" >> "$GITHUB_OUTPUT"
+          echo "Previous version: $PREV"
+
+      - name: Create version directory and copy Python files
+        if: steps.version_check.outputs.new_version == 'true'
+        run: |
+          NEW_DIR="replay_unpack/clients/wows/versions/${{ steps.version_check.outputs.dir_version }}"
+          PREV_DIR="replay_unpack/clients/wows/versions/${{ steps.prev_version.outputs.prev_dir }}"
+
+          mkdir -p "$NEW_DIR"
+          cp "$PREV_DIR/__init__.py" "$NEW_DIR/"
+          cp "$PREV_DIR/battle_controller.py" "$NEW_DIR/"
+          cp "$PREV_DIR/constants.py" "$NEW_DIR/"
+          cp "$PREV_DIR/players_info.py" "$NEW_DIR/"
+
+      - name: Install Rust toolchain
+        if: steps.version_check.outputs.new_version == 'true'
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo registry and build
+        if: steps.version_check.outputs.new_version == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+          key: cargo-wowsunpack-${{ runner.os }}-v1
+
+      - name: Install wowsunpack
+        if: steps.version_check.outputs.new_version == 'true'
+        run: |
+          if ! command -v wowsunpack &> /dev/null; then
+            cargo install --git https://github.com/landaire/wows-toolkit wowsunpack
+          else
+            echo "wowsunpack already cached"
+          fi
+
+      - name: Extract game scripts
+        if: steps.version_check.outputs.new_version == 'true'
+        run: |
+          WORK_DIR=$(mktemp -d)
+          BUILD_NUM="${{ steps.version_check.outputs.build_number }}"
+          NEW_DIR="replay_unpack/clients/wows/versions/${{ steps.version_check.outputs.dir_version }}"
+
+          echo "=== Downloading system_data.idx (build $BUILD_NUM) ==="
+          wgc-download extract WOWS.WW.PRODUCTION client \
+            "bin/${BUILD_NUM}/idx/system_data.idx" \
+            -d "$WORK_DIR"
+
+          echo "=== Downloading system_data_0001.pkg ==="
+          wgc-download extract WOWS.WW.PRODUCTION client \
+            "res_packages/system_data_0001.pkg" \
+            -d "$WORK_DIR"
+
+          echo "=== Extracting scripts ==="
+          # wowsunpack writes VFS paths as-is; /scripts/** becomes /scripts/ at filesystem root
+          wowsunpack \
+            -i "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
+            -p "$WORK_DIR/res_packages/" \
+            extract \
+            '/scripts/**'
+
+          echo "=== Copying scripts to version directory ==="
+          cp -r /scripts "$NEW_DIR/scripts"
+
+          echo "=== Extracted files ==="
+          find "$NEW_DIR/scripts" -type f | wc -l
+          find "$NEW_DIR/scripts" -type f | sort
+
+          rm -rf "$WORK_DIR"
+
+      - name: Validate extracted scripts
+        if: steps.version_check.outputs.new_version == 'true'
+        run: |
+          NEW_DIR="replay_unpack/clients/wows/versions/${{ steps.version_check.outputs.dir_version }}"
+
+          REQUIRED_FILES=(
+            "scripts/entities.xml"
+            "scripts/components.xml"
+            "scripts/entity_defs/Avatar.def"
+            "scripts/entity_defs/Vehicle.def"
+            "scripts/entity_defs/BattleLogic.def"
+            "scripts/entity_defs/alias.xml"
+          )
+
+          MISSING=0
+          for f in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$NEW_DIR/$f" ]; then
+              echo "::error::Missing required file: $f"
+              MISSING=1
+            fi
+          done
+
+          if [ $MISSING -eq 1 ]; then
+            exit 1
+          fi
+
+          FILE_COUNT=$(find "$NEW_DIR/scripts" -type f | wc -l)
+          echo "Extracted $FILE_COUNT script files (expected ~106)"
+          if [ "$FILE_COUNT" -lt 80 ]; then
+            echo "::warning::Unusually low file count ($FILE_COUNT), expected ~106"
+          fi
+
+      - name: Run tests
+        if: steps.version_check.outputs.new_version == 'true'
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
+          pytest
+
+      - name: Create Pull Request
+        if: steps.version_check.outputs.new_version == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "added ${{ steps.version_check.outputs.short_version }}"
+          branch: "auto/version-${{ steps.version_check.outputs.dir_version }}"
+          title: "added ${{ steps.version_check.outputs.short_version }}"
+          body: |
+            Automated version update for WoWS ${{ steps.version_check.outputs.short_version }}.
+
+            - Python files copied from version ${{ steps.prev_version.outputs.prev_dir }}
+            - Scripts extracted from WGC CDN (full version: ${{ steps.version_check.outputs.full_version }})
+
+            Please verify constants.py is correct for this version.
+          delete-branch: true
