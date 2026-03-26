@@ -75,6 +75,7 @@ jobs:
           mkdir -p "$NEW_DIR"
           cp "$PREV_DIR/__init__.py" "$NEW_DIR/"
           cp "$PREV_DIR/battle_controller.py" "$NEW_DIR/"
+          cp "$PREV_DIR/battle_results.py" "$NEW_DIR/"
           cp "$PREV_DIR/constants.py" "$NEW_DIR/"
           cp "$PREV_DIR/players_info.py" "$NEW_DIR/"
 

@@ -71,3 +71,12 @@ SHIP_TYPE_BY_ID = {
     {{ key }}: '{{ val }}',
 {% endfor %}
 }
+
+{% if battle_results is defined and battle_results %}
+{% for const_name in ['COMMON_RESULTS', 'PLAYER_PRIVATE_RESULTS', 'INIT_ECONOMICS', 'COMMON_ECONOMICS', 'SUBTOTAL_ECONOMICS', 'CLIENT_PUBLIC_RESULTS', 'CLIENT_VEH_INTERACTION_DETAILS', 'CLIENT_BUILDING_INTERACTION_DETAILS', 'BUILDINGS_FULL_RESULTS'] %}
+{% if const_name in battle_results %}
+
+{{ battle_results[const_name] | format_tuple(const_name) }}
+{% endif %}
+{% endfor %}
+{% endif %}

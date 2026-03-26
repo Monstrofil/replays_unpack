@@ -132,6 +132,42 @@ def extract_status_and_tasktype():
 safe_extract('status_and_tasktype', extract_status_and_tasktype)
 
 
+# BattleResultsSystem constants (field name tuples for post-battle results)
+def extract_battle_results():
+    # Find the BattleResultsSystem module (obfuscated name like m92ea29c6.BattleResultsSystem)
+    brs_mod = None
+    for name, mod in sys.modules.items():
+        if mod is not None and name.endswith('.BattleResultsSystem'):
+            brs_mod = mod
+            break
+
+    if brs_mod is None:
+        raise ImportError('Could not find BattleResultsSystem module')
+
+    # Get constants from func_globals of an unpack function
+    fg = brs_mod.unpackCommonRes.func_globals
+
+    result = {}
+    for const_name in (
+        'CLIENT_PUBLIC_RESULTS', 'COMMON_RESULTS', 'PLAYER_PRIVATE_RESULTS',
+        'INIT_ECONOMICS', 'COMMON_ECONOMICS', 'SUBTOTAL_ECONOMICS',
+        'CLIENT_VEH_INTERACTION_DETAILS', 'CLIENT_BUILDING_INTERACTION_DETAILS',
+    ):
+        val = fg.get(const_name)
+        if val is not None:
+            result[const_name] = list(val)
+
+    # Module-level attributes
+    for const_name in ('BUILDINGS_FULL_RESULTS',):
+        val = getattr(brs_mod, const_name, None)
+        if val is not None:
+            result[const_name] = list(val)
+
+    data['battle_results'] = result
+
+safe_extract('battle_results', extract_battle_results)
+
+
 # Output
 output = {'data': data}
 if errors:

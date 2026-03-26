@@ -11,6 +11,14 @@ try:
     from .constants import DEATH_TYPES, SHIP_TYPE_BY_ID, SKILL_TYPE_ID_TO_NAME
 except ImportError:
     DEATH_TYPES = {}
+try:
+    from .battle_results import (
+        unpackCommonRes, unpackPlayerPrivateRes,
+        unpackClientPublicRes, unpackBuildinsRes,
+    )
+except ImportError:
+    unpackCommonRes = unpackPlayerPrivateRes = None
+    unpackClientPublicRes = unpackBuildinsRes = None
 from .players_info import PlayersInfo, PlayerType
 
 
@@ -230,6 +238,28 @@ class BattleController(IBattleController):
     def receive_planeDeath(self, avatar, squadronID, planeIDs, reason, attackerId):
         self._dead_planes.setdefault(attackerId, 0)
         self._dead_planes[attackerId] += len(planeIDs)
+
+    def onPostBattleResultsReceived(self, serverData):
+        if unpackCommonRes is None:
+            return
+
+        common = unpackCommonRes(serverData.get('commonList', []))
+        private = unpackPlayerPrivateRes(serverData.get('privateDataList', []))
+        public = {
+            player_id: unpackClientPublicRes(player_data)
+            for player_id, player_data in serverData.get('playersPublicInfo', {}).items()
+        }
+        buildings = {
+            building_id: unpackBuildinsRes(building_data)
+            for building_id, building_data in serverData.get('buildings', {}).items()
+        }
+
+        self.postBattleResult = {
+            'common': common,
+            'private': private,
+            'public': public,
+            'buildings': buildings,
+        }
 
     @property
     def map(self):
