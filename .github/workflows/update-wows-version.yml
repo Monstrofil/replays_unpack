@@ -78,28 +78,12 @@ jobs:
           cp "$PREV_DIR/constants.py" "$NEW_DIR/"
           cp "$PREV_DIR/players_info.py" "$NEW_DIR/"
 
-      - name: Install Rust toolchain
-        if: steps.version_check.outputs.new_version == 'true'
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Cache cargo registry and build
-        if: steps.version_check.outputs.new_version == 'true'
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-          key: cargo-wowsunpack-${{ runner.os }}-v1
-
-      - name: Install wowsunpack
+      - name: Install wows-extract
         if: steps.version_check.outputs.new_version == 'true'
         run: |
-          if ! command -v wowsunpack &> /dev/null; then
-            cargo install --git https://github.com/landaire/wows-toolkit wowsunpack
-          else
-            echo "wowsunpack already cached"
-          fi
+          curl -fsSL https://github.com/Monstrofil/wows-extract/releases/latest/download/wows-extract-linux-x86_64.tar.gz \
+            | tar xz -C /usr/local/bin/
+          wows-extract --help || true
 
       - name: Extract game scripts
         if: steps.version_check.outputs.new_version == 'true'
@@ -118,46 +102,16 @@ jobs:
             "res_packages/system_data_0001.pkg" \
             -d "$WORK_DIR"
 
-          echo "=== Listing files in package index ==="
-          wowsunpack \
-            -i "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
-            -p "$WORK_DIR/res_packages/" \
-            list 2>&1 | grep -i script | head -30 || true
-
-          echo "=== Listing all top-level paths ==="
-          wowsunpack \
-            -i "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
-            -p "$WORK_DIR/res_packages/" \
-            list 2>&1 | sed 's|/.*||' | sort -u | head -30 || true
-
           echo "=== Extracting scripts ==="
           EXTRACT_DIR=$(mktemp -d)
-          wowsunpack \
-            -i "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
-            -p "$WORK_DIR/res_packages/" \
-            extract \
-            --out-dir "$EXTRACT_DIR" \
+          wows-extract \
+            "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
+            "$WORK_DIR/res_packages/" \
+            "$EXTRACT_DIR" \
             '/scripts/**'
 
-          echo "=== Listing extraction result ==="
-          find "$EXTRACT_DIR" -maxdepth 3 -type d | sort
-
           echo "=== Copying scripts to version directory ==="
-          # wowsunpack may extract with leading slash, placing files at /scripts/ (root)
-          # instead of $EXTRACT_DIR/scripts/. Check both locations.
-          if [ -d "$EXTRACT_DIR/scripts" ]; then
-            cp -r "$EXTRACT_DIR/scripts" "$NEW_DIR/scripts"
-          elif [ -d "/scripts" ]; then
-            echo "Note: wowsunpack extracted to /scripts (absolute path)"
-            cp -r /scripts "$NEW_DIR/scripts"
-          else
-            echo "::error::No scripts directory found in extraction output"
-            echo "Checking extract dir:"
-            find "$EXTRACT_DIR" -maxdepth 3 | head -20
-            echo "Checking /scripts:"
-            ls -la /scripts 2>/dev/null || echo "/scripts does not exist"
-            exit 1
-          fi
+          cp -r "$EXTRACT_DIR/scripts" "$NEW_DIR/scripts"
           rm -rf "$EXTRACT_DIR"
 
           echo "=== Extracted files ==="
