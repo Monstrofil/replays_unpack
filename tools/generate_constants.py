@@ -71,6 +71,24 @@ def format_property_map(mapping, name):
     return '\n'.join(lines)
 
 
+def format_tuple(items, name):
+    """Format a list of strings as a named tuple constant with line wrapping."""
+    if not items:
+        return f'{name} = ()'
+    lines = [f'{name} = (']
+    current = '    '
+    for i, item in enumerate(items):
+        sep = ', ' if i < len(items) - 1 else ')'
+        addition = f'{item!r}{sep}'
+        if len(current) + len(addition) > 105:
+            lines.append(current)
+            current = '    ' + addition
+        else:
+            current += addition
+    lines.append(current)
+    return '\n'.join(lines)
+
+
 def format_skill_lines(mapping):
     """Format skill ID-to-name dict as wrapped lines of key: value pairs."""
     int_map = {int(k): v for k, v in mapping.items()}
@@ -103,6 +121,7 @@ def create_env():
     env.filters['pformat'] = pformat
     env.filters['format_property_map'] = format_property_map
     env.filters['format_skill_lines'] = format_skill_lines
+    env.filters['format_tuple'] = format_tuple
     return env
 
 
