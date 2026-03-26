@@ -51,4 +51,8 @@ class ControlledPlayerBase(PlayerBase, ABC):
         raise NotImplementedError
 
     def get_info(self):
-        return self._battle_controller.get_info()
+        info = self._battle_controller.get_info()
+        capabilities = self._battle_controller.capabilities
+        if capabilities:
+            info['capabilities'] = capabilities
+        return info

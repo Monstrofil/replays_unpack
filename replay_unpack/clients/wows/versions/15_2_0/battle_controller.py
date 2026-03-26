@@ -19,6 +19,10 @@ try:
 except ImportError:
     unpackCommonRes = unpackPlayerPrivateRes = None
     unpackClientPublicRes = unpackBuildinsRes = None
+try:
+    from .constants import UNIT_TYPE_NAMES, SLOT_SYSTEMS
+except ImportError:
+    UNIT_TYPE_NAMES = SLOT_SYSTEMS = None
 from .players_info import PlayersInfo, PlayerType
 
 
@@ -55,6 +59,15 @@ class BattleController(IBattleController):
 
     def onSetConsumable(self, vehicle, blob):
         print(pickle.loads(blob))
+
+    @property
+    def capabilities(self):
+        caps = []
+        if unpackCommonRes is not None:
+            caps.append('post_battle')
+        if UNIT_TYPE_NAMES is not None:
+            caps.append('ship_config')
+        return caps
 
     @property
     def entities(self):
