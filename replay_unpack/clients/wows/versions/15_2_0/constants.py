@@ -160,6 +160,21 @@ SHIP_TYPE_BY_ID = {
 }
 
 
+UNIT_TYPE_NAMES = (
+    'HullUnit', 'ArtilleryUnit', 'TorpedoesUnit', 'SuoUnit', 'EngineUnit', 'FlightControlUnit', 
+    'FighterTypeUnit', 'TorpedoBomberTypeUnit', 'DiveBomberTypeUnit', 'SkipBomberTypeUnit', 
+    'PrimaryWeaponsUnit', 'SecondaryWeaponsUnit', 'AbilitiesUnit', 'SonarUnit')
+
+SLOT_SYSTEMS = (
+    {'name': 'ModernizationSlots', 'has_autobuy': False, 'has_color_schemes': False},
+    {'name': 'ExteriorSlots', 'has_autobuy': True, 'has_color_schemes': True},
+    {'name': 'AbilitySlots', 'has_autobuy': False, 'has_color_schemes': False},
+    {'name': 'EnsignSlots', 'has_autobuy': False, 'has_color_schemes': False},
+    {'name': 'EcoboostSlots', 'has_autobuy': True, 'has_color_schemes': False},
+    {'name': 'BattleCardSlots', 'has_autobuy': False, 'has_color_schemes': False},
+)
+
+
 COMMON_RESULTS = (
     'arena_id', 'cluster_id', 'start_dt', 'winner_team_id', 'win_type_id', 'team_build_type_id', 
     'clan_season_type', 'clan_season_id', 'duration_sec', 'map_type_id', 'scenario_name', 'survey_id', 

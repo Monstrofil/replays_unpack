@@ -36,5 +36,9 @@ class IBattleController(metaclass=ABCMeta):
     def map(self, value: str):
         pass
 
+    @property
+    def capabilities(self):
+        return []
+
     def get_info(self) -> Dict:
         pass

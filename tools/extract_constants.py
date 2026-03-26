@@ -168,6 +168,39 @@ def extract_battle_results():
 safe_extract('battle_results', extract_battle_results)
 
 
+# ShipConfig constants for decoding shipConfigDump
+def extract_ship_config():
+    # Find ShipConfig module
+    sc_mod = sys.modules.get('ShipConfig')
+    if sc_mod is None:
+        raise ImportError('Could not find ShipConfig module')
+
+    fg = sc_mod.makeCompactDescription.func_globals
+    result = {}
+    result['UNIT_TYPE_NAMES'] = list(fg['UNIT_TYPE_NAMES'])
+
+    # Slot system metadata: order and which have autobuy
+    # allSlotSystems = (modernizationSlots, exteriorSlots, abilitySlots,
+    #                   ensignSlots, ecoboostSlots, battleCardSlots)
+    slot_fg = sc_mod.ShipSlots.__init__.func_globals
+    slot_systems = []
+    for cls_name in ('ModernizationSlots', 'ExteriorSlots', 'AbilitySlots',
+                     'EnsignSlots', 'EcoboostSlots', 'BattleCardSlots'):
+        cls = slot_fg[cls_name]
+        has_autobuy = bool(getattr(cls, 'AUTO_BUY_CATEGORIES', []))
+        has_color_schemes = 'colorSchemes' in cls.initFromCompactDescr.func_code.co_names
+        slot_systems.append({
+            'name': cls_name,
+            'has_autobuy': has_autobuy,
+            'has_color_schemes': has_color_schemes,
+        })
+    result['SLOT_SYSTEMS'] = slot_systems
+
+    data['ship_config'] = result
+
+safe_extract('ship_config', extract_ship_config)
+
+
 # Output
 output = {'data': data}
 if errors:

@@ -72,6 +72,17 @@ SHIP_TYPE_BY_ID = {
 {% endfor %}
 }
 
+{% if ship_config is defined and ship_config %}
+
+{{ ship_config.UNIT_TYPE_NAMES | format_tuple("UNIT_TYPE_NAMES") }}
+
+SLOT_SYSTEMS = (
+{% for slot in ship_config.SLOT_SYSTEMS %}
+    {'name': '{{ slot.name }}', 'has_autobuy': {{ slot.has_autobuy }}, 'has_color_schemes': {{ slot.has_color_schemes }}},
+{% endfor %}
+)
+{% endif %}
+
 {% if battle_results is defined and battle_results %}
 {% for const_name in ['COMMON_RESULTS', 'PLAYER_PRIVATE_RESULTS', 'INIT_ECONOMICS', 'COMMON_ECONOMICS', 'SUBTOTAL_ECONOMICS', 'CLIENT_PUBLIC_RESULTS', 'CLIENT_VEH_INTERACTION_DETAILS', 'CLIENT_BUILDING_INTERACTION_DETAILS', 'BUILDINGS_FULL_RESULTS'] %}
 {% if const_name in battle_results %}
