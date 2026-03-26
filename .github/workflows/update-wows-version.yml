@@ -118,6 +118,18 @@ jobs:
             "res_packages/system_data_0001.pkg" \
             -d "$WORK_DIR"
 
+          echo "=== Listing files in package index ==="
+          wowsunpack \
+            -i "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
+            -p "$WORK_DIR/res_packages/" \
+            list 2>&1 | grep -i script | head -30 || true
+
+          echo "=== Listing all top-level paths ==="
+          wowsunpack \
+            -i "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
+            -p "$WORK_DIR/res_packages/" \
+            list 2>&1 | sed 's|/.*||' | sort -u | head -30 || true
+
           echo "=== Extracting scripts ==="
           EXTRACT_DIR=$(mktemp -d)
           wowsunpack \
@@ -127,8 +139,25 @@ jobs:
             --out-dir "$EXTRACT_DIR" \
             '/scripts/**'
 
+          echo "=== Listing extraction result ==="
+          find "$EXTRACT_DIR" -maxdepth 3 -type d | sort
+
           echo "=== Copying scripts to version directory ==="
-          cp -r "$EXTRACT_DIR/scripts" "$NEW_DIR/scripts"
+          # wowsunpack may extract with leading slash, placing files at /scripts/ (root)
+          # instead of $EXTRACT_DIR/scripts/. Check both locations.
+          if [ -d "$EXTRACT_DIR/scripts" ]; then
+            cp -r "$EXTRACT_DIR/scripts" "$NEW_DIR/scripts"
+          elif [ -d "/scripts" ]; then
+            echo "Note: wowsunpack extracted to /scripts (absolute path)"
+            cp -r /scripts "$NEW_DIR/scripts"
+          else
+            echo "::error::No scripts directory found in extraction output"
+            echo "Checking extract dir:"
+            find "$EXTRACT_DIR" -maxdepth 3 | head -20
+            echo "Checking /scripts:"
+            ls -la /scripts 2>/dev/null || echo "/scripts does not exist"
+            exit 1
+          fi
           rm -rf "$EXTRACT_DIR"
 
           echo "=== Extracted files ==="
