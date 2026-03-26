@@ -135,6 +135,28 @@ jobs:
 
           rm -rf "$WORK_DIR"
 
+      - name: Download scripts.zip
+        if: steps.version_check.outputs.new_version == 'true'
+        id: scripts_zip
+        run: |
+          BUILD_NUM="${{ steps.version_check.outputs.build_number }}"
+          WORK_DIR=$(mktemp -d)
+
+          echo "=== Downloading scripts.zip (build $BUILD_NUM) ==="
+          wgc-download extract WOWS.WW.PRODUCTION client \
+            "bin/${BUILD_NUM}/res/scripts.zip" \
+            -d "$WORK_DIR"
+
+          SCRIPTS_ZIP="$WORK_DIR/bin/${BUILD_NUM}/res/scripts.zip"
+          if [ -f "$SCRIPTS_ZIP" ]; then
+            echo "scripts_zip=$SCRIPTS_ZIP" >> "$GITHUB_OUTPUT"
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "Found scripts.zip ($(stat -c%s "$SCRIPTS_ZIP") bytes)"
+          else
+            echo "::warning::scripts.zip not found at bin/${BUILD_NUM}/res/scripts.zip"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Validate extracted scripts
         if: steps.version_check.outputs.new_version == 'true'
         run: |
@@ -167,6 +189,56 @@ jobs:
             echo "::warning::Unusually low file count ($FILE_COUNT), expected ~106"
           fi
 
+      - name: Cache wows-sandbox build
+        if: steps.version_check.outputs.new_version == 'true' && steps.scripts_zip.outputs.found == 'true'
+        uses: actions/cache@v4
+        id: sandbox_cache
+        with:
+          path: /opt/wows-sandbox
+          key: wows-sandbox-${{ runner.os }}-v1
+
+      - name: Build wows-sandbox
+        if: steps.version_check.outputs.new_version == 'true' && steps.scripts_zip.outputs.found == 'true' && steps.sandbox_cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc zlib1g-dev libssl-dev libffi-dev
+
+          git clone --recurse-submodules https://github.com/monstrofil/wows-sandbox.git /opt/wows-sandbox
+          cd /opt/wows-sandbox
+          make python
+          make
+
+      - name: Update constants.py via wows-sandbox
+        if: steps.version_check.outputs.new_version == 'true' && steps.scripts_zip.outputs.found == 'true'
+        run: |
+          NEW_DIR="replay_unpack/clients/wows/versions/${{ steps.version_check.outputs.dir_version }}"
+
+          mkdir -p /opt/wows-sandbox/data
+          cp "${{ steps.scripts_zip.outputs.scripts_zip }}" /opt/wows-sandbox/data/scripts.zip
+
+          echo "=== Extracting constants from scripts.zip ==="
+          cd /opt/wows-sandbox
+          PYTHONHOME=3rdparty/cpython ./wows_shell "$GITHUB_WORKSPACE/tools/extract_constants.py" \
+            2>/dev/null | tail -1 > /tmp/extracted_constants.json
+          cd "$GITHUB_WORKSPACE"
+
+          echo "=== Extraction result ==="
+          python3 -m json.tool /tmp/extracted_constants.json | head -20
+
+          # Check for extraction errors
+          ERRORS=$(python3 -c "import json; d=json.load(open('/tmp/extracted_constants.json')); print(len(d.get('errors', [])))")
+          if [ "$ERRORS" != "0" ]; then
+            echo "::warning::Some constants failed to extract:"
+            python3 -c "import json; d=json.load(open('/tmp/extracted_constants.json')); [print('  -', e) for e in d.get('errors', [])]"
+          fi
+
+          echo "=== Generating constants.py ==="
+          pip install jinja2
+          python3 tools/generate_constants.py /tmp/extracted_constants.json "$NEW_DIR/constants.py"
+
+          echo "=== Generated constants.py ==="
+          cat "$NEW_DIR/constants.py"
+
       - name: Run tests
         if: steps.version_check.outputs.new_version == 'true'
         run: |
@@ -187,6 +259,5 @@ jobs:
 
             - Python files copied from version ${{ steps.prev_version.outputs.prev_dir }}
             - Scripts extracted from WGC CDN (full version: ${{ steps.version_check.outputs.full_version }})
-
-            Please verify constants.py is correct for this version.
+            - constants.py ${{ steps.scripts_zip.outputs.found == 'true' && 'auto-generated from scripts.zip via wows-sandbox' || 'copied from previous version (scripts.zip not found)' }}
           delete-branch: true
