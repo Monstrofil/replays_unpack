@@ -119,15 +119,17 @@ jobs:
             -d "$WORK_DIR"
 
           echo "=== Extracting scripts ==="
-          # wowsunpack writes VFS paths as-is; /scripts/** becomes /scripts/ at filesystem root
+          EXTRACT_DIR=$(mktemp -d)
           wowsunpack \
             -i "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
             -p "$WORK_DIR/res_packages/" \
             extract \
+            --out-dir "$EXTRACT_DIR" \
             '/scripts/**'
 
           echo "=== Copying scripts to version directory ==="
-          cp -r /scripts "$NEW_DIR/scripts"
+          cp -r "$EXTRACT_DIR/scripts" "$NEW_DIR/scripts"
+          rm -rf "$EXTRACT_DIR"
 
           echo "=== Extracted files ==="
           find "$NEW_DIR/scripts" -type f | wc -l
