@@ -50,12 +50,10 @@ def decode_ship_config_dump(data):
         items = [next(it) for _ in range(n)]
         result[slot['name']] = [x for x in items if x]
         if slot['has_autobuy']:
-            next(it)  # autobuy flags
+            result[slot['name'] + '_autobuy'] = next(it)
         if slot['has_color_schemes']:
             n_schemes = next(it)
-            for _ in range(n_schemes):
-                next(it)
-                next(it)
+            result['color_schemes'] = {next(it): next(it) for _ in range(n_schemes)}
 
     result['naval_flag_id'] = next(it)
     return result
