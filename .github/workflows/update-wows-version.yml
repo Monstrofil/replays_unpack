@@ -2,7 +2,7 @@ name: Update WoWS Version
 
 on:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '0 20 * * *'
   workflow_dispatch:
 
 jobs:
@@ -78,28 +78,12 @@ jobs:
           cp "$PREV_DIR/constants.py" "$NEW_DIR/"
           cp "$PREV_DIR/players_info.py" "$NEW_DIR/"
 
-      - name: Install Rust toolchain
-        if: steps.version_check.outputs.new_version == 'true'
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Cache cargo registry and build
-        if: steps.version_check.outputs.new_version == 'true'
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-          key: cargo-wowsunpack-${{ runner.os }}-v1
-
-      - name: Install wowsunpack
+      - name: Install wows-extract
         if: steps.version_check.outputs.new_version == 'true'
         run: |
-          if ! command -v wowsunpack &> /dev/null; then
-            cargo install --git https://github.com/landaire/wows-toolkit wowsunpack
-          else
-            echo "wowsunpack already cached"
-          fi
+          curl -fsSL https://github.com/Monstrofil/wows-extract/releases/latest/download/wows-extract-linux-x86_64.tar.gz \
+            | tar xz -C /usr/local/bin/
+          wows-extract --help || true
 
       - name: Extract game scripts
         if: steps.version_check.outputs.new_version == 'true'
@@ -119,21 +103,44 @@ jobs:
             -d "$WORK_DIR"
 
           echo "=== Extracting scripts ==="
-          # wowsunpack writes VFS paths as-is; /scripts/** becomes /scripts/ at filesystem root
-          wowsunpack \
-            -i "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
-            -p "$WORK_DIR/res_packages/" \
-            extract \
+          EXTRACT_DIR=$(mktemp -d)
+          wows-extract \
+            "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
+            "$WORK_DIR/res_packages/" \
+            "$EXTRACT_DIR" \
             '/scripts/**'
 
           echo "=== Copying scripts to version directory ==="
-          cp -r /scripts "$NEW_DIR/scripts"
+          cp -r "$EXTRACT_DIR/scripts" "$NEW_DIR/scripts"
+          rm -rf "$EXTRACT_DIR"
 
           echo "=== Extracted files ==="
           find "$NEW_DIR/scripts" -type f | wc -l
           find "$NEW_DIR/scripts" -type f | sort
 
           rm -rf "$WORK_DIR"
+
+      - name: Download scripts.zip
+        if: steps.version_check.outputs.new_version == 'true'
+        id: scripts_zip
+        run: |
+          BUILD_NUM="${{ steps.version_check.outputs.build_number }}"
+          WORK_DIR=$(mktemp -d)
+
+          echo "=== Downloading scripts.zip (build $BUILD_NUM) ==="
+          wgc-download extract WOWS.WW.PRODUCTION client \
+            "bin/${BUILD_NUM}/res/scripts.zip" \
+            -d "$WORK_DIR"
+
+          SCRIPTS_ZIP="$WORK_DIR/bin/${BUILD_NUM}/res/scripts.zip"
+          if [ -f "$SCRIPTS_ZIP" ]; then
+            echo "scripts_zip=$SCRIPTS_ZIP" >> "$GITHUB_OUTPUT"
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "Found scripts.zip ($(stat -c%s "$SCRIPTS_ZIP") bytes)"
+          else
+            echo "::warning::scripts.zip not found at bin/${BUILD_NUM}/res/scripts.zip"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Validate extracted scripts
         if: steps.version_check.outputs.new_version == 'true'
@@ -167,6 +174,42 @@ jobs:
             echo "::warning::Unusually low file count ($FILE_COUNT), expected ~106"
           fi
 
+      - name: Install wows-sandbox
+        if: steps.version_check.outputs.new_version == 'true' && steps.scripts_zip.outputs.found == 'true'
+        run: |
+          SANDBOX_DIR=$(mktemp -d)
+          curl -fsSL https://github.com/monstrofil/wows-sandbox/releases/latest/download/wows_shell-linux-x86_64.tar.gz \
+            | tar xz -C "$SANDBOX_DIR"
+          cp "$SANDBOX_DIR/wows_shell" /usr/local/bin/wows_shell
+          rm -rf "$SANDBOX_DIR"
+
+      - name: Update constants.py via wows-sandbox
+        if: steps.version_check.outputs.new_version == 'true' && steps.scripts_zip.outputs.found == 'true'
+        run: |
+          NEW_DIR="replay_unpack/clients/wows/versions/${{ steps.version_check.outputs.dir_version }}"
+
+          echo "=== Extracting constants from scripts.zip ==="
+          wows_shell --zip "${{ steps.scripts_zip.outputs.scripts_zip }}" \
+            tools/extract_constants.py \
+            2>/dev/null | tail -1 > /tmp/extracted_constants.json
+
+          echo "=== Extraction result ==="
+          python3 -m json.tool /tmp/extracted_constants.json | head -20
+
+          # Check for extraction errors
+          ERRORS=$(python3 -c "import json; d=json.load(open('/tmp/extracted_constants.json')); print(len(d.get('errors', [])))")
+          if [ "$ERRORS" != "0" ]; then
+            echo "::warning::Some constants failed to extract:"
+            python3 -c "import json; d=json.load(open('/tmp/extracted_constants.json')); [print('  -', e) for e in d.get('errors', [])]"
+          fi
+
+          echo "=== Generating constants.py ==="
+          pip install jinja2
+          python3 tools/generate_constants.py /tmp/extracted_constants.json "$NEW_DIR/constants.py"
+
+          echo "=== Generated constants.py ==="
+          cat "$NEW_DIR/constants.py"
+
       - name: Run tests
         if: steps.version_check.outputs.new_version == 'true'
         run: |
@@ -187,6 +230,5 @@ jobs:
 
             - Python files copied from version ${{ steps.prev_version.outputs.prev_dir }}
             - Scripts extracted from WGC CDN (full version: ${{ steps.version_check.outputs.full_version }})
-
-            Please verify constants.py is correct for this version.
+            - constants.py ${{ steps.scripts_zip.outputs.found == 'true' && 'auto-generated from scripts.zip via wows-sandbox' || 'copied from previous version (scripts.zip not found)' }}
           delete-branch: true

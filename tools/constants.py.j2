@@ -1,0 +1,73 @@
+# coding=utf-8
+
+{{ id_property_map | format_property_map("id_property_map") }}
+property_id_map = {value: key for key, value in id_property_map.items()}
+
+# ModsShell.API_v_1_0.battleGate.PlayersInfo.gSharedBotInfo._numMemberMap
+{{ id_property_map_bots | format_property_map("id_property_map_bots") }}
+property_id_map_bots = {value: key for key, value in id_property_map.items()}
+
+
+# ModsShell.API_v_1_0.battleGate.PlayersInfo.gSharedObserverInfo._numMemberMap
+{{ id_property_map_observer | format_property_map("id_property_map_observer") }}
+property_id_map_bots_observer = {value: key for key, value in id_property_map.items()}
+
+
+
+class DamageStatsType:
+    """See Avatar.DamageStatsType"""
+{% for attr, val in damage_stats | sort_by_value %}
+    {{ attr }} = {{ val }}
+{% endfor %}
+
+
+class Category(object):
+    """Category of task to separate for UI"""
+
+{% for name, val in category.ids | dictsort_by_value %}
+    {{ name | upper }} = {{ val }}
+{% endfor %}
+
+    ids = {{ category.ids | pformat }}
+    names = {{ category.names | pformat }}
+
+
+class Status(object):
+{% for name, val in status.ids | dictsort_by_value %}
+    {{ name | camel_to_upper }} = {{ val }}
+{% endfor %}
+
+    ids = {{ status.ids | pformat }}
+    names = {{ status.names | pformat }}
+
+
+class TaskType(object):
+{% for name, val in task_type.ids | dictsort_by_value %}
+    {{ name | camel_to_upper }} = {{ val }}
+{% endfor %}
+
+    names = {{ task_type.names | pformat }}
+    ids = {{ task_type.ids | pformat }}
+
+
+# {i: vars(j) for i,j in Vehicle.DeathReason._DeathReason__byId.items()}
+DEATH_TYPES = {
+{% for key, val in death_types | dictsort_by_int_key %}
+    {{ key }}: {{ val | pformat }},
+{% endfor %}
+}
+
+# >>> CrewModifiers.SkillTypeEnum.ID_TO_NAME
+SKILL_TYPE_ID_TO_NAME = {
+{% for line in skill_type_id_to_name | format_skill_lines %}
+    {{ line }}
+{% endfor %}
+}
+
+
+# CrewModifiers.ShipTypes.TYPE_BY_ID
+SHIP_TYPE_BY_ID = {
+{% for key, val in ship_type_by_id | dictsort_by_int_key %}
+    {{ key }}: '{{ val }}',
+{% endfor %}
+}
