@@ -177,8 +177,11 @@ jobs:
       - name: Install wows-sandbox
         if: steps.version_check.outputs.new_version == 'true' && steps.scripts_zip.outputs.found == 'true'
         run: |
+          SANDBOX_DIR=$(mktemp -d)
           curl -fsSL https://github.com/monstrofil/wows-sandbox/releases/latest/download/wows_shell-linux-x86_64.tar.gz \
-            | tar xz -C /usr/local/bin/ wows_shell
+            | tar xz -C "$SANDBOX_DIR"
+          cp "$SANDBOX_DIR/wows_shell" /usr/local/bin/wows_shell
+          rm -rf "$SANDBOX_DIR"
 
       - name: Update constants.py via wows-sandbox
         if: steps.version_check.outputs.new_version == 'true' && steps.scripts_zip.outputs.found == 'true'
