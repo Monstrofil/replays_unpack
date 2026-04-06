@@ -1,0 +1,33 @@
+<root>
+	<BaseMethods>
+		<onKicked>
+			<Args>
+				<reason> UINT8 </reason>
+			</Args>
+		</onKicked>
+		<onRedirected>
+			<Args>
+				<realm> STRING </realm>
+				<battleStarterService> MAILBOX </battleStarterService>
+			</Args>
+		</onRedirected>
+		<startBattlePreparation>
+			<Args>
+				<mmResult> PYTHON </mmResult>
+				<battleSession> BATTLE_SESSION_DEF </battleSession>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+		</startBattlePreparation>
+
+		<onPlayersJoinFailed>
+			<Args>
+				<battleSessionID> BATTLE_SESSION_ID </battleSessionID>
+			</Args>
+			<ReturnValues>
+				<resultCode> UINT8 </resultCode>
+			</ReturnValues>
+		</onPlayersJoinFailed>
+	</BaseMethods>
+</root>

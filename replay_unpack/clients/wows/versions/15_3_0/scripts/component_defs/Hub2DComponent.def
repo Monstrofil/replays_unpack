@@ -1,0 +1,19 @@
+<root>
+
+	<ClientMethods>
+
+		<sync>
+			<Arg> ARRAY <of> MSGPACK_BLOB </of> </Arg>
+		</sync>
+
+        <syncToken>
+			<Arg> STRING </Arg>
+			<Arg> BOOL </Arg>
+		</syncToken>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+</root>
