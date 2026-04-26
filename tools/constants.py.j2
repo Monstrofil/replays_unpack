@@ -72,6 +72,16 @@ SHIP_TYPE_BY_ID = {
 {% endfor %}
 }
 
+{% if currency_id_to_name is defined and currency_id_to_name %}
+# CURRENCY_ID_TO_WALLET_ASSET_NAME from scripts.zip - resolves the 'type'
+# integer in post-battle reward bundles to a stable wallet-asset name.
+CURRENCY_ID_TO_NAME = {
+{% for key, val in currency_id_to_name | dictsort_by_int_key %}
+    {{ key }}: '{{ val }}',
+{% endfor %}
+}
+{% endif %}
+
 {% if ship_config is defined and ship_config %}
 
 {{ ship_config.UNIT_TYPE_NAMES | format_tuple("UNIT_TYPE_NAMES") }}

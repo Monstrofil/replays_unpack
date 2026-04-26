@@ -5,6 +5,7 @@ import pickle
 
 from replay_unpack.core import IBattleController
 from replay_unpack.core.entity import Entity
+from .battle_report import build_battle_report
 from .constants import DamageStatsType, Category, TaskType, Status
 
 try:
@@ -100,7 +101,7 @@ class BattleController(IBattleController):
             player['planesCount'] = self._dead_planes.get(
                 player.get('shipId', 0), 0)
 
-        return dict(
+        info = dict(
             achievements=self._achievements,
             ribbons=self._ribbons,
             players=players,
@@ -118,6 +119,8 @@ class BattleController(IBattleController):
             arena_id=self._arena_id,
             post_battle=self.postBattleResult
         )
+        info['battle_report'] = build_battle_report(info)
+        return info
 
     def _getCrewInfo(self, vehicle):
         learned_skills_packed = vehicle.properties['client']['crewModifiersCompactParams']['learnedSkills']

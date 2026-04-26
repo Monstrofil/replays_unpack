@@ -160,6 +160,27 @@ SHIP_TYPE_BY_ID = {
 }
 
 
+# Reward bundle "type" integer (e.g. tasks[*].rewards[i][j][1]['type']) maps to
+# a stable wallet-asset name. From the obfuscated CURRENCY_ID_TO_WALLET_ASSET_NAME
+# in scripts.zip - same key set is used by the post-battle reward applier.
+CURRENCY_ID_TO_NAME = {
+    0: 'credits', 1: 'gold', 2: 'freeXP', 4: 'eliteXP', 5: 'steel', 6: 'coal',
+    7: 'molybdenum', 8: 'brass', 9: 'saltpeter', 10: 'eventum_1', 11: 'eventum_2',
+    12: 'paragonXP', 13: 'recruitment_points', 33: 'eventum_3', 34: 'eventum_4',
+    35: 'eventum_5', 36: 'eventum_6', 37: 'eventum_7', 38: 'eventum_8',
+    39: 'eventum_9', 40: 'eventum_10', 41: 'eventum_cn', 42: 'clientum_1',
+    43: 'clientum_2', 44: 'santium', 45: 'dockyardum_1', 46: 'dockyardum_2',
+    47: 'eventum_11', 48: 'eventum_12', 49: 'eventum_13', 50: 'eventum_14',
+    51: 'minidockyardum', 52: 'battlecardum', 53: 'grandstrategium_1',
+    54: 'grandstrategium_2', 55: 'grandstrategium_3', 56: 'grandstrategium_4',
+    57: 'grandstrategium_5', 58: 'grandstrategium_6', 59: 'grandstrategium_7',
+    60: 'grandstrategium_8', 61: 'grandstrategium_9', 62: 'grandstrategium_10',
+    63: 'grandstrategium_11', 64: 'grandstrategium_12', 65: 'grandstrategium_13',
+    66: 'grandstrategium_14', 67: 'grandstrategium_15', 68: 'metashopium_1',
+    69: 'metashopium_2', 70: 'metashopium_3', 71: 'metashopium_4', 72: 'metashopium_5',
+}
+
+
 UNIT_TYPE_NAMES = (
     'HullUnit', 'ArtilleryUnit', 'TorpedoesUnit', 'SuoUnit', 'EngineUnit', 'FlightControlUnit', 
     'FighterTypeUnit', 'TorpedoBomberTypeUnit', 'DiveBomberTypeUnit', 'SkipBomberTypeUnit', 

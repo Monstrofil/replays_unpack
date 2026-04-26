@@ -168,6 +168,26 @@ def extract_battle_results():
 safe_extract('battle_results', extract_battle_results)
 
 
+# CURRENCY_ID_TO_WALLET_ASSET_NAME: maps the integer 'type' in post-battle reward
+# bundles ([[op, {type: int, count: int}], ...]) to a stable wallet-asset name
+# (e.g. 0 -> 'credits', 46 -> 'dockyardum_2'). Module name is obfuscated, so we
+# search by attribute and signature instead of importing.
+def extract_currency_id_to_name():
+    target = None
+    for name, mod in sys.modules.items():
+        if mod is None:
+            continue
+        val = getattr(mod, 'CURRENCY_ID_TO_WALLET_ASSET_NAME', None)
+        if isinstance(val, dict) and val.get(0) == 'credits':
+            target = val
+            break
+    if target is None:
+        raise ImportError('CURRENCY_ID_TO_WALLET_ASSET_NAME not found')
+    data['currency_id_to_name'] = {int(k): v for k, v in target.items()}
+
+safe_extract('currency_id_to_name', extract_currency_id_to_name)
+
+
 # ShipConfig constants for decoding shipConfigDump
 def extract_ship_config():
     # Find ShipConfig module
