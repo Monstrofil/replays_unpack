@@ -1,0 +1,23 @@
+# Schema for tools/distill_gameparams.py.
+#
+# Each top-level key is "<typeinfo.type>" or "<typeinfo.type>/<typeinfo.species>".
+# When both forms match a record the more-specific Type/Species wins.
+#
+# `fields` is a list of top-level attribute names. Dotted paths into nested
+# objects are not supported yet. Output keys match source names verbatim.
+
+Ship:
+  fields:
+    - id
+    - index
+    - name
+    - level
+    - group
+    - typeinfo
+
+Achievement:
+  fields:
+    - id
+    - index
+    - name
+    - typeinfo

@@ -211,6 +211,52 @@ jobs:
           echo "=== Generated constants.py ==="
           cat "$NEW_DIR/constants.py"
 
+      - name: Extract GameParams.data
+        if: steps.version_check.outputs.new_version == 'true'
+        id: gameparams
+        run: |
+          BUILD_NUM="${{ steps.version_check.outputs.build_number }}"
+          WORK_DIR=$(mktemp -d)
+
+          echo "=== Downloading basecontent.idx (build $BUILD_NUM) ==="
+          wgc-download extract WOWS.WW.PRODUCTION client \
+            "bin/${BUILD_NUM}/idx/basecontent.idx" \
+            -d "$WORK_DIR"
+
+          echo "=== Downloading basecontent_0001.pkg ==="
+          wgc-download extract WOWS.WW.PRODUCTION client \
+            "res_packages/basecontent_0001.pkg" \
+            -d "$WORK_DIR"
+
+          echo "=== Extracting GameParams.data ==="
+          EXTRACT_DIR=$(mktemp -d)
+          wows-extract \
+            "$WORK_DIR/bin/${BUILD_NUM}/idx/" \
+            "$WORK_DIR/res_packages/" \
+            "$EXTRACT_DIR" \
+            '**/GameParams*'
+
+          GP_PATH="$EXTRACT_DIR/content/GameParams.data"
+          test -f "$GP_PATH"
+          echo "gp_path=$GP_PATH" >> "$GITHUB_OUTPUT"
+          ls -la "$GP_PATH"
+
+          rm -rf "$WORK_DIR"
+
+      - name: Distill GameParams.data
+        if: steps.version_check.outputs.new_version == 'true'
+        run: |
+          NEW_DIR="replay_unpack/clients/wows/versions/${{ steps.version_check.outputs.dir_version }}"
+          pip install pyyaml
+          python3 tools/distill_gameparams.py \
+            --gameparams "${{ steps.gameparams.outputs.gp_path }}" \
+            --schema    tools/distill_schema.yaml \
+            --output    "$NEW_DIR/game_params.py"
+
+          echo "=== Generated game_params.py size ==="
+          wc -l "$NEW_DIR/game_params.py"
+          ls -la "$NEW_DIR/game_params.py"
+
       - name: Run tests
         if: steps.version_check.outputs.new_version == 'true'
         run: |
