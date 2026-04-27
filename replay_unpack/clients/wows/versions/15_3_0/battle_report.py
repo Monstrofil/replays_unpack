@@ -33,27 +33,39 @@ constants extraction / GameParams distillation.
 The original post_battle dict is never mutated. Sections build new outer
 containers and share unchanged nested values by reference.
 """
-from .constants import CURRENCY_ID_TO_NAME
 from .game_params import BY_ID as GAME_PARAMS_BY_ID
-
-
-def _resolve_rewards(rewards):
-    return [
-        [[op, {**payload, 'type': CURRENCY_ID_TO_NAME[payload['type']]}]
-         for op, payload in bundle]
-        for bundle in rewards
-    ]
 
 
 def _combat_missions_section(post_battle):
     raw = post_battle['private']['tasks']
-    data = {
-        task_id: {**task, 'rewards': _resolve_rewards(task['rewards'])}
-        for task_id, task in raw.items()
-    }
     return {
         'kind': 'object',
-        'data': data,
+        'data': {
+            task_id: {k: v for k, v in task.items() if k != 'rewards'}
+            for task_id, task in raw.items()
+        },
+    }
+
+
+_RANK_FIELDS = (
+    'rank_battles_season_id',
+    'rank_league',
+    'rank_old',
+    'rank_new',
+    'rank_stars_old',
+    'rank_stars_gained',
+    'rank_stars_new',
+    'rank_victories_old',
+    'rank_victories_new',
+    'rank_victory_rewards_progress',
+)
+
+
+def _ranked_section(post_battle):
+    private = post_battle['private']
+    return {
+        'kind': 'object',
+        'data': {f: private[f] for f in _RANK_FIELDS},
     }
 
 
@@ -64,19 +76,23 @@ def _local_account_db_id(info):
                 if p['avatarId'] == player_id)
 
 
+def _resolve_achievements(raw):
+    return [
+        {
+            'count': count,
+            'index': GAME_PARAMS_BY_ID[ach_id]['index'],
+            'name':  GAME_PARAMS_BY_ID[ach_id]['name'],
+        }
+        for ach_id, count in raw
+    ]
+
+
 def _achievements_section(info):
     account_id = _local_account_db_id(info)
-    raw = info['post_battle']['public'][str(account_id)]['achievements']
     return {
         'kind': 'list',
-        'data': [
-            {
-                'count': count,
-                'index': GAME_PARAMS_BY_ID[ach_id]['index'],
-                'name':  GAME_PARAMS_BY_ID[ach_id]['name'],
-            }
-            for ach_id, count in raw
-        ],
+        'data': _resolve_achievements(
+            info['post_battle']['public'][str(account_id)]['achievements']),
     }
 
 
@@ -92,6 +108,18 @@ def _received_stats(p, suffix):
     return {
         'hits':   p['received_hits_'   + suffix],
         'damage': p['received_damage_' + suffix],
+    }
+
+
+def _torpedo_stats(p):
+    if p['shots_tpd'] is None:
+        return {'shots': None, 'hits': None, 'damage': None}
+    return {
+        'shots':  p['shots_tpd'],
+        'hits':   p['hits_tpd'],
+        'damage': (p['damage_tpd_normal']
+                 + p['damage_tpd_deep']
+                 + p['damage_tpd_alter']),
     }
 
 
@@ -129,6 +157,7 @@ def _ship_damage_section(info):
                 'ap': _shell_stats(p, 'atba_ap'),
                 'he': _shell_stats(p, 'atba_he'),
             },
+            'torpedoes': _torpedo_stats(p),
             'airstrike': {
                 'bombs':         _shell_stats(p, 'bomb_airsupport'),
                 'depth_charges': _shell_stats(p, 'dbomb_airsupport'),
@@ -292,19 +321,86 @@ def _objective_points_section(info):
     }
 
 
+def _decode_rank_info_dump(dump):
+    """Unpack RankBattlesCommon.accountRankInfoPackerUnpacker (bitCounts [3, 16, 7, 4]).
+
+    Layout, low to high: league(4) | rank(7) | season_id(16) | stage(3).
+    Returns None for the no-rank case (league == 0), matching getRankInfo.
+    """
+    league = dump & 0xF
+    if league == 0:
+        return None
+    return {'league': league, 'position': (dump >> 4) & 0x7F}
+
+
+def _team_score_record(player, public, local_account_db_id, local_stars):
+    p = public[str(player['accountDBID'])]
+    ship = GAME_PARAMS_BY_ID[p['vehicle_type_id']]
+    is_own = player['accountDBID'] == local_account_db_id
+    record = {
+        'squad_id':      player.get('preBattleIdOnStart', 0),
+        'team_id':       player['teamId'],
+        'clan_tag':      player['clanTag'],
+        'username':      player['name'],
+        'is_own':        is_own,
+        'is_alive':      player['isAlive'],
+        'ship_type':     ship['typeinfo']['species'],
+        'ship_name':     ship['index'],
+        'ship_level':    ship['level'],
+        'frags':         p['ships_killed'],
+        'planes_killed': p['planes_killed_by_ship'],
+        'exp':           p['exp'],
+        'achievements':  _resolve_achievements(p['achievements']),
+    }
+    rank = _decode_rank_info_dump(p.get('rank_info_dump', 0))
+    if rank is not None:
+        if is_own and local_stars is not None:
+            rank['stars'] = local_stars
+        record['rank'] = rank
+    return record
+
+
+def _local_team_id(info):
+    player_id = info['player_id']
+    return next(p['teamId']
+                for p in info['players'].values()
+                if p['avatarId'] == player_id)
+
+
+def _team_score_sections(info):
+    public = info['post_battle']['public']
+    ally_team_id = _local_team_id(info)
+    local_account_db_id = _local_account_db_id(info)
+    local_stars = info['post_battle']['private'].get('rank_stars_old')
+    allies, enemies = [], []
+    for player in info['players'].values():
+        if str(player['accountDBID']) not in public:
+            continue
+        record = _team_score_record(player, public, local_account_db_id, local_stars)
+        (allies if player['teamId'] == ally_team_id else enemies).append(record)
+    return (
+        {'kind': 'list', 'data': allies},
+        {'kind': 'list', 'data': enemies},
+    )
+
+
 def build_battle_report(info):
     """Build the report from the controller's get_info() dict."""
     post_battle = info['post_battle']
     if post_battle is None:
         return {'tabs': {}}
 
+    results_sections = {
+        'combat_missions': _combat_missions_section(post_battle),
+        'achievements':    _achievements_section(info),
+    }
+    if 'rank_battles_season_id' in post_battle['private']:
+        results_sections['ranked'] = _ranked_section(post_battle)
+
     return {
         'tabs': {
             'results': {
-                'sections': {
-                    'combat_missions': _combat_missions_section(post_battle),
-                    'achievements':    _achievements_section(info),
-                },
+                'sections': results_sections,
             },
             'details': {
                 'sections': {
@@ -318,6 +414,10 @@ def build_battle_report(info):
                     'team_play':          _team_play_section(info),
                     'objective_points':   _objective_points_section(info),
                 },
+            },
+            'team_score': {
+                'sections': dict(zip(('allies', 'enemies'),
+                                     _team_score_sections(info))),
             },
         },
     }

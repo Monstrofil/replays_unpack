@@ -93,3 +93,6 @@ ENV/
 
 # Claude Code
 .claude/
+
+# Replay parser dumps
+*.post_battle.json

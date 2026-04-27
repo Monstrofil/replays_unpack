@@ -119,7 +119,8 @@ class BattleController(IBattleController):
             arena_id=self._arena_id,
             post_battle=self.postBattleResult
         )
-        info['battle_report'] = build_battle_report(info)
+        info['battle_results_beta'] = build_battle_report(info)
+        del info['post_battle']
         return info
 
     def _getCrewInfo(self, vehicle):
