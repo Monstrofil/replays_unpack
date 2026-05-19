@@ -20,4 +20,5 @@ Achievement:
     - id
     - index
     - name
+    - uiName
     - typeinfo

@@ -79,9 +79,11 @@ def _local_account_db_id(info):
 def _resolve_achievements(raw):
     return [
         {
-            'count': count,
-            'index': GAME_PARAMS_BY_ID[ach_id]['index'],
-            'name':  GAME_PARAMS_BY_ID[ach_id]['name'],
+            'count':    count,
+            'local_id': ach_id,
+            'index':    GAME_PARAMS_BY_ID[ach_id]['index'],
+            'name':     GAME_PARAMS_BY_ID[ach_id]['name'],
+            'ui_name':  GAME_PARAMS_BY_ID[ach_id].get('uiName'),
         }
         for ach_id, count in raw
     ]
