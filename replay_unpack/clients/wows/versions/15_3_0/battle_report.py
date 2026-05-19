@@ -414,6 +414,115 @@ def _team_score_sections(info):
     )
 
 
+_DIFFICULTY_SUFFIXES = ('_LOW_LVL', '_MEDIUM_LVL', '_HIGH_LVL', '_NIGHTMARE')
+
+
+def _parse_scenario_difficulty(scenario_name):
+    """Strip the runtime difficulty suffix from a scenario name.
+
+    Operations expose difficulty via the scenario string the server picks at
+    queue time (e.g. PCVO003_OP_01_03_s03_Labyrinth_HIGH_LVL). The base
+    BattleScript record in GameParams has a static `difficulty` attribute,
+    but the suffix is the actual difficulty played - it overrides the default.
+    """
+    for suffix in _DIFFICULTY_SUFFIXES:
+        if scenario_name.endswith(suffix):
+            return suffix.lstrip('_').lower()
+    return None
+
+
+_TASK_CATEGORY_MAIN      = 1
+_TASK_CATEGORY_SECONDARY = 2
+_TASK_CATEGORY_TRANSPORT = 3
+
+_TASK_CATEGORY_NAMES = {
+    _TASK_CATEGORY_MAIN:      'main',
+    _TASK_CATEGORY_SECONDARY: 'secondary',
+    _TASK_CATEGORY_TRANSPORT: 'transport',
+}
+
+# Task `status` semantics (inferred from observed data, only `3 == completed`
+# is firmly attested across replays - other values lumped into "not completed").
+_TASK_STATUS_COMPLETED = 3
+
+
+def _task_record(t):
+    return {
+        'id':         t['id'],
+        'category':   _TASK_CATEGORY_NAMES.get(t['category'], 'other'),
+        'completed':  t['status'] == _TASK_STATUS_COMPLETED,
+        'value':      t['currentValue'],
+        'icon':       t['icon'] or None,
+        'start_time': t['startTime'],
+        'close_time': t['closeTime'],
+    }
+
+
+def _operation_outcome(info):
+    winner = info['post_battle']['common']['winner_team_id']
+    if winner == -1:
+        return 'draw'
+    return 'victory' if winner == _local_team_id(info) else 'defeat'
+
+
+def _operation_tab(info):
+    pb = info['post_battle']
+    common = pb['common']
+    tasks = common['battle_logic_info']['tasks']
+    star_tasks = [t for t in tasks
+                  if t['category'] in (_TASK_CATEGORY_MAIN, _TASK_CATEGORY_SECONDARY)]
+    transport_tasks = [t for t in tasks if t['category'] == _TASK_CATEGORY_TRANSPORT]
+    other_tasks = [t for t in tasks
+                   if t['category'] not in (_TASK_CATEGORY_MAIN,
+                                            _TASK_CATEGORY_SECONDARY,
+                                            _TASK_CATEGORY_TRANSPORT)]
+    stars_earned = sum(1 for t in star_tasks if t['status'] == _TASK_STATUS_COMPLETED)
+    return {
+        'sections': {
+            'summary': {
+                'kind': 'object',
+                'data': {
+                    'scenario':        common['scenario_name'],
+                    'operation_id':    common['pve_operation_id'],
+                    'difficulty':      _parse_scenario_difficulty(common['scenario_name']),
+                    'outcome':         _operation_outcome(info),
+                    'duration_sec':    common['duration_sec'],
+                    'from_matchmaker': pb['private'].get('pve_details', {}).get('enter_matchmaker'),
+                    'stars': {
+                        # Some main tasks are multi-step prerequisites (e.g.
+                        # OP_01_03_MAIN_TASK_PREQUEL -> OP_01_03_MAIN_TASK) which both
+                        # appear as category=1; only the final step is awarded as a star.
+                        # `earned` counts every cat-1/2 task with status==3, then we clamp
+                        # to `max` to drop the extras. The post-battle UI universally caps
+                        # operation stars at 5.
+                        'earned': min(stars_earned, 5),
+                        'max':    5,
+                    },
+                },
+            },
+            'tasks': {
+                'kind': 'list',
+                'data': [_task_record(t) for t in star_tasks],
+            },
+            'transports': {
+                'kind': 'list',
+                'data': [_task_record(t) for t in transport_tasks],
+            },
+            'drops': {
+                'kind': 'object',
+                'data': common['battle_logic_info'].get('drop', {}),
+            },
+            **({'other_tasks': {'kind': 'list',
+                                'data': [_task_record(t) for t in other_tasks]}}
+               if other_tasks else {}),
+        },
+    }
+
+
+def _is_operation_battle(post_battle):
+    return bool(post_battle['common'].get('pve_operation_id'))
+
+
 def build_battle_report(info):
     """Build the report from the controller's get_info() dict."""
     post_battle = info['post_battle']
@@ -456,5 +565,7 @@ def build_battle_report(info):
                     'achievements': _achievements_section(info),
                 },
             },
+            **({'operation': _operation_tab(info)}
+               if _is_operation_battle(post_battle) else {}),
         },
     }
