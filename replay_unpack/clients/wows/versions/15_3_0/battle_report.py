@@ -96,6 +96,34 @@ def _achievements_section(info):
     }
 
 
+def _personal_summary_section(info):
+    p = info['post_battle']['public'][str(_local_account_db_id(info))]
+    return {
+        'kind': 'object',
+        'data': {
+            'damage':           p['damage'],
+            'frags':            p['ships_killed'],
+            'planes_killed':    p['planes_killed_by_ship'],
+            'exp':              p['exp'],
+            'base_exp':         p['raw_exp'],
+            'scouting_damage':  p['scouting_damage'],
+            'potential_damage': p['agro_art'] + p['agro_tpd'] + p['agro_air'] + p['agro_dbomb'],
+            'capture_points':   p['capture_points'],
+            'defense_points':   p['dropped_capture_points'],
+        },
+    }
+
+
+def _personal_ribbons_section(info):
+    p = info['post_battle']['public'][str(_local_account_db_id(info))]
+    return {
+        'kind': 'list',
+        'data': [{'name': k, 'count': v}
+                 for k, v in p.items()
+                 if k.startswith('RIBBON_') and v],
+    }
+
+
 def _shell_stats(p, suffix):
     return {
         'shots':  p['shots_'  + suffix],
@@ -418,6 +446,13 @@ def build_battle_report(info):
             'team_score': {
                 'sections': dict(zip(('allies', 'enemies'),
                                      _team_score_sections(info))),
+            },
+            'personal_score': {
+                'sections': {
+                    'summary':      _personal_summary_section(info),
+                    'ribbons':      _personal_ribbons_section(info),
+                    'achievements': _achievements_section(info),
+                },
             },
         },
     }
