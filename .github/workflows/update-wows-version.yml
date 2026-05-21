@@ -192,7 +192,12 @@ jobs:
           echo "=== Extracting constants from scripts.zip ==="
           wows_shell --zip "${{ steps.scripts_zip.outputs.scripts_zip }}" \
             tools/extract_constants.py \
-            2>/dev/null | tail -1 > /tmp/extracted_constants.json
+            2>/tmp/wows_shell.stderr | tail -1 > /tmp/extracted_constants.json
+
+          if [ -s /tmp/wows_shell.stderr ]; then
+            echo "=== wows_shell stderr ==="
+            cat /tmp/wows_shell.stderr
+          fi
 
           echo "=== Extraction result ==="
           python3 -m json.tool /tmp/extracted_constants.json | head -20
@@ -218,14 +223,14 @@ jobs:
           BUILD_NUM="${{ steps.version_check.outputs.build_number }}"
           WORK_DIR=$(mktemp -d)
 
-          echo "=== Downloading basecontent.idx (build $BUILD_NUM) ==="
+          echo "=== Downloading system_data.idx (build $BUILD_NUM) ==="
           wgc-download extract WOWS.WW.PRODUCTION client \
-            "bin/${BUILD_NUM}/idx/basecontent.idx" \
+            "bin/${BUILD_NUM}/idx/system_data.idx" \
             -d "$WORK_DIR"
 
-          echo "=== Downloading basecontent_0001.pkg ==="
+          echo "=== Downloading system_data_0001.pkg ==="
           wgc-download extract WOWS.WW.PRODUCTION client \
-            "res_packages/basecontent_0001.pkg" \
+            "res_packages/system_data_0001.pkg" \
             -d "$WORK_DIR"
 
           echo "=== Extracting GameParams.data ==="
