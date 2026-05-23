@@ -22,3 +22,44 @@ Achievement:
     - name
     - uiName
     - typeinfo
+
+# Upgrade-slot items (e.g. "Engine Boost Modification 1"). Numeric ids appear
+# as `source` entries in post_battle.private.subtotal_economics when a slotted
+# upgrade applied a credits/exp bonus.
+Modernization:
+  fields:
+    - id
+    - index
+    - name
+    - slot
+    - level
+    - typeinfo
+
+# Camouflages, permoflags, and signal flags. All flag the same `Exterior`
+# top-level type with species disambiguating; treating them uniformly keeps
+# the schema small while still resolving numeric sources in the economy tab.
+Exterior:
+  fields:
+    - id
+    - index
+    - name
+    - typeinfo
+
+# Commanders. Surfaced for `source` lookup when a captain skill awards an
+# economic modifier (e.g. a unique commander's signature bonus).
+Crew:
+  fields:
+    - id
+    - index
+    - name
+    - typeinfo
+
+# Consumables. Some Battle-Pack / event consumables grant economic bonuses
+# and show up by id in subtotal_economics; resolving them here keeps the
+# economy tab self-describing without a separate consumables table.
+Ability:
+  fields:
+    - id
+    - index
+    - name
+    - typeinfo

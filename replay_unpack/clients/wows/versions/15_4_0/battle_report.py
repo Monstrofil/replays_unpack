@@ -33,6 +33,8 @@ constants extraction / GameParams distillation.
 The original post_battle dict is never mutated. Sections build new outer
 containers and share unchanged nested values by reference.
 """
+import math
+
 from .game_params import BY_ID as GAME_PARAMS_BY_ID
 
 
@@ -523,6 +525,236 @@ def _is_operation_battle(post_battle):
     return bool(post_battle['common'].get('pve_operation_id'))
 
 
+# subtotal_economics entries are 4-tuples [source, factor, applied, ?].
+# `source` is either a string tag (FIRST_WIN, CLAN_SUPPLY_BONUS, ...) or a
+# numeric GameParams id (modernization / signal / camouflage / exterior).
+# `applied` is the game's flag for whether the modifier actually contributed -
+# entries with applied==False are listed in the UI but greyed out.
+_MOD_LANES = ('sse', 'base', 'mod')
+
+
+def _resolve_modifier_source(source):
+    """Resolve a numeric GameParams id to {name, index, type, species}.
+
+    String sources (FIRST_WIN, CLAN_SUPPLY_BONUS, ...) come straight from
+    server-side enums and have no GameParams record - they are returned with
+    `name` equal to the tag itself and no type info. Numeric sources are
+    upgrade / exterior / crew / ability ids and resolve through the distilled
+    GameParams; an unresolved int is returned with `name: None` so callers
+    can still display the raw id without crashing.
+    """
+    if isinstance(source, str):
+        return {'name': source}
+    rec = GAME_PARAMS_BY_ID.get(source)
+    if rec is None:
+        return {'name': None}
+    return {
+        'name':    rec.get('name'),
+        'index':   rec.get('index'),
+        'type':    rec.get('typeinfo', {}).get('type'),
+        'species': rec.get('typeinfo', {}).get('species'),
+    }
+
+
+def _modifier_record(entry, base_n, base_p):
+    """Per-modifier record with both no-premium and with-premium contributions.
+
+    The game UI mirrors each modifier across the two columns - same +X%, but
+    a different absolute value - so each record carries `value` under both
+    `without_premium` and `with_premium`. `ceil(base * factor)` matches the
+    in-game per-modifier rounding (see `_modifier_contribution`).
+    """
+    source, factor, applied, _ = entry
+    rec = {
+        'source':   source,
+        'resolved': _resolve_modifier_source(source),
+        'factor':   factor,
+        'applied':  applied,
+    }
+    if applied:
+        rec['without_premium'] = {'value': math.ceil(base_n * factor)}
+        rec['with_premium']    = {'value': math.ceil(base_p * factor)}
+    return rec
+
+
+def _applied_factor_sum(group):
+    return sum(e[1] for lane in _MOD_LANES for e in group[lane] if e[2])
+
+
+def _modifier_contribution(group, base):
+    """Sum the per-modifier reward contribution against `base`.
+
+    Empirically the in-game UI computes each applied modifier's reward
+    contribution as `ceil(base * factor)` and then sums - rounding factors
+    first and multiplying once gives values that drift by ±1, and standard
+    half-to-even rounding lands a step below the displayed number. Matching
+    the per-modifier ceil keeps the totals byte-identical to the screen.
+    """
+    return sum(math.ceil(base * e[1]) for lane in _MOD_LANES for e in group[lane] if e[2])
+
+
+def _category_modifier_records(group, base_n, base_p):
+    return {lane: [_modifier_record(e, base_n, base_p) for e in group[lane]]
+            for lane in _MOD_LANES}
+
+
+def _credits_spent(common):
+    return {
+        'service':    common['auto_repair_credits'],
+        'ammunition': common['auto_load_credits'],
+        'camouflage': common['auto_camo_credits'],
+        'signals':    common['auto_signals_credits'],
+        'boosters':   common['auto_boost_credits'],
+    }
+
+
+def _credits_economy_section(priv, common):
+    init = priv['init_economics']
+    sub = priv['subtotal_economics']
+    base = init['credits']
+    prem = common['wows_premium_credits_factor']
+    spent_map = _credits_spent(common)
+    total_spent = sum(spent_map.values())
+    received_n = base
+    received_p = math.ceil(base * prem)
+    modifiers_n = _modifier_contribution(sub['credits'], base)
+    modifiers_p = _modifier_contribution(sub['credits'], received_p)
+    return {
+        'kind': 'object',
+        'data': {
+            'modifiers': _category_modifier_records(sub['credits'], base, received_p),
+            'spent':     spent_map,
+            'penalty':       init['credits_penalty'],
+            'compensation':  init['credits_compensation'],
+            'without_premium': {
+                'received':  received_n,
+                'modifiers': modifiers_n,
+                'spent':     total_spent,
+                'total':     received_n + modifiers_n - total_spent,
+            },
+            'with_premium': {
+                'premium_factor': prem,
+                'received':  received_p,
+                'modifiers': modifiers_p,
+                'spent':     total_spent,
+                'total':     received_p + modifiers_p - total_spent,
+            },
+        },
+    }
+
+
+def _exp_economy_section(priv, common, category):
+    """Build the ship_exp / crew_exp section.
+
+    Both categories share the same `received` value (init_economics.exp) and
+    the same premium multiplier (wows_premium_exp_factor); they differ only
+    in which subtotal_economics group supplies the modifier factors.
+    """
+    init = priv['init_economics']
+    sub = priv['subtotal_economics'][category]
+    base = init['exp']
+    prem = common['wows_premium_exp_factor']
+    received_n = base
+    received_p = math.ceil(base * prem)
+    modifiers_n = _modifier_contribution(sub, base)
+    modifiers_p = _modifier_contribution(sub, received_p)
+    return {
+        'kind': 'object',
+        'data': {
+            'modifiers': _category_modifier_records(sub, base, received_p),
+            'penalty':   init['exp_penalty'],
+            'without_premium': {
+                'received':  received_n,
+                'modifiers': modifiers_n,
+                'total':     received_n + modifiers_n,
+            },
+            'with_premium': {
+                'premium_factor': prem,
+                'received':  received_p,
+                'modifiers': modifiers_p,
+                'total':     received_p + modifiers_p,
+            },
+        },
+    }
+
+
+def _free_exp_economy_section(priv, common):
+    """Free XP is awarded as a fraction (free_exp_factor) of ship XP and has
+    its own modifier group. No premium factor is applied to free XP itself
+    in the UI - it's reported as a single small total next to ship XP.
+    """
+    sub = priv['subtotal_economics']['free_exp']
+    init = priv['init_economics']
+    base_n = math.ceil(init['exp'] * common['free_exp_factor'])
+    base_p = math.ceil(init['exp'] * common['wows_premium_exp_factor']
+                                   * common['free_exp_factor'])
+    return {
+        'kind': 'object',
+        'data': {
+            'modifiers':       _category_modifier_records(sub, base_n, base_p),
+            'free_exp_factor': common['free_exp_factor'],
+        },
+    }
+
+
+def _elite_exp_economy_section(priv, common):
+    sub = priv['subtotal_economics']['elite_exp']
+    base_n = priv['init_economics']['exp']
+    base_p = math.ceil(base_n * common['wows_premium_exp_factor'])
+    return {
+        'kind': 'object',
+        'data': {'modifiers': _category_modifier_records(sub, base_n, base_p)},
+    }
+
+
+def _bonuses_economy_section(priv, common):
+    """Account-wide multipliers (premium ship, global boosts, AoGAS) and the
+    flags that say whether each consumable lane (camo/signals/boost/service)
+    was actually applied. Useful for explaining why a modifier is or isn't
+    in the modifier list.
+    """
+    return {
+        'kind': 'object',
+        'data': {
+            'premium_credits_factor':       common['premium_credits_factor'],
+            'premium_exp_factor':           common['premium_exp_factor'],
+            'wows_premium_credits_factor':  common['wows_premium_credits_factor'],
+            'wows_premium_exp_factor':      common['wows_premium_exp_factor'],
+            'free_exp_factor':              common['free_exp_factor'],
+            'aogas_factor':                 common['aogas_factor'],
+            'globalboosts': priv.get('globalboosts_mods') or {},
+            'applied': {
+                'camo':    common['camo_applied'],
+                'signals': common['signals_applied'],
+                'boost':   common['boost_applied'],
+                'service': common['serve_applied'],
+            },
+            'enabled': {
+                'ship_service': common['ship_service_enabled'],
+                'credits':      common['credits_enabled'],
+                'exp':          common['exp_enabled'],
+                'crew_exp':     common['crew_exp_enabled'],
+                'free_exp':     common['free_exp_enabled'],
+                'acc_points':   common['acc_points_enabled'],
+            },
+        },
+    }
+
+
+def _economy_tab(priv):
+    common = priv['common_economics']
+    return {
+        'sections': {
+            'credits':       _credits_economy_section(priv, common),
+            'ship_exp':      _exp_economy_section(priv, common, 'ship_exp'),
+            'commander_exp': _exp_economy_section(priv, common, 'crew_exp'),
+            'free_exp':      _free_exp_economy_section(priv, common),
+            'elite_exp':     _elite_exp_economy_section(priv, common),
+            'bonuses':       _bonuses_economy_section(priv, common),
+        },
+    }
+
+
 def build_battle_report(info):
     """Build the report from the controller's get_info() dict."""
     post_battle = info['post_battle']
@@ -565,6 +797,7 @@ def build_battle_report(info):
                     'achievements': _achievements_section(info),
                 },
             },
+            'economy': _economy_tab(post_battle['private']),
             **({'operation': _operation_tab(info)}
                if _is_operation_battle(post_battle) else {}),
         },
