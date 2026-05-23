@@ -96,3 +96,7 @@ ENV/
 
 # Replay parser dumps
 *.post_battle.json
+*.highlights.json
+
+# Local replay corpus for highlight tests
+tmp/

@@ -1,4 +1,4 @@
-.travis.yml# Getting exposed index for properties and methods
+# Getting exposed index for properties and methods
 
 To get exposed id, both clients, WoT and WoWS are doing the same stuff, so this package is suitable for both.
 
