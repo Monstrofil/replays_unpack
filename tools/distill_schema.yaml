@@ -32,7 +32,6 @@ Modernization:
     - index
     - name
     - slot
-    - level
     - typeinfo
 
 # Camouflages, permoflags, and signal flags. All flag the same `Exterior`
