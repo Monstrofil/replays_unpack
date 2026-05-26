@@ -609,6 +609,9 @@ def _credits_spent(common):
 
 
 def _credits_economy_section(priv, common):
+    # `total` is gross credits earned (received + modifiers), matching the
+    # "Credits" line in the in-game post-battle screen. `spent` is reported
+    # alongside as its own line and is NOT subtracted here.
     init = priv['init_economics']
     sub = priv['subtotal_economics']
     base = init['credits']
@@ -630,14 +633,14 @@ def _credits_economy_section(priv, common):
                 'received':  received_n,
                 'modifiers': modifiers_n,
                 'spent':     total_spent,
-                'total':     received_n + modifiers_n - total_spent,
+                'total':     received_n + modifiers_n,
             },
             'with_premium': {
                 'premium_factor': prem,
                 'received':  received_p,
                 'modifiers': modifiers_p,
                 'spent':     total_spent,
-                'total':     received_p + modifiers_p - total_spent,
+                'total':     received_p + modifiers_p,
             },
         },
     }
@@ -679,20 +682,34 @@ def _exp_economy_section(priv, common, category):
 
 
 def _free_exp_economy_section(priv, common):
-    """Free XP is awarded as a fraction (free_exp_factor) of ship XP and has
-    its own modifier group. No premium factor is applied to free XP itself
-    in the UI - it's reported as a single small total next to ship XP.
+    """Free XP is awarded as a fraction (free_exp_factor) of ship XP. The
+    premium ship-exp multiplier feeds through the base, so the with-premium
+    column uses `init.exp * wows_premium_exp_factor * free_exp_factor` as
+    its received value.
     """
     sub = priv['subtotal_economics']['free_exp']
     init = priv['init_economics']
     base_n = math.ceil(init['exp'] * common['free_exp_factor'])
     base_p = math.ceil(init['exp'] * common['wows_premium_exp_factor']
                                    * common['free_exp_factor'])
+    modifiers_n = _modifier_contribution(sub, base_n)
+    modifiers_p = _modifier_contribution(sub, base_p)
     return {
         'kind': 'object',
         'data': {
             'modifiers':       _category_modifier_records(sub, base_n, base_p),
             'free_exp_factor': common['free_exp_factor'],
+            'without_premium': {
+                'received':  base_n,
+                'modifiers': modifiers_n,
+                'total':     base_n + modifiers_n,
+            },
+            'with_premium': {
+                'premium_factor': common['wows_premium_exp_factor'],
+                'received':  base_p,
+                'modifiers': modifiers_p,
+                'total':     base_p + modifiers_p,
+            },
         },
     }
 
@@ -743,7 +760,15 @@ def _bonuses_economy_section(priv, common):
 
 def _economy_tab(priv):
     common = priv['common_economics']
+    # Every section emits both `without_premium` and `with_premium` columns;
+    # this flag tells consumers which one actually reflects what the player
+    # earned. A wows_premium_*_factor of 1.0 means no premium-time bonus was
+    # applied this battle, so `without_premium` is the real total.
+    premium_active = (common['wows_premium_credits_factor'] > 1.0
+                      or common['wows_premium_exp_factor'] > 1.0)
     return {
+        'premium_active': premium_active,
+        'premium_type':   priv.get('premium_type'),
         'sections': {
             'credits':       _credits_economy_section(priv, common),
             'ship_exp':      _exp_economy_section(priv, common, 'ship_exp'),
