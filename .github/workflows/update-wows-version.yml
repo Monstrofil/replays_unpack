@@ -210,6 +210,14 @@ jobs:
             python3 -c "import json; d=json.load(open('/tmp/extracted_constants.json')); [print('  -', e) for e in d.get('errors', [])]"
           fi
 
+          # battle_results feeds battle_results.py; without it the generated
+          # constants.py silently disables the 'post_battle' capability
+          # (see 15.7.0, PR #43). Fail hard instead of shipping a broken version.
+          if python3 -c "import json, sys; d=json.load(open('/tmp/extracted_constants.json')); sys.exit(0 if any(e.startswith('battle_results:') for e in d.get('errors', [])) else 1)"; then
+            echo "::error::battle_results extraction failed - refusing to generate constants.py without post-battle field tuples"
+            exit 1
+          fi
+
           echo "=== Generating constants.py ==="
           pip install jinja2
           python3 tools/generate_constants.py /tmp/extracted_constants.json "$NEW_DIR/constants.py"
