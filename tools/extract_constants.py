@@ -132,6 +132,40 @@ def extract_status_and_tasktype():
 safe_extract('status_and_tasktype', extract_status_and_tasktype)
 
 
+def _scripts_zip_path():
+    """Return the path of the scripts.zip the sandbox importer loaded from."""
+    for mod in list(sys.modules.values()):
+        f = getattr(mod, '__file__', None) or ''
+        idx = f.find('scripts.zip')
+        if idx != -1:
+            return f[:idx + len('scripts.zip')]
+    return None
+
+
+def _import_from_zip(basename):
+    """Find 'scripts/<pkg>/<basename>.pyc' in scripts.zip and import it.
+
+    Packages are obfuscated (e.g. m98c45b66.BattleResultsSystem), so the
+    module name is derived from the zip entry path. Returns the module or
+    None when no entry matches or every candidate fails to import.
+    """
+    import importlib
+    import zipfile
+    zip_path = _scripts_zip_path()
+    if zip_path is None:
+        return None
+    suffix = '/%s.pyc' % basename
+    for entry in zipfile.ZipFile(zip_path).namelist():
+        if not (entry.startswith('scripts/') and entry.endswith(suffix)):
+            continue
+        mod_name = entry[len('scripts/'):-len('.pyc')].replace('/', '.')
+        try:
+            return importlib.import_module(mod_name)
+        except Exception:
+            errors.append('%s: import %s failed: %s' % (basename, mod_name, traceback.format_exc()))
+    return None
+
+
 # BattleResultsSystem constants (field name tuples for post-battle results)
 def extract_battle_results():
     # Find the BattleResultsSystem module (obfuscated name like m92ea29c6.BattleResultsSystem)
@@ -140,6 +174,13 @@ def extract_battle_results():
         if mod is not None and name.endswith('.BattleResultsSystem'):
             brs_mod = mod
             break
+
+    if brs_mod is None:
+        # Since 15.7.0 the BWPersonality boot chain dies before reaching
+        # BattleResultsSystem (sandbox lacks a ResMgr.DataSection stub), so the
+        # module is never loaded implicitly. Locate it in scripts.zip and
+        # import it explicitly by its obfuscated package name.
+        brs_mod = _import_from_zip('BattleResultsSystem')
 
     if brs_mod is None:
         raise ImportError('Could not find BattleResultsSystem module')
