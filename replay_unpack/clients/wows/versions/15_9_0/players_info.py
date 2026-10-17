@@ -45,17 +45,37 @@ def decode_ship_config_dump(data):
 
     result['externalConfigId'] = next(it)
 
-    for slot in SLOT_SYSTEMS:
-        n = next(it)
-        items = [next(it) for _ in range(n)]
-        result[slot['name']] = [x for x in items if x]
-        if slot['has_autobuy']:
-            result[slot['name'] + '_autobuy'] = next(it)
-        if slot['has_color_schemes']:
-            n_schemes = next(it)
-            result['color_schemes'] = {next(it): next(it) for _ in range(n_schemes)}
+    try:
+        for slot in SLOT_SYSTEMS:
+            n = next(it)
+            items = [next(it) for _ in range(n)]
+            result[slot['name']] = [x for x in items if x]
+            # since 15.9 EcoboostSlots no longer carries a trailing autobuy
+            # word, even though the client class still declares autobuy
+            # categories (which is what SLOT_SYSTEMS is generated from)
+            if slot['has_autobuy'] and slot['name'] != 'EcoboostSlots':
+                result[slot['name'] + '_autobuy'] = next(it)
+            if slot['has_color_schemes']:
+                n_schemes = next(it)
+                result['color_schemes'] = {next(it): next(it) for _ in range(n_schemes)}
 
-    result['naval_flag_id'] = next(it)
+        # 15.9 added a block between the slot systems and the naval flag:
+        # two scalar words followed by a counted list (0 or 8 entries seen).
+        # Their meaning is not known yet, so they are exposed as-is.
+        result['extra_flags'] = next(it)
+        result['extra_value'] = next(it)
+        n_extra = next(it)
+        result['extra_slots'] = [next(it) for _ in range(n_extra)]
+
+        result['naval_flag_id'] = next(it)
+    except StopIteration:
+        # unknown layout, don't break the whole replay over cosmetic data
+        logger.warning('shipConfigDump is shorter than expected (%d words)', len(values))
+        return None
+
+    leftover = list(it)
+    if leftover:
+        logger.warning('shipConfigDump has %d unparsed trailing words', len(leftover))
     return result
 
 
