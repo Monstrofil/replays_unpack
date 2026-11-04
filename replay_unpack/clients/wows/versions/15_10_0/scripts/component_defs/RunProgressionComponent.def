@@ -1,0 +1,64 @@
+<root>
+	<BaseMethods>
+		<dev_getProgress>
+			<Exposed/>
+			<Args>
+				<namespace> STRING </namespace>
+				<ownerIdx> STRING </ownerIdx>
+				<scope> STRING </scope>
+			</Args>
+		</dev_getProgress>
+
+		<dev_getRPL>
+			<Exposed/>
+			<Args>
+				<namespace> STRING </namespace>
+				<ownerIdx> STRING </ownerIdx>
+				<scope> STRING </scope>
+			</Args>
+		</dev_getRPL>
+
+		<dev_addProgress>
+			<Exposed/>
+			<Args>
+				<namespace> STRING </namespace>
+				<ownerIdx> STRING </ownerIdx>
+				<scope> STRING </scope>
+				<progress> UINT32 </progress>
+			</Args>
+		</dev_addProgress>
+
+		<dev_resetProgress>
+			<Exposed/>
+			<Args>
+				<namespace> STRING </namespace>
+				<ownerIdx> STRING </ownerIdx>
+				<scope> STRING </scope>
+			</Args>
+		</dev_resetProgress>
+
+		<preBattleResetProgress>
+			<Exposed/>
+			<Args>
+				<namespace> STRING </namespace>
+				<ownerIdx> STRING </ownerIdx>
+				<scope> STRING </scope>
+				<scenarioName> STRING </scenarioName>
+			</Args>
+		</preBattleResetProgress>
+	</BaseMethods>
+
+	<ClientMethods>
+		<fullSyncRunProgressions>
+			<Arg> MSGPACK_BLOB </Arg>
+		</fullSyncRunProgressions>
+
+		<partialSyncRunProgressions>
+			<Arg> MSGPACK_BLOB </Arg>
+		</partialSyncRunProgressions>
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+</root>

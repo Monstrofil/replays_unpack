@@ -1,0 +1,86 @@
+<root>
+
+	<BaseMethods>
+		<unlockCrewSlot>
+			<Args>
+				<crewParamsId> GAMEPARAMS_ID </crewParamsId>
+				<slotType> STRING </slotType>
+				<count> UINT8 </count>
+			</Args>
+			<ReturnValues>
+				<methodErrorCode> UINT8 </methodErrorCode>
+				<resultData> PYTHON </resultData>
+			</ReturnValues>
+		</unlockCrewSlot>
+
+		<lockCrewSlot>
+			<Args>
+				<crewParamsId> GAMEPARAMS_ID </crewParamsId>
+				<slotType> STRING </slotType>
+				<count> UINT8 </count>
+			</Args>
+			<ReturnValues>
+				<methodErrorCode> UINT8 </methodErrorCode>
+				<resultData> PYTHON </resultData>
+			</ReturnValues>
+		</lockCrewSlot>
+
+		<assignCrewSlot>
+			<Exposed/>
+			<Args>
+				<crewID> CREW_ID </crewID>
+				<slotType> STRING </slotType>
+				<slotIndex> UINT8 </slotIndex>
+				<itemParamsID> GAMEPARAMS_ID </itemParamsID>
+			</Args>
+			<ReturnValues>
+				<methodErrorCode> UINT8 </methodErrorCode>
+				<resultData> PYTHON </resultData>
+			</ReturnValues>
+		</assignCrewSlot>
+
+		<unassignCrewSlot>
+			<Exposed/>
+			<Args>
+				<crewID> CREW_ID </crewID>
+				<slotType> STRING </slotType>
+				<slotIndex> UINT8 </slotIndex>
+			</Args>
+			<ReturnValues>
+				<methodErrorCode> UINT8 </methodErrorCode>
+				<resultData> PYTHON </resultData>
+			</ReturnValues>
+		</unassignCrewSlot>
+
+		<dev_lockCrewSlot>
+			<Exposed/>
+			<Args>
+				<crewParamsId> GAMEPARAMS_ID </crewParamsId>
+				<slotType> STRING </slotType>
+				<count> UINT8 </count>
+			</Args>
+			<ReturnValues>
+				<methodErrorCode> UINT8 </methodErrorCode>
+				<resultData> PYTHON </resultData>
+			</ReturnValues>
+		</dev_lockCrewSlot>
+
+		<dev_unlockCrewSlot>
+			<Exposed/>
+			<Args>
+				<crewParamsId> GAMEPARAMS_ID </crewParamsId>
+				<slotType> STRING </slotType>
+				<count> UINT8 </count>
+			</Args>
+			<ReturnValues>
+				<methodErrorCode> UINT8 </methodErrorCode>
+				<resultData> PYTHON </resultData>
+			</ReturnValues>
+		</dev_unlockCrewSlot>
+
+	</BaseMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+</root>
