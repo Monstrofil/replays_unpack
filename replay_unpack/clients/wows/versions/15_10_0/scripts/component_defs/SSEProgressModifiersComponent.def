@@ -1,0 +1,25 @@
+<root>
+
+    <BaseMethods>
+
+        <getBalanceFactors>
+            <Exposed/>
+            <Args/>
+            <ReturnValues>
+				<balanceFactorDTOList> MSGPACK_BLOB </balanceFactorDTOList>
+			</ReturnValues>
+        </getBalanceFactors>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<sync>
+		</sync>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+</root>

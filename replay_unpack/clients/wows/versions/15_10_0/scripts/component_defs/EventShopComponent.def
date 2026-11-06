@@ -1,0 +1,67 @@
+<root>
+
+    <BaseMethods>
+
+		<itemPurchase>
+			<Exposed/>
+			<Args>
+				<itemId> STRING </itemId>
+			</Args>
+
+			<ReturnValues>
+				<result> UINT8 </result>
+				<changedItems> MSGPACK_BLOB </changedItems>
+			</ReturnValues>
+		</itemPurchase>
+
+        <itemUnpurchase>
+			<Exposed/>
+			<Args>
+				<itemId> STRING </itemId>
+			</Args>
+
+			<ReturnValues>
+				<result> UINT8 </result>
+				<changedItems> MSGPACK_BLOB </changedItems>
+			</ReturnValues>
+		</itemUnpurchase>
+
+		<requestEventShopItem>
+			<Exposed/>
+			<Args>
+				<itemId> STRING </itemId>
+			</Args>
+
+			<ReturnValues>
+				<items> MSGPACK_BLOB </items>
+			</ReturnValues>
+		</requestEventShopItem>
+
+	</BaseMethods>
+
+	<ClientMethods>
+
+		<syncEventShop>
+			<Args>
+				<shop> MSGPACK_BLOB </shop>
+			</Args>
+		</syncEventShop>
+
+        <dev_itemPurchase>
+			<Args>
+				<itemId> STRING </itemId>
+			</Args>
+		</dev_itemPurchase>
+
+        <dev_itemUnpurchase>
+			<Args>
+				<itemId> STRING </itemId>
+			</Args>
+		</dev_itemUnpurchase>
+
+	</ClientMethods>
+
+	<ofEntity>
+		<Account/>
+	</ofEntity>
+</root>
